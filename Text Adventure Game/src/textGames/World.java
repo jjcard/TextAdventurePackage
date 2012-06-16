@@ -157,7 +157,7 @@ public class World {
 		 if (input.startsWith("attack ")){
 			 return attackMob(input.substring(7));
 		 }if (input.startsWith("loot all ")){
-			 
+			 return lootAllMob(input.substring(9));
 		 }
 		 
 			 
@@ -183,11 +183,17 @@ public class World {
 			 return key + " was not found";
 		 }
 	 }
-	public String LootAllMob(String key){
+	public String lootAllMob(String key){
 		if (current.containsMob(key)){
-			player.addAllItems(current.getMob(key).inventory());
-			current.getMob(key).removeInventory();
-			return " items added";
+			Mob lootM = current.getMob(key);
+			if (lootM.isDead()){
+				player.addAllItems(current.getMob(key).inventory());
+				current.getMob(key).removeInventory();
+				return key +"'s items added";
+			} else {
+				return key + " is still alive!";
+			}
+
 		} 
 			return "Mob not found";
 		

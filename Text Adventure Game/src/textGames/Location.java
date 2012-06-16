@@ -1,0 +1,188 @@
+package textGames;
+
+//import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Location implements Comparable<Location>{
+	public static final int UNDEFINED = 0;
+	public static final int NORTH = 1;
+	public static final int SOUTH = 2;
+	public static final int EAST  = 3;
+	public static final int WEST  = 4;
+	public static final int UP    = 5;
+	public static final int DOWN  = 6;
+	public static final int NORTHEAST = 7;
+	public static final int NORTHWEST = 8;
+	public static final int SOUTHEAST = 9;
+	public static final int SOUTHWEST = 10;
+	
+	public static final String[] dirName = {
+		"UNDEFINED",
+		"NORTH",
+		"SOUTH",
+		"EAST",
+		"WEST",
+		"UP",
+		"DOWN",
+		"NORTHEAST",
+		"NORTHWEST",
+		"SOUTHEAST",
+		"SOUTHWEST"
+	};
+	private static int dirNameLength = dirName.length;
+	private String name;
+	private String description;
+	private Map<String, Item> inventory;
+	private Map<String, Mob> roomMob;
+	private Map<String, Location> exits;
+	
+	public Location(){
+		name = new String();
+		description = new String();
+		inventory = new HashMap<String, Item>();
+		roomMob = new HashMap<String, Mob>();
+		exits = new HashMap<String, Location>();
+	}
+	public Location(String nameN){
+		name = nameN;
+		description = new String();
+		inventory = new HashMap<String, Item>();
+		roomMob =  new HashMap<String, Mob>();
+		exits = new HashMap<String, Location>();
+	}
+	public Location(String nameN, String descripN){
+		name = nameN;
+		description = descripN;
+		inventory = new HashMap<String, Item>();
+		roomMob =  new HashMap<String, Mob>();
+		exits = new HashMap<String, Location>();
+	}
+	public String name(){
+		return name;
+	}
+	public String description(){
+		return description;
+	}
+	public Map<String, Item> inventory(){
+		return inventory;
+	}
+	public  Map<String, Mob> roomMob() {
+		return roomMob;
+	}
+	public Map<String, Location> exits() {
+		return exits;
+	}
+	public Item addItem(String key, Item add){
+		return inventory.put(key, add);
+	}
+	public void setInventory(Map<String, Item> inventoryNew){
+		inventory = inventoryNew;
+	}
+	public void setRoomMob(Map<String, Mob> roomMobNew){
+		roomMob = roomMobNew;
+	}
+	public Item removeItem(Item key){
+		return inventory.remove(key);
+	}
+	public boolean containsItem(String keyR){
+		return inventory.containsKey(keyR);
+	}
+	public Mob addMob(String key, Mob m){
+		return roomMob.put(key, m);
+		
+	}
+	public Mob removeMob(String key){
+		return roomMob.remove(key);
+	}
+	public boolean containsMob(String m){
+		return roomMob.containsKey(m);
+
+	}
+	public void addExit(String dir, Location room){
+		exits.put(dir.toUpperCase(), room);
+	}
+	public void addExit(int dir, Location room){
+		if(dir < dirName.length){
+			exits.put(dirName[dir], room);
+		}
+		
+	}
+	public void removeExit(String dir){
+		 exits.remove(dir.toUpperCase()); 
+	}
+	public void removeExit(int dir){
+		exits.remove(dirName[dir]);
+	}
+	public Location getExitLocation(String dir){
+		return exits.get(dir.toUpperCase());
+	}
+	public Location getExitLocation(int dir){
+		if (dirNameLength < dir){
+			return exits.get(dirName[dir]);
+		}
+		return null;
+		
+	}
+	public Mob getMob(String key){
+		return roomMob.get(key);
+	}
+	public Item getItem(String key){
+		return inventory.get(key);
+	}
+	public boolean containsExit(String dir){
+		return exits.containsKey(dir.toUpperCase());
+	}
+	public boolean containsExit(int dir){
+		return exits.containsKey(dirName[dir]);
+	}
+	public void setName(String change){
+		name = change;
+	}
+	public void setDescription(String change){
+		description = change;
+	}
+	@Override
+	public int compareTo(Location other) {
+		return name.compareTo(other.name);
+	}
+	public String getExits(){
+		String re = exits.keySet().toString();
+		return re.substring(1, re.length()-1);
+	}
+	public String getInventoryDescrip(){
+		
+		StringBuilder re = new StringBuilder();
+		for(Item i: inventory.values()){
+			if ((!i.hidden()) && (i.roomDescrip() != null)){
+				re.append(" " + i.roomDescrip());
+			}
+		}
+		return re.toString();
+	}
+	public String getMobDescrip(){
+		StringBuilder re = new StringBuilder();
+		for(Mob m: roomMob.values()){
+			if (m.roomDescrip() != null){
+				re.append(m.roomDescrip());
+			}
+			
+		}
+		return re.toString();
+	}
+	public String showRoom(){
+		
+		StringBuilder re = new StringBuilder(description);
+		
+		if (!inventory.isEmpty()){
+			re.append(" " + getInventoryDescrip());
+		}
+		if (!roomMob.isEmpty()){
+			re.append(" " + getMobDescrip());
+		}
+		if (!exits.isEmpty()){
+			re.append(" The obvious exits are " + getExits());
+		}
+		return re.toString();
+	}
+}

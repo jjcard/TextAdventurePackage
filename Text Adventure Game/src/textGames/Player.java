@@ -48,16 +48,16 @@ public class Player extends Mob {
 		level = levelNew;
 		xp = 0;
 	}
-	public Armour armor(){
+	public Armour getArmor(){
 		return armor;
 	}
-	public Weapon weapon() {
+	public Weapon getWeapon() {
 		return weapon;
 	}
-	public int level(){
+	public int getLevel(){
 		return level;
 	}
-	public int xp() {
+	public int getxp() {
 		return xp;
 	}
 	public void changelevel(int change){

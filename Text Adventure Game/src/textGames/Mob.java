@@ -66,37 +66,37 @@ public class Mob {
 		attack = attackNew;
 		money = 0;
 	}
-	public String name() {
+	public String getName() {
 		return name;
 	}
-	public String description() {
+	public String getDescription() {
 		return description;
 	}
-	public int maxHealth() {
+	public int getMaxHealth() {
 		return maxHealth;
 	}
-	public String roomDescrip(){
+	public String getRoomDescrip(){
 		return roomDescrip;
 	}
-	public int health(){
+	public int getHealth(){
 		return curHealth;
 	}
-	public int money(){
+	public int getMoney(){
 		return money;
 	}
-	public Map<String, Item> inventory() {
+	public Map<String, Item> getInventory() {
 		return inventory;
 	}
-	public int defense() {
+	public int getDefense() {
 		return defense;
 	}
-	public int attack() {
+	public int getAttack() {
 		return attack;
 	}
-	public boolean Hostile() {
+	public boolean isHostile() {
 		return Hostile;
 	}
-	public Status status() {
+	public Status getStatus() {
 		return status;
 	}
 	public void setName(String nameNew){
@@ -188,7 +188,7 @@ public class Mob {
 	public boolean equals(Object o){
 		if (o instanceof Mob){
 			Mob m = (Mob) o;
-			return this.name.equals(m.name()) && this.description.equalsIgnoreCase(m.description);
+			return this.name.equals(m.getName()) && this.description.equalsIgnoreCase(m.description);
 		} else {
 			return false;
 		}

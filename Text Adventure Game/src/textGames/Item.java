@@ -39,25 +39,25 @@ public class Item {
 		level = levelNew;
 		cost = costNew;
 	}
-	public String name() {
+	public String getName() {
 		return name;
 	}
-	public int cost() {
+	public int getCost() {
 		return cost;
 	}
-	public String info() {
+	public String getInfo() {
 		return info;
 	}
-	public int level(){
+	public int getLevel(){
 		return level;
 	}
-	public boolean hidden(){
+	public boolean getHidden(){
 		return hidden;
 	}
-	public boolean movable(){
+	public boolean getMovable(){
 		return movable;
 	}
-	public ItemUse use() {
+	public ItemUse getUse() {
 		return use;
 	}
 	public String roomDescrip(){
@@ -102,7 +102,7 @@ public class Item {
 	public boolean equals(Object o){
 		if (o instanceof Item){
 			Item m = (Item) o;
-			return this.name.equals(m.name()) && this.info.equalsIgnoreCase(m.info) && this.use == m.use;
+			return this.name.equals(m.getName()) && this.info.equalsIgnoreCase(m.info) && this.use.equals(m.getUse());
 		} else {
 			return false;
 		}

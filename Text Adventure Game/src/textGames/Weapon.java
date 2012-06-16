@@ -40,13 +40,13 @@ public class Weapon extends Item {
 		durability = 100;
 		super.setUse(ItemUse.Weapon);
 	}
-	public int attack() {
+	public int getAttack() {
 		return attack;
 	}
-	public int crit() {
+	public int getCrit() {
 			return crit;
 		}
-	public int durability(){
+	public int getDurability(){
 		return durability;
 	}
 	public void setDurability(int durN){

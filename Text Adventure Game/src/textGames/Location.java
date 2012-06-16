@@ -67,19 +67,19 @@ public class Location implements Comparable<Location>{
 		roomMob =  new HashMap<String, Mob>();
 		exits = new HashMap<String, Location>();
 	}
-	public String name(){
+	public String getName(){
 		return name;
 	}
-	public String description(){
+	public String getDescription(){
 		return description;
 	}
-	public Map<String, Item> inventory(){
+	public Map<String, Item> getInventory(){
 		return inventory;
 	}
-	public  Map<String, Mob> roomMob() {
+	public  Map<String, Mob> getRoomMob() {
 		return roomMob;
 	}
-	public Map<String, Location> exits() {
+	public Map<String, Location> getExits() {
 		return exits;
 	}
 	public Item addItem(String key, Item add){
@@ -170,7 +170,7 @@ public class Location implements Comparable<Location>{
 	public int compareTo(Location other) {
 		return name.compareTo(other.name);
 	}
-	public String getExits(){
+	public String getExitsDescrip(){
 		String re = exits.keySet().toString();
 		return re.substring(1, re.length()-1);
 	}
@@ -178,7 +178,7 @@ public class Location implements Comparable<Location>{
 		
 		StringBuilder re = new StringBuilder();
 		for(Item i: inventory.values()){
-			if ((!i.hidden()) && (i.roomDescrip() != null)){
+			if ((!i.getHidden()) && (i.roomDescrip() != null)){
 				re.append(" " + i.roomDescrip());
 			}
 		}
@@ -187,8 +187,8 @@ public class Location implements Comparable<Location>{
 	public String getMobDescrip(){
 		StringBuilder re = new StringBuilder();
 		for(Mob m: roomMob.values()){
-			if (m.roomDescrip() != null){
-				re.append(m.roomDescrip());
+			if (m.getRoomDescrip() != null){
+				re.append(m.getRoomDescrip());
 			}
 			
 		}

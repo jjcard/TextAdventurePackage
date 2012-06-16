@@ -45,8 +45,8 @@ public class World {
 		return current;
 	}
 	
-	public String getCurrentExits(){
-		return current.getExits();
+	public String getCurrentExitsDescrip(){
+		return current.getExitsDescrip();
 	}
 	public void setPlayer(Player playerN){
 		player = playerN;
@@ -93,7 +93,7 @@ public class World {
 	}
 	public Item playerGetItem(String key){
 		Item re = current.getItem(key);
-		if (re != null && re.movable()){
+		if (re != null && re.getMovable()){
 			return player.addItem(key, current.getItem(key));
 		}
 		return null;
@@ -106,18 +106,18 @@ public class World {
 		Armour add = player.setArmour(armorN);
 		if (add != null){
 			//taking away the defense from old armour
-			player.changeDefense(- add.defense());
+			player.changeDefense(- add.getDefense());
 			//adding defense from now armour
-			player.changeDefense(player.armor().defense());
+			player.changeDefense(player.getArmor().getDefense());
 			//add old armour back to inventory
-			player.addItem(add.name(), add);
+			player.addItem(add.getName(), add);
 			
 		}
 	}
 	public void setPlayerWeapon(Weapon weaponN){
 		Weapon add = player.setWeapon(weaponN);
 		if (add != null){
-			player.addItem(add.name(), add);
+			player.addItem(add.getName(), add);
 		}
 	}
 	public boolean currentContainsExit(String dir){
@@ -133,8 +133,8 @@ public class World {
 	public String basicOperations(String input){
 		
 		switch(input.toUpperCase()){
-		case "HEALTH": return player.health() + "";
-		case "NAME": return player.name() + "";
+		case "HEALTH": return player.getHealth() + "";
+		case "NAME": return player.getName() + "";
 		case "NORTH":
 		case "N":
 			return movePlayer("NORTH");
@@ -148,13 +148,13 @@ public class World {
 		case "W": 
 			return movePlayer("WEST");
 		case "INVENTORY": 
-			if (player.inventory().isEmpty()){
+			if (player.getInventory().isEmpty()){
 				return "You have nothing in your inventory";
 			}
 			return player.inventoryToString();
 		case "QUIT": quit = true;
 			return "Goodbye";
-		case "LEVEL": return player.level() + "";
+		case "LEVEL": return player.getLevel() + "";
 		
 		}
 		 if (input.startsWith("go ")){
@@ -199,7 +199,7 @@ public class World {
 		if (current.containsMob(key)){
 			Mob lootM = current.getMob(key);
 			if (lootM.isDead()){
-				player.addAllItems(current.getMob(key).inventory());
+				player.addAllItems(current.getMob(key).getInventory());
 				current.getMob(key).removeInventory();
 				return key +"'s items added";
 			} else {
@@ -212,8 +212,8 @@ public class World {
 	}
 	public String attackMob(String key){
 		if (current.containsMob(key)){
-			current.getMob(key).changeHealth(-player.attack());
-			String re = " you have attacked " + key + " for " + player.attack() + " damage.";
+			current.getMob(key).changeHealth(-player.getAttack());
+			String re = " you have attacked " + key + " for " + player.getAttack() + " damage.";
 			if (current.getMob(key).isDead()){
 				return re + " You have slain " + key + "!";
 			} 
@@ -221,7 +221,9 @@ public class World {
 		}
 		return "cannot find "+ key;
 	}
-	
+	/**
+	 * no use yet
+	 */
 	private void getStrings(){
 		try {
 			Scanner scanner = new Scanner(new File("Strings.txt"));

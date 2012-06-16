@@ -27,7 +27,7 @@ public class Armour extends Item {
 		defense = defenseNew;
 		super.setUse(ItemUse.Armour);
 	}
-	public int defense(){
+	public int getDefense(){
 		return defense;
 	}
 	public void setDefense(int change){

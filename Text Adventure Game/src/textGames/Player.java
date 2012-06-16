@@ -84,6 +84,11 @@ public class Player extends Mob {
 			xp = 0;
 		}
 	}
+	/**
+	 * 
+	 * @param a
+	 * @return previous Armour
+	 */
 	public Armour setArmour(Armour a){
 		Armour re = armor;
 		armor = a;

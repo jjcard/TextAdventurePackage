@@ -4,6 +4,12 @@ package textGames;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author jjcard
+ *
+ */
+
+
 public class Location implements Comparable<Location>{
 	public static final int UNDEFINED = 0;
 	public static final int NORTH = 1;
@@ -17,6 +23,9 @@ public class Location implements Comparable<Location>{
 	public static final int SOUTHEAST = 9;
 	public static final int SOUTHWEST = 10;
 	
+	/**
+	 * String[] containing basic directions
+	 */
 	public static final String[] dirName = {
 		"UNDEFINED",
 		"NORTH",
@@ -99,6 +108,11 @@ public class Location implements Comparable<Location>{
 		return roomMob.containsKey(m);
 
 	}
+	/**
+	 * adds Exit with given String in Uppercase and loctaion
+	 * @param dir
+	 * @param room
+	 */
 	public void addExit(String dir, Location room){
 		exits.put(dir.toUpperCase(), room);
 	}
@@ -108,12 +122,22 @@ public class Location implements Comparable<Location>{
 		}
 		
 	}
+	
+	/**
+	 * romves Exit under that String in uppercase
+	 * @param dir
+	 */
 	public void removeExit(String dir){
 		 exits.remove(dir.toUpperCase()); 
 	}
 	public void removeExit(int dir){
 		exits.remove(dirName[dir]);
 	}
+	/**
+	 * returns Location corresponding to dir to uppercase
+	 * @param dir
+	 * @return
+	 */
 	public Location getExitLocation(String dir){
 		return exits.get(dir.toUpperCase());
 	}
@@ -170,6 +194,10 @@ public class Location implements Comparable<Location>{
 		}
 		return re.toString();
 	}
+	/**
+	 * 
+	 * @return room description, description of items and mobs in room, and exits. 
+	 */
 	public String showRoom(){
 		
 		StringBuilder re = new StringBuilder(description);

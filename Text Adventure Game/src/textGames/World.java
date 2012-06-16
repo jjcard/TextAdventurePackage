@@ -6,6 +6,11 @@ import java.io.FileNotFoundException;
 //import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * basic world that contains locations and player and operations for commands
+ * @author jjcard
+ *
+ */
 public class World {
 	Location current;
 	Player player;
@@ -118,6 +123,13 @@ public class World {
 	public boolean currentContainsExit(String dir){
 		return current.containsExit(dir);
 	}
+	
+	
+	/**
+	 * does basic operations for text commands
+	 * @param input String
+	 * @return String containing output text
+	 */
 	public String basicOperations(String input){
 		
 		switch(input.toUpperCase()){

@@ -87,6 +87,11 @@ public class Mob {
 	public Map<String, Item> getInventory() {
 		return inventory;
 	}
+	public Item getItem(String key){
+		return inventory.get(key);
+	}
+
+
 	public int getDefense() {
 		return defense;
 	}

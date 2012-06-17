@@ -60,7 +60,7 @@ public class Item {
 	public ItemUse getUse() {
 		return use;
 	}
-	public String roomDescrip(){
+	public String getRoomDescrip(){
 		return roomDescrip;
 	}
  	public void setName(String change){

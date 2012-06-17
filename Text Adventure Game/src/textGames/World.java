@@ -41,7 +41,7 @@ public class World {
 	}
 	
 
-	public Location getCurrent(String key){
+	public Location getCurrent(){
 		return current;
 	}
 	
@@ -82,10 +82,10 @@ public class World {
 	}
 	public Item roomGetItem(String key){
 		
-		if (current.containsItem(key)){
+		//if (current.containsItem(key)){
 			return current.getItem(key);
-		}
-		return null;
+		//}
+		//return null;
 		
 	}
 	public boolean roomContainsItem(String key){
@@ -170,12 +170,31 @@ public class World {
 			 return attackMob(input.substring(7));
 		 }if (input.startsWith("loot all ")){
 			 return lootAllMob(input.substring(9));
+		 } if (input.startsWith("look ")){
+			 return lookAt(input.substring(5));
 		 }
 		 
 			 
 		
-		return "command not understood";
+		return "I don't understand";
 		
+	}
+	public String lookAt(String key){
+		if (key.equals("room")){
+			return showCurrentRoom();
+		}
+		if (roomContainsItem(key)){
+			return current.getItem(key).getInfo();
+		} if (roomContainsMob(key)){
+			return current.getMob(key).getDescription();
+		} if (player.containsItem(key)){
+			return player.getItem(key).getInfo();
+		}
+		return "You don't see anything like that";
+	}
+	public boolean roomContainsMob(String key){
+		
+		return current.containsMob(key);
 	}
 	public String movePlayer(String key){
 		if (goDirection(key)){
@@ -183,6 +202,7 @@ public class World {
 		}
 		return "You can't go that direction.";
 	}
+	
 	public String getItemFromRoom(String key){
 		 if(current.containsItem(key)){
 			 if (playerGetItem(key) !=null){

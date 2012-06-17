@@ -5,7 +5,11 @@ import java.util.Scanner;
 
 import textGames.*;
 
-
+/**
+ * Test game to test out features and bugs
+ * @author jjcard
+ *
+ */
 public class CrawlingDungeon {
 	
 	public static void main(String[] args){
@@ -15,7 +19,7 @@ public class CrawlingDungeon {
 		Player player = new Player("adventurer", 100, 6, 5);
 		World world = new World(starting, player);
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Welcom to Crawling Dungeon");
+		System.out.println("Welcome to Crawling Dungeon");
 		
 		
 		while(!world.Quit()){
@@ -27,7 +31,9 @@ public class CrawlingDungeon {
 	}
 	
 	public static Location setLocations(){
-		Location starting = new Location("Starting room");
+		Location starting = new Location("Starting room", "A mostly empty room");
+		Location secondRoom = new Location("second room", " a long hallway");
+		starting.addExit("north", secondRoom);
 		
 		
 		return starting;

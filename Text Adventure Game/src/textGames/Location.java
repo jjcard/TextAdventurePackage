@@ -67,6 +67,20 @@ public class Location implements Comparable<Location>{
 		roomMob =  new HashMap<String, Mob>();
 		exits = new HashMap<String, Location>();
 	}
+	public Location(String nameN, String descripN, Map<String, Item> invenN){
+		name = nameN;
+		description = descripN;
+		inventory = invenN;
+		roomMob =  new HashMap<String, Mob>();
+		exits = new HashMap<String, Location>();
+	}
+	public Location(String nameN, String descripN, Map<String, Item> invenN, Map<String, Mob> mobs){
+		name = nameN;
+		description = descripN;
+		inventory = invenN;
+		roomMob = mobs;
+		exits = new HashMap<String, Location>();
+	}
 	public String getName(){
 		return name;
 	}
@@ -178,8 +192,8 @@ public class Location implements Comparable<Location>{
 		
 		StringBuilder re = new StringBuilder();
 		for(Item i: inventory.values()){
-			if ((!i.getHidden()) && (i.roomDescrip() != null)){
-				re.append(" " + i.roomDescrip());
+			if ((!i.getHidden()) && (i.getRoomDescrip() != null)){
+				re.append(" " + i.getRoomDescrip());
 			}
 		}
 		return re.toString();
@@ -209,7 +223,7 @@ public class Location implements Comparable<Location>{
 			re.append(" " + getMobDescrip());
 		}
 		if (!exits.isEmpty()){
-			re.append(" The obvious exits are " + getExits());
+			re.append(" The obvious exits are " + getExitsDescrip());
 		}
 		return re.toString();
 	}

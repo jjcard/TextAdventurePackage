@@ -1,4 +1,4 @@
-package textGames;
+package jjcard.textGames;
 
 public class Item {
 	private String name;

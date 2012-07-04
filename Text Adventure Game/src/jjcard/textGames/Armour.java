@@ -1,4 +1,5 @@
-package textGames;
+package jjcard.textGames;
+
 
 public class Armour extends Item {
 	private int defense;

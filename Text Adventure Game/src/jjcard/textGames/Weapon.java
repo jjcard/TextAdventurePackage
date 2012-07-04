@@ -1,4 +1,4 @@
-package textGames;
+package jjcard.textGames;
 
 public class Weapon extends Item {
 	private int attack;

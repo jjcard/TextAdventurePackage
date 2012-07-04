@@ -1,4 +1,4 @@
-package textGames;
+package jjcard.textGames;
 
 public enum Status {
 	ALIVE, DEAD, SICK, POISONED, CONFUSED, BEWITCHED;

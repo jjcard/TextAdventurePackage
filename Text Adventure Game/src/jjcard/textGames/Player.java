@@ -1,4 +1,5 @@
-package textGames;
+package jjcard.textGames;
+
 
 public class Player extends Mob {
 	private Armour armor;

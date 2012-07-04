@@ -3,7 +3,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import textGames.*;
+import jjcard.textGames.Item;
+import jjcard.textGames.Location;
+import jjcard.textGames.Mob;
+import jjcard.textGames.Player;
+import jjcard.textGames.Weapon;
+import jjcard.textGames.World;
+
+import jjcard.textGames.*;
 
 /**
  * Test game to test out features and bugs
@@ -24,7 +31,8 @@ public class CrawlingDungeon {
 		
 		while(!world.Quit()){
 			System.out.print("> ");
-			System.out.println(world.basicOperations(scanner.nextLine()));
+			CommandAndKey ck = world.praseInput(scanner.nextLine());
+			world.basicOperations(ck);
 		}
 		
 		System.out.print("The program is now ending");

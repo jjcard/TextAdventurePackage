@@ -61,11 +61,19 @@ public class Weapon extends Item {
 			attack = 0;
 		}
 	}
-	public void setCrit(int change) {
+	public void changeCrit(int change) {
 		crit += change;
 		if (crit < 0){
 			crit = 0;
 		} else if(crit > 100){
+			crit = 100;
+		}
+	}
+	public void setCrit(int critN){
+		crit = critN;
+		if (crit < 0){
+			crit = 0;
+		} else if (crit > 100){
 			crit = 100;
 		}
 	}

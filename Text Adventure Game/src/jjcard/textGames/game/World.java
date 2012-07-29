@@ -304,9 +304,10 @@ public class World {
 		if (player.containsItem(key)){
 			Item drop = player.removeItem(key);
 			current.addItem(key, drop);
-			System.out.println(key + " dropped");
+			System.out.println(key + " dropped from your inventory");
 			return ReturnCom.ITEM_DROPPED;
 		} else {
+			System.out.println("Item not found");
 			return ReturnCom.DROP_ITEM_NOT_FOUND;
 		}
 	}

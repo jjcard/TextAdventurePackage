@@ -3,14 +3,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import jjcard.textGames.Item;
-import jjcard.textGames.Location;
-import jjcard.textGames.Mob;
-import jjcard.textGames.Player;
-import jjcard.textGames.Weapon;
-import jjcard.textGames.World;
 
-import jjcard.textGames.*;
+import jjcard.textGames.game.*;
 
 /**
  * Test game to test out features and bugs
@@ -18,6 +12,7 @@ import jjcard.textGames.*;
  *
  */
 public class CrawlingDungeon {
+	static boolean quit = false;
 	
 	public static void main(String[] args){
 		Location starting = setLocations();
@@ -29,9 +24,22 @@ public class CrawlingDungeon {
 		System.out.println("Welcome to Crawling Dungeon");
 		
 		
-		while(!world.Quit()){
+		HashMap<String, String> strings = world.getStringsFromFile(System.getProperty("user.dir")+"/src/crawlingdungeon/Strings.txt");
+		//System.out.println(strings.toString());	
+		for (Map.Entry<String, String> entry : strings.entrySet()) {
+		    System.out.println(entry.getKey() + ", " + entry.getValue());
+		}
+
+		quit = true;
+		
+		while(!quit){
+			
+
 			System.out.print("> ");
 			CommandAndKey ck = world.praseInput(scanner.nextLine());
+			if (ck.getCommand().equals(Commands.QUIT)){
+				quit = true;
+			}
 			world.basicOperations(ck);
 		}
 		

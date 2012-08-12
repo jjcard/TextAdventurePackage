@@ -24,19 +24,19 @@ public class CrawlingDungeon {
 		System.out.println("Welcome to Crawling Dungeon");
 		
 		
-		HashMap<String, String> strings = world.getStringsFromFile(System.getProperty("user.dir")+"/src/crawlingdungeon/Strings.txt");
+		//HashMap<String, String> strings = world.getStringsFromFile(System.getProperty("user.dir")+"/src/crawlingdungeon/Strings.txt");
 		//System.out.println(strings.toString());	
-		for (Map.Entry<String, String> entry : strings.entrySet()) {
-		    System.out.println(entry.getKey() + ", " + entry.getValue());
-		}
+		//for (Map.Entry<String, String> entry : strings.entrySet()) {
+		    //System.out.println(entry.getKey() + ", " + entry.getValue());
+		//}
 
-		quit = true;
+		//quit = true;
 		
 		while(!quit){
 			
 
 			System.out.print("> ");
-			CommandAndKey ck = world.praseInput(scanner.nextLine());
+			CommandAndKey ck = world.parseInput(scanner.nextLine());
 			if (ck.getCommand().equals(Commands.QUIT)){
 				quit = true;
 			}

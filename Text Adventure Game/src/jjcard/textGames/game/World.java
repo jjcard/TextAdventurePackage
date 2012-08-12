@@ -124,26 +124,95 @@ public class World {
 	public String showCurrentRoom(){
 		return current.showRoom();
 	}
-	public void setPlayerArmor(Armour armorN){
-		Armour add = player.setArmour(armorN);
+	public ReturnCom equipItem(String i){
+		Item toE = player.getItem(i);
+		
+		if (toE == null){
+			System.out.println(i + " not found");
+			return ReturnCom.EQUIPPED_NOT_FOUND;
+		}
+		
+		if (toE.getUse().equals(ItemUse.Armour)){
+			setPlayerArmor(i, (Armour) toE);
+			player.removeItem(i);
+			
+			System.out.println(i + " equipped as armor. ");
+			return ReturnCom.EQUIPPED_ARMOUR;
+		}
+		if (toE.getUse().equals(ItemUse.Weapon)){
+			setPlayerWeapon(i, (Weapon) toE);
+			player.removeItem(i);
+			System.out.println(i + " equipped as weapon. ");
+			return ReturnCom.EQUIPPED_WEAPON;
+		}
+		System.out.println(i + " not found");
+		return ReturnCom.EQUIPPED_NOT_FOUND;
+	}
+	public ReturnCom unequipItem(String key){
+		if (key.equalsIgnoreCase("armor") || key.equalsIgnoreCase("armour") ||player.armorIsKey(key)){
+			String aKey = player.getArmorKey();
+			Armour it = player.removeArmour();
+			if (it != null){
+				//remove armours defense bonus
+				player.changeDefense(- it.getDefense());
+				//add it back to the inventory
+				player.addItem(aKey, it);
+				System.out.println(key + " has been unequipped from armor. ");
+				return ReturnCom.UNEQUIPPED_ARMOUR;				
+			} else {
+				System.out.println("No armor equipped. ");
+				return ReturnCom.UNEQUIPPED_NO_ARMOUR;
+			}
+
+		}
+		if (key.equalsIgnoreCase("weapon") || player.weaponIsKey(key)){
+			String wKey = player.getWeaponKey();
+			Weapon i = player.removeWeapon();
+			if (i != null){
+				//remove weapons attack bonus
+				player.changeAttack(-i.getAttack());
+				player.addItem(wKey, i);
+				System.out.println(key + " has been unequipped from weapon. ");
+				return ReturnCom.UNEQUIPPED_WEAPON;
+			} else {
+				System.out.println("No weapon equipped. ");
+				return ReturnCom.UNEQUIPPED_NO_WEAPON;
+			}
+		}
+		System.out.println("Nothing like that to unequip. ");
+		return ReturnCom.UNEQUIPPED_ITEM_NOT_FOUND;
+	}
+	public void setPlayerArmor(String i, Armour armorN){
+		String armorKey = player.getArmorKey();
+		Armour add = player.setArmour(i, armorN);
 		if (add != null){
 			//taking away the defense from old armour
 			player.changeDefense(- add.getDefense());
-			//adding defense from now armour
-			player.changeDefense(player.getArmor().getDefense());
+			
+			
 			//add old armour back to inventory
-			player.addItem(add.getName(), add);
+			player.addItem(armorKey, add);
 			
 		}
+		//adding defense from now armour
+		player.changeDefense(player.getArmor().getDefense());
 	}
-	public void setPlayerWeapon(Weapon weaponN){
-		Weapon add = player.setWeapon(weaponN);
+	/**
+	 * equips givin weapon to player. adds old weapon back to inventory.
+	 * @param key for weaponN
+	 * @param weaponN
+	 */
+	public void setPlayerWeapon(String key, Weapon weaponN){
+		String weaponKey = player.getWeaponKey();
+		Weapon add = player.setWeapon(key, weaponN);
 		if (add != null){
-			player.addItem(add.getName(), add);
+			//add old weapon to inventory
+			player.addItem(weaponKey, add);
+			//remove old attack 
 			player.changeAttack(- add.getAttack());
-			player.changeAttack(player.getWeapon().getAttack());
 			
 		}
+		player.changeAttack(player.getWeapon().getAttack());
 	}
 	public boolean currentContainsExit(String dir){
 		return current.containsExit(dir);
@@ -169,6 +238,10 @@ public class World {
 			return lootAllMob(key);
 		case DROP:
 			return dropItem(key);
+		case EQUIP:
+			return equipItem(key);
+		case UNEQUIP:
+			return unequipItem(key);
 		 default:
 			 return ReturnCom.COMMAND_NOT_FOUND;
 			
@@ -182,74 +255,85 @@ public class World {
 	 * @param input String
 	 * @return CommandAndKey 
 	 */
-	public CommandAndKey praseInput(String input){
+	public CommandAndKey parseInput(String input){
+		String inputUp = input.toUpperCase();
 		
-		switch(input.toUpperCase()){
+		switch(inputUp){
 		case "HEALTH": return new CommandAndKey(Commands.PLAYER_INFO, "health");
-				//player.getHealth() + "";
 		case "NAME": return new CommandAndKey(Commands.PLAYER_INFO, "name");
-			//return player.getName() + "";
 		case "NORTH":
 		case "N":
 			 return new CommandAndKey(Commands.MOVE, "NORTH");
-					//movePlayer("NORTH");
 		case "SOUTH":
 		case "S": 
 			return new CommandAndKey(Commands.MOVE, "SOUTH");
-					//movePlayer("SOUTH");
 		case "EAST":
 		case "E":
 			return new CommandAndKey(Commands.MOVE, "EAST");
-					//movePlayer("EAST");
 		case "WEST":
 		case "W": 
 			return new CommandAndKey(Commands.MOVE, "WEST");
-					//movePlayer("WEST");
+		case "NW":
+		case "NORTHWEST":
+		case "NORTH WEST":
+			return new CommandAndKey(Commands.MOVE, "NORTHWEST");
+		case "NE":
+		case "NORTHEAST":
+			return new CommandAndKey(Commands.MOVE, "NORTHEAST");
+		case "SW":
+		case "SOUTHWEST":
+			return new CommandAndKey(Commands.MOVE, "SOUTHWEST");
+		case "UP":
+			return new CommandAndKey(Commands.MOVE, "UP");
+		case "DOWN":
+			return new CommandAndKey(Commands.MOVE, "DOWN");
 		case "INVENTORY": 
-//			if (player.getInventory().isEmpty()){
-//				return "You have nothing in your inventory";
-//			}
 			return new CommandAndKey(Commands.PLAYER_INFO, "inventory");
-					//player.inventoryToString();
-		case "QUIT": ///quit = true;
+		case "QUIT": 
 			return new CommandAndKey(Commands.QUIT);
-					//"Goodbye";
-		case "LEVEL": return new CommandAndKey(Commands.PLAYER_INFO, "level");
-				//player.getLevel() + "";
+		case "LEVEL": 
+			return new CommandAndKey(Commands.PLAYER_INFO, "level");
 		
 		}
-		 if (input.startsWith("go ")){
+		
+		 if (inputUp.startsWith("GO ")){
 			 return new CommandAndKey(Commands.MOVE, input.substring(3));
-					 //movePlayer(input.substring(3));
 		 }
-		 if (input.startsWith("get ")){
+		 if (inputUp.startsWith("GET ")){
 			 return new CommandAndKey(Commands.GET, input.substring(4));
-					 //getItemFromRoom(input.substring(4));
 		 }
-		 if (input.startsWith("pick up ")){
+		 if (inputUp.startsWith("MOVE ")){
+			 return new CommandAndKey(Commands.MOVE, input.substring(5));
+		 }
+		 if (inputUp.startsWith("PICK UP ")){
 			 return new CommandAndKey(Commands.GET, input.substring(8));
-					 //getItemFromRoom(input.substring(8));
 		 }
-		 if (input.startsWith("attack ")){
-			 
+		 if (inputUp.startsWith("WALK ")){
+			 return new CommandAndKey(Commands.MOVE, input.substring(5));
+		 }
+		 if (inputUp.startsWith("ATTACK ")){
 			 return new CommandAndKey(Commands.ATTACK, input.substring(7));
-					 //attackMob(input.substring(7));
-		 }if (input.startsWith("loot all ")){
+		 }if (inputUp.startsWith("LOOT ALL ")){
 			 return new CommandAndKey(Commands.LOOT_ALL, input.substring(9));
-					 //lootAllMob(input.substring(9));
-		 } if (input.startsWith("look ")){
+		 } if (inputUp.startsWith("LOOK AT ")){
+			 return new CommandAndKey(Commands.LOOK, input.substring(8));
+		 }if (inputUp.startsWith("LOOK ")){
 			 return new CommandAndKey(Commands.LOOK, input.substring(5));
-					 //lookAt(input.substring(5));
-		 } if (input.startsWith("drop ")){
+		 } if (inputUp.startsWith("DROP ")){
 			return new CommandAndKey(Commands.DROP, input.substring(5));
 		 }
-		 
+		 if (inputUp.startsWith("EQUIP ")){
+			 return new CommandAndKey(Commands.EQUIP, input.substring(6));
+		 }
+		 if (inputUp.startsWith("UNEQUIP ")){
+			 return new CommandAndKey(Commands.UNEQUIP, input.substring(8));
+		 }		 
 			 
-		
 		return null;
-				//"I don't understand";
+		
 		
 	}
+	
 	public ReturnCom lookAt(String key){
 		if (key.equals("room")){
 			 output.println(showCurrentRoom());
@@ -361,9 +445,11 @@ public class World {
 	}
 	public ReturnCom attackMob(String key){
 		if (current.containsMob(key)){
-			current.getMob(key).changeHealth(-player.getAttack());
+			Mob mob = current.getMob(key);
+			//current.getMob(key).changeHealth(-player.getAttack());
+			mob.attackMob(player.getAttack());
 			String re = " you have attacked " + key + " for " + player.getAttack() + " damage.\n";
-			if (current.getMob(key).isDead()){
+			if (mob.isDead()){
 				output.println( re + " You have slain " + key + "!");
 				return ReturnCom.ATTACK_MOB_KILLED;
 			} 

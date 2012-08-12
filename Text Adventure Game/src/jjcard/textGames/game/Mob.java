@@ -177,7 +177,16 @@ public class Mob {
 	public void removeInventory(){
 		inventory = null;
 	}
-	
+	/**
+	 * attack this mob for this amount of damage minus the mobs defense. 
+	 * Returns new health
+	 * @param attack
+	 * @return
+	 */
+	public int attackMob(int damage){
+		changeHealth(-(damage - defense) );
+		return curHealth;
+	}
 	public boolean containsItem(String key){
 		return inventory.containsKey(key);
 	}

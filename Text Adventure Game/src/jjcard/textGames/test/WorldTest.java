@@ -11,6 +11,7 @@ public class WorldTest {
 	Player player;
 	Location local;
 	Location hallway;
+	Mob mob;
 
 	@Test
 	public void MovingTest() {
@@ -22,13 +23,120 @@ public class WorldTest {
 		assertEquals("entry room", world.getCurrent().getName());
 		world.goDirection(Location.NORTH);
 		assertEquals("hallway", world.getCurrent().getName());
+		CommandAndKey ck = world.parseInput("move south");
+		assertEquals(ck.getCommand(), Commands.MOVE);
+		assertEquals(ck.getKey(), "south");
+		ReturnCom rc = world.basicOperations(ck);
+		assertEquals(rc, ReturnCom.MOVED_DIRECTION);
+		
+	}
+	@Test
+	public void MobsWorldTest(){
+		//Mob mob = new Mob("Goblin", 10, 1, 4);
+		//mob.setDescription("You can tell its a goblin because it's green and broccoli usually doesn't try to kill you");
+		local.addMob("goblin", mob);
+		assertEquals(world.getCurrent().getMob("goblin"), mob);
+		CommandAndKey ck = world.parseInput("Look goblin");
+		assertEquals(ck.getCommand(), Commands.LOOK);
+		assertEquals(ck.getKey(), "goblin");
+		ck = world.parseInput("look at goblin");
+		assertEquals(ck.getCommand(), Commands.LOOK);
+		assertEquals(ck.getKey(), "goblin");
+		
+		ReturnCom rc = world.basicOperations(ck);
+		assertEquals(rc, ReturnCom.LOOK_MOB);
+		
+		ck = world.parseInput("Loot all goblin");
+		assertEquals(ck.getCommand(), Commands.LOOT_ALL);
+		assertEquals(ck.getKey(), "goblin");
+		
+		rc = world.basicOperations(ck);
+		assertEquals(rc, ReturnCom.LOOT_MOB_ALIVE);
+		
+	
+	}
+	@Test
+	public void WorldCombatTest(){
+		local.addMob("goblin", mob);
+		CommandAndKey ck = world.parseInput("attack goblin");
+		assertEquals(ck.getCommand(), Commands.ATTACK);
+		assertEquals(ck.getKey(), "goblin");
+		assertEquals(mob.getHealth(), 10);
+		ReturnCom rc = world.basicOperations(ck);
+		assertEquals(rc, ReturnCom.ATTACK_MOB);
+		assertEquals(mob.getHealth(), 6);
+		assertEquals(mob.getStatus(), Status.ALIVE);
+		Item coin = new Item("coin", "a single golden coin");
+		mob.addItem("coin", coin);
+		
+		assertTrue(mob.containsItem("coin"));
+		rc = world.basicOperations(ck);
+		rc = world.basicOperations(ck);
+		assertEquals(rc, ReturnCom.ATTACK_MOB_KILLED);
+		assertEquals(mob.getStatus(), Status.DEAD);
+		assertTrue(mob.isDead());
+		assertEquals(mob.getHealth(), 0);
+		assertFalse(player.containsItem("coin"));
+		rc = world.basicOperations(world.parseInput("loot all goblin"));
+		assertEquals(rc, ReturnCom.LOOT_MOB);
+		assertTrue(player.containsItem("coin"));
+			
+	}
+	@Test
+	public void EquipWorldTest(){
+		Armour wool = new Armour("wool", "its itchness might be a defense", 0, 4);
+		player.addItem("wool", wool);
+		CommandAndKey ck = world.parseInput("equip wool");
+		assertEquals(ck.getCommand(), Commands.EQUIP);
+		assertEquals(ck.getKey(), "wool");
+		assertEquals(player.getDefense(), 8);
+		ReturnCom rc = world.basicOperations(ck);
+		assertEquals(rc, ReturnCom.EQUIPPED_ARMOUR);
+		assertEquals(player.getDefense(), 8 + 4);
+	
+		
+		Weapon weapon = new Weapon("shank", "it can also be used as a verb", 3);
+		player.addItem("shank", weapon);
+		ck = world.parseInput("equip shank");
+		assertEquals(ck.getCommand(), Commands.EQUIP);
+		assertEquals(ck.getKey(), "shank");
+		assertEquals(player.getAttack(), 5);
+		rc = world.basicOperations(ck);
+		assertEquals(rc, ReturnCom.EQUIPPED_WEAPON);
+		assertEquals(player.getAttack(), 8);
+		assertEquals(player.getWeaponKey(), "shank");
+		
+		
+		ck = world.parseInput("unequip shank");
+		assertEquals(ck.getCommand(), Commands.UNEQUIP);
+		assertEquals(ck.getKey(), "shank");
+		assertFalse(player.containsItem("shank"));
+		rc = world.basicOperations(ck);
+		assertEquals(rc, ReturnCom.UNEQUIPPED_WEAPON);
+		assertNull(player.getWeapon());
+		assertTrue(player.containsItem("shank"));
+		assertNull(player.getWeaponKey());
+		assertEquals(player.getAttack(), 5);
+		
+		ck = world.parseInput("UnEquiP wool");
+		assertEquals(ck.getCommand(), Commands.UNEQUIP);
+		assertEquals(ck.getKey(), "wool");
+		assertFalse(player.containsItem("wool"));
+		
+		rc = world.basicOperations(ck);
+		assertEquals(rc, ReturnCom.UNEQUIPPED_ARMOUR);
+		assertTrue(player.containsItem("wool"));
+		assertEquals(player.getDefense(), 8);
+		
+		
+		
 		
 	}
 	@Test
 	public void ItemWorldTest(){
 		assertTrue(world.getCurrent().containsItem("item"));
 		assertFalse(player.containsItem("item"));
-		CommandAndKey ck = world.praseInput("get item");
+		CommandAndKey ck = world.parseInput("get item");
 		assertEquals(ck.getKey(), "item");
 		assertEquals(ck.getCommand(), Commands.GET);
 		ReturnCom rc = world.basicOperations(ck);
@@ -36,7 +144,7 @@ public class WorldTest {
 		assertTrue(player.containsItem("item"));
 		assertFalse(world.getCurrent().containsItem("item"));
 		
-		ck = world.praseInput("drop item");
+		ck = world.parseInput("drop item");
 		assertEquals(ck.getKey(), "item");
 		assertEquals(ck.getCommand(), Commands.DROP);
 		rc = world.basicOperations(ck);
@@ -44,17 +152,24 @@ public class WorldTest {
 		assertFalse(player.containsItem("item"));
 		assertTrue(world.getCurrent().containsItem("item"));
 	}
+	public void attackMobTest(){
+		
+	}
 	@Before
 	public void setUp(){
 		
-		 player = new Player("jjcard");
-		 local = new Location("entry room", "A barren room");
+		// player = new Player("jjcard");
+		 player = new Player("jjcard", 50, 8, 5);
+		 local = new Location("entry room", "A barren room.");
 		 Item item = new Item("item");
 		 local.addItem("item", item);
-		 hallway = new Location("hallway","a long hallway with one torch");
+		 hallway = new Location("hallway","a long hallway with one torch.");
 		local.addExit("NORTH", hallway);
 		hallway.addExit(Location.SOUTH, local);
 		 world = new World(local, player);
+		 
+		 mob = new Mob("Goblin", 10, 1, 4);
+		mob.setDescription("You can tell its a goblin because it's green and broccoli usually doesn't try to kill you");
 		
 	}
 

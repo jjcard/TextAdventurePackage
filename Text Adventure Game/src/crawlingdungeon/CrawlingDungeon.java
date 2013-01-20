@@ -24,13 +24,6 @@ public class CrawlingDungeon {
 		System.out.println("Welcome to Crawling Dungeon");
 		
 		
-		//HashMap<String, String> strings = world.getStringsFromFile(System.getProperty("user.dir")+"/src/crawlingdungeon/Strings.txt");
-		//System.out.println(strings.toString());	
-		//for (Map.Entry<String, String> entry : strings.entrySet()) {
-		    //System.out.println(entry.getKey() + ", " + entry.getValue());
-		//}
-
-		//quit = true;
 		
 		while(!quit){
 			

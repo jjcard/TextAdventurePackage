@@ -1,7 +1,7 @@
 package jjcard.textGames.game;
 
 public enum Status {
-	ALIVE, DEAD, SICK, POISONED, CONFUSED, BEWITCHED;
+	 DEAD, POISONED, SICK, CONFUSED, BEWITCHED, ALIVE;
 	
 	public String toString() {
 		String s = super.toString();

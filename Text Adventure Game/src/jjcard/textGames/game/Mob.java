@@ -1,70 +1,58 @@
 package jjcard.textGames.game;
 //import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 public class Mob {
+	public static int DEFAULT_HEALTH = 10;
 	private String name;
 	private String description;
 	private String roomDescrip;
 	private int maxHealth;
 	private int curHealth;
-	private int money;
-	private Map<String, Item> inventory;
-	private int defense;
-	private int attack;
+	private int money = 0;
+	private Map<String, Item> inventory = new HashMap<String, Item>();
+	private int defense = 0;
+	private int attack = 0;
 	private boolean Hostile = true;
-	private Status status = Status.ALIVE;
+	private LinkedList<Status> statusList = new LinkedList<Status>();
 	
 	public Mob() {
 		name = new String();
 		description = new String();
-		maxHealth = 1;
+		maxHealth = DEFAULT_HEALTH;
 		curHealth = maxHealth;
-		inventory = new HashMap<String, Item>();
-		defense = 0;
-		attack = 0;
-		money = 0;
+
 	}
 	public Mob(String nameNew) {
 		name = nameNew;
-		description = new String();
-		maxHealth = 1;
+		description = "";
+		maxHealth = DEFAULT_HEALTH;
 		curHealth = maxHealth;
-		inventory = new HashMap<String, Item>();
-		defense = 0;
-		attack = 0;
-		money = 0;
+
 	}
 	public Mob(String nameNew, int healthNew){
 		name = nameNew;
-		description = new String();
+		description = "";
 		maxHealth = healthNew;
 		curHealth = maxHealth;
-		inventory = new HashMap<String, Item>();
-		defense = 0;
-		attack = 0;
-		money = 0;
 		
 	}
 	public Mob(String nameNew, int healthNew, int defenseNew) {
 		name = nameNew;
-		description = new String();
+		description = "";
 		maxHealth = healthNew;
 		curHealth = maxHealth;
-		inventory = new HashMap<String, Item>();
 		defense = defenseNew;
-		attack = 0;
-		money = 0;
+
 	}
 	public Mob(String nameNew, int healthNew, int defenseNew, int attackNew){
 		name = nameNew;
-		description = new String();
+		description = "";
 		maxHealth = healthNew;
 		curHealth = maxHealth;
-		inventory = new HashMap<String, Item>();
 		defense = defenseNew;
 		attack = attackNew;
-		money = 0;
 	}
 	public String getName() {
 		return name;
@@ -101,8 +89,14 @@ public class Mob {
 	public boolean isHostile() {
 		return Hostile;
 	}
-	public Status getStatus() {
-		return status;
+	public LinkedList<Status> getstatusList() {
+		return statusList;
+	}
+	public boolean containsStatus(Status s){
+		return statusList.contains(s);
+	}
+	public boolean removeStatus(Status s){
+		return statusList.remove(s);
 	}
 	public void setName(String nameNew){
 		name = nameNew;
@@ -129,8 +123,15 @@ public class Mob {
 		}
 		if (curHealth <= 0){
 			curHealth = 0;
-			status = Status.DEAD;
+			addStatus(Status.DEAD);
 		} 
+	}
+	public void addStatus(Status s){
+		if (Status.DEAD.equals(s)){
+			statusList.addFirst(s);
+		} else {
+			statusList.add(s);
+		}
 	}
 	public void changeMoney(int change){
 		money += change;
@@ -159,8 +160,8 @@ public class Mob {
 	public void setHostile(boolean change){
 		Hostile = change;
 	}
-	public void setStatus(Status change){
-		status = change;
+	public void setstatusList(LinkedList<Status> s){
+		statusList = s;
 	}
 	public Item addItem(String key, Item add){
 		
@@ -194,10 +195,13 @@ public class Mob {
 		return inventory.size();
 	}
 	public boolean isDead(){
-		return status == Status.DEAD;
+		return  Status.DEAD.equals(getFirstStatus());
 	}
 	public String toString() {
 		return name;
+	}
+	private Status getFirstStatus(){
+		return statusList.isEmpty() ? null: statusList.getFirst();
 	}
 	public boolean equals(Object o){
 		if (o instanceof Mob){

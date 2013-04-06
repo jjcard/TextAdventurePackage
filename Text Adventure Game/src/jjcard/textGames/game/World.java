@@ -1,12 +1,6 @@
 package jjcard.textGames.game;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.PrintStream;
-//import java.util.Map;
-//import java.util.HashMap;
-import java.util.HashMap;
-import java.util.Scanner;
 
 
 
@@ -24,13 +18,9 @@ public class World {
 	
 	public World(){
 		current = new Location();
-		//Locations = new HashMap<String, Location>();
-//		Mobs = new HashMap<String, Mob>();
-//		Items = new HashMap<String, Item>();
 	}
 
 	public World( Location newCur){
-		//Locations = newLoc;
 		current = newCur;
 	}
 	public World(Location newCur, Player playerN){
@@ -459,33 +449,6 @@ public class World {
 		 output.println("cannot find "+ key);
 		 return ReturnCom.ATTACK_MOB_NOT_FOUND;
 	}
-	/**
-	 * no use yet
-	 * @return 
-	 */
-	public HashMap<String, String> getStringsFromFile(String address){
-		try {
-			
-			Scanner scanner = new Scanner(new File(address));
-			scanner.useDelimiter("==\\n*");
-			
-			HashMap<String, String> strings = new HashMap<String, String>();
-			while (scanner.hasNext()){
-				String key = scanner.next();
-				if (scanner.hasNext()){
-					strings.put(key, scanner.next());
-				}
-				//strings.put(key, scanner.next());
-				//System.out.println(scanner.next());
-				
-				
-			}
-			return strings;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			return null;
-		}
-		
-	}
+
 
 }

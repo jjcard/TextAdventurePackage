@@ -1,6 +1,7 @@
 package jjcard.textGames.test;
 
 import static org.junit.Assert.*;
+
 import jjcard.textGames.game.*;
 
 import org.junit.Before;
@@ -65,7 +66,7 @@ public class WorldTest {
 		ReturnCom rc = world.basicOperations(ck);
 		assertEquals(rc, ReturnCom.ATTACK_MOB);
 		assertEquals(mob.getHealth(), 6);
-		assertEquals(mob.getStatus(), Status.ALIVE);
+		assertTrue(mob.getstatusList().isEmpty());
 		Item coin = new Item("coin", "a single golden coin");
 		mob.addItem("coin", coin);
 		
@@ -73,7 +74,7 @@ public class WorldTest {
 		rc = world.basicOperations(ck);
 		rc = world.basicOperations(ck);
 		assertEquals(rc, ReturnCom.ATTACK_MOB_KILLED);
-		assertEquals(mob.getStatus(), Status.DEAD);
+		assertEquals(mob.getstatusList().getFirst(), Status.DEAD);
 		assertTrue(mob.isDead());
 		assertEquals(mob.getHealth(), 0);
 		assertFalse(player.containsItem("coin"));
@@ -152,9 +153,7 @@ public class WorldTest {
 		assertFalse(player.containsItem("item"));
 		assertTrue(world.getCurrent().containsItem("item"));
 	}
-	public void attackMobTest(){
-		
-	}
+
 	@Before
 	public void setUp(){
 		

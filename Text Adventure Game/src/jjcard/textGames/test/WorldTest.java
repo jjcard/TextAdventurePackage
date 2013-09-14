@@ -66,7 +66,7 @@ public class WorldTest {
 		assertEquals(mob.getHealth(), 6);
 		assertTrue(mob.getstatusList().isEmpty());
 		Item coin = new Item("coin", "a single golden coin");
-		mob.addItem("coin", coin);
+		mob.addItem( coin);
 		
 		assertTrue(mob.containsItem("coin"));
 		rc = world.basicOperations(ck);
@@ -83,7 +83,7 @@ public class WorldTest {
 	@Test
 	public void EquipWorldTest(){
 		Armour wool = new Armour("wool", "its itchness might be a defense", 0, 4);
-		player.addItem("wool", wool);
+		player.addItem( wool);
 		CommandAndKey ck = world.parseInput("equip wool");
 		assertEquals(ck.getCommand(), Commands.EQUIP);
 		assertEquals(ck.getKey(), "wool");
@@ -94,7 +94,7 @@ public class WorldTest {
 	
 		
 		Weapon weapon = new Weapon("shank", "it can also be used as a verb", 3);
-		player.addItem("shank", weapon);
+		player.addItem(weapon);
 		ck = world.parseInput("equip shank");
 		assertEquals(ck.getCommand(), Commands.EQUIP);
 		assertEquals(ck.getKey(), "shank");
@@ -102,7 +102,7 @@ public class WorldTest {
 		rc = world.basicOperations(ck);
 		assertEquals(rc, ReturnCom.EQUIPPED_WEAPON);
 		assertEquals(player.getFullAttack(), 8);
-		assertEquals(player.getWeaponKey(), "shank");
+		assertEquals(player.getStandardWeaponKey(), "shank");
 		
 		
 		ck = world.parseInput("unequip shank");
@@ -113,7 +113,7 @@ public class WorldTest {
 		assertEquals(rc, ReturnCom.UNEQUIPPED_WEAPON);
 		assertNull(player.getWeapon());
 		assertTrue(player.containsItem("shank"));
-		assertNull(player.getWeaponKey());
+		assertNull(player.getStandardWeaponKey());
 		assertEquals(player.getFullAttack(), 5);
 		
 		ck = world.parseInput("UnEquiP wool");

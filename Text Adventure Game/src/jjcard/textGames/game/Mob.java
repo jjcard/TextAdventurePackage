@@ -1,22 +1,20 @@
 package jjcard.textGames.game;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 public class Mob extends GameElement{
 	public static int DEFAULT_HEALTH = 10;
 	private String description;
 	private int maxHealth;
 	private int curHealth;
 	private int money = 0;
-	private Map<String, Item> inventory = new HashMap<String, Item>();
+	private GameElementMap<Item> inventory = new GameElementMap<Item>();
 	private int defense = 0;
 	private int attack = 0;
 	private boolean Hostile = true;
 	private LinkedList<Status> statusList = new LinkedList<Status>();
 	private Armour armor;
-	private String armorKey;
+	//private String armorKey;
 	private Weapon weapon;
-	private String weaponKey;
+	//private String weaponKey;
 	
 	public Mob() {
 		super();
@@ -69,7 +67,7 @@ public class Mob extends GameElement{
 	public int getMoney(){
 		return money;
 	}
-	public Map<String, Item> getInventory() {
+	public GameElementMap<Item> getInventory() {
 		return inventory;
 	}
 	public Item getItem(String key){
@@ -109,7 +107,7 @@ public class Mob extends GameElement{
 		return statusList.remove(s);
 	}
 	public void setName(String name){
-		setElementName(new ElementName(name));
+		setStandardName(name);
 	}
 
 	public void setDescription(String newDes){
@@ -163,8 +161,7 @@ public class Mob extends GameElement{
 	 * @param a
 	 * @return previous Armour
 	 */
-	public Armour setArmour(String key, Armour a){
-		armorKey = key;
+	public Armour setArmour( Armour a){
 		Armour re = armor;
 		armor = a;
 		return re;
@@ -174,8 +171,7 @@ public class Mob extends GameElement{
 	 * @param w
 	 * @return previous Weapon
 	 */
-	public Weapon setWeapon(String key, Weapon w){
-		weaponKey = key;
+	public Weapon setWeapon( Weapon w){
 		Weapon re = weapon;
 		weapon = w;
 		return re;
@@ -199,18 +195,17 @@ public class Mob extends GameElement{
 	public void setstatusList(LinkedList<Status> s){
 		statusList = s;
 	}
-	public Item addItem(String key, Item add){
+	public Item addItem(Item add){
 		
-		return inventory.put(key, add);
+		return inventory.put(add);
 		
 	}
 	public Armour removeArmour() {
 		Armour re = armor;
 		armor = null;
-		armorKey = null;
 		return re;
 	}
-	public void addAllItems(Map<String, Item> addMap){
+	public void addAllItems(GameElementMap<Item> addMap){
 		inventory.putAll(addMap);
 		
 		}
@@ -231,10 +226,10 @@ public class Mob extends GameElement{
 		return curHealth;
 	}
 	public boolean containsItem(String key){
-		return inventory.containsKey(key);
+		return inventory.containsName(key);
 	}
 	public int inventorySize() {
-		return inventory.size();
+		return inventory.getElementCount();
 	}
 	public boolean isDead(){
 		return  getHealth() <= 0;
@@ -245,27 +240,34 @@ public class Mob extends GameElement{
 
 	public Weapon removeWeapon() {
 		Weapon re = weapon;
-		weaponKey = null;
 		weapon = null;
 		return re;
 	}
-	public String getArmorKey(){
-		return armorKey;
+	public String getStandardArmorKey(){
+		return armor == null? null: armor.getStandardName();
 	}
-	public boolean armorIsKey(String key){
-		if (armorKey == null){
+	public boolean isKeyforArmor(String key){
+		return isKeyForItem(key, armor);
+	}
+	private boolean isKeyForItem(String key, Item item){
+		if (key.equalsIgnoreCase(item.getStandardName())){
+			return true;
+		} else {
+			if (item.getAltNames() != null){
+				for (String altName: item.getAltNames()){
+					if (key.equalsIgnoreCase(altName)){
+						return true;
+					}
+				}
+			}
 			return false;
 		}
-		return armorKey.equals(key);
 	}
-	public boolean weaponIsKey(String key){
-		if (weaponKey == null){
-			return false;
-		}
-		return weaponKey.equals(key);
+	public boolean isKeyForWeapon(String key){
+		return isKeyForItem(key, weapon);
 	}
-	public String getWeaponKey(){
-		return weaponKey;
+	public String getStandardWeaponKey(){
+		return weapon == null? null: weapon.getStandardName();
 	}
 	public boolean equals(Object o){
 		if (o instanceof Mob){
@@ -276,21 +278,21 @@ public class Mob extends GameElement{
 		}
 	}
 	public String inventoryToString(){
-		String re = inventory.keySet().toString();
+		String re = inventory.getAllStandardNamesString();
 		return re.substring(1, re.length()-1);
 		
 	}
 	public Armour setArmour(String a){
 		Item ar = getItem(a);
 		if (ar != null && ar instanceof Armour){
-			return setArmour(a, (Armour) ar);
+			return setArmour((Armour) ar);
 		}
 		return null;
 	}
 	public Weapon setWeapon(String a){
 		Item ar = getItem(a);
 		if (ar != null && ar instanceof Weapon){
-			return setWeapon(a, (Weapon) ar);
+			return setWeapon( (Weapon) ar);
 		}
 		return null;
 	}

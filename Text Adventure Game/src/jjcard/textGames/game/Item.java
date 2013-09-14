@@ -56,7 +56,7 @@ public class Item extends GameElement{
 		return use;
 	}
  	public void setName(String name){
-		setElementName(new ElementName(name));
+		setStandardName(name);
 	}
 	public void setCost(int costN){
 		cost = costN;

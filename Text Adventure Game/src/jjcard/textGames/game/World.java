@@ -68,7 +68,7 @@ public class World {
 	public boolean playerGetItem(String key){
 		Item re = current.getItem(key);
 		if (re != null && re.canGet()){
-			 player.addItem(key, re);
+			 player.addItem(re);
 			 return true;
 		}
 		return false;
@@ -102,13 +102,12 @@ public class World {
 		return ReturnCom.EQUIPPED_NOT_FOUND;
 	}
 	public ReturnCom unequipItem(String key){
-		if (key.equalsIgnoreCase("armor") || key.equalsIgnoreCase("armour") ||player.armorIsKey(key)){
-			String aKey = player.getArmorKey();
+		if (key.equalsIgnoreCase("armor") || key.equalsIgnoreCase("armour") ||player.isKeyforArmor(key)){
 			Armour it = player.removeArmour();
 			if (it != null){
 
 				//add it back to the inventory
-				player.addItem(aKey, it);
+				player.addItem( it);
 				System.out.println(key + " has been unequipped from armor. ");
 				return ReturnCom.UNEQUIPPED_ARMOUR;				
 			} else {
@@ -117,12 +116,11 @@ public class World {
 			}
 
 		}
-		if (key.equalsIgnoreCase("weapon") || player.weaponIsKey(key)){
-			String wKey = player.getWeaponKey();
+		if (key.equalsIgnoreCase("weapon") || player.isKeyForWeapon(key)){
 			Weapon i = player.removeWeapon();
 			if (i != null){
 
-				player.addItem(wKey, i);
+				player.addItem( i);
 				System.out.println(key + " has been unequipped from weapon. ");
 				return ReturnCom.UNEQUIPPED_WEAPON;
 			} else {
@@ -134,11 +132,10 @@ public class World {
 		return ReturnCom.UNEQUIPPED_ITEM_NOT_FOUND;
 	}
 	public void setPlayerArmor(String i, Armour armorN){
-		String armorKey = player.getArmorKey();
-		Armour add = player.setArmour(i, armorN);
+		Armour add = player.setArmour( armorN);
 		if (add != null){
 			//add old armour back to inventory
-			player.addItem(armorKey, add);
+			player.addItem( add);
 			
 		}
 
@@ -149,11 +146,10 @@ public class World {
 	 * @param weaponN
 	 */
 	public void setPlayerWeapon(String key, Weapon weaponN){
-		String weaponKey = player.getWeaponKey();
-		Weapon add = player.setWeapon(key, weaponN);
+		Weapon add = player.setWeapon(weaponN);
 		if (add != null){
 			//add old weapon to inventory
-			player.addItem(weaponKey, add);
+			player.addItem( add);
 
 		}
 	}

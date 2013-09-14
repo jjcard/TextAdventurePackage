@@ -20,7 +20,7 @@ public class GameElementMapTest {
 		map.put(e1);
 		
 		assertEquals(1, map.getElementCount());
-		Item r1 = map.get(e1.getElementName().getStandardName());
+		Item r1 = map.get(e1.getStandardName());
 		assertNotNull(r1);
 		assertEquals(e1, r1);
 		

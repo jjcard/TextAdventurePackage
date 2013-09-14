@@ -5,38 +5,40 @@ public abstract class GameElement {
 	
 
 	
-	private ElementName elementName;
 	private String roomDescription;
 	
+	private String standardName;
+	private String[] altNames;
+	
 		public GameElement(){
-		elementName = new ElementName();
+		altNames =  new String[0];
 	}
 	public GameElement(String name){
-		elementName = new ElementName(name);
+		standardName = name;
+		altNames =  new String[0];
 	}
 	public GameElement(String name, String[] altNames){
-		elementName = new ElementName(name, altNames);
+		standardName = name;
+		this.altNames = altNames;
 	}
-	public ElementName getElementName(){
-		return elementName;
-	}
+
 	public String getStandardName(){
-		return elementName == null? null: elementName.getStandardName();
+		return standardName;
 	}
 	public void setStandardName(String name){
-		elementName.setStanderdName(name);
-	}
-	public void setElementName(ElementName elementName){
-		this.elementName = elementName;
+		this.standardName = name;
 	}
 	public void setAltNames(String[] altNames){
-		this.elementName.setAltNames(altNames);
+		this.altNames = altNames;
 	}
 	public String getRoomDescription() {
 		return roomDescription;
 	}
 	public void setRoomDescription(String roomDescription) {
 		this.roomDescription = roomDescription;
+	}
+	public String[] getAltNames(){
+		return altNames;
 	}
 
 	

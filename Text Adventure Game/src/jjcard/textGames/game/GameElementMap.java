@@ -33,13 +33,13 @@ public class GameElementMap<A extends GameElement> {
 
    }
     public void putStandardNameOnly(A gameElement){
-    	String TrueName = gameElement.getElementName().getStandardName().toUpperCase();
+    	String TrueName = gameElement.getStandardName().toUpperCase();
     	altNamesMap.put(TrueName, TrueName);
     	elementMap.put(TrueName, gameElement);
     }
 	public A put(A gameElement){
-		return put(gameElement.getElementName().getStandardName(), 
-				gameElement.getElementName().getAltNames(), gameElement);
+		return put(gameElement.getStandardName(), 
+				gameElement.getAltNames(), gameElement);
 			
 
 	}
@@ -84,8 +84,8 @@ public class GameElementMap<A extends GameElement> {
 		
 		
 		//now remove from the altname table
-		if (element.getElementName().getAltNames() != null){
-			for (String altName: element.getElementName().getAltNames()){
+		if (element.getAltNames() != null){
+			for (String altName: element.getAltNames()){
 				altNamesMap.remove(altName.toUpperCase());
 			}
 		}
@@ -126,6 +126,12 @@ public class GameElementMap<A extends GameElement> {
 	
 	public boolean isEmpty(){
 		return elementMap.isEmpty();
+	}
+	
+	public void putAll(GameElementMap<A> map){
+		altNamesMap.putAll(map.altNamesMap);
+		
+		elementMap.putAll(map.elementMap);
 	}
 
 	

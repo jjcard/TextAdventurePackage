@@ -33,8 +33,6 @@ public class WorldTest {
 	}
 	@Test
 	public void MobsWorldTest(){
-		//Mob mob = new Mob("Goblin", 10, 1, 4);
-		//mob.setDescription("You can tell its a goblin because it's green and broccoli usually doesn't try to kill you");
 		local.addMob( mob);
 		assertEquals(world.getCurrent().getMob("goblin"), mob);
 		CommandAndKey ck = world.parseInput("Look goblin");

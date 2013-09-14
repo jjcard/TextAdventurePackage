@@ -10,20 +10,20 @@ public class ItemTest {
 	@Test
 	public void Itemtest() {
 		Item item = new Item("basic item", "it shows off the true potential of an item...which isn't much");
-		assertEquals("basic item", item.getName());
+		assertEquals("basic item", item.getStandardName());
 		assertEquals("it shows off the true potential of an item...which isn't much", item.getInfo());
 		
 		item.setHidden(true);
 		item.setMovable(false);
 		item.setCost(1);
 		item.setLevel(99);
-		item.setRoomDescrip("an item is in the room");
+		item.setRoomDescription("an item is in the room");
 		
-		assertEquals(item.getHidden(), true);
-		assertEquals(item.getMovable(), false);
+		assertEquals(item.isHidden(), true);
+		assertEquals(item.isMovable(), false);
 		assertEquals(item.getCost(), 1);
 		assertEquals(item.getLevel(), 99);
-		assertEquals(item.getRoomDescrip(), "an item is in the room");
+		assertEquals(item.getRoomDescription(), "an item is in the room");
 		
 		item.changeCost(1);
 		assertEquals(item.getCost(), 2);
@@ -35,7 +35,7 @@ public class ItemTest {
 	@Test
 	public void WeaponTest(){
 		Weapon weapon = new Weapon("sword", "pointy end", 2);
-		assertEquals(weapon.getName(), "sword");
+		assertEquals(weapon.getStandardName(), "sword");
 		assertEquals(weapon.getInfo(), "pointy end");
 		assertEquals(weapon.getAttack(), 2);
 		

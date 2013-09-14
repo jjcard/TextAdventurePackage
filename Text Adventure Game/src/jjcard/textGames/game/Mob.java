@@ -1,13 +1,10 @@
 package jjcard.textGames.game;
-//import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-public class Mob {
+public class Mob extends GameElement{
 	public static int DEFAULT_HEALTH = 10;
-	private String name;
 	private String description;
-	private String roomDescrip;
 	private int maxHealth;
 	private int curHealth;
 	private int money = 0;
@@ -16,56 +13,56 @@ public class Mob {
 	private int attack = 0;
 	private boolean Hostile = true;
 	private LinkedList<Status> statusList = new LinkedList<Status>();
+	private Armour armor;
+	private String armorKey;
+	private Weapon weapon;
+	private String weaponKey;
 	
 	public Mob() {
-		name = new String();
+		super();
 		description = new String();
 		maxHealth = DEFAULT_HEALTH;
 		curHealth = maxHealth;
 
 	}
-	public Mob(String nameNew) {
-		name = nameNew;
+	public Mob(String name) {
+		super(name);
 		description = "";
 		maxHealth = DEFAULT_HEALTH;
 		curHealth = maxHealth;
 
 	}
-	public Mob(String nameNew, int healthNew){
-		name = nameNew;
+	public Mob(String name, int healthNew){
+		super(name);
 		description = "";
 		maxHealth = healthNew;
 		curHealth = maxHealth;
 		
 	}
-	public Mob(String nameNew, int healthNew, int defenseNew) {
-		name = nameNew;
+	public Mob(String name, int healthNew, int defenseNew) {
+		super(name);
 		description = "";
 		maxHealth = healthNew;
 		curHealth = maxHealth;
 		defense = defenseNew;
 
 	}
-	public Mob(String nameNew, int healthNew, int defenseNew, int attackNew){
-		name = nameNew;
+	public Mob(String name, int healthNew, int defenseNew, int attackNew){
+		super(name);
 		description = "";
 		maxHealth = healthNew;
 		curHealth = maxHealth;
 		defense = defenseNew;
 		attack = attackNew;
 	}
-	public String getName() {
-		return name;
-	}
+
 	public String getDescription() {
 		return description;
 	}
 	public int getMaxHealth() {
 		return maxHealth;
 	}
-	public String getRoomDescrip(){
-		return roomDescrip;
-	}
+
 	public int getHealth(){
 		return curHealth;
 	}
@@ -78,12 +75,25 @@ public class Mob {
 	public Item getItem(String key){
 		return inventory.get(key);
 	}
+	public Armour getArmor(){
+		return armor;
+	}
+	public Weapon getWeapon() {
+		return weapon;
+	}
 
-
-	public int getDefense() {
+	/**
+	 * returns defense only. Does not add armour bonus.
+	 * @return
+	 */
+	public int getBasicDefense() {
 		return defense;
 	}
-	public int getAttack() {
+	/**
+	 * returns attack only. Does not add weapon bonus.
+	 * @return
+	 */
+	public int getBasicAttack() {
 		return attack;
 	}
 	public boolean isHostile() {
@@ -98,12 +108,10 @@ public class Mob {
 	public boolean removeStatus(Status s){
 		return statusList.remove(s);
 	}
-	public void setName(String nameNew){
-		name = nameNew;
+	public void setName(String name){
+		setElementName(new ElementName(name));
 	}
-	public void setRoomDescrip(String roomDescripN){
-		roomDescrip = roomDescripN;
-	}
+
 	public void setDescription(String newDes){
 		description = newDes;
 	}
@@ -123,15 +131,11 @@ public class Mob {
 		}
 		if (curHealth <= 0){
 			curHealth = 0;
-			addStatus(Status.DEAD);
 		} 
 	}
 	public void addStatus(Status s){
-		if (Status.DEAD.equals(s)){
-			statusList.addFirst(s);
-		} else {
 			statusList.add(s);
-		}
+
 	}
 	public void changeMoney(int change){
 		money += change;
@@ -154,8 +158,40 @@ public class Mob {
 			attack = 0;
 		}
 	}
+	/**
+	 * Sets armour with given armorKey and returns previous armour
+	 * @param a
+	 * @return previous Armour
+	 */
+	public Armour setArmour(String key, Armour a){
+		armorKey = key;
+		Armour re = armor;
+		armor = a;
+		return re;
+	}
+	/**
+	 * 
+	 * @param w
+	 * @return previous Weapon
+	 */
+	public Weapon setWeapon(String key, Weapon w){
+		weaponKey = key;
+		Weapon re = weapon;
+		weapon = w;
+		return re;
+	}
 	public void setAttack(int attackN){
 		attack = attackN;
+	}
+	/**
+	 * gets attack plus weapon attack bonus
+	 * @return
+	 */
+	public int getFullAttack(){
+		return attack + (weapon == null? 0: weapon.getAttack());
+	}
+	public int getFullDefense(){
+		return defense + (armor == null? 0: armor.getDefense());
 	}
 	public void setHostile(boolean change){
 		Hostile = change;
@@ -167,6 +203,12 @@ public class Mob {
 		
 		return inventory.put(key, add);
 		
+	}
+	public Armour removeArmour() {
+		Armour re = armor;
+		armor = null;
+		armorKey = null;
+		return re;
 	}
 	public void addAllItems(Map<String, Item> addMap){
 		inventory.putAll(addMap);
@@ -195,18 +237,40 @@ public class Mob {
 		return inventory.size();
 	}
 	public boolean isDead(){
-		return  Status.DEAD.equals(getFirstStatus());
+		return  getHealth() <= 0;
 	}
 	public String toString() {
-		return name;
+		return getStandardName();
 	}
-	private Status getFirstStatus(){
-		return statusList.isEmpty() ? null: statusList.getFirst();
+
+	public Weapon removeWeapon() {
+		Weapon re = weapon;
+		weaponKey = null;
+		weapon = null;
+		return re;
+	}
+	public String getArmorKey(){
+		return armorKey;
+	}
+	public boolean armorIsKey(String key){
+		if (armorKey == null){
+			return false;
+		}
+		return armorKey.equals(key);
+	}
+	public boolean weaponIsKey(String key){
+		if (weaponKey == null){
+			return false;
+		}
+		return weaponKey.equals(key);
+	}
+	public String getWeaponKey(){
+		return weaponKey;
 	}
 	public boolean equals(Object o){
 		if (o instanceof Mob){
 			Mob m = (Mob) o;
-			return this.name.equals(m.getName()) && this.description.equalsIgnoreCase(m.description);
+			return this.getStandardName().equals(m.getStandardName()) && this.description.equalsIgnoreCase(m.description);
 		} else {
 			return false;
 		}
@@ -215,5 +279,19 @@ public class Mob {
 		String re = inventory.keySet().toString();
 		return re.substring(1, re.length()-1);
 		
+	}
+	public Armour setArmour(String a){
+		Item ar = getItem(a);
+		if (ar != null && ar instanceof Armour){
+			return setArmour(a, (Armour) ar);
+		}
+		return null;
+	}
+	public Weapon setWeapon(String a){
+		Item ar = getItem(a);
+		if (ar != null && ar instanceof Weapon){
+			return setWeapon(a, (Weapon) ar);
+		}
+		return null;
 	}
 }

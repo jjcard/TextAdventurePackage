@@ -14,7 +14,6 @@ public class World {
 	 Player player;
 	PrintStream output = System.out;
 
-	//private boolean quit = false;
 	
 	public World(){
 		current = new Location();
@@ -28,13 +27,6 @@ public class World {
 		player = playerN;
 	}
 
-//	public void setQuit(boolean b){
-//		quit = b;
-//	}
-//	public boolean Quit(){
-//		return quit;
-//	}
-	
 	public Player getPlayer(){
 		return player;
 	}
@@ -64,39 +56,10 @@ public class World {
 		}
 		return false;
 	}
-	public boolean goDirection(int dir){
-		if (current.containsExit(dir)){
-			//System.out.println("contains exit");
-			//System.out.println(current.getName());
-			current = current.getExitLocation(dir);
-			return true;
-		}
-		return false;
-	}
-	public Location goDirection(Location l, String dir){
-		if (l.containsExit(dir)){
-			return l.getExitLocation(dir);
-		}
-			return l;
-	}
-	/**
-	 * using direction int from Location and returns new Location
-	 * @param l
-	 * @param dir 
-	 * @return
-	 */
-	public Location goDirection(Location l, int dir){
-		if (l.containsExit(dir)){
-			return l.getExitLocation(dir);
-		}
-		return l;
-	}
+
+
 	public Item roomGetItem(String key){
-		
-		//if (current.containsItem(key)){
 			return current.getItem(key);
-		//}
-		//return null;
 		
 	}
 	public boolean roomContainsItem(String key){
@@ -104,7 +67,7 @@ public class World {
 	}
 	public boolean playerGetItem(String key){
 		Item re = current.getItem(key);
-		if (re != null && re.getMovable()){
+		if (re != null && re.canGet()){
 			 player.addItem(key, re);
 			 return true;
 		}
@@ -143,8 +106,7 @@ public class World {
 			String aKey = player.getArmorKey();
 			Armour it = player.removeArmour();
 			if (it != null){
-				//remove armours defense bonus
-				player.changeDefense(- it.getDefense());
+
 				//add it back to the inventory
 				player.addItem(aKey, it);
 				System.out.println(key + " has been unequipped from armor. ");
@@ -159,8 +121,7 @@ public class World {
 			String wKey = player.getWeaponKey();
 			Weapon i = player.removeWeapon();
 			if (i != null){
-				//remove weapons attack bonus
-				player.changeAttack(-i.getAttack());
+
 				player.addItem(wKey, i);
 				System.out.println(key + " has been unequipped from weapon. ");
 				return ReturnCom.UNEQUIPPED_WEAPON;
@@ -176,19 +137,14 @@ public class World {
 		String armorKey = player.getArmorKey();
 		Armour add = player.setArmour(i, armorN);
 		if (add != null){
-			//taking away the defense from old armour
-			player.changeDefense(- add.getDefense());
-			
-			
 			//add old armour back to inventory
 			player.addItem(armorKey, add);
 			
 		}
-		//adding defense from now armour
-		player.changeDefense(player.getArmor().getDefense());
+
 	}
 	/**
-	 * equips givin weapon to player. adds old weapon back to inventory.
+	 * equips given weapon to player. adds old weapon back to inventory.
 	 * @param key for weaponN
 	 * @param weaponN
 	 */
@@ -198,17 +154,14 @@ public class World {
 		if (add != null){
 			//add old weapon to inventory
 			player.addItem(weaponKey, add);
-			//remove old attack 
-			player.changeAttack(- add.getAttack());
-			
+
 		}
-		player.changeAttack(player.getWeapon().getAttack());
 	}
 	public boolean currentContainsExit(String dir){
 		return current.containsExit(dir);
 	}
 	/**
-	 * does basic operations with givin CommandsAndKey givin and returns ReturnCom
+	 * does basic operations with given CommandsAndKey given and returns ReturnCom
 	 * @param comkey
 	 * @return ReturnCom detailing what happened
 	 */
@@ -377,7 +330,7 @@ public class World {
 	public ReturnCom dropItem(String key){
 		if (player.containsItem(key)){
 			Item drop = player.removeItem(key);
-			current.addItem(key, drop);
+			current.addItem(drop);
 			System.out.println(key + " dropped from your inventory");
 			return ReturnCom.ITEM_DROPPED;
 		} else {
@@ -436,9 +389,8 @@ public class World {
 	public ReturnCom attackMob(String key){
 		if (current.containsMob(key)){
 			Mob mob = current.getMob(key);
-			//current.getMob(key).changeHealth(-player.getAttack());
-			mob.attackMob(player.getAttack());
-			String re = " you have attacked " + key + " for " + player.getAttack() + " damage.\n";
+			mob.attackMob(player.getFullAttack());
+			String re = " you have attacked " + key + " for " + player.getFullAttack() + " damage.\n";
 			if (mob.isDead()){
 				output.println( re + " You have slain " + key + "!");
 				return ReturnCom.ATTACK_MOB_KILLED;

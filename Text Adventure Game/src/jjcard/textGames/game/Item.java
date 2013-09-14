@@ -1,46 +1,41 @@
 package jjcard.textGames.game;
 
-public class Item {
-	private String name;
+public class Item extends GameElement{
 	private int cost;
 	private String info;
 	private int level;
 	private boolean hidden = false;
 	private boolean movable = true;
 	private ItemUse use = ItemUse.Item;
-	private String roomDescrip;
  	public Item(){
-		name = new String();
-		info = new String();
+		super();
+		info = "";
 		cost = 0;
 		level = 0;
 	}
-	public Item(String nameNew){
-		name = nameNew;
-		info = new String();
+	public Item(String name){
+		super(name);
+		info = "";
 		cost = 0;
 		level = 0;
 	}
-	public Item(String nameNew, String infoNew){
-		name = nameNew;
+	public Item(String name, String infoNew){
+		super(name);
 		info = infoNew;
 		cost = 0;
 		level = 0;
 	}
-	public Item(String nameNew, String infoNew, int levelNew){
-		name = nameNew;
+	public Item(String name, String infoNew, int levelNew){
+		super(name);
 		info = infoNew;
 		cost = 0;
 		level = levelNew;
 	}
-	public Item(String nameNew, String infoNew, int levelNew, int costNew){
-		name = nameNew;
+	public Item(String name, String infoNew, int levelNew, int costNew){
+		super(name);
 		info = infoNew;
 		level = levelNew;
 		cost = costNew;
-	}
-	public String getName() {
-		return name;
 	}
 	public int getCost() {
 		return cost;
@@ -51,20 +46,17 @@ public class Item {
 	public int getLevel(){
 		return level;
 	}
-	public boolean getHidden(){
+	public boolean isHidden(){
 		return hidden;
 	}
-	public boolean getMovable(){
+	public boolean isMovable(){
 		return movable;
 	}
 	public ItemUse getUse() {
 		return use;
 	}
-	public String getRoomDescrip(){
-		return roomDescrip;
-	}
- 	public void setName(String change){
-		name = change;
+ 	public void setName(String name){
+		setElementName(new ElementName(name));
 	}
 	public void setCost(int costN){
 		cost = costN;
@@ -87,22 +79,29 @@ public class Item {
 	public void setHidden(boolean change){
 		hidden = change;
 	}
+	/**
+	 * returns true if item is movable and not hidden
+	 * @return
+	 */
+	public boolean canGet(){
+		return movable && !hidden;
+	}
 	public void setMovable(boolean change){
 		movable = change;
 	}
 	public void setUse(ItemUse change){
 		use = change;
 	}
-	public void setRoomDescrip(String descripN){
-		roomDescrip = descripN;
-	}
 	public String toString() {
-		return name;
+		return getStandardName();
 	}
 	public boolean equals(Object o){
+		if (o == this){
+			return true;
+		}
 		if (o instanceof Item){
 			Item m = (Item) o;
-			return this.name.equals(m.getName()) && this.info.equalsIgnoreCase(m.info) && this.use.equals(m.getUse());
+			return this.getStandardName().equals(m.getStandardName()) && this.info.equalsIgnoreCase(m.info) && this.use.equals(m.getUse());
 		} else {
 			return false;
 		}

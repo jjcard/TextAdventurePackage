@@ -15,6 +15,9 @@ public class Exit extends GameElement {
 	public static final Exit SOUTHEAST = new Exit("SOUTHEAST", "SOUTH EAST","SE");
 	public static final Exit SOUTHWEST = new Exit("SOUTHWEST", "SOUTH WEST", "SW");
 	
+	public static final Exit UP = new Exit("UP", "U");
+	public static final Exit DOWN = new Exit("DOWN", "D");
+	
 	private Location location;
 
 	

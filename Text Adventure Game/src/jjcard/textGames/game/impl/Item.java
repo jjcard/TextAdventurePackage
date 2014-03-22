@@ -1,4 +1,4 @@
-package jjcard.textGames.game;
+package jjcard.textGames.game.impl;
 
 public class Item extends GameElement{
 	private int cost;
@@ -99,9 +99,32 @@ public class Item extends GameElement{
 		if (o == this){
 			return true;
 		}
+		if (o == null){
+			return false;
+		}
 		if (o instanceof Item){
 			Item m = (Item) o;
-			return this.getStandardName().equals(m.getStandardName()) && this.info.equalsIgnoreCase(m.info) && this.use.equals(m.getUse());
+			if (this.standardName == null){
+				if (m.standardName != null){
+					return false;
+				}
+				
+			} else {
+				if (!this.standardName.equals(m.standardName)){
+					return false;
+				}
+			}
+			
+			if (this.info == null){
+				if (m.info != null){
+					return false;
+				}
+			} else {
+				if (!this.info.equals(m.info)){
+					return false;
+				}
+			}
+			return this.use.equals(m.getUse());
 		} else {
 			return false;
 		}

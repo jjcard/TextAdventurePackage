@@ -1,4 +1,4 @@
-package jjcard.textGames.game;
+package jjcard.textGames.game.impl;
 
 public enum Commands {
 	ATTACK, LOOK, MOVE, GET, LOOT_ALL, PLAYER_INFO, QUIT, DROP, EQUIP, UNEQUIP;

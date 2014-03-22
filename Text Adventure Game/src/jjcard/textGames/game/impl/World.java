@@ -1,6 +1,8 @@
-package jjcard.textGames.game;
+package jjcard.textGames.game.impl;
 
 import java.io.PrintStream;
+
+import jjcard.textGames.game.ILocation;
 
 
 
@@ -10,7 +12,7 @@ import java.io.PrintStream;
  *
  */
 public class World {
-	Location current;
+	ILocation current;
 	 Player player;
 	PrintStream output = System.out;
 
@@ -30,7 +32,7 @@ public class World {
 	public Player getPlayer(){
 		return player;
 	}
-	public Location getCurrent(){
+	public ILocation getCurrent(){
 		return current;
 	}
 	public PrintStream getOuput(){
@@ -41,7 +43,7 @@ public class World {
 	}
 	
 	public String getCurrentExitsDescrip(){
-		return current.getExitsDescrip();
+		return current.getExitsDescriptions();
 	}
 	public void setPlayer(Player playerN){
 		player = playerN;
@@ -86,14 +88,14 @@ public class World {
 		}
 		
 		if (toE.getUse().equals(ItemUse.Armour)){
-			setPlayerArmor(i, (Armour) toE);
+			setPlayerArmor( (Armour) toE);
 			player.removeItem(i);
 			
 			System.out.println(i + " equipped as armor. ");
 			return ReturnCom.EQUIPPED_ARMOUR;
 		}
 		if (toE.getUse().equals(ItemUse.Weapon)){
-			setPlayerWeapon(i, (Weapon) toE);
+			setPlayerWeapon( (Weapon) toE);
 			player.removeItem(i);
 			System.out.println(i + " equipped as weapon. ");
 			return ReturnCom.EQUIPPED_WEAPON;
@@ -131,7 +133,7 @@ public class World {
 		System.out.println("Nothing like that to unequip. ");
 		return ReturnCom.UNEQUIPPED_ITEM_NOT_FOUND;
 	}
-	public void setPlayerArmor(String i, Armour armorN){
+	public void setPlayerArmor( Armour armorN){
 		Armour add = player.setArmour( armorN);
 		if (add != null){
 			//add old armour back to inventory
@@ -145,7 +147,7 @@ public class World {
 	 * @param key for weaponN
 	 * @param weaponN
 	 */
-	public void setPlayerWeapon(String key, Weapon weaponN){
+	public void setPlayerWeapon( Weapon weaponN){
 		Weapon add = player.setWeapon(weaponN);
 		if (add != null){
 			//add old weapon to inventory

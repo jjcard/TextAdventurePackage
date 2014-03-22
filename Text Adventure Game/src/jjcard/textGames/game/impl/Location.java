@@ -1,4 +1,6 @@
-package jjcard.textGames.game;
+package jjcard.textGames.game.impl;
+
+import jjcard.textGames.game.ILocation;
 
 /**
  * @author jjcard
@@ -6,7 +8,7 @@ package jjcard.textGames.game;
  */
 
 
-public class Location implements Comparable<Location> {
+public class Location implements ILocation {
 
 	private String name;
 	private String description;
@@ -96,12 +98,12 @@ public class Location implements Comparable<Location> {
 	 * @param dir
 	 * @param room
 	 */
-	public void addExit(String dir, Location room){
+	public void addExit(String dir, ILocation room){
 		Exit exit = new Exit(dir, room);
 		exits.put(exit);
 	}
 	
-	public void addExit(Exit exit, Location room){
+	public void addExit(Exit exit, ILocation room){
 		exit.setLocation(room);
 		exits.put(exit);
 	}
@@ -112,7 +114,7 @@ public class Location implements Comparable<Location> {
 	 * @param dir
 	 */
 	public void removeExit(String dir){
-		 exits.remove(dir.toUpperCase()); 
+		 exits.remove(dir); 
 	}
 
 	/**
@@ -120,7 +122,7 @@ public class Location implements Comparable<Location> {
 	 * @param dir
 	 * @return
 	 */
-	public Location getExitLocation(String dir){
+	public ILocation getExitLocation(String dir){
 		Exit exit = exits.get(dir);
 		if (exit != null){
 			return exit.getLocation();
@@ -135,7 +137,7 @@ public class Location implements Comparable<Location> {
 		return inventory.get(key);
 	}
 	public boolean containsExit(String dir){
-		return exits.containsName(dir.toUpperCase());
+		return exits.containsName(dir);
 	}
 
 	public void setName(String name){
@@ -145,19 +147,18 @@ public class Location implements Comparable<Location> {
 	public void setDescription(String descrip){
 		description = descrip;
 	}
-	@Override
-	public int compareTo(Location other) {
+	public int compareTo(ILocation other) {
 		int compare = getName().compareTo(other.getName());
 		if (compare == 0 && description != null){
-			compare = description.compareTo(other.description);
+			compare = description.compareTo(other.getDescription());
 		}
 		return getName().compareTo(other.getName());
 	}
-	public String getExitsDescrip(){
-		String re = exits.getAllStandardNamesString();
+	public String getExitsDescriptions(){
+		String re = exits.getAllStandardNamesAsString();
 		return re.substring(1, re.length()-1);
 	}
-	public String getInventoryDescrip(){
+	public String getInventoryDescriptions(){
 		
 		StringBuilder re = new StringBuilder();
 		for(Item i: inventory.getElements()){
@@ -167,7 +168,7 @@ public class Location implements Comparable<Location> {
 		}
 		return re.toString();
 	}
-	public String getMobDescrip(){
+	public String getMobDescriptions(){
 		StringBuilder re = new StringBuilder();
 		for(Mob m: roomMob.getElements()){
 			if (m.getRoomDescription() != null){
@@ -186,13 +187,13 @@ public class Location implements Comparable<Location> {
 		StringBuilder re = new StringBuilder(description);
 		
 		if (!inventory.isEmpty()){
-			re.append(" " + getInventoryDescrip());
+			re.append(" " + getInventoryDescriptions());
 		}
 		if (!roomMob.isEmpty()){
-			re.append(" " + getMobDescrip());
+			re.append(" " + getMobDescriptions());
 		}
 		if (!exits.isEmpty()){
-			re.append(" The obvious exits are " + getExitsDescrip());
+			re.append(" The obvious exits are " + getExitsDescriptions());
 		}
 		return re.toString();
 	}

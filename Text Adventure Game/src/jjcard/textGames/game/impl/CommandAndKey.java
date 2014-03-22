@@ -1,4 +1,4 @@
-package jjcard.textGames.game;
+package jjcard.textGames.game.impl;
 
 public class CommandAndKey {
 	private Commands command;

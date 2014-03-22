@@ -1,4 +1,6 @@
-package jjcard.textGames.game;
+package jjcard.textGames.game.impl;
+
+import jjcard.textGames.game.ILocation;
 
 public class Exit extends GameElement {
 
@@ -18,27 +20,27 @@ public class Exit extends GameElement {
 	public static final Exit UP = new Exit("UP", "U");
 	public static final Exit DOWN = new Exit("DOWN", "D");
 	
-	private Location location;
+	private ILocation location;
 
 	
-	public Exit (String direction, Location location){
+	public Exit (String direction, ILocation location){
 		super(direction);
 		this.location = location;
 	}
 
 	
-	public Exit(String direction, Location location, String... altNames){
+	public Exit(String direction, ILocation location, String... altNames){
 		super(direction, altNames);
 		this.location = location;
 	}
 	public Exit(String direction, String...altNames){
 		super(direction, altNames);
 	}
-	public Location getLocation() {
+	public ILocation getLocation() {
 		return location;
 	}
 
-	public void setLocation(Location location) {
+	public void setLocation(ILocation location) {
 		this.location = location;
 	}
 	

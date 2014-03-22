@@ -1,13 +1,19 @@
-package jjcard.textGames.game;
+package jjcard.textGames.game.impl;
 
+/**
+ * a class with some basic elements needed for most classes.
+ * the standard name and alternate names are used to to refer
+ * the the classes in the game.
+ * @author User
+ *
+ */
 public abstract class GameElement {
 	
 	
 
-	
 	private String roomDescription;
 	
-	private String standardName;
+	protected String standardName;
 	private String[] altNames;
 	
 		public GameElement(){

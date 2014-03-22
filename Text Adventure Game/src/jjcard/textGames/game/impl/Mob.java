@@ -1,5 +1,11 @@
-package jjcard.textGames.game;
+package jjcard.textGames.game.impl;
 import java.util.LinkedList;
+
+/**
+ * a class to represent creatures and people.
+ * @author jjcard
+ *
+ */
 public class Mob extends GameElement{
 	public static int DEFAULT_HEALTH = 10;
 	private String description;
@@ -12,9 +18,7 @@ public class Mob extends GameElement{
 	private boolean Hostile = true;
 	private LinkedList<Status> statusList = new LinkedList<Status>();
 	private Armour armor;
-	//private String armorKey;
 	private Weapon weapon;
-	//private String weaponKey;
 	
 	public Mob() {
 		super();
@@ -250,6 +254,9 @@ public class Mob extends GameElement{
 		return isKeyForItem(key, armor);
 	}
 	private boolean isKeyForItem(String key, Item item){
+		if (item == null){
+			return false;
+		}
 		if (key.equalsIgnoreCase(item.getStandardName())){
 			return true;
 		} else {
@@ -270,15 +277,40 @@ public class Mob extends GameElement{
 		return weapon == null? null: weapon.getStandardName();
 	}
 	public boolean equals(Object o){
+		
+		if (this == o){
+			return true;
+		}
+		if (o == null){
+			return false;
+		}
 		if (o instanceof Mob){
 			Mob m = (Mob) o;
-			return this.getStandardName().equals(m.getStandardName()) && this.description.equalsIgnoreCase(m.description);
+			if (this.getStandardName() == null){
+				if (m.getStandardName() != null){
+					return false;
+				}
+			} else{
+				if (!this.getStandardName().equals(m.getStandardName())){
+					return false;
+				}
+			}
+			if (this.description == null){
+				if (m.description != null){
+					return false;
+				}
+			} else {
+				if (!this.description.equals(m.description)){
+					return false;
+				}
+			}
+			return true;
 		} else {
 			return false;
 		}
 	}
 	public String inventoryToString(){
-		String re = inventory.getAllStandardNamesString();
+		String re = inventory.getAllStandardNamesAsString();
 		return re.substring(1, re.length()-1);
 		
 	}

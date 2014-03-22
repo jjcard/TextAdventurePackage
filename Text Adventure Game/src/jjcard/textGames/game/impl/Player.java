@@ -1,7 +1,9 @@
-package jjcard.textGames.game;
+package jjcard.textGames.game.impl;
+
+import jjcard.textGames.game.HasLeveling;
 
 
-public class Player extends Mob {
+public class Player extends Mob implements HasLeveling{
 	private int level;
 	private int xp;
 	
@@ -39,7 +41,7 @@ public class Player extends Mob {
 	public int getLevel(){
 		return level;
 	}
-	public int getxp() {
+	public int getXp() {
 		return xp;
 	}
 
@@ -67,6 +69,8 @@ public class Player extends Mob {
 			xp = 0;
 		}
 	}
+
+
 
 
 

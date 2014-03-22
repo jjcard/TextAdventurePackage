@@ -1,9 +1,11 @@
-package jjcard.textGames.game;
+package jjcard.textGames.game.impl;
 
 import java.util.Collection;
 import java.util.HashMap;
 
-public class GameElementMap<A extends GameElement> {
+import jjcard.textGames.game.IGameElementMap;
+
+public class GameElementMap<A extends GameElement> implements IGameElementMap<A>{
 	private HashMap<String, String> altNamesMap;
 	private HashMap<String, A> elementMap;
 	
@@ -102,7 +104,7 @@ public class GameElementMap<A extends GameElement> {
 		return elementMap.keySet().toArray(new String[getElementCount()]);
 	}
 	
-	public String getAllStandardNamesString(){
+	public String getAllStandardNamesAsString(){
 		return elementMap.keySet().toString();
 	}
 	public String[] getAllStandardNamesSaveCase(){
@@ -115,11 +117,7 @@ public class GameElementMap<A extends GameElement> {
 		
 		return names;
 	}
-	/**
-	 * returns all the elements in the map.
-	 * do not modify elements this way.
-	 * @return
-	 */
+
 	public Collection<A> getElements(){
 		return elementMap.values();
 	}

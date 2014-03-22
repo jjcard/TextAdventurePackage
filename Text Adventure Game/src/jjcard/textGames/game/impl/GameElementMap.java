@@ -34,11 +34,7 @@ public class GameElementMap<A extends GameElement> implements IGameElementMap<A>
 	   return elementMap.put(standardNameUpper, gameElement);
 
    }
-    public void putStandardNameOnly(A gameElement){
-    	String TrueName = gameElement.getStandardName().toUpperCase();
-    	altNamesMap.put(TrueName, TrueName);
-    	elementMap.put(TrueName, gameElement);
-    }
+
 	public A put(A gameElement){
 		return put(gameElement.getStandardName(), 
 				gameElement.getAltNames(), gameElement);
@@ -130,6 +126,14 @@ public class GameElementMap<A extends GameElement> implements IGameElementMap<A>
 		altNamesMap.putAll(map.altNamesMap);
 		
 		elementMap.putAll(map.elementMap);
+	}
+
+	@Override
+	public void putAll(IGameElementMap<A> map) {
+		for (A gameElement: map.getElements()){
+			this.put(gameElement);
+		}
+		
 	}
 
 	

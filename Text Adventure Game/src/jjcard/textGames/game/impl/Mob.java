@@ -1,6 +1,8 @@
 package jjcard.textGames.game.impl;
 import java.util.LinkedList;
 
+import jjcard.textGames.game.IGameElementMap;
+
 /**
  * a class to represent creatures and people.
  * @author jjcard
@@ -12,7 +14,7 @@ public class Mob extends GameElement{
 	private int maxHealth;
 	private int curHealth;
 	private int money = 0;
-	private GameElementMap<Item> inventory = new GameElementMap<Item>();
+	private IGameElementMap<Item> inventory = new GameElementMap<Item>();
 	private int defense = 0;
 	private int attack = 0;
 	private boolean Hostile = true;
@@ -71,7 +73,7 @@ public class Mob extends GameElement{
 	public int getMoney(){
 		return money;
 	}
-	public GameElementMap<Item> getInventory() {
+	public IGameElementMap<Item> getInventory() {
 		return inventory;
 	}
 	public Item getItem(String key){
@@ -209,7 +211,7 @@ public class Mob extends GameElement{
 		armor = null;
 		return re;
 	}
-	public void addAllItems(GameElementMap<Item> addMap){
+	public void addAllItems(IGameElementMap<Item> addMap){
 		inventory.putAll(addMap);
 		
 		}

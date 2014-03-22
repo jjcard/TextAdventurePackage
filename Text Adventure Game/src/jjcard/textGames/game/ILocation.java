@@ -5,18 +5,18 @@ import jjcard.textGames.game.impl.GameElementMap;
 import jjcard.textGames.game.impl.Item;
 import jjcard.textGames.game.impl.Mob;
 
-public interface ILocation extends  Comparable<ILocation>{
+public interface ILocation extends Comparable<ILocation>{
 
 	public String getName();
 	public void setName(String name);
 	public String getDescription();
 	public void setDescription(String descrip);
-	public GameElementMap<Item> getInventory();
-	public  GameElementMap<Mob> getRoomMob();
-	public GameElementMap<Exit> getExits();
+	public IGameElementMap<Item> getInventory();
+	public IGameElementMap<Mob> getRoomMob();
+	public IGameElementMap<Exit> getExits();
 	public Item addItem(Item add);
-	public void setInventory(GameElementMap<Item> inventoryNew);
-	public void setRoomMob(GameElementMap<Mob> roomMobNew);
+	public void setInventory(IGameElementMap<Item> inventoryNew);
+	public void setRoomMob(IGameElementMap<Mob> roomMobNew);
 	public Item removeItem(String key);
 	public boolean containsItem(String keyR);
 	public Mob addMob(Mob m);

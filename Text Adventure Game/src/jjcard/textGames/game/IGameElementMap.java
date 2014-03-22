@@ -3,12 +3,10 @@ package jjcard.textGames.game;
 import java.util.Collection;
 
 import jjcard.textGames.game.impl.GameElement;
-import jjcard.textGames.game.impl.GameElementMap;
 
 public interface IGameElementMap<A extends GameElement> {
 	
 	
-	public void putStandardNameOnly(A gameElement);
 	/**
 	 * Puts the given Game Element in the game, with the game elements 
 	 * standard Name and Alternate Names.
@@ -59,6 +57,6 @@ public interface IGameElementMap<A extends GameElement> {
 	
 	public boolean isEmpty();
 	
-	public void putAll(GameElementMap<A> map);
+	public void putAll(IGameElementMap<A> map);
 
 }

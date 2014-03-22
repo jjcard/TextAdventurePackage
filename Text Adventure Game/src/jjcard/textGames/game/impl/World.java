@@ -21,10 +21,10 @@ public class World {
 		current = new Location();
 	}
 
-	public World( Location newCur){
+	public World( ILocation newCur){
 		current = newCur;
 	}
-	public World(Location newCur, Player playerN){
+	public World(ILocation newCur, Player playerN){
 		current = newCur;
 		player = playerN;
 	}
@@ -48,7 +48,7 @@ public class World {
 	public void setPlayer(Player playerN){
 		player = playerN;
 	}
-	public void setCurrent(Location locationN){
+	public void setCurrent(ILocation locationN){
 		current = locationN;
 	}
 	public boolean goDirection(String dir){

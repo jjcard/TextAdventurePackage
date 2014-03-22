@@ -1,5 +1,6 @@
 package jjcard.textGames.game.impl;
 
+import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.ILocation;
 
 /**
@@ -13,9 +14,9 @@ public class Location implements ILocation {
 	private String name;
 	private String description;
 	
-	private GameElementMap< Item> inventory;
-	private GameElementMap<Mob> roomMob;
-	private GameElementMap<Exit> exits;
+	private IGameElementMap< Item> inventory;
+	private IGameElementMap<Mob> roomMob;
+	private IGameElementMap<Exit> exits;
 	
 	public Location(){
 		this.name = new String();
@@ -38,14 +39,14 @@ public class Location implements ILocation {
 		roomMob =  new GameElementMap<Mob>();
 		exits = new GameElementMap<Exit>();
 	}
-	public Location(String name, String descripN, GameElementMap<Item> invenN){
+	public Location(String name, String descripN, IGameElementMap<Item> invenN){
 		this.name = name;
 		description = descripN;
 		inventory = invenN;
 		roomMob =  new GameElementMap<Mob>();
 		exits = new GameElementMap<Exit>();
 	}
-	public Location(String name, String descripN, GameElementMap<Item> invenN, GameElementMap<Mob>  mobs){
+	public Location(String name, String descripN, IGameElementMap<Item> invenN, IGameElementMap<Mob>  mobs){
 		this.name = name;
 		description = descripN;
 		inventory = invenN;
@@ -58,22 +59,22 @@ public class Location implements ILocation {
 	public String getDescription(){
 		return description;
 	}
-	public GameElementMap<Item> getInventory(){
+	public IGameElementMap<Item> getInventory(){
 		return inventory;
 	}
-	public  GameElementMap<Mob> getRoomMob() {
+	public  IGameElementMap<Mob> getRoomMob() {
 		return roomMob;
 	}
-	public GameElementMap<Exit> getExits() {
+	public IGameElementMap<Exit> getExits() {
 		return exits;
 	}
 	public Item addItem(Item add){
 		return inventory.put(add);
 	}
-	public void setInventory(GameElementMap<Item> inventoryNew){
+	public void setInventory(IGameElementMap<Item> inventoryNew){
 		inventory = inventoryNew;
 	}
-	public void setRoomMob(GameElementMap<Mob> roomMobNew){
+	public void setRoomMob(IGameElementMap<Mob> roomMobNew){
 		roomMob = roomMobNew;
 	}
 	public Item removeItem(String key){

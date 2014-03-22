@@ -1,6 +1,8 @@
 package jjcard.textGames.game.impl;
 
-public class Item extends GameElement{
+import jjcard.textGames.game.IItem;
+
+public class Item extends GameElement implements IItem{
 	private int cost;
 	private String info;
 	private int level;
@@ -102,9 +104,7 @@ public class Item extends GameElement{
 	public ItemUse getUse() {
 		return use;
 	}
-// 	public void setName(String name){
-//		setStandardName(name);
-//	}
+
 	public void setCost(int costN){
 		cost = costN;
 	}

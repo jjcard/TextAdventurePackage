@@ -1,8 +1,6 @@
 package jjcard.textGames.game;
 
 import jjcard.textGames.game.impl.Exit;
-import jjcard.textGames.game.impl.Item;
-import jjcard.textGames.game.impl.Mob;
 
 public interface ILocation extends Comparable<ILocation>{
 
@@ -10,16 +8,16 @@ public interface ILocation extends Comparable<ILocation>{
 	public void setName(String name);
 	public String getDescription();
 	public void setDescription(String descrip);
-	public IGameElementMap<Item> getInventory();
-	public IGameElementMap<Mob> getRoomMob();
+	public IGameElementMap<IItem> getInventory();
+	public IGameElementMap<IMob> getRoomMob();
 	public IGameElementMap<Exit> getExits();
-	public Item addItem(Item add);
-	public void setInventory(IGameElementMap<Item> inventoryNew);
-	public void setRoomMob(IGameElementMap<Mob> roomMobNew);
-	public Item removeItem(String key);
+	public IItem addItem(IItem add);
+	public void setInventory(IGameElementMap<IItem> inventoryNew);
+	public void setRoomMob(IGameElementMap<IMob> roomMobNew);
+	public IItem removeItem(String key);
 	public boolean containsItem(String keyR);
-	public Mob addMob(Mob m);
-	public Mob removeMob(String key);
+	public IMob addMob(IMob m);
+	public IMob removeMob(String key);
 	public boolean containsMob(String m);
 	public void addExit(String dir, ILocation room);
 	public void addExit(Exit exit, ILocation room);
@@ -30,8 +28,8 @@ public interface ILocation extends Comparable<ILocation>{
 	 * @return
 	 */
 	public ILocation getExitLocation(String dir);
-	public Mob getMob(String key);
-	public Item getItem(String key);
+	public IMob getMob(String key);
+	public IItem getItem(String key);
 	public boolean containsExit(String dir);
 	/**
 	 * 

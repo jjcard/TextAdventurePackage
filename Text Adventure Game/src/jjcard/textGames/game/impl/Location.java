@@ -1,7 +1,9 @@
 package jjcard.textGames.game.impl;
 
 import jjcard.textGames.game.IGameElementMap;
+import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.ILocation;
+import jjcard.textGames.game.IMob;
 
 /**
  * @author jjcard
@@ -14,39 +16,39 @@ public class Location implements ILocation {
 	private String name;
 	private String description;
 	
-	private IGameElementMap< Item> inventory;
-	private IGameElementMap<Mob> roomMob;
+	private IGameElementMap<IItem> inventory;
+	private IGameElementMap<IMob> roomMob;
 	private IGameElementMap<Exit> exits;
 	
 	public Location(){
 		this.name = new String();
 		description = new String();
-		inventory = new GameElementMap<Item>();
-		roomMob = new GameElementMap<Mob>();
+		inventory = new GameElementMap<IItem>();
+		roomMob = new GameElementMap<IMob>();
 		exits = new GameElementMap<Exit>();
 	}
 	public Location(String name){
 		this.name = name;
 		description = new String();
-		inventory = new GameElementMap<Item>();
-		roomMob =  new GameElementMap<Mob>();
+		inventory = new GameElementMap<IItem>();
+		roomMob =  new GameElementMap<IMob>();
 		exits = new GameElementMap<Exit>();
 	}
 	public Location(String name, String descripN){
 		this.name = name;
 		description = descripN;
-		inventory = new GameElementMap<Item>();
-		roomMob =  new GameElementMap<Mob>();
+		inventory = new GameElementMap<IItem>();
+		roomMob =  new GameElementMap<IMob>();
 		exits = new GameElementMap<Exit>();
 	}
-	public Location(String name, String descripN, IGameElementMap<Item> invenN){
+	public Location(String name, String descripN, IGameElementMap<IItem> invenN){
 		this.name = name;
 		description = descripN;
 		inventory = invenN;
-		roomMob =  new GameElementMap<Mob>();
+		roomMob =  new GameElementMap<IMob>();
 		exits = new GameElementMap<Exit>();
 	}
-	public Location(String name, String descripN, IGameElementMap<Item> invenN, IGameElementMap<Mob>  mobs){
+	public Location(String name, String descripN, IGameElementMap<IItem> invenN, IGameElementMap<IMob>  mobs){
 		this.name = name;
 		description = descripN;
 		inventory = invenN;
@@ -59,35 +61,35 @@ public class Location implements ILocation {
 	public String getDescription(){
 		return description;
 	}
-	public IGameElementMap<Item> getInventory(){
+	public IGameElementMap<IItem> getInventory(){
 		return inventory;
 	}
-	public  IGameElementMap<Mob> getRoomMob() {
+	public  IGameElementMap<IMob> getRoomMob() {
 		return roomMob;
 	}
 	public IGameElementMap<Exit> getExits() {
 		return exits;
 	}
-	public Item addItem(Item add){
+	public IItem addItem(IItem add){
 		return inventory.put(add);
 	}
-	public void setInventory(IGameElementMap<Item> inventoryNew){
+	public void setInventory(IGameElementMap<IItem> inventoryNew){
 		inventory = inventoryNew;
 	}
-	public void setRoomMob(IGameElementMap<Mob> roomMobNew){
+	public void setRoomMob(IGameElementMap<IMob> roomMobNew){
 		roomMob = roomMobNew;
 	}
-	public Item removeItem(String key){
+	public IItem removeItem(String key){
 		return inventory.remove(key);
 	}
 	public boolean containsItem(String keyR){
 		return inventory.containsName(keyR);
 	}
-	public Mob addMob(Mob m){
+	public IMob addMob(IMob m){
 		return roomMob.put(m);
 		
 	}
-	public Mob removeMob(String key){
+	public IMob removeMob(String key){
 		return roomMob.remove(key);
 	}
 	public boolean containsMob(String m){
@@ -131,10 +133,10 @@ public class Location implements ILocation {
 			return null;
 		}
 	}
-	public Mob getMob(String key){
+	public IMob getMob(String key){
 		return roomMob.get(key);
 	}
-	public Item getItem(String key){
+	public IItem getItem(String key){
 		return inventory.get(key);
 	}
 	public boolean containsExit(String dir){
@@ -162,7 +164,7 @@ public class Location implements ILocation {
 	public String getInventoryDescriptions(){
 		
 		StringBuilder re = new StringBuilder();
-		for(Item i: inventory.getElements()){
+		for(IItem i: inventory.getElements()){
 			if ((!i.isHidden()) && (i.getRoomDescription() != null)){
 				re.append(" " + i.getRoomDescription());
 			}
@@ -171,7 +173,7 @@ public class Location implements ILocation {
 	}
 	public String getMobDescriptions(){
 		StringBuilder re = new StringBuilder();
-		for(Mob m: roomMob.getElements()){
+		for(IMob m: roomMob.getElements()){
 			if (m.getRoomDescription() != null){
 				re.append(m.getRoomDescription());
 			}

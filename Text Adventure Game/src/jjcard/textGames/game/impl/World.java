@@ -2,7 +2,9 @@ package jjcard.textGames.game.impl;
 
 import java.io.PrintStream;
 
+import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.ILocation;
+import jjcard.textGames.game.IMob;
 
 
 
@@ -60,7 +62,7 @@ public class World {
 	}
 
 
-	public Item roomGetItem(String key){
+	public IItem roomGetItem(String key){
 			return current.getItem(key);
 		
 	}
@@ -68,7 +70,7 @@ public class World {
 		return current.containsItem(key);
 	}
 	public boolean playerGetItem(String key){
-		Item re = current.getItem(key);
+		IItem re = current.getItem(key);
 		if (re != null && re.canGet()){
 			 player.addItem(re);
 			 return true;
@@ -80,7 +82,7 @@ public class World {
 		return current.showRoom();
 	}
 	public ReturnCom equipItem(String i){
-		Item toE = player.getItem(i);
+		IItem toE = player.getItem(i);
 		
 		if (toE == null){
 			System.out.println(i + " not found");
@@ -327,7 +329,7 @@ public class World {
 	
 	public ReturnCom dropItem(String key){
 		if (player.containsItem(key)){
-			Item drop = player.removeItem(key);
+			IItem drop = player.removeItem(key);
 			current.addItem(drop);
 			System.out.println(key + " dropped from your inventory");
 			return ReturnCom.ITEM_DROPPED;
@@ -369,7 +371,7 @@ public class World {
 	 }
 	public ReturnCom lootAllMob(String key){
 		if (current.containsMob(key)){
-			Mob lootM = current.getMob(key);
+			IMob lootM = current.getMob(key);
 			if (lootM.isDead()){
 				player.addAllItems(current.getMob(key).getInventory());
 				current.getMob(key).removeInventory();
@@ -386,7 +388,7 @@ public class World {
 	}
 	public ReturnCom attackMob(String key){
 		if (current.containsMob(key)){
-			Mob mob = current.getMob(key);
+			IMob mob = current.getMob(key);
 			mob.attackMob(player.getFullAttack());
 			String re = " you have attacked " + key + " for " + player.getFullAttack() + " damage.\n";
 			if (mob.isDead()){

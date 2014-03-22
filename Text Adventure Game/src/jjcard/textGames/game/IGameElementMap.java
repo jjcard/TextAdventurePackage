@@ -2,9 +2,7 @@ package jjcard.textGames.game;
 
 import java.util.Collection;
 
-import jjcard.textGames.game.impl.GameElement;
-
-public interface IGameElementMap<A extends GameElement> {
+public interface IGameElementMap<A extends IGameElement> {
 	
 	
 	/**

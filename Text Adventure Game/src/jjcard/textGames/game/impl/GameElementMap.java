@@ -3,9 +3,10 @@ package jjcard.textGames.game.impl;
 import java.util.Collection;
 import java.util.HashMap;
 
+import jjcard.textGames.game.IGameElement;
 import jjcard.textGames.game.IGameElementMap;
 
-public class GameElementMap<A extends GameElement> implements IGameElementMap<A>{
+public class GameElementMap<A extends IGameElement> implements IGameElementMap<A>{
 	private HashMap<String, String> altNamesMap;
 	private HashMap<String, A> elementMap;
 	

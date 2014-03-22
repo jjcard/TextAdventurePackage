@@ -4,6 +4,7 @@ import java.util.List;
 
 import jjcard.textGames.game.HasLeveling;
 import jjcard.textGames.game.IGameElementMap;
+import jjcard.textGames.game.IItem;
 
 
 public class Player extends Mob implements HasLeveling{
@@ -62,7 +63,7 @@ public class Player extends Mob implements HasLeveling{
 			super.money(money);
 			return this;
 		}
-		public PlayerBuilder inventory(IGameElementMap<Item> inventory){
+		public PlayerBuilder inventory(IGameElementMap<IItem> inventory){
 			super.inventory(inventory);
 			return this;
 		}

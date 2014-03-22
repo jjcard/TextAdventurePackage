@@ -3,19 +3,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 import jjcard.textGames.game.IGameElementMap;
+import jjcard.textGames.game.IItem;
+import jjcard.textGames.game.IMob;
 
 /**
  * a class to represent creatures and people.
  * @author jjcard
  *
  */
-public class Mob extends GameElement{
+public class Mob extends GameElement implements IMob{
 	public static int DEFAULT_HEALTH = 10;
 	private String description;
 	private int maxHealth;
 	private int curHealth;
 	private int money = 0;
-	private IGameElementMap<Item> inventory = new GameElementMap<Item>();
+	private IGameElementMap<IItem> inventory = new GameElementMap<IItem>();
 	private int defense = 0;
 	private int attack = 0;
 	private boolean hostile = true;
@@ -28,7 +30,7 @@ public class Mob extends GameElement{
 		private int maxHealth;
 		private int curHealth;
 		private int money = 0;
-		private IGameElementMap<Item> inventory = new GameElementMap<Item>();
+		private IGameElementMap<IItem> inventory = new GameElementMap<IItem>();
 		private int defense = 0;
 		private int attack = 0;
 		private boolean hostile = true;
@@ -72,9 +74,9 @@ public class Mob extends GameElement{
 			this.money = money;
 			return this;
 		}
-		public MobBuilder inventory(IGameElementMap<Item> inventory){
+		public MobBuilder inventory(IGameElementMap<IItem> inventory){
 			if (inventory == null){
-				this.inventory = new GameElementMap<Item>();
+				this.inventory = new GameElementMap<IItem>();
 			} else {
 				this.inventory = inventory;	
 			}
@@ -168,10 +170,10 @@ public class Mob extends GameElement{
 	public int getMoney(){
 		return money;
 	}
-	public IGameElementMap<Item> getInventory() {
+	public IGameElementMap<IItem> getInventory() {
 		return inventory;
 	}
-	public Item getItem(String key){
+	public IItem getItem(String key){
 		return inventory.get(key);
 	}
 	public Armour getArmor(){
@@ -293,7 +295,7 @@ public class Mob extends GameElement{
 	public void setstatusList(LinkedList<Status> s){
 		statusList = s;
 	}
-	public Item addItem(Item add){
+	public IItem addItem(IItem add){
 		
 		return inventory.put(add);
 		
@@ -303,11 +305,11 @@ public class Mob extends GameElement{
 		armor = null;
 		return re;
 	}
-	public void addAllItems(IGameElementMap<Item> addMap){
+	public void addAllItems(IGameElementMap<IItem> addMap){
 		inventory.putAll(addMap);
 		
 		}
-	public Item removeItem(String key){
+	public IItem removeItem(String key){
 		return inventory.remove(key);
 	}
 	public void removeInventory(){
@@ -409,14 +411,14 @@ public class Mob extends GameElement{
 		
 	}
 	public Armour setArmour(String a){
-		Item ar = getItem(a);
+		IItem ar = getItem(a);
 		if (ar != null && ar instanceof Armour){
 			return setArmour((Armour) ar);
 		}
 		return null;
 	}
 	public Weapon setWeapon(String a){
-		Item ar = getItem(a);
+		IItem ar = getItem(a);
 		if (ar != null && ar instanceof Weapon){
 			return setWeapon( (Weapon) ar);
 		}

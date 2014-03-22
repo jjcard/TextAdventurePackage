@@ -18,7 +18,7 @@ public class CrawlingDungeon {
 		Location starting = setLocations();
 		Map<String, Mob> mobs = getMobs();
 		Map<String, Item> items = getItems();
-		Player player = new Player("adventurer", 100, 6, 5);
+		Player player = new Player.PlayerBuilder().standardName("adventurer").curHelath(100).defense(6).attack(5).build();
 		World world = new World(starting, player);
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Welcome to Crawling Dungeon");
@@ -49,7 +49,7 @@ public class CrawlingDungeon {
 	}
 	public static Map<String, Item> getItems(){
 		Map<String, Item> items = new HashMap<String, Item>();
-		Weapon sword = new Weapon("wooden sword", "it isn't the best sword, but it will do", 3);
+		Weapon sword = new Weapon.WeaponBuilder().standardName("wooden sword").info("it isn't the best sword, but it will do").attack(3).build();
 		items.put("wooden sword", sword);
 		
 		return items;

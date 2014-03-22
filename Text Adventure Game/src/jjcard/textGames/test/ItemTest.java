@@ -10,7 +10,7 @@ public class ItemTest {
 
 	@Test
 	public void Itemtest() {
-		Item item = new Item("basic item", "it shows off the true potential of an item...which isn't much");
+		Item item = new Item.ItemBuilder().standardName("basic item").info("it shows off the true potential of an item...which isn't much").build();
 		assertEquals("basic item", item.getStandardName());
 		assertEquals("it shows off the true potential of an item...which isn't much", item.getInfo());
 		
@@ -35,7 +35,7 @@ public class ItemTest {
 	}
 	@Test
 	public void WeaponTest(){
-		Weapon weapon = new Weapon("sword", "pointy end", 2);
+		Weapon weapon = new Weapon.WeaponBuilder().standardName("sword").info("pointy end").attack(2).build();
 		assertEquals(weapon.getStandardName(), "sword");
 		assertEquals(weapon.getInfo(), "pointy end");
 		assertEquals(weapon.getAttack(), 2);
@@ -43,9 +43,9 @@ public class ItemTest {
 		weapon.setCost(3);
 		assertEquals(weapon.getCost(), 3);
 		
-		assertEquals(weapon.getCrit(), 1);
-		weapon.setCrit(5);
-		assertEquals(weapon.getCrit(), 5);
+		assertEquals(weapon.getCritChance(), 0);
+		weapon.setCritChance(5);
+		assertEquals(weapon.getCritChance(), 5);
 		weapon.setDurability(112);
 		assertEquals(weapon.getDurability(), 112);
 		

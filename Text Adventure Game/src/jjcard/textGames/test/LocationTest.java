@@ -10,15 +10,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class LocationTest {
-	private Mob mob = new Mob("Gelatinous Cube");
+	private Mob mob = new Mob.MobBuilder().standardName("Gelatinous Cube").altNames(new String[] {"The bane"}).description("Run").build();
 	private Location hallway = new Location("Hallway", "It's a hallway. What more do you want.");
 	private Location room = new Location("A room", "no not THE room");
-	private Item item = new Item("vendor trash", "doesn't do anything");
+	private Item item = new Item.ItemBuilder().standardName("vendor trash").info("doesn't do anything").altNames(new String[] {"worthless"}).build();
 	@Before
 	public void setUp() throws Exception {
-		mob.setDescription("Run");
-		item.setAltNames(new String[] {"worthless"});
-		mob.setAltNames(new String[] {"The bane"});
+		mob = new Mob.MobBuilder().standardName("Gelatinous Cube").altNames(new String[] {"The bane"}).description("Run").build();
+		item = new Item.ItemBuilder().standardName("vendor trash").info("doesn't do anything").altNames(new String[] {"worthless"}).build();
 		hallway.addExit(Exit.NORTH, room);
 		room.addExit(Exit.SOUTH, hallway);
 		hallway.addItem(item);

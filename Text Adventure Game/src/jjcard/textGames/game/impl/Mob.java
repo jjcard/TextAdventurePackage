@@ -1,5 +1,6 @@
 package jjcard.textGames.game.impl;
 import java.util.LinkedList;
+import java.util.List;
 
 import jjcard.textGames.game.IGameElementMap;
 
@@ -17,47 +18,121 @@ public class Mob extends GameElement{
 	private IGameElementMap<Item> inventory = new GameElementMap<Item>();
 	private int defense = 0;
 	private int attack = 0;
-	private boolean Hostile = true;
-	private LinkedList<Status> statusList = new LinkedList<Status>();
+	private boolean hostile = true;
+	private List<Status> statusList = new LinkedList<Status>();
 	private Armour armor;
 	private Weapon weapon;
 	
-	public Mob() {
-		super();
-		description = new String();
-		maxHealth = DEFAULT_HEALTH;
-		curHealth = maxHealth;
-
-	}
-	public Mob(String name) {
-		super(name);
-		description = "";
-		maxHealth = DEFAULT_HEALTH;
-		curHealth = maxHealth;
-
-	}
-	public Mob(String name, int healthNew){
-		super(name);
-		description = "";
-		maxHealth = healthNew;
-		curHealth = maxHealth;
+	public static class MobBuilder extends GameElementBuilder{
+		private String description;
+		private int maxHealth;
+		private int curHealth;
+		private int money = 0;
+		private IGameElementMap<Item> inventory = new GameElementMap<Item>();
+		private int defense = 0;
+		private int attack = 0;
+		private boolean hostile = true;
+		private List<Status> statusList = new LinkedList<Status>();
+		private Armour armor;
+		private Weapon weapon;	
+		
+		public MobBuilder maxHealth(int maxHealth){
+			this.maxHealth = maxHealth;
+			return this;
+		}
+		public MobBuilder curHelath(int curHealth){
+			this.curHealth = curHealth;
+			return this;
+		}
+		public MobBuilder description(String description){
+			this.description = description;
+			return this;
+		}
+		public MobBuilder money(int money){
+			this.money = money;
+			return this;
+		}
+		public MobBuilder inventory(IGameElementMap<Item> inventory){
+			if (inventory == null){
+				this.inventory = new GameElementMap<Item>();
+			} else {
+				this.inventory = inventory;	
+			}
+			
+			return this;
+		}
+		public MobBuilder defense(int defense){
+			this.defense = defense;
+			return this;
+		}
+		public MobBuilder attack(int attack){
+			this.attack = attack;
+			return this;
+		}
+		public MobBuilder hostile(boolean hostile){
+			this.hostile = hostile;
+			return this;
+		}
+		public MobBuilder statusList(List<Status> statusList){
+			if (statusList == null){
+				this.statusList = new LinkedList<Status>();
+			} else {
+				this.statusList = statusList;	
+			}
+			
+			return this;
+		}
+		public MobBuilder armor(Armour armour){
+			this.armor = armour;
+			return this;
+		}
+		public MobBuilder weapon(Weapon weapon){
+			this.weapon = weapon;
+			return this;
+		}
+		public MobBuilder addStatus(Status status){
+			statusList.add(status);
+			return this;
+		}
+		public MobBuilder standardName(String name){
+			super.standardName(name);
+			return this;
+		}
+		public MobBuilder altNames(String[] altNames){
+			super.altNames(altNames);
+			return this;
+		}
+		public MobBuilder addAltName(String altName){
+			super.addAltName(altName);
+			return this;
+		}
+		public MobBuilder roomDescription(String roomDescrip){
+			super.roomDescription(roomDescrip);
+			return this;
+		}
+		public Mob build(){
+			return new Mob(this);
+		}
+		
 		
 	}
-	public Mob(String name, int healthNew, int defenseNew) {
-		super(name);
-		description = "";
-		maxHealth = healthNew;
-		curHealth = maxHealth;
-		defense = defenseNew;
-
-	}
-	public Mob(String name, int healthNew, int defenseNew, int attackNew){
-		super(name);
-		description = "";
-		maxHealth = healthNew;
-		curHealth = maxHealth;
-		defense = defenseNew;
-		attack = attackNew;
+	
+	protected Mob( MobBuilder b){
+		  super(b);
+		  description = b.description;
+		  maxHealth = b.maxHealth;
+		  curHealth = b.curHealth;
+		  if (maxHealth < curHealth){
+			  maxHealth = curHealth;
+		  }
+		  money = b.money;
+		  inventory = b.inventory;
+		  defense = b.defense;
+		  attack = b.attack;
+		  hostile = b.hostile;
+		  statusList = b.statusList;
+		  armor = b.armor;
+		  weapon = b.weapon;
 	}
 
 	public String getDescription() {
@@ -101,9 +176,9 @@ public class Mob extends GameElement{
 		return attack;
 	}
 	public boolean isHostile() {
-		return Hostile;
+		return hostile;
 	}
-	public LinkedList<Status> getstatusList() {
+	public List<Status> getStatusList() {
 		return statusList;
 	}
 	public boolean containsStatus(Status s){
@@ -111,9 +186,6 @@ public class Mob extends GameElement{
 	}
 	public boolean removeStatus(Status s){
 		return statusList.remove(s);
-	}
-	public void setName(String name){
-		setStandardName(name);
 	}
 
 	public void setDescription(String newDes){
@@ -195,8 +267,8 @@ public class Mob extends GameElement{
 	public int getFullDefense(){
 		return defense + (armor == null? 0: armor.getDefense());
 	}
-	public void setHostile(boolean change){
-		Hostile = change;
+	public void setHostile(boolean hostile){
+		this.hostile = hostile;
 	}
 	public void setstatusList(LinkedList<Status> s){
 		statusList = s;

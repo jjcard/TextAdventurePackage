@@ -13,7 +13,7 @@ public class GameElementMapTest {
 	@Test
 	public void AddTestName() {
 		
-		Item e1 = new Item("item1");
+		Item e1 = new Item.ItemBuilder().standardName("item1").build();
 		assertEquals("item1", e1.getStandardName());
 		GameElementMap<Item> map = new GameElementMap<Item>();
 		
@@ -36,8 +36,7 @@ public class GameElementMapTest {
 	}
 	@Test
 	public void AddTestAltName(){
-		Mob m = new Mob("Bob");
-		m.setAltNames(new String[] {"Bubba", "Ray"});
+		Mob m = new Mob.MobBuilder().attack(9).standardName("Bob").altNames(new String[] {"Bubba", "Ray"}).build();
 		
 		GameElementMap<Mob> MobMap = new GameElementMap<Mob>();
 		
@@ -68,8 +67,7 @@ public class GameElementMapTest {
 	
 	@Test
 	public void removeTest(){
-		Mob m = new Mob("Bob");
-		m.setAltNames(new String[] {"Bubba", "Ray"});
+		Mob m = new Mob.MobBuilder().standardName("Bob").altNames(new String[] {"Bubba", "Ray"}).build();
 		
 		GameElementMap<Mob> MobMap = new GameElementMap<Mob>();
 		
@@ -119,8 +117,7 @@ public class GameElementMapTest {
 		
 		//added multiple, removing one shouldn't effect others
 		MobMap.put(m);
-		Mob m2 = new Mob("Store keep", 7);
-		m2.setAltNames(new String[] {"George"});
+		Mob m2 = new Mob.MobBuilder().standardName("Store keep").curHelath(7).altNames(new String[] {"George"}).build();
 		MobMap.put(m2);
 		
 		assertEquals(2, MobMap.getElementCount());
@@ -137,11 +134,9 @@ public class GameElementMapTest {
 	@Test
 	public void containsTest(){
 		GameElementMap<Mob> MobMap = new GameElementMap<Mob>();
-		Mob m = new Mob("Bob");
-		m.setAltNames(new String[] {"Bubba", "Ray"});
+		Mob m = new Mob.MobBuilder().standardName("Bob").altNames(new String[] {"Bubba", "Ray"}).build();
 		MobMap.put(m);
-		Mob m2 = new Mob("Store keep", 7);
-		m2.setAltNames(new String[] {"George"});
+		Mob m2 = new Mob.MobBuilder().standardName("Store keep").curHelath(7).altNames(new String[] {"George"}).build();
 		MobMap.put(m2);
 		
 		
@@ -162,11 +157,10 @@ public class GameElementMapTest {
 	}
 	@Test
 	public void testGetAllStandardNames(){
-		Item e1 = new Item("item1");
+		Item e1 = new Item.ItemBuilder().standardName("item1").build();
 		assertEquals("item1", e1.getStandardName());
 		
-		Item e2 = new Item("item2");
-		e2.setAltNames(new String[] {"health potion", "health flask"});
+		Item e2 = new Item.ItemBuilder().standardName("item2").altNames(new String[] {"health potion", "health flask"}).build();
 		GameElementMap<Item> map = new GameElementMap<Item>();
 		
 		map.put(e1);
@@ -180,11 +174,10 @@ public class GameElementMapTest {
 	
 	@Test
 	public void testGetAllStandardNamesKeepingCase(){
-		Item e1 = new Item("iteM1");
+		Item e1 = new Item.ItemBuilder().standardName("iteM1").build();
 		assertEquals("iteM1", e1.getStandardName());
 		
-		Item e2 = new Item("itEm2");
-		e2.setAltNames(new String[] {"health potion", "health flask"});
+		Item e2 = new Item.ItemBuilder().standardName("itEm2").altNames(new String[] {"health potion", "health flask"}).build();
 		GameElementMap<Item> map = new GameElementMap<Item>();
 		
 		map.put(e1);

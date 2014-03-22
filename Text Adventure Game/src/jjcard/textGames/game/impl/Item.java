@@ -7,35 +7,70 @@ public class Item extends GameElement{
 	private boolean hidden = false;
 	private boolean movable = true;
 	private ItemUse use = ItemUse.Item;
- 	public Item(){
-		super();
-		info = "";
-		cost = 0;
-		level = 0;
+	
+	
+	
+	public static class ItemBuilder extends GameElementBuilder{
+		private int cost;
+		private String info;
+		private int level;
+		private boolean hidden = false;
+		private boolean movable = true;
+		private ItemUse use = ItemUse.Item;
+		
+		public ItemBuilder cost(int cost){
+			this.cost = cost;
+			return this;
+		}
+		public ItemBuilder info(String info){
+			this.info = info;
+			return this;
+		}
+		public ItemBuilder level(int level){
+			this.level = level;
+			return this;
+		}
+		public ItemBuilder hidden(boolean hidden){
+			this.hidden = hidden;
+			return this;
+		}
+		public ItemBuilder movable(boolean movable){
+			this.movable = movable;
+			return this;
+		}
+		public ItemBuilder use(ItemUse use){
+			this.use = use;
+			return this;
+		}
+		public ItemBuilder standardName(String name){
+			super.standardName(name);
+			return this;
+		}
+		public ItemBuilder altNames(String[] altNamesArray){
+			super.altNames(altNamesArray);
+			return this;
+		}
+		public ItemBuilder addAltName(String altName){
+			super.addAltName(altName);
+			return this;
+		}
+		public ItemBuilder roomDescription(String roomDescrip){
+			super.roomDescription(roomDescrip);
+			return this;
+		}
+		public Item build(){
+			return new Item(this);
+		}
 	}
-	public Item(String name){
-		super(name);
-		info = "";
-		cost = 0;
-		level = 0;
-	}
-	public Item(String name, String infoNew){
-		super(name);
-		info = infoNew;
-		cost = 0;
-		level = 0;
-	}
-	public Item(String name, String infoNew, int levelNew){
-		super(name);
-		info = infoNew;
-		cost = 0;
-		level = levelNew;
-	}
-	public Item(String name, String infoNew, int levelNew, int costNew){
-		super(name);
-		info = infoNew;
-		level = levelNew;
-		cost = costNew;
+	
+	protected Item(ItemBuilder b){
+		  super(b);
+		  cost = b.cost;
+		  info = b.info;
+		  level = b.level;
+		  hidden = b.hidden;
+		  movable = b.movable;
+		  use = b.use;
 	}
 	public int getCost() {
 		return cost;
@@ -55,9 +90,9 @@ public class Item extends GameElement{
 	public ItemUse getUse() {
 		return use;
 	}
- 	public void setName(String name){
-		setStandardName(name);
-	}
+// 	public void setName(String name){
+//		setStandardName(name);
+//	}
 	public void setCost(int costN){
 		cost = costN;
 	}

@@ -62,10 +62,10 @@ public class WorldTest {
 		assertEquals(ck.getKey(), "goblin");
 		assertEquals(mob.getHealth(), 10);
 		ReturnCom rc = world.basicOperations(ck);
-		assertEquals(rc, ReturnCom.ATTACK_MOB);
+		assertEquals(ReturnCom.ATTACK_MOB, rc);
 		assertEquals(mob.getHealth(), 6);
-		assertTrue(mob.getstatusList().isEmpty());
-		Item coin = new Item("coin", "a single golden coin");
+		assertTrue(mob.getStatusList().isEmpty());
+		Item coin = new Item.ItemBuilder().standardName("coin").info("a single golden coin").build();
 		mob.addItem( coin);
 		
 		assertTrue(mob.containsItem("coin"));
@@ -82,25 +82,25 @@ public class WorldTest {
 	}
 	@Test
 	public void EquipWorldTest(){
-		Armour wool = new Armour("wool", "its itchness might be a defense", 0, 4);
+		Armour wool = new Armour.ArmourBuilder().standardName("wool").info("its itchness might be a defense").level(0).defense(4).build();
 		player.addItem( wool);
 		CommandAndKey ck = world.parseInput("equip wool");
 		assertEquals(ck.getCommand(), Commands.EQUIP);
 		assertEquals(ck.getKey(), "wool");
 		assertEquals(player.getFullDefense(), 8);
 		ReturnCom rc = world.basicOperations(ck);
-		assertEquals(rc, ReturnCom.EQUIPPED_ARMOUR);
+		assertEquals(ReturnCom.EQUIPPED_ARMOUR, rc);
 		assertEquals(player.getFullDefense(), 8 + 4);
 	
 		
-		Weapon weapon = new Weapon("shank", "it can also be used as a verb", 3);
+		Weapon weapon = new Weapon.WeaponBuilder().standardName("shank").info("it can also be used as a verb").attack(3).build();
 		player.addItem(weapon);
 		ck = world.parseInput("equip shank");
-		assertEquals(ck.getCommand(), Commands.EQUIP);
+		assertEquals(Commands.EQUIP, ck.getCommand());
 		assertEquals(ck.getKey(), "shank");
 		assertEquals(player.getFullAttack(), 5);
 		rc = world.basicOperations(ck);
-		assertEquals(rc, ReturnCom.EQUIPPED_WEAPON);
+		assertEquals( ReturnCom.EQUIPPED_WEAPON, rc);
 		assertEquals(player.getFullAttack(), 8);
 		assertEquals(player.getStandardWeaponKey(), "shank");
 		
@@ -154,16 +154,17 @@ public class WorldTest {
 	@Before
 	public void setUp(){
 		
-		 player = new Player("jjcard", 50, 8, 5);
+		 player = new Player.PlayerBuilder().standardName("jjcard").curHelath(50).defense(8).attack(5).build();
 		 local = new Location("entry room", "A barren room.");
-		 Item item = new Item("item");
+		 
+		 Item item = new Item.ItemBuilder().standardName("item").build();
 		 local.addItem(item);
 		 hallway = new Location("hallway","a long hallway with one torch.");
 		local.addExit("NORTH", hallway);
 		hallway.addExit(Exit.SOUTH, local);
 		 world = new World(local, player);
 		 
-		 mob = new Mob("Goblin", 10, 1, 4);
+		 mob = new Mob.MobBuilder().standardName("Goblin").curHelath(10).defense(1).attack(4).build();
 		mob.setDescription("You can tell its a goblin because it's green and broccoli usually doesn't try to kill you");
 		
 	}

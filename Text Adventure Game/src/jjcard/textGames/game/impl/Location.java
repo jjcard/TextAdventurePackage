@@ -100,7 +100,7 @@ public class Location implements ILocation {
 	 * @param room
 	 */
 	public void addExit(String dir, ILocation room){
-		Exit exit = new Exit(dir, room);
+		Exit exit = new Exit.ExitBuilder().standardName(dir).location(room).build();
 		exits.put(exit);
 	}
 	

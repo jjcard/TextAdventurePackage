@@ -1,42 +1,132 @@
 package jjcard.textGames.game.impl;
 
+import java.util.List;
+
 import jjcard.textGames.game.HasLeveling;
+import jjcard.textGames.game.IGameElementMap;
 
 
 public class Player extends Mob implements HasLeveling{
 	private int level;
 	private int xp;
 	
-	public Player(){
-		super();
-		level = 0;
-		xp = 0;
+	public static class PlayerBuilder extends MobBuilder{
+		private int level;
+		private int xp;
+		public PlayerBuilder standardName(String name){
+			super.standardName(name);
+			return this;
+		}
+		public PlayerBuilder level(int level){
+			this.level = level;
+			return this;
+		}
+		public PlayerBuilder xp(int xp){
+			this.xp = xp;
+			return this;
+		}
+		public PlayerBuilder altNames(String[] altNames){
+			super.altNames(altNames);
+			return this;
+		}
+		public PlayerBuilder addAltName(String altName){
+			super.addAltName(altName);
+			return this;
+		}
+		public PlayerBuilder roomDescription(String roomDescrip){
+			super.roomDescription(roomDescrip);
+			return this;
+		}
+		public PlayerBuilder maxHealth(int maxHealth){
+			super.maxHealth(maxHealth);
+			return this;
+		}
+		public PlayerBuilder curHelath(int curHealth){
+			super.curHelath(curHealth);
+			return this;
+		}
+		public PlayerBuilder description(String description){
+			super.description(description);
+			return this;
+		}
+		public PlayerBuilder money(int money){
+			super.money(money);
+			return this;
+		}
+		public PlayerBuilder inventory(IGameElementMap<Item> inventory){
+			super.inventory(inventory);
+			return this;
+		}
+		public PlayerBuilder defense(int defense){
+			super.defense(defense);
+			return this;
+		}
+		public PlayerBuilder attack(int attack){
+			super.attack(attack);
+			return this;
+		}
+		public PlayerBuilder hostile(boolean hostile){
+			super.hostile(hostile);
+			return this;
+		}
+		public PlayerBuilder statusList(List<Status> statusList){
+			super.statusList(statusList);
+			
+			return this;
+		}
+		public PlayerBuilder armor(Armour armour){
+			super.armor(armour);
+			return this;
+		}
+		public PlayerBuilder weapon(Weapon weapon){
+			super.weapon(weapon);
+			return this;
+		}
+		public PlayerBuilder addStatus(Status status){
+			super.addStatus(status);
+			return this;
+		}
+		public Player build(){
+			return new Player(this);
+		}
 	}
-	public Player(String name){
-		super(name);
-		level = 0;
-		xp = 0;
+	
+	
+	private Player(PlayerBuilder b){
+		super(b);
+		this.xp = b.xp;
+		this.level = b.level;
 	}
-	public Player(String name, int health){
-		super(name, health);
-		level = 0;
-		xp = 0;
-	}
-	public Player(String name, int health, int defense){
-		super(name, health, defense);
-		level = 0;
-		xp = 0;
-	}
-	public Player(String name, int health, int defense, int attack){
-		super(name, health, defense, attack);
-		level = 0;
-		xp = 0;
-	}
-	public Player(String name, int health, int defense, int attack, int levelNew){
-		super(name, health, defense, attack);
-		level = levelNew;
-		xp = 0;
-	}
+//	public Player(){
+//		super();
+//		level = 0;
+//		xp = 0;
+//	}
+//	public Player(String name){
+//		super(name);
+//		level = 0;
+//		xp = 0;
+//	}
+//	public Player(String name, int health){
+//		super(name, health);
+//		level = 0;
+//		xp = 0;
+//	}
+//	public Player(String name, int health, int defense){
+//		super(name, health, defense);
+//		level = 0;
+//		xp = 0;
+//	}
+//	public Player(String name, int health, int defense, int attack){
+//		super(name, health, defense, attack);
+//		level = 0;
+//		xp = 0;
+//	}
+//	public Player(String name, int health, int defense, int attack, int levelNew){
+//		super(name, health, defense, attack);
+//		level = levelNew;
+//		xp = 0;
+//	}
 
 	public int getLevel(){
 		return level;

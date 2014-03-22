@@ -26,6 +26,13 @@ public class Exit extends GameElement {
 		private ILocation location;
 		
 		
+		public ExitBuilder(){
+			super();
+		}
+		public ExitBuilder(Exit e){
+			super(e);
+			this.location = e.location;
+		}
 		public ExitBuilder standardName(String name){
 			super.standardName(name);
 			return this;

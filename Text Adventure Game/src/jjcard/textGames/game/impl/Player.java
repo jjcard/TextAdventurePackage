@@ -15,7 +15,7 @@ public class Player extends Mob implements HasLeveling{
 		private int xp;
 		
 		public PlayerBuilder(){
-			
+			super();
 		}
 		public PlayerBuilder(Player p){
 			super(p);

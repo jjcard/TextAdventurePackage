@@ -37,7 +37,7 @@ public class Mob extends GameElement{
 		private Weapon weapon;	
 		
 		public MobBuilder(){
-			
+			super();
 		}
 		public MobBuilder(Mob b){
 			super(b);

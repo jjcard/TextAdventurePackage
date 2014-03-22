@@ -11,6 +11,7 @@ public class Weapon extends Item {
 		private int durability;
 		
 		public WeaponBuilder(){
+			super();
 			use(ItemUse.Weapon);
 		}
 		public WeaponBuilder(Weapon w){

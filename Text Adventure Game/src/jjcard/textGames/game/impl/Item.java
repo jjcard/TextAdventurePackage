@@ -19,6 +19,7 @@ public class Item extends GameElement{
 		private ItemUse use = ItemUse.Item;
 		
 		public ItemBuilder(){
+			super();
 		}
 		public ItemBuilder(Item i){
 			  super(i);

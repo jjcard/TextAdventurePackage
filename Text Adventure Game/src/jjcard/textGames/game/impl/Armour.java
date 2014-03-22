@@ -8,6 +8,7 @@ public class Armour extends Item {
 		private int defense;
 		
 		public ArmourBuilder(){
+			super();
 			use(ItemUse.Armour);
 		}
 		public ArmourBuilder(Armour a){

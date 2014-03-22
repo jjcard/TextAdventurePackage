@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 
-import jjcard.textGames.game.*;
+import jjcard.textGames.game.impl.*;
 
 /**
  * Test game to test out features and bugs

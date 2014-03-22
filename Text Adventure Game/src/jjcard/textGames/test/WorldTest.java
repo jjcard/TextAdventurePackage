@@ -2,7 +2,7 @@ package jjcard.textGames.test;
 
 import static org.junit.Assert.*;
 
-import jjcard.textGames.game.*;
+import jjcard.textGames.game.impl.*;
 
 import org.junit.Before;
 import org.junit.Test;

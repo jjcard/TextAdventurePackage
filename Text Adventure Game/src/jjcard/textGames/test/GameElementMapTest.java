@@ -2,9 +2,9 @@ package jjcard.textGames.test;
 
 import static org.junit.Assert.*;
 
-import jjcard.textGames.game.GameElementMap;
-import jjcard.textGames.game.Item;
-import jjcard.textGames.game.Mob;
+import jjcard.textGames.game.impl.GameElementMap;
+import jjcard.textGames.game.impl.Item;
+import jjcard.textGames.game.impl.Mob;
 
 import org.junit.Test;
 

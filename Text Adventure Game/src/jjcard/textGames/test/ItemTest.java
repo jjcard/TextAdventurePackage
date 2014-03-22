@@ -3,7 +3,8 @@ package jjcard.textGames.test;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import jjcard.textGames.game.*;
+
+import jjcard.textGames.game.impl.*;
 
 public class ItemTest {
 

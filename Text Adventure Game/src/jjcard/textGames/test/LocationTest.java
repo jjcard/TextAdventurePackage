@@ -1,10 +1,10 @@
 package jjcard.textGames.test;
 
 import static org.junit.Assert.*;
-import jjcard.textGames.game.Exit;
-import jjcard.textGames.game.Item;
-import jjcard.textGames.game.Location;
-import jjcard.textGames.game.Mob;
+import jjcard.textGames.game.impl.Exit;
+import jjcard.textGames.game.impl.Item;
+import jjcard.textGames.game.impl.Location;
+import jjcard.textGames.game.impl.Mob;
 
 import org.junit.Before;
 import org.junit.Test;

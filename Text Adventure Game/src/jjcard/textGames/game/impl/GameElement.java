@@ -35,6 +35,15 @@ public abstract class GameElement implements IGameElement {
 		private List<String> altNames = new ArrayList<String>();
 		private String roomDescription;
 		
+		
+		public GameElementBuilder(){
+			
+		}
+		public GameElementBuilder(GameElement g){
+			this.standardName = g.standardName;
+			this.roomDescription = g.roomDescription;
+			this.altNames = Arrays.asList(g.altNames);
+		}
 		public GameElementBuilder standardName(String name){
 			this.standardName = name;
 			return  this;

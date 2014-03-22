@@ -13,6 +13,15 @@ public class Player extends Mob implements HasLeveling{
 	public static class PlayerBuilder extends MobBuilder{
 		private int level;
 		private int xp;
+		
+		public PlayerBuilder(){
+			
+		}
+		public PlayerBuilder(Player p){
+			super(p);
+			this.xp = p.xp;
+			this.level = p.level;
+		}
 		public PlayerBuilder standardName(String name){
 			super.standardName(name);
 			return this;
@@ -97,36 +106,6 @@ public class Player extends Mob implements HasLeveling{
 		this.xp = b.xp;
 		this.level = b.level;
 	}
-//	public Player(){
-//		super();
-//		level = 0;
-//		xp = 0;
-//	}
-//	public Player(String name){
-//		super(name);
-//		level = 0;
-//		xp = 0;
-//	}
-//	public Player(String name, int health){
-//		super(name, health);
-//		level = 0;
-//		xp = 0;
-//	}
-//	public Player(String name, int health, int defense){
-//		super(name, health, defense);
-//		level = 0;
-//		xp = 0;
-//	}
-//	public Player(String name, int health, int defense, int attack){
-//		super(name, health, defense, attack);
-//		level = 0;
-//		xp = 0;
-//	}
-//	public Player(String name, int health, int defense, int attack, int levelNew){
-//		super(name, health, defense, attack);
-//		level = levelNew;
-//		xp = 0;
-//	}
 
 	public int getLevel(){
 		return level;

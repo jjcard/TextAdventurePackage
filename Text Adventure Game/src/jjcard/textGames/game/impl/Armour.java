@@ -10,6 +10,10 @@ public class Armour extends Item {
 		public ArmourBuilder(){
 			use(ItemUse.Armour);
 		}
+		public ArmourBuilder(Armour a){
+			super(a);
+			this.defense = a.defense;
+		}
 		public ArmourBuilder cost(int cost){
 			super.cost(cost);
 			return this;

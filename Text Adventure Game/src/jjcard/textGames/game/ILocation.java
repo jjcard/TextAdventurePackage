@@ -1,7 +1,6 @@
 package jjcard.textGames.game;
 
 import jjcard.textGames.game.impl.Exit;
-import jjcard.textGames.game.impl.GameElementMap;
 import jjcard.textGames.game.impl.Item;
 import jjcard.textGames.game.impl.Mob;
 

@@ -36,6 +36,26 @@ public class Mob extends GameElement{
 		private Armour armor;
 		private Weapon weapon;	
 		
+		public MobBuilder(){
+			
+		}
+		public MobBuilder(Mob b){
+			super(b);
+			  this.description = b.description;
+			  this.maxHealth = b.maxHealth;
+			  this.curHealth = b.curHealth;
+			  if (maxHealth < curHealth){
+				  this. maxHealth = curHealth;
+			  }
+			  this.money = b.money;
+			  this.inventory = b.inventory;
+			  this.defense = b.defense;
+			  this.attack = b.attack;
+			  this.hostile = b.hostile;
+			  this.statusList = b.statusList;
+			  this.armor = b.armor;
+			  this.weapon = b.weapon;
+		}
 		public MobBuilder maxHealth(int maxHealth){
 			this.maxHealth = maxHealth;
 			return this;

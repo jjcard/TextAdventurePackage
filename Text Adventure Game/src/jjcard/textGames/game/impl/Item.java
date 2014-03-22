@@ -18,6 +18,17 @@ public class Item extends GameElement{
 		private boolean movable = true;
 		private ItemUse use = ItemUse.Item;
 		
+		public ItemBuilder(){
+		}
+		public ItemBuilder(Item i){
+			  super(i);
+			  cost = i.cost;
+			  info = i.info;
+			  level = i.level;
+			  hidden = i.hidden;
+			  movable = i.movable;
+			  use = i.use;
+		}
 		public ItemBuilder cost(int cost){
 			this.cost = cost;
 			return this;

@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.IMob;
+import jjcard.textGames.game.IWorld;
 
 
 
@@ -13,7 +14,7 @@ import jjcard.textGames.game.IMob;
  * @author jjcard
  *
  */
-public class World {
+public class World implements IWorld{
 	ILocation current;
 	 Player player;
 	PrintStream output = System.out;
@@ -165,7 +166,7 @@ public class World {
 	 * @param comkey
 	 * @return ReturnCom detailing what happened
 	 */
-	public ReturnCom basicOperations(CommandAndKey comkey){
+	public ReturnCom executeCommands(CommandAndKey comkey){
 		String key = comkey.getKey();
 		switch(comkey.getCommand()){
 		case ATTACK:  

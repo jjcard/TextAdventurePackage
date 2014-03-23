@@ -2,13 +2,14 @@ package jjcard.textGames.test;
 
 import static org.junit.Assert.*;
 
+import jjcard.textGames.game.IWorld;
 import jjcard.textGames.game.impl.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class WorldTest {
-	World world;
+	IWorld world;
 	Player player;
 	Location local;
 	Location hallway;
@@ -27,7 +28,7 @@ public class WorldTest {
 		CommandAndKey ck = world.parseInput("move south");
 		assertEquals(ck.getCommand(), Commands.MOVE);
 		assertEquals(ck.getKey(), "south");
-		ReturnCom rc = world.basicOperations(ck);
+		ReturnCom rc = world.executeCommands(ck);
 		assertEquals(rc, ReturnCom.MOVED_DIRECTION);
 		
 	}
@@ -42,14 +43,14 @@ public class WorldTest {
 		assertEquals(ck.getCommand(), Commands.LOOK);
 		assertEquals(ck.getKey(), "goblin");
 		
-		ReturnCom rc = world.basicOperations(ck);
+		ReturnCom rc = world.executeCommands(ck);
 		assertEquals(rc, ReturnCom.LOOK_MOB);
 		
 		ck = world.parseInput("Loot all goblin");
 		assertEquals(ck.getCommand(), Commands.LOOT_ALL);
 		assertEquals(ck.getKey(), "goblin");
 		
-		rc = world.basicOperations(ck);
+		rc = world.executeCommands(ck);
 		assertEquals(rc, ReturnCom.LOOT_MOB_ALIVE);
 		
 	
@@ -61,7 +62,7 @@ public class WorldTest {
 		assertEquals(ck.getCommand(), Commands.ATTACK);
 		assertEquals(ck.getKey(), "goblin");
 		assertEquals(mob.getHealth(), 10);
-		ReturnCom rc = world.basicOperations(ck);
+		ReturnCom rc = world.executeCommands(ck);
 		assertEquals(ReturnCom.ATTACK_MOB, rc);
 		assertEquals(mob.getHealth(), 6);
 		assertTrue(mob.getStatusList().isEmpty());
@@ -69,13 +70,13 @@ public class WorldTest {
 		mob.addItem( coin);
 		
 		assertTrue(mob.containsItem("coin"));
-		rc = world.basicOperations(ck);
-		rc = world.basicOperations(ck);
+		rc = world.executeCommands(ck);
+		rc = world.executeCommands(ck);
 		assertEquals(rc, ReturnCom.ATTACK_MOB_KILLED);
 		assertTrue(mob.isDead());
 		assertEquals(mob.getHealth(), 0);
 		assertFalse(player.containsItem("coin"));
-		rc = world.basicOperations(world.parseInput("loot all goblin"));
+		rc = world.executeCommands(world.parseInput("loot all goblin"));
 		assertEquals(rc, ReturnCom.LOOT_MOB);
 		assertTrue(player.containsItem("coin"));
 			
@@ -88,7 +89,7 @@ public class WorldTest {
 		assertEquals(ck.getCommand(), Commands.EQUIP);
 		assertEquals(ck.getKey(), "wool");
 		assertEquals(player.getFullDefense(), 8);
-		ReturnCom rc = world.basicOperations(ck);
+		ReturnCom rc = world.executeCommands(ck);
 		assertEquals(ReturnCom.EQUIPPED_ARMOUR, rc);
 		assertEquals(player.getFullDefense(), 8 + 4);
 	
@@ -99,7 +100,7 @@ public class WorldTest {
 		assertEquals(Commands.EQUIP, ck.getCommand());
 		assertEquals(ck.getKey(), "shank");
 		assertEquals(player.getFullAttack(), 5);
-		rc = world.basicOperations(ck);
+		rc = world.executeCommands(ck);
 		assertEquals( ReturnCom.EQUIPPED_WEAPON, rc);
 		assertEquals(player.getFullAttack(), 8);
 		assertEquals(player.getStandardWeaponKey(), "shank");
@@ -109,7 +110,7 @@ public class WorldTest {
 		assertEquals(ck.getCommand(), Commands.UNEQUIP);
 		assertEquals(ck.getKey(), "shank");
 		assertFalse(player.containsItem("shank"));
-		rc = world.basicOperations(ck);
+		rc = world.executeCommands(ck);
 		assertEquals(rc, ReturnCom.UNEQUIPPED_WEAPON);
 		assertNull(player.getWeapon());
 		assertTrue(player.containsItem("shank"));
@@ -121,7 +122,7 @@ public class WorldTest {
 		assertEquals(ck.getKey(), "wool");
 		assertFalse(player.containsItem("wool"));
 		
-		rc = world.basicOperations(ck);
+		rc = world.executeCommands(ck);
 		assertEquals(rc, ReturnCom.UNEQUIPPED_ARMOUR);
 		assertTrue(player.containsItem("wool"));
 		assertEquals(player.getFullDefense(), 8);
@@ -137,7 +138,7 @@ public class WorldTest {
 		CommandAndKey ck = world.parseInput("get item");
 		assertEquals(ck.getKey(), "item");
 		assertEquals(ck.getCommand(), Commands.GET);
-		ReturnCom rc = world.basicOperations(ck);
+		ReturnCom rc = world.executeCommands(ck);
 		assertEquals(rc, ReturnCom.GOT_ITEM);
 		assertTrue(player.containsItem("item"));
 		assertFalse(world.getCurrent().containsItem("item"));
@@ -145,7 +146,7 @@ public class WorldTest {
 		ck = world.parseInput("drop item");
 		assertEquals(ck.getKey(), "item");
 		assertEquals(ck.getCommand(), Commands.DROP);
-		rc = world.basicOperations(ck);
+		rc = world.executeCommands(ck);
 		assertEquals(rc, ReturnCom.ITEM_DROPPED);
 		assertFalse(player.containsItem("item"));
 		assertTrue(world.getCurrent().containsItem("item"));

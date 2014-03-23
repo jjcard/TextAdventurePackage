@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 
+import jjcard.textGames.game.IWorld;
 import jjcard.textGames.game.impl.*;
 
 /**
@@ -19,7 +20,7 @@ public class CrawlingDungeon {
 		Map<String, Mob> mobs = getMobs();
 		Map<String, Item> items = getItems();
 		Player player = new Player.PlayerBuilder().standardName("adventurer").curHelath(100).defense(6).attack(5).build();
-		World world = new World(starting, player);
+		IWorld world = new World(starting, player);
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Welcome to Crawling Dungeon");
 		
@@ -33,7 +34,7 @@ public class CrawlingDungeon {
 			if (ck.getCommand().equals(Commands.QUIT)){
 				quit = true;
 			}
-			world.basicOperations(ck);
+			world.executeCommands(ck);
 		}
 		
 		System.out.print("The program is now ending");

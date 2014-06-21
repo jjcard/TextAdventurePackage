@@ -86,7 +86,7 @@ public class World implements IWorld{
 		IItem toE = player.getItem(i);
 		
 		if (toE == null){
-			System.out.println(i + " not found");
+			output.println(i + " not found");
 			return ReturnCom.EQUIPPED_NOT_FOUND;
 		}
 		
@@ -94,16 +94,16 @@ public class World implements IWorld{
 			setPlayerArmor( (Armour) toE);
 			player.removeItem(i);
 			
-			System.out.println(i + " equipped as armor. ");
+			output.println(i + " equipped as armor. ");
 			return ReturnCom.EQUIPPED_ARMOUR;
 		}
 		if (toE.getUse().equals(ItemUse.Weapon)){
 			setPlayerWeapon( (Weapon) toE);
 			player.removeItem(i);
-			System.out.println(i + " equipped as weapon. ");
+			output.println(i + " equipped as weapon. ");
 			return ReturnCom.EQUIPPED_WEAPON;
 		}
-		System.out.println(i + " not found");
+		output.println(i + " not found");
 		return ReturnCom.EQUIPPED_NOT_FOUND;
 	}
 	public ReturnCom unequipItem(String key){
@@ -113,10 +113,10 @@ public class World implements IWorld{
 
 				//add it back to the inventory
 				player.addItem( it);
-				System.out.println(key + " has been unequipped from armor. ");
+				output.println(key + " has been unequipped from armor. ");
 				return ReturnCom.UNEQUIPPED_ARMOUR;				
 			} else {
-				System.out.println("No armor equipped. ");
+				output.println("No armor equipped. ");
 				return ReturnCom.UNEQUIPPED_NO_ARMOUR;
 			}
 
@@ -126,14 +126,14 @@ public class World implements IWorld{
 			if (i != null){
 
 				player.addItem( i);
-				System.out.println(key + " has been unequipped from weapon. ");
+				output.println(key + " has been unequipped from weapon. ");
 				return ReturnCom.UNEQUIPPED_WEAPON;
 			} else {
-				System.out.println("No weapon equipped. ");
+				output.println("No weapon equipped. ");
 				return ReturnCom.UNEQUIPPED_NO_WEAPON;
 			}
 		}
-		System.out.println("Nothing like that to unequip. ");
+		output.println("Nothing like that to unequip. ");
 		return ReturnCom.UNEQUIPPED_ITEM_NOT_FOUND;
 	}
 	public void setPlayerArmor( Armour armorN){
@@ -332,10 +332,10 @@ public class World implements IWorld{
 		if (player.containsItem(key)){
 			IItem drop = player.removeItem(key);
 			current.addItem(drop);
-			System.out.println(key + " dropped from your inventory");
+			output.println(key + " dropped from your inventory");
 			return ReturnCom.ITEM_DROPPED;
 		} else {
-			System.out.println("Item not found");
+			output.println("Item not found");
 			return ReturnCom.DROP_ITEM_NOT_FOUND;
 		}
 	}

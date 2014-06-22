@@ -3,9 +3,9 @@ package jjcard.textGames.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import jjcard.textGames.game.parser.BasicTextTokenType;
-import jjcard.textGames.game.parser.SpaceTextTokenType;
 import jjcard.textGames.game.parser.TextToken;
+import jjcard.textGames.game.parser.impl.BasicTextTokenType;
+import jjcard.textGames.game.parser.impl.SpaceTextTokenType;
 
 import org.junit.Before;
 import org.junit.Test;

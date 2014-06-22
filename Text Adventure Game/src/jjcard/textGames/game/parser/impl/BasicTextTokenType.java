@@ -1,4 +1,6 @@
-package jjcard.textGames.game.parser;
+package jjcard.textGames.game.parser.impl;
+
+import jjcard.textGames.game.parser.ITextTokenType;
 
 public enum BasicTextTokenType implements ITextTokenType {
 	ENEMY(true), TALK(false), LOOK(false), GET(false), DROP(false), WEAPON(true), ARMOR(true), MOVE(false), ITEM(true), PLAYER(true);

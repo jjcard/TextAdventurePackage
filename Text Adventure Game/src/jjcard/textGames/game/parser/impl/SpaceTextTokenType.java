@@ -1,4 +1,6 @@
-package jjcard.textGames.game.parser;
+package jjcard.textGames.game.parser.impl;
+
+import jjcard.textGames.game.parser.ITextTokenType;
 
 public enum SpaceTextTokenType implements ITextTokenType {
 	

@@ -1,5 +1,7 @@
 package jjcard.textGames.test;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -28,6 +30,7 @@ public class SimpleTextEventListenerTest {
 	public void test() {
 		try {
 			SimpleTextEventListener listener = new SimpleTextEventListener(stream);
+			assertNotNull(listener);
 		} catch (IOException e) {
 			Assert.fail("Could not find String.txt");
 		}

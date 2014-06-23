@@ -1,5 +1,11 @@
 package jjcard.textGames.game.parser;
 
+/**
+ * 
+ * Interface TextParsers should use.
+ *
+ * @param <T>
+ */
 public interface ITextParser<T extends Enum<T> & ITextTokenType> {
 	
 	/**

@@ -4,7 +4,9 @@ import jjcard.textGames.game.parser.ITextTokenType;
 
 public enum SpaceTextTokenType implements ITextTokenType {
 	
-	ENEMY(true), TALK(false), LOOK(false), GET(false), DROP(false), WEAPON(true), ARMOR(true), MOVE(false), SHIP(true), MOVE_SHIP(false), ITEM(true), PLAYER(true), WORDS(true);
+	ENEMY(true), TALK(false), LOOK(false), GET(false), DROP(false), WEAPON(true), 
+	ARMOR(true), MOVE(false), SHIP(true), MOVE_SHIP(false), ITEM(true), PLAYER(true), 
+	WORDS(true), UNKOWN;
 
 	private boolean isObject;
 	

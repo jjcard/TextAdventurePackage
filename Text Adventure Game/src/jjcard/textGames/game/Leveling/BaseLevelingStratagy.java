@@ -1,6 +1,5 @@
 package jjcard.textGames.game.Leveling;
 
-import jjcard.textGames.game.HasLeveling;
 
 public class BaseLevelingStratagy implements LevelingStratagy {
 	private static final int[] levelingChart = new int[]{1000, 3000, 6000, 

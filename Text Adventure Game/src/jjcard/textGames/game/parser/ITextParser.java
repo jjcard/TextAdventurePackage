@@ -13,5 +13,11 @@ public interface ITextParser<T extends Enum<T> & ITextTokenType> {
 	 * @param text
 	 */
 	public TextTokenStream<T> parseText(String text);
+	
+	/**
+	 * Sets the library the parser will use.
+	 * @param library
+	 */
+	public void setTextDictionary(ITextDictionary<T> library);
 
 }

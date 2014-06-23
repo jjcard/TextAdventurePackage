@@ -2,9 +2,9 @@ package jjcard.textGames.game.impl;
 
 import java.util.List;
 
-import jjcard.textGames.game.HasLeveling;
 import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
+import jjcard.textGames.game.Leveling.HasLeveling;
 
 
 public class Player extends Mob implements HasLeveling{

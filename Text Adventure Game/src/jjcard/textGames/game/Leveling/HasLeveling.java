@@ -1,4 +1,4 @@
-package jjcard.textGames.game;
+package jjcard.textGames.game.Leveling;
 
 public interface HasLeveling {
 	

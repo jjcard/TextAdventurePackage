@@ -12,4 +12,11 @@ public interface ITextDictionary<T extends Enum<T> & ITextTokenType> extends Map
 
 	
 	public void putAll(Collection<String> keys, T value);
+	
+	/**
+	 * If this is true, Dictionary should automatically set casing on words to lowercase when using
+	 * put or get.
+	 * @param doAutomaticCasing
+	 */
+	public void setAutomaticCasing(boolean doAutomaticCasing);
 }

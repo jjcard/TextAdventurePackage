@@ -62,8 +62,15 @@ public class TextTokenStream<T extends Enum<T> & ITextTokenType> {
 			this.errors = errors;
 			return this;
 		}
+		/**
+		 * Adds error to builder only if error not already exists in the list.
+		 * @param error
+		 * @return
+		 */
 		public TextTokenStreamBuilder<T> addError(TextParserError error){
-			this.errors.add(error);
+			if (!this.errors.contains(error)){
+				this.errors.add(error);
+			}
 			return this;
 		}
 		/**

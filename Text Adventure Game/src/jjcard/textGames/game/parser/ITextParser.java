@@ -18,6 +18,12 @@ public interface ITextParser<T extends Enum<T> & ITextTokenType> {
 	 * Sets the library the parser will use.
 	 * @param library
 	 */
-	public void setTextDictionary(ITextDictionary<T> library);
+	public void setTextDictionary(ITextDictionary<T> dictionary);
+	
+	public ITextDictionary<T> getTextDictionary();
+	/**
+	 * Clears any data the parser might remember
+	 */
+	public void clear();
 
 }

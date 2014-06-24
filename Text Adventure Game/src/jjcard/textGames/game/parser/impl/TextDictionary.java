@@ -1,9 +1,12 @@
-package jjcard.textGames.game.parser;
+package jjcard.textGames.game.parser.impl;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
+
+import jjcard.textGames.game.parser.ITextDictionary;
+import jjcard.textGames.game.parser.ITextTokenType;
 
 /**
  * Class implementation to hold the Library for use during parsing.
@@ -18,6 +21,7 @@ public class TextDictionary<T extends Enum<T> & ITextTokenType> extends TreeMap<
 	 * 
 	 */
 	private static final long serialVersionUID = -108288250545705909L;
+	private boolean automaticCasing;
 
 	public TextDictionary(){
 		
@@ -34,6 +38,17 @@ public class TextDictionary<T extends Enum<T> & ITextTokenType> extends TreeMap<
 		for (String key: keys){
 			put(key, value);
 		}
+		
+	}
+	public T put(String key, T value){
+		return super.put(automaticCasing? key.toLowerCase():key, value);
+	}
+	public T get(Object key){
+		return super.get(automaticCasing? key.toString().toLowerCase(): key);
+	}
+	@Override
+	public void setAutomaticCasing(boolean doAutomaticCasing) {
+		automaticCasing = doAutomaticCasing;
 		
 	}
 	

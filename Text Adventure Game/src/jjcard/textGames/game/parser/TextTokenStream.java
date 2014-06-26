@@ -30,6 +30,12 @@ public class TextTokenStream<T extends Enum<T> & ITextTokenType> {
 		public TextTokenStreamBuilder() {
 			
 		}
+		public TextTokenStreamBuilder(TextTokenStream<T> stream){
+			this.objects = stream.objects == null? this.objects: stream.objects;
+			this.verb = stream.verb;
+			this.withObject = stream.withObject;
+			this.errors = stream.errors == null? this.errors: stream.errors;
+		}
 		public TextTokenStreamBuilder<T> verb(TextToken<T> verb){
 			this.verb = verb;
 			return this;

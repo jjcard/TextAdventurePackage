@@ -8,7 +8,7 @@ import jjcard.textGames.game.parser.TextTokenStream.TextTokenStreamBuilder;
  * @param <T>
  * @param <K>
  */
-public abstract class TextIndicatorParser<T extends Enum<T> & ITextTokenType, K extends ITextIndicator>
+public abstract class TextIndicatorParser<T extends ITextTokenType, K extends ITextIndicator>
 		implements ITextParser<T> {
 
 	protected boolean withObjectIndicator;
@@ -18,7 +18,7 @@ public abstract class TextIndicatorParser<T extends Enum<T> & ITextTokenType, K 
 
 		String[] words = splitText(input);
 
-		TextTokenStreamBuilder<T> builder = new TextTokenStreamBuilder<>();
+		TextTokenStreamBuilder<T> builder = new TextTokenStreamBuilder<T>();
 
 		K indicator = getIndicator(input);
 		if (indicator != null && indicator.isWholeSentenceIndicator()) {

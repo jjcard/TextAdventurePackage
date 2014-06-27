@@ -6,7 +6,7 @@ package jjcard.textGames.game.parser;
  *
  * @param <T>
  */
-public interface ITextParser<T extends Enum<T> & ITextTokenType> {
+public interface ITextParser<T extends ITextTokenType> {
 	
 	/**
 	 * Parses the String and returns a TextTokenStream containing the parsed result.

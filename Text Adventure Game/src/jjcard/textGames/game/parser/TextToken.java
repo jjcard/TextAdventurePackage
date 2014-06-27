@@ -4,7 +4,7 @@ package jjcard.textGames.game.parser;
  * A Class for containing the parsed Token.
  *
  */
-public class TextToken<T extends Enum<T> & ITextTokenType> implements ITextTokenType{
+public class TextToken<T extends ITextTokenType> implements ITextTokenType{
 
 	private String token;
 	

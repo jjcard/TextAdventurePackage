@@ -9,7 +9,7 @@ import java.util.List;
  * 
  * @param <T>
  */
-public class TextTokenStream<T extends Enum<T> & ITextTokenType> {
+public class TextTokenStream<T extends ITextTokenType> {
 
 	private List<TextToken<T>> objects;
 
@@ -19,7 +19,7 @@ public class TextTokenStream<T extends Enum<T> & ITextTokenType> {
 
 	private List<TextParserError> errors;
 
-	public static class TextTokenStreamBuilder<T extends Enum<T> & ITextTokenType>{
+	public static class TextTokenStreamBuilder<T extends ITextTokenType>{
 		
 		private List<TextToken<T>> objects = new LinkedList<TextToken<T>>();
 		private TextToken<T> verb;

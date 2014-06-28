@@ -161,5 +161,8 @@ public class TextTokenStream<T extends ITextTokenType> {
 	public boolean containsError(TextParserError e) {
 		return errors.contains(e);
 	}
+	public boolean hasErrors(){
+		return !errors.isEmpty();
+	}
 
 }

@@ -1,8 +1,10 @@
 package jjcard.textGames.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import jjcard.textGames.game.parser.ITextDictionary;
+import jjcard.textGames.game.parser.TextParserError;
 import jjcard.textGames.game.parser.TextTokenStream;
 import jjcard.textGames.game.parser.impl.BasicTextParser;
 import jjcard.textGames.game.parser.impl.BasicTextTokenType;
@@ -69,6 +71,29 @@ public class BasicTextParserTest {
 		assertNotNull(stream.getFirstObject());
 		assertEquals("brEaD", stream.getFirstObject().getToken());
 		assertEquals(BasicTextTokenType.ITEM, stream.getFirstObject().getType());
+		assertEquals(1, stream.getObjects().size());
+	}
+	@Test
+	public void testPatternParsing(){
+		ITextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>();
+		dictionary.put("say", BasicTextTokenType.TALK);
+		String text = "And then I say \"I really hope this works\"";
+		BasicTextParser<BasicTextTokenType> parser = new BasicTextParser<>(dictionary);
+		parser.addTextTokenTypePattern("\".*\"", BasicTextTokenType.WORDS);
+		
+		
+		TextTokenStream<BasicTextTokenType> stream = parser.parseText(text);
+		
+
+		assertFalse(stream.hasErrors());
+		
+		assertNotNull(stream.getFirstObject());
+		assertEquals( "\"I really hope this works\"", stream.getFirstObject().getToken());
+		assertEquals( BasicTextTokenType.WORDS, stream.getFirstObject().getType());
+		assertNotNull(stream.getVerb());
+		assertEquals("say", stream.getVerb().getToken());
+		assertEquals(BasicTextTokenType.TALK, stream.getVerb().getType());
+		
 	}
 
 }

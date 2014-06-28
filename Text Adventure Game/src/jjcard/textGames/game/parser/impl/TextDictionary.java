@@ -13,7 +13,7 @@ import jjcard.textGames.game.parser.ITextTokenType;
  * Should have all the verbs and objects used in the game, or else parsing may not work correctly.
  *
  */
-public class TextDictionary<T extends Enum<T> & ITextTokenType> extends TreeMap<String, T>implements ITextDictionary<T>{
+public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, T>implements ITextDictionary<T>{
 
 //	private static final Pattern pairPattern = Pattern.compile("=");
 //	public static final String COMMENT_INDICATOR = "#";

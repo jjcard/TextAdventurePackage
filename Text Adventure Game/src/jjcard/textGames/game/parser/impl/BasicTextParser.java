@@ -13,10 +13,12 @@ import jjcard.textGames.game.parser.TextToken;
 import jjcard.textGames.game.parser.TextTokenStream;
 import jjcard.textGames.game.parser.TextTokenStream.TextTokenStreamBuilder;
 
-public class BasicTextParser<T extends Enum<T> & ITextTokenType> extends TextIndicatorParser<T, TextIndicator> {
+public class BasicTextParser<T extends ITextTokenType> extends TextIndicatorParser<T, TextIndicator> {
 	
 
 	private ITextDictionary<T> dictionary;
+	private List<PatternEntry<T>> textTokenPatterns;
+	private List<PatternEntry<TextIndicator>> textIndicatorPatterns;
 	private static final Pattern splitPattern = Pattern.compile("[\\s]+");
 	private int objectLimit = 10;
 	
@@ -29,64 +31,14 @@ public class BasicTextParser<T extends Enum<T> & ITextTokenType> extends TextInd
 		
 	
 	
+	public BasicTextParser() {
+		textIndicatorPatterns = new LinkedList<>();
+		textTokenPatterns = new LinkedList<>();
+	}
 	BasicTextParser(ITextDictionary<T> dictionary){
+		this();
 		this.dictionary = dictionary;
 	}
-//	@Override
-//	public TextTokenStream<T> parseText(String text) {
-//		
-//		
-//		TextTokenStreamBuilder<T> builder = new TextTokenStreamBuilder<>();
-//		
-//		TextIndicators ti = indicatorMap.get(text);
-//		if (ti != null && ti.isWholeSentenceIndicator()){
-//			builder = handleWholeSentenceIndicator(ti, builder);
-//		} else {
-//			String[] words = splitWords(text);
-//
-//			List<TextToken<T>> objects = new LinkedList<TextToken<T>>();
-//			TextToken<T> verb = null;
-//			TextToken<T> withObject = null;
-//
-//			// flag to use one a 'with' indicator has been found.
-//			boolean foundWithObjectIndicator = false;
-//
-//			boolean checkingObjects = objectLimit > 0;
-//
-//			T type;
-//			for (String s : words) {
-//				type = dictionary.get(s);
-//				if (type != null) {
-//					// has a type defined in the dictionary
-//					TextToken<T> token = new TextToken<T>(s, type);
-//					if (token.isObject()) {
-//						if (foundWithObjectIndicator) {
-//							withObject = handleWithObject(builder, withObject,
-//									token);
-//						} else {
-//							handleObject(builder, objects, checkingObjects,
-//									token);
-//						}
-//
-//					} else if (token.isVerb()) {
-//						verb = handleVerb(builder, verb, token);
-//					}
-//				} else {
-//					// not a dictionary word.
-//					TextIndicators indicator = indicatorMap.get(s);
-//					if (indicator != null && indicator.isWordIndicator()) {
-//						foundWithObjectIndicator = handleWordIndicator(builder,
-//								objects, foundWithObjectIndicator, s, indicator);
-//					}
-//					// else do nothing
-//
-//				}
-//			}			
-//		}
-//
-//		previousStream = builder.build();
-//		return builder.build();
-//	}
 	@Override
 	protected String[] splitText(String text) {
 		String[] words = splitPattern.split(text);
@@ -102,7 +54,42 @@ public class BasicTextParser<T extends Enum<T> & ITextTokenType> extends TextInd
 		// TODO Auto-generated method stub
 		
 	}
-
+	/**
+	 * creates a Pattern matching the given String and Adds the pattern to the list matching to the given TextTokenType.
+	 * For each word, will be checked in the order given.
+	 * @param regexPattern
+	 * @param type
+	 */
+	public void addTextTokenTypePattern(String regexPattern, T type){
+		addTextTokenTypePattern(Pattern.compile(regexPattern), type);
+	}
+	/**
+	 * Adds the given pattern to the list matching to the given TextTokenType.
+	 * For each word, will be checked in the order given.
+	 * @param pattern
+	 * @param type
+	 */
+	public void addTextTokenTypePattern(Pattern pattern, T type){
+		textTokenPatterns.add(new PatternEntry<T>(pattern, type));
+	}
+	/**
+	 * creates a Pattern matching the given String and Adds the pattern to the list matching to the given TextIndicator.
+	 * For each word, will be checked in the order given.
+	 * @param regexPattern
+	 * @param type
+	 */
+	public void addTextIndicatorePattern(String regexPattern, TextIndicator type){
+		addTextIndicatorePattern(Pattern.compile(regexPattern), type);
+	}
+	/**
+	 * Adds the given pattern to the list matching to the given TextIndicator.
+	 * For each word, will be checked in the order given.
+	 * @param pattern
+	 * @param type
+	 */
+	public void addTextIndicatorePattern(Pattern pattern, TextIndicator type){
+		textIndicatorPatterns.add(new PatternEntry<TextIndicator>(pattern, type));
+	}
 	/**
 	 * Sets the limit on the number of objects allowed before adding an error to the stream.
 	 * A number less then 1 indicates no checking.
@@ -186,20 +173,37 @@ public class BasicTextParser<T extends Enum<T> & ITextTokenType> extends TextInd
 	}
 	@Override
 	protected T getType(String word) {
-		return dictionary.get(word);
+		T type = dictionary.get(word);
+		if (type == null){
+			//check against patterns
+			for (PatternEntry<T> entry: textTokenPatterns){
+				if (entry.matches(word)){
+					type = entry.getValue();
+					break;
+				}
+			}
+		}
+		return type;
 	}
 
 	@Override
 	protected TextIndicator getIndicator(String input) {
-		return indicatorMap.get(input);
+		TextIndicator indicator = indicatorMap.get(input);
+		if (indicator == null){
+			//check against patterns
+			for (PatternEntry<TextIndicator> entry: textIndicatorPatterns){
+				if (entry.matches(input)){
+					indicator = entry.getValue();
+					break;
+				}
+			}
+		}
+		return indicator;
 	}
 	
 	@Override
 	protected void startParsing(String text) {
-		checkingObjects = objectLimit > 0;
-		objects = new LinkedList<TextToken<T>>();
-		verb = null;
-		withObject = null;
+
 		
 	}
 	@Override
@@ -214,6 +218,38 @@ public class BasicTextParser<T extends Enum<T> & ITextTokenType> extends TextInd
 			break;
 		}
 		return builder;
+	}
+	@Override
+	protected void handleEndOfWordParsing(TextTokenStreamBuilder<T> builder,
+			String[] words) {
+		builder.objects(objects).verb(verb).withObject(withObject);
+		
+	}
+	@Override
+	protected void handleStartOfWordParsing(TextTokenStreamBuilder<T> builder,
+			String[] words) {
+		checkingObjects = objectLimit > 0;
+		objects = new LinkedList<TextToken<T>>();
+		verb = null;
+		withObject = null;
+		withObjectIndicator = false;
+		
+	}
+	
+	private class PatternEntry<S>{
+		private Pattern pattern;
+		private S value;
+		
+		public PatternEntry(Pattern p, S value){
+			this.pattern = p;
+			this.value = value;
+		}
+		public S getValue(){
+			return value;
+		}
+		public boolean matches(String text){
+			return pattern.matcher(text).matches();
+		}
 	}
 	
 }

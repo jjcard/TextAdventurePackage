@@ -11,12 +11,15 @@ import jjcard.textGames.game.parser.TextTokenStream.TextTokenStreamBuilder;
 public abstract class TextIndicatorParser<T extends ITextTokenType, K extends ITextIndicator>
 		implements ITextParser<T> {
 
+	/**
+	 * Indicator for the next object being a withObject. While it is true, objects will be handling like withObjects.
+	 */
 	protected boolean withObjectIndicator;
 
 	public TextTokenStream<T> parseText(String input) {
 		startParsing(input);
 
-		String[] words = splitText(input);
+		
 
 		TextTokenStreamBuilder<T> builder = new TextTokenStreamBuilder<T>();
 
@@ -24,6 +27,8 @@ public abstract class TextIndicatorParser<T extends ITextTokenType, K extends IT
 		if (indicator != null && indicator.isWholeSentenceIndicator()) {
 			builder = handleWholeSentenceIndicator(indicator, input, builder);
 		} else {
+			String[] words = splitText(input);
+			handleStartOfWordParsing(builder, words);
 			for (String word : words) {
 				T type = getType(word);
 				if (type != null) {
@@ -48,11 +53,29 @@ public abstract class TextIndicatorParser<T extends ITextTokenType, K extends IT
 					}
 				}
 			}
+			
+			handleEndOfWordParsing(builder, words);
 		}
 
 		endParsing(builder);
 		return builder.build();
 	}
+
+	/**
+	 * Called if the parsing of all the words, if got to that point.
+	 * @param builder
+	 * @param words
+	 */
+	protected abstract void handleEndOfWordParsing(TextTokenStreamBuilder<T> builder,
+			String[] words);
+
+	/**
+	 * If parsing word by word, calls this before starting
+	 * @param builder
+	 * @param words
+	 */
+	protected abstract void handleStartOfWordParsing(TextTokenStreamBuilder<T> builder,
+			String[] words);
 
 	/**
 	 * Method called when parsing of input ends. Tears down anything that is a per-parse variable.

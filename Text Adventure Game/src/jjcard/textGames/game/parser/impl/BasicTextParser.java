@@ -117,6 +117,9 @@ public class BasicTextParser<T extends ITextTokenType> extends TextIndicatorPars
 	public void setIndicatorMap(Map<String, TextIndicator> indicatorMap){
 		this.indicatorMap = indicatorMap;
 	}
+	public Map<String, TextIndicator> getIndicatorMap(){
+		return indicatorMap;
+	}
 	@Override
 	protected void endParsing(TextTokenStreamBuilder<T> builder) {
 		previousStream = builder.build();
@@ -185,7 +188,7 @@ public class BasicTextParser<T extends ITextTokenType> extends TextIndicatorPars
 
 	@Override
 	protected TextIndicator getIndicator(String input) {
-		TextIndicator indicator = indicatorMap.get(input);
+		TextIndicator indicator = indicatorMap == null? null: indicatorMap.get(input);
 		if (indicator == null){
 			//check against patterns
 			indicator = textIndicatorPatterns.get(input);

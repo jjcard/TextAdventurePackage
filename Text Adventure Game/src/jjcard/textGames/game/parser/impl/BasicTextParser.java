@@ -13,7 +13,11 @@ import jjcard.textGames.game.parser.TextParserError;
 import jjcard.textGames.game.parser.TextToken;
 import jjcard.textGames.game.parser.TextTokenStream;
 import jjcard.textGames.game.parser.TextTokenStream.TextTokenStreamBuilder;
-
+/**
+ * Basic text parser class.
+ *
+ * @param <T>
+ */
 public class BasicTextParser<T extends ITextTokenType> extends TextIndicatorParser<T, TextIndicator> {
 	
 

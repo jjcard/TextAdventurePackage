@@ -26,10 +26,20 @@ public class PatternList<S> {
 		patternList.add(new PatternEntry(p, value));
 	}
 
+	/**
+	 * Compiles the given string into a pattern and adds it.
+	 * @param s
+	 * @param value
+	 */
 	public void add(String s, S value) {
 		add(Pattern.compile(s), value);
 	}
 
+	/**
+	 * Returns the value that connected with the pattern the given text matches.
+	 * @param text
+	 * @return
+	 */
 	public S get(String text) {
 		S value = null;
 		for (PatternEntry entry : patternList) {

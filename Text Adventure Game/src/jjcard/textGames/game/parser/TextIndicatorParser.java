@@ -83,25 +83,72 @@ public abstract class TextIndicatorParser<T extends ITextTokenType, K extends IT
 	 */
 	protected abstract void endParsing(TextTokenStreamBuilder<T> builder);
 
+	/**
+	 * Called when a verb is found when parsing
+	 * @param builder
+	 * @param token
+	 * @return
+	 */
 	protected abstract TextTokenStreamBuilder<T> handleVerb(TextTokenStreamBuilder<T> builder,
 			TextToken<T> token);
 
+	/**
+	 * Called when a object is found when parsing
+	 * @param builder
+	 * @param token
+	 * @return
+	 */
 	protected abstract TextTokenStreamBuilder<T> handleObject(TextTokenStreamBuilder<T> builder,
 			TextToken<T> token);
 
+	/**
+	 * Called when a withObjects is found when parsing
+	 * @param builder
+	 * @param token
+	 * @return
+	 */
 	protected abstract TextTokenStreamBuilder<T> handleWithObject(TextTokenStreamBuilder<T> builder,
 			TextToken<T> token);
 
+	/**
+	 * Called when a single word ITextIndicator is found
+	 * @param builder
+	 * @param word
+	 * @param indicator
+	 * @return
+	 */
 	protected abstract TextTokenStreamBuilder<T> handleWordIndicator(
 			TextTokenStreamBuilder<T> builder, String word, K indicator);
 
+	/**
+	 * Called to get the Type of a word. Can return null.
+	 * @param word
+	 * @return
+	 */
 	protected abstract T getType(String word);
 
+	/**
+	 * Called 
+	 * @param indicator
+	 * @param input
+	 * @param builder
+	 * @return
+	 */
 	protected abstract TextTokenStreamBuilder<T> handleWholeSentenceIndicator(K indicator, String input,
 			TextTokenStreamBuilder<T> builder);
 
+	/**
+	 * Called to get the Indicator for the given input. Can return null.
+	 * @param input
+	 * @return
+	 */
 	protected abstract K getIndicator(String input);
 
+	/**
+	 * Called to split the input to the individual parsing words
+	 * @param input
+	 * @return
+	 */
 	protected abstract String[] splitText(String input);
 
 	/**

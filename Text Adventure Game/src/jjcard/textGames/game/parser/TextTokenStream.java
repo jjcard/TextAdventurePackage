@@ -19,100 +19,153 @@ public class TextTokenStream<T extends ITextTokenType> {
 
 	private List<TextParserError> errors;
 
-	public static class TextTokenStreamBuilder<T extends ITextTokenType>{
-		
+	public static class TextTokenStreamBuilder<T extends ITextTokenType> {
+
 		private List<TextToken<T>> objects = new LinkedList<TextToken<T>>();
 		private TextToken<T> verb;
 		private TextToken<T> withObject;
 		private List<TextParserError> errors = new LinkedList<TextParserError>();
 		private boolean validateInput = true;
-		
+
 		public TextTokenStreamBuilder() {
-			
+
 		}
-		public TextTokenStreamBuilder(TextTokenStream<T> stream){
-			this.objects = stream.objects == null? this.objects: stream.objects;
+
+		/**
+		 * Creates a TextTokenStreamBuilder with the objects, verb, withObject,
+		 * and errors of the given stream.
+		 * 
+		 * @param stream
+		 */
+		public TextTokenStreamBuilder(TextTokenStream<T> stream) {
+			this.objects = stream.objects == null ? this.objects
+					: stream.objects;
 			this.verb = stream.verb;
 			this.withObject = stream.withObject;
-			this.errors = stream.errors == null? this.errors: stream.errors;
+			this.errors = stream.errors == null ? this.errors : stream.errors;
 		}
-		public TextTokenStreamBuilder<T> verb(TextToken<T> verb){
+
+		/**
+		 * Sets the verb to the TextToken given.
+		 * 
+		 * @param verb
+		 * @return
+		 */
+		public TextTokenStreamBuilder<T> verb(TextToken<T> verb) {
 			this.verb = verb;
 			return this;
 		}
-		public TextTokenStreamBuilder<T> withObject(TextToken<T> withObject){
+
+		/**
+		 * Sets the withObject to the TextToken given.
+		 * 
+		 * @param withObject
+		 * @return
+		 */
+		public TextTokenStreamBuilder<T> withObject(TextToken<T> withObject) {
 			this.withObject = withObject;
 			return this;
 		}
-		public TextTokenStreamBuilder<T> objects(List<TextToken<T>> objects){
-			if (objects == null){
+
+		/**
+		 * Sets the object list to the one given. If null, creates a new list.
+		 * 
+		 * @param objects
+		 * @return
+		 */
+		public TextTokenStreamBuilder<T> objects(List<TextToken<T>> objects) {
+			if (objects == null) {
 				objects = new LinkedList<TextToken<T>>();
 			}
 			this.objects = objects;
 			return this;
 		}
-		public TextTokenStreamBuilder<T> addObject(TextToken<T> object){
+
+		public TextTokenStreamBuilder<T> addObject(TextToken<T> object) {
 			objects.add(object);
 			return this;
 		}
-		public TextTokenStreamBuilder<T> addObjects(List<TextToken<T>> objects){
-			if (objects != null){
+
+		/**
+		 * Adds the given list of objects to the end of the object list
+		 * 
+		 * @param objects
+		 * @return
+		 */
+		public TextTokenStreamBuilder<T> addObjects(List<TextToken<T>> objects) {
+			if (objects != null) {
 				this.objects.addAll(objects);
 			}
 			return this;
 		}
-		public TextTokenStreamBuilder<T> errors(List<TextParserError> errors){
-			if (errors == null){
+
+		public TextTokenStreamBuilder<T> errors(List<TextParserError> errors) {
+			if (errors == null) {
 				errors = new LinkedList<TextParserError>();
 			}
 			this.errors = errors;
 			return this;
 		}
+
 		/**
 		 * Adds error to builder only if error not already exists in the list.
+		 * 
 		 * @param error
 		 * @return
 		 */
-		public TextTokenStreamBuilder<T> addError(TextParserError error){
-			if (!this.errors.contains(error)){
+		public TextTokenStreamBuilder<T> addError(TextParserError error) {
+			if (!this.errors.contains(error)) {
 				this.errors.add(error);
 			}
 			return this;
 		}
+
 		/**
-		 * Sets the flag to validate the input and add errors to the stream.
-		 * It is true by default
+		 * Sets the flag to validate the input and add errors to the stream
+		 * automatically. It is true by default
+		 * 
 		 * @param validateInput
 		 * @return
 		 */
-		public TextTokenStreamBuilder<T> validateInput(boolean validateInput){
+		public TextTokenStreamBuilder<T> validateInput(boolean validateInput) {
 			this.validateInput = validateInput;
 			return this;
 		}
-		public TextTokenStream<T> build(){
-			return new TextTokenStream<>(verb, objects, withObject, errors, validateInput);
+
+		/**
+		 * Builds a TextTokenStream with the values in the builder.
+		 * 
+		 * @return
+		 */
+		public TextTokenStream<T> build() {
+			return new TextTokenStream<>(verb, objects, withObject, errors,
+					validateInput);
 		}
 	}
+
 	private TextTokenStream(TextToken<T> verb, List<TextToken<T>> objects,
-			TextToken<T> withObject, List<TextParserError> errors, boolean validateInput) {
+			TextToken<T> withObject, List<TextParserError> errors,
+			boolean validateInput) {
 
 		this.objects = objects;
 		this.verb = verb;
 		this.withObject = withObject;
 		this.errors = errors;
-		
-		if (validateInput){
+
+		if (validateInput) {
 			validateInput();
 		}
 	}
-	private void validateInput(){
-		if (objects.isEmpty() && !containsError(TextParserError.NO_OBJECTS)){
+
+	private void validateInput() {
+		if (objects.isEmpty() && !containsError(TextParserError.NO_OBJECTS)) {
 			errors.add(TextParserError.NO_OBJECTS);
 		}
-		if (verb == null && !containsError(TextParserError.NO_VERB)){
+		if (verb == null && !containsError(TextParserError.NO_VERB)) {
 			errors.add(TextParserError.NO_VERB);
 		}
 	}
+
 	/**
 	 * Returns true if the TextTokenStream has a object token in the withObject
 	 * field.
@@ -123,14 +176,29 @@ public class TextTokenStream<T extends ITextTokenType> {
 		return withObject != null;
 	}
 
+	/**
+	 * Returns the list of Object TextTokens
+	 * 
+	 * @return
+	 */
 	public List<TextToken<T>> getObjects() {
 		return objects;
 	}
 
+	/**
+	 * Returns the verb TextToken
+	 * 
+	 * @return
+	 */
 	public TextToken<T> getVerb() {
 		return verb;
 	}
 
+	/**
+	 * Returns the withObject TextToken
+	 * 
+	 * @return
+	 */
 	public TextToken<T> getWithObject() {
 		return withObject;
 	}
@@ -154,14 +222,31 @@ public class TextTokenStream<T extends ITextTokenType> {
 		return hasObject() ? objects.get(0) : null;
 	}
 
+	/**
+	 * Returns the error list.
+	 * 
+	 * @return
+	 */
 	public List<TextParserError> getErrors() {
 		return errors;
 	}
 
+	/**
+	 * Returns true if the error list contains the given error
+	 * 
+	 * @param e
+	 * @return
+	 */
 	public boolean containsError(TextParserError e) {
 		return errors.contains(e);
 	}
-	public boolean hasErrors(){
+
+	/**
+	 * Returns true of the stream has any errors
+	 * 
+	 * @return
+	 */
+	public boolean hasErrors() {
 		return !errors.isEmpty();
 	}
 

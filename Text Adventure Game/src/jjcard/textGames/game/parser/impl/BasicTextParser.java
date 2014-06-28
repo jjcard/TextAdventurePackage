@@ -38,7 +38,7 @@ public class BasicTextParser<T extends ITextTokenType> extends TextIndicatorPars
 		textTokenPatterns = new PatternList<>();
 		this.dictionary = new TextDictionary<T>();
 	}
-	BasicTextParser(ITextDictionary<T> dictionary){
+	public BasicTextParser(ITextDictionary<T> dictionary){
 		this();
 		this.dictionary = dictionary;
 	}

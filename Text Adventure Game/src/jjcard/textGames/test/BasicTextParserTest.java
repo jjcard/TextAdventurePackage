@@ -1,8 +1,12 @@
 package jjcard.textGames.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import jjcard.textGames.game.parser.ITextDictionary;
 import jjcard.textGames.game.parser.TextTokenStream;
 import jjcard.textGames.game.parser.impl.BasicTextParser;
 import jjcard.textGames.game.parser.impl.BasicTextTokenType;
+import jjcard.textGames.game.parser.impl.TextDictionary;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -44,6 +48,27 @@ public class BasicTextParserTest {
 		String[] result2 = BasicTextParser.splitPattern.split(text2);
 		
 		Assert.assertArrayEquals(text2Expected, result2);
+	}
+	@Test
+	public void testParsing1(){
+		
+		ITextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>();
+		dictionary.put("go", BasicTextTokenType.MOVE);
+		dictionary.put("bread", BasicTextTokenType.ITEM);
+		String text = "Go to brEaD";
+		
+		BasicTextParser<BasicTextTokenType> parser = new BasicTextParser<>(dictionary);
+		
+		TextTokenStream<BasicTextTokenType> stream = parser.parseText(text);
+		
+		assertNotNull(stream);
+		
+		assertNotNull(stream.getVerb());
+		assertEquals("Go", stream.getVerb().getToken());
+		assertEquals(BasicTextTokenType.MOVE, stream.getVerb().getType());
+		assertNotNull(stream.getFirstObject());
+		assertEquals("brEaD", stream.getFirstObject().getToken());
+		assertEquals(BasicTextTokenType.ITEM, stream.getFirstObject().getType());
 	}
 
 }

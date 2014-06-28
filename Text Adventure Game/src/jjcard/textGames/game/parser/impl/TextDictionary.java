@@ -21,7 +21,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, T>
 	 * 
 	 */
 	private static final long serialVersionUID = -108288250545705909L;
-	private boolean automaticCasing;
+	private boolean automaticCasing = true;
 
 	public TextDictionary(){
 		

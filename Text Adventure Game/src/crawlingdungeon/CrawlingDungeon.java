@@ -37,6 +37,7 @@ public class CrawlingDungeon {
 			world.executeCommands(ck);
 		}
 		
+		scanner.close();
 		System.out.print("The program is now ending");
 	}
 	

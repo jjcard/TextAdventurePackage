@@ -3,8 +3,11 @@ package jjcard.textGames.game.parser.impl;
 import jjcard.textGames.game.parser.ITextTokenType;
 
 public enum BasicTextTokenType implements ITextTokenType {
-	ENEMY(true), TALK(false), LOOK(false), GET(false), DROP(false), WEAPON(true), ARMOR(true), MOVE(false), ITEM(true), PLAYER(true), WORDS(true), UNKOWN;
+	//objects
+	ENEMY(true), WEAPON(true), ARMOR(true), ITEM(true), PLAYER(true), WORDS(true), NPC(true), INVENTORY(true), UNKOWN,
 	
+	//verbs
+	 TALK(false), LOOK(false), GET(false), MOVE(false), LOOT(false), EQUIP(false), UNEQUIP(false), SAVE(false), QUIT(false), DROP(false);
 	private boolean isObject;
 	
 	BasicTextTokenType(boolean isObject){

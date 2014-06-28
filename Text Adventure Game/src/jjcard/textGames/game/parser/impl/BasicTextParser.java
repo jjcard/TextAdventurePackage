@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import jjcard.textGames.game.parser.ITextDictionary;
 import jjcard.textGames.game.parser.ITextTokenType;
+import jjcard.textGames.game.parser.PatternList;
 import jjcard.textGames.game.parser.TextIndicatorParser;
 import jjcard.textGames.game.parser.TextParserError;
 import jjcard.textGames.game.parser.TextToken;
@@ -17,8 +18,8 @@ public class BasicTextParser<T extends ITextTokenType> extends TextIndicatorPars
 	
 
 	private ITextDictionary<T> dictionary;
-	private List<PatternEntry<T>> textTokenPatterns;
-	private List<PatternEntry<TextIndicator>> textIndicatorPatterns;
+	private PatternList<T> textTokenPatterns;
+	private PatternList<TextIndicator> textIndicatorPatterns;
 	private static final Pattern splitPattern = Pattern.compile("[\\s]+");
 	private int objectLimit = 10;
 	
@@ -32,8 +33,8 @@ public class BasicTextParser<T extends ITextTokenType> extends TextIndicatorPars
 	
 	
 	public BasicTextParser() {
-		textIndicatorPatterns = new LinkedList<>();
-		textTokenPatterns = new LinkedList<>();
+		textIndicatorPatterns = new PatternList<>();
+		textTokenPatterns = new PatternList<>();
 	}
 	BasicTextParser(ITextDictionary<T> dictionary){
 		this();
@@ -70,7 +71,7 @@ public class BasicTextParser<T extends ITextTokenType> extends TextIndicatorPars
 	 * @param type
 	 */
 	public void addTextTokenTypePattern(Pattern pattern, T type){
-		textTokenPatterns.add(new PatternEntry<T>(pattern, type));
+		textTokenPatterns.add(pattern, type);
 	}
 	/**
 	 * creates a Pattern matching the given String and Adds the pattern to the list matching to the given TextIndicator.
@@ -88,7 +89,7 @@ public class BasicTextParser<T extends ITextTokenType> extends TextIndicatorPars
 	 * @param type
 	 */
 	public void addTextIndicatorePattern(Pattern pattern, TextIndicator type){
-		textIndicatorPatterns.add(new PatternEntry<TextIndicator>(pattern, type));
+		textIndicatorPatterns.add(pattern, type);
 	}
 	/**
 	 * Sets the limit on the number of objects allowed before adding an error to the stream.
@@ -176,12 +177,7 @@ public class BasicTextParser<T extends ITextTokenType> extends TextIndicatorPars
 		T type = dictionary.get(word);
 		if (type == null){
 			//check against patterns
-			for (PatternEntry<T> entry: textTokenPatterns){
-				if (entry.matches(word)){
-					type = entry.getValue();
-					break;
-				}
-			}
+			 type = textTokenPatterns.get(word);
 		}
 		return type;
 	}
@@ -191,12 +187,7 @@ public class BasicTextParser<T extends ITextTokenType> extends TextIndicatorPars
 		TextIndicator indicator = indicatorMap.get(input);
 		if (indicator == null){
 			//check against patterns
-			for (PatternEntry<TextIndicator> entry: textIndicatorPatterns){
-				if (entry.matches(input)){
-					indicator = entry.getValue();
-					break;
-				}
-			}
+			indicator = textIndicatorPatterns.get(input);
 		}
 		return indicator;
 	}
@@ -236,20 +227,6 @@ public class BasicTextParser<T extends ITextTokenType> extends TextIndicatorPars
 		
 	}
 	
-	private class PatternEntry<S>{
-		private Pattern pattern;
-		private S value;
-		
-		public PatternEntry(Pattern p, S value){
-			this.pattern = p;
-			this.value = value;
-		}
-		public S getValue(){
-			return value;
-		}
-		public boolean matches(String text){
-			return pattern.matcher(text).matches();
-		}
-	}
+
 	
 }

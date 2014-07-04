@@ -434,8 +434,25 @@ public class World implements IWorld<BasicTextTokenType>{
 			return equipItem(token);
 		case UNEQUIP:
 			return unequipItem(token);
+		case INFO:
+			return info(token);
 		 default:
-			 return ReturnCom.COMMAND_NOT_FOUND;
+//			 return ReturnCom.COMMAND_NOT_FOUND;
+			 break;
+		}
+		
+		if (object != null){
+			//For objects that can also be used to infer their verbs
+			switch(object.getType()){
+			case DIRECTION:
+				movePlayer(token);
+			case INVENTORY:
+				info(token);
+			default:
+				return ReturnCom.COMMAND_NOT_FOUND;
+			}
+		} else {
+			return ReturnCom.COMMAND_NOT_FOUND;
 		}
 		// TODO Auto-generated method stub
 		/*

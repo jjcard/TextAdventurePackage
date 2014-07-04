@@ -24,13 +24,29 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, T>
 	private boolean automaticCasing = true;
 
 	public TextDictionary(){
-		
+		super();
 	}
 	public TextDictionary(Map<String, ? extends T> map){
 		super(map);
 	}
 	public TextDictionary(SortedMap<String, ? extends T> map){
 		super(map);
+	}
+	/**
+	 * Uses the default values to do an initial load to the Dictionary
+	 * @param values
+	 */
+	@SafeVarargs
+	public TextDictionary(T...values){
+		super();
+		if (values != null){
+			for (T value: values){
+				if (value.defaultWords() != null){
+					putAll(value, value.defaultWords());	
+				}
+				
+			}
+		}
 	}
 
 	@Override

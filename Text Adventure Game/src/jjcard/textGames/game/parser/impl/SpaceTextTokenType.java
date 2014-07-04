@@ -28,7 +28,7 @@ public enum SpaceTextTokenType implements ITextTokenType {
 	}
 	@Override
 	public String[] defaultWords() {
-		throw new UnsupportedOperationException();
+		throw null;
 	}
 
 }

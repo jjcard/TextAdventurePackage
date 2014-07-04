@@ -191,20 +191,12 @@ public class WorldTest {
 	private ITextParser<BasicTextTokenType> getParser(){
 		if (parser == null){
 			parser = new BasicTextParser<BasicTextTokenType>();
-			TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>();
+			TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>(BasicTextTokenType.values());
 			dictionary.putAll(BasicTextTokenType.DIRECTION, "north", "south", "east", "west", "n");
-			dictionary.putAll(BasicTextTokenType.ATTACK, "attack");
-			dictionary.putAll(BasicTextTokenType.MOVE, "move", "walk");
 			dictionary.putAll(BasicTextTokenType.ITEM, "coin", "item");
 			dictionary.putAll(BasicTextTokenType.WEAPON, "shank");
 			dictionary.putAll(BasicTextTokenType.ENEMY, "goblin");
-			dictionary.putAll(BasicTextTokenType.DROP, "drop");
 			dictionary.putAll(BasicTextTokenType.ARMOR, "wool");
-			dictionary.putAll(BasicTextTokenType.UNEQUIP, "unequip");
-			dictionary.putAll(BasicTextTokenType.EQUIP, "equip");
-			dictionary.putAll(BasicTextTokenType.LOOT, "loot");
-			dictionary.putAll(BasicTextTokenType.GET, "get");
-			dictionary.putAll(BasicTextTokenType.LOOK, "look");
 			parser.setTextDictionary(dictionary);
 			//TODO make this less tedious..			
 		}

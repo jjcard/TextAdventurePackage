@@ -1,11 +1,13 @@
 package jjcard.textGames.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import jjcard.textGames.game.events.ITextEvent;
 import jjcard.textGames.game.events.ITextEventListener;
 import jjcard.textGames.game.events.ITextEventManager;
-import jjcard.textGames.game.events.SimpleTextEvent;
-import jjcard.textGames.game.events.TextEventManager;
+import jjcard.textGames.game.events.impl.SimpleTextEvent;
+import jjcard.textGames.game.events.impl.TextEventManager;
 import jjcard.textGames.game.impl.Commands;
 
 import org.junit.Before;

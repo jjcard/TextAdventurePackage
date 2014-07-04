@@ -1,7 +1,11 @@
-package jjcard.textGames.game.events;
+package jjcard.textGames.game.events.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import jjcard.textGames.game.events.ITextEvent;
+import jjcard.textGames.game.events.ITextEventListener;
+import jjcard.textGames.game.events.ITextEventManager;
 
 public class TextEventManager implements ITextEventManager{
 	

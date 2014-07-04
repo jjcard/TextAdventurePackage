@@ -1,5 +1,6 @@
-package jjcard.textGames.game.events;
+package jjcard.textGames.game.events.impl;
 
+import jjcard.textGames.game.events.ITextEvent;
 import jjcard.textGames.game.impl.Commands;
 import jjcard.textGames.game.impl.ReturnCom;
 

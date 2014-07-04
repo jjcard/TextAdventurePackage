@@ -1,4 +1,4 @@
-package jjcard.textGames.game.events;
+package jjcard.textGames.game.events.impl;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,6 +8,9 @@ import java.io.PrintStream;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
+
+import jjcard.textGames.game.events.ITextEvent;
+import jjcard.textGames.game.events.ITextEventListener;
 
 public class SimpleTextEventListener implements ITextEventListener {
 

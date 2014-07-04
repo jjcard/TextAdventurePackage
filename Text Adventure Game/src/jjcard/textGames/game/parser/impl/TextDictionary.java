@@ -40,6 +40,11 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, T>
 		}
 		
 	}
+	public void putAll(T value, String...keys){
+		for (String key: keys){
+			put(key, value);
+		}
+	}
 	public T put(String key, T value){
 		return super.put(automaticCasing? key.toLowerCase():key, value);
 	}

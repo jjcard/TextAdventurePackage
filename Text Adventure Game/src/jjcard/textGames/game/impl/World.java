@@ -6,6 +6,10 @@ import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.IMob;
 import jjcard.textGames.game.IWorld;
+import jjcard.textGames.game.parser.ITextParser;
+import jjcard.textGames.game.parser.TextToken;
+import jjcard.textGames.game.parser.TextTokenStream;
+import jjcard.textGames.game.parser.impl.BasicTextTokenType;
 
 
 
@@ -14,10 +18,11 @@ import jjcard.textGames.game.IWorld;
  * @author jjcard
  *
  */
-public class World implements IWorld{
-	ILocation current;
-	 Player player;
-	PrintStream output = System.out;
+public class World implements IWorld<BasicTextTokenType>{
+	private ILocation current;
+	 private Player player;
+	private PrintStream output = System.out;
+	private ITextParser<BasicTextTokenType> parser;
 
 	
 	public World(){
@@ -32,6 +37,12 @@ public class World implements IWorld{
 		player = playerN;
 	}
 
+	public void setTextParser(ITextParser<BasicTextTokenType> parser){
+		this.parser = parser;
+	}
+	public ITextParser<BasicTextTokenType> getTextParser(){
+		return parser;
+	}
 	public Player getPlayer(){
 		return player;
 	}
@@ -199,81 +210,80 @@ public class World implements IWorld{
 	 * @param input String
 	 * @return CommandAndKey 
 	 */
-	public CommandAndKey parseInput(String input){
-		String inputUp = input.toUpperCase();
-		
-		switch(inputUp){
-		case "HEALTH": return new CommandAndKey(Commands.PLAYER_INFO, "health");
-		case "NAME": return new CommandAndKey(Commands.PLAYER_INFO, "name");
-		case "NORTH":
-		case "N":
-			 return new CommandAndKey(Commands.MOVE, "NORTH");
-		case "SOUTH":
-		case "S": 
-			return new CommandAndKey(Commands.MOVE, "SOUTH");
-		case "EAST":
-		case "E":
-			return new CommandAndKey(Commands.MOVE, "EAST");
-		case "WEST":
-		case "W": 
-			return new CommandAndKey(Commands.MOVE, "WEST");
-		case "NW":
-		case "NORTHWEST":
-		case "NORTH WEST":
-			return new CommandAndKey(Commands.MOVE, "NORTHWEST");
-		case "NE":
-		case "NORTHEAST":
-			return new CommandAndKey(Commands.MOVE, "NORTHEAST");
-		case "SW":
-		case "SOUTHWEST":
-			return new CommandAndKey(Commands.MOVE, "SOUTHWEST");
-		case "UP":
-			return new CommandAndKey(Commands.MOVE, "UP");
-		case "DOWN":
-			return new CommandAndKey(Commands.MOVE, "DOWN");
-		case "INVENTORY": 
-			return new CommandAndKey(Commands.PLAYER_INFO, "inventory");
-		case "QUIT": 
-			return new CommandAndKey(Commands.QUIT);
-		case "LEVEL": 
-			return new CommandAndKey(Commands.PLAYER_INFO, "level");
-		
-		}
-		
-		 if (inputUp.startsWith("GO ")){
-			 return new CommandAndKey(Commands.MOVE, input.substring(3));
-		 }
-		 if (inputUp.startsWith("GET ")){
-			 return new CommandAndKey(Commands.GET, input.substring(4));
-		 }
-		 if (inputUp.startsWith("MOVE ")){
-			 return new CommandAndKey(Commands.MOVE, input.substring(5));
-		 }
-		 if (inputUp.startsWith("PICK UP ")){
-			 return new CommandAndKey(Commands.GET, input.substring(8));
-		 }
-		 if (inputUp.startsWith("WALK ")){
-			 return new CommandAndKey(Commands.MOVE, input.substring(5));
-		 }
-		 if (inputUp.startsWith("ATTACK ")){
-			 return new CommandAndKey(Commands.ATTACK, input.substring(7));
-		 }if (inputUp.startsWith("LOOT ALL ")){
-			 return new CommandAndKey(Commands.LOOT_ALL, input.substring(9));
-		 } if (inputUp.startsWith("LOOK AT ")){
-			 return new CommandAndKey(Commands.LOOK, input.substring(8));
-		 }if (inputUp.startsWith("LOOK ")){
-			 return new CommandAndKey(Commands.LOOK, input.substring(5));
-		 } if (inputUp.startsWith("DROP ")){
-			return new CommandAndKey(Commands.DROP, input.substring(5));
-		 }
-		 if (inputUp.startsWith("EQUIP ")){
-			 return new CommandAndKey(Commands.EQUIP, input.substring(6));
-		 }
-		 if (inputUp.startsWith("UNEQUIP ")){
-			 return new CommandAndKey(Commands.UNEQUIP, input.substring(8));
-		 }		 
+	public TextTokenStream<BasicTextTokenType> parseInput(String input){
+		return parser.parseText(input);
+//		
+//		switch(inputUp){
+//		case "HEALTH": return new CommandAndKey(Commands.PLAYER_INFO, "health");
+//		case "NAME": return new CommandAndKey(Commands.PLAYER_INFO, "name");
+//		case "NORTH":
+//		case "N":
+//			 return new CommandAndKey(Commands.MOVE, "NORTH");
+//		case "SOUTH":
+//		case "S": 
+//			return new CommandAndKey(Commands.MOVE, "SOUTH");
+//		case "EAST":
+//		case "E":
+//			return new CommandAndKey(Commands.MOVE, "EAST");
+//		case "WEST":
+//		case "W": 
+//			return new CommandAndKey(Commands.MOVE, "WEST");
+//		case "NW":
+//		case "NORTHWEST":
+//		case "NORTH WEST":
+//			return new CommandAndKey(Commands.MOVE, "NORTHWEST");
+//		case "NE":
+//		case "NORTHEAST":
+//			return new CommandAndKey(Commands.MOVE, "NORTHEAST");
+//		case "SW":
+//		case "SOUTHWEST":
+//			return new CommandAndKey(Commands.MOVE, "SOUTHWEST");
+//		case "UP":
+//			return new CommandAndKey(Commands.MOVE, "UP");
+//		case "DOWN":
+//			return new CommandAndKey(Commands.MOVE, "DOWN");
+//		case "INVENTORY": 
+//			return new CommandAndKey(Commands.PLAYER_INFO, "inventory");
+//		case "QUIT": 
+//			return new CommandAndKey(Commands.QUIT);
+//		case "LEVEL": 
+//			return new CommandAndKey(Commands.PLAYER_INFO, "level");
+//		
+//		}
+//		
+//		 if (inputUp.startsWith("GO ")){
+//			 return new CommandAndKey(Commands.MOVE, input.substring(3));
+//		 }
+//		 if (inputUp.startsWith("GET ")){
+//			 return new CommandAndKey(Commands.GET, input.substring(4));
+//		 }
+//		 if (inputUp.startsWith("MOVE ")){
+//			 return new CommandAndKey(Commands.MOVE, input.substring(5));
+//		 }
+//		 if (inputUp.startsWith("PICK UP ")){
+//			 return new CommandAndKey(Commands.GET, input.substring(8));
+//		 }
+//		 if (inputUp.startsWith("WALK ")){
+//			 return new CommandAndKey(Commands.MOVE, input.substring(5));
+//		 }
+//		 if (inputUp.startsWith("ATTACK ")){
+//			 return new CommandAndKey(Commands.ATTACK, input.substring(7));
+//		 }if (inputUp.startsWith("LOOT ALL ")){
+//			 return new CommandAndKey(Commands.LOOT_ALL, input.substring(9));
+//		 } if (inputUp.startsWith("LOOK AT ")){
+//			 return new CommandAndKey(Commands.LOOK, input.substring(8));
+//		 }if (inputUp.startsWith("LOOK ")){
+//			 return new CommandAndKey(Commands.LOOK, input.substring(5));
+//		 } if (inputUp.startsWith("DROP ")){
+//			return new CommandAndKey(Commands.DROP, input.substring(5));
+//		 }
+//		 if (inputUp.startsWith("EQUIP ")){
+//			 return new CommandAndKey(Commands.EQUIP, input.substring(6));
+//		 }
+//		 if (inputUp.startsWith("UNEQUIP ")){
+//			 return new CommandAndKey(Commands.UNEQUIP, input.substring(8));
+//		 }		 
 			 
-		return null;
 		
 		
 	}
@@ -401,6 +411,59 @@ public class World implements IWorld{
 		}
 		 output.println("cannot find "+ key);
 		 return ReturnCom.ATTACK_MOB_NOT_FOUND;
+	}
+
+	@Override
+	public ReturnCom executeCommands(TextTokenStream<BasicTextTokenType> stream) {
+		TextToken<BasicTextTokenType> object = stream.getFirstObject();
+		String token = object == null? null: object.getToken();
+		switch(stream.getVerb().getType()){
+		case ATTACK:
+			return attackMob(object.getToken());
+		case LOOK:
+			return lookAt(object.getToken());
+		case MOVE:
+			return movePlayer(token);
+		case GET:
+			return getItemFromRoom(object.getToken());
+		case LOOT:
+			return lootAllMob(object.getToken());
+		case DROP:
+			return dropItem(token);
+		case EQUIP:
+			return equipItem(token);
+		case UNEQUIP:
+			return unequipItem(token);
+		 default:
+			 return ReturnCom.COMMAND_NOT_FOUND;
+		}
+		// TODO Auto-generated method stub
+		/*
+		 * 		String key = comkey.getKey();
+		switch(comkey.getCommand()){
+		case ATTACK:  
+			return attackMob(key);
+		case LOOK:
+			return lookAt(key);
+			
+		case MOVE:
+			return movePlayer(key);
+		case GET:
+			return getItemFromRoom(key);
+		case LOOT_ALL:
+			return lootAllMob(key);
+		case DROP:
+			return dropItem(key);
+		case EQUIP:
+			return equipItem(key);
+		case UNEQUIP:
+			return unequipItem(key);
+		 default:
+			 return ReturnCom.COMMAND_NOT_FOUND;
+			
+		
+		}
+		 */
 	}
 
 

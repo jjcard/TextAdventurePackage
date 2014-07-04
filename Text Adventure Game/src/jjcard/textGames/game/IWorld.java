@@ -1,10 +1,12 @@
 package jjcard.textGames.game;
 
-import jjcard.textGames.game.impl.CommandAndKey;
 import jjcard.textGames.game.impl.Player;
 import jjcard.textGames.game.impl.ReturnCom;
+import jjcard.textGames.game.parser.ITextParser;
+import jjcard.textGames.game.parser.ITextTokenType;
+import jjcard.textGames.game.parser.TextTokenStream;
 
-public interface IWorld {
+public interface IWorld<T extends ITextTokenType> {
 
 	public Player getPlayer();
 	public void setPlayer(Player playerN);
@@ -13,11 +15,13 @@ public interface IWorld {
 	public void setCurrent(ILocation locationN);		
 	
 	
-	public CommandAndKey parseInput(String input);
+	public TextTokenStream<T> parseInput(String input);
 	
-	public ReturnCom executeCommands(CommandAndKey comkey);
+	public ReturnCom executeCommands(TextTokenStream<T> stream);
 	
 	public boolean goDirection(String dir);
+	
+	public void setTextParser(ITextParser<T> parser);
 	
 	
 }

@@ -8,10 +8,15 @@ public enum BasicTextTokenType implements ITextTokenType {
 	
 	//verbs
 	 TALK(false), LOOK(false), GET(false), MOVE(false), LOOT(false), EQUIP(false), UNEQUIP(false), SAVE(false), QUIT(false), DROP(false), ATTACK(false);
-	private boolean isObject;
 	
-	BasicTextTokenType(boolean isObject){
+	
+	//attributes
+	private boolean isObject;
+	private String[] defaultWords;
+	
+	BasicTextTokenType(boolean isObject, String...defaultWords){
 		this.isObject = isObject;
+		this.defaultWords = defaultWords;
 	}
 	BasicTextTokenType(){
 		this(true);
@@ -22,5 +27,9 @@ public enum BasicTextTokenType implements ITextTokenType {
 	}
 	public boolean isVerb(){
 		return !isObject;
+	}
+	@Override
+	public String[] defaultWords() {
+		return defaultWords;
 	}
 }

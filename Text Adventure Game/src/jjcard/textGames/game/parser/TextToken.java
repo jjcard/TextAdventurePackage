@@ -27,4 +27,8 @@ public class TextToken<T extends ITextTokenType> implements ITextTokenType{
 	public boolean isVerb(){
 		return type.isVerb();
 	}
+	@Override
+	public String[] defaultWords() {
+		return type.defaultWords();
+	}
 }

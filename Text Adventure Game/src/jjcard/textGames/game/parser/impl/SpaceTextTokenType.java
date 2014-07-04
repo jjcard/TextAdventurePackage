@@ -26,5 +26,9 @@ public enum SpaceTextTokenType implements ITextTokenType {
 	public boolean isVerb() {
 		return !isObject;
 	}
+	@Override
+	public String[] defaultWords() {
+		throw new UnsupportedOperationException();
+	}
 
 }

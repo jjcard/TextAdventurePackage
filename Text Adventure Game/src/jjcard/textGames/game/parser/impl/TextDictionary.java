@@ -59,9 +59,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, T>
 		put(element.getStandardName(), value);
 		
 		if (element.getAltNames() != null){
-			for (String altName: element.getAltNames()){
-				put(altName, value);
-			}
+			putAll(value, element.getAltNames());
 		}
 	}
 	@Override

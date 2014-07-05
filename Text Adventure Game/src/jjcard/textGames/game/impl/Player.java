@@ -51,8 +51,8 @@ public class Player extends Mob implements HasLeveling{
 			super.maxHealth(maxHealth);
 			return this;
 		}
-		public PlayerBuilder curHelath(int curHealth){
-			super.curHelath(curHealth);
+		public PlayerBuilder curHealth(int curHealth){
+			super.curHealth(curHealth);
 			return this;
 		}
 		public PlayerBuilder description(String description){

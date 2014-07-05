@@ -117,7 +117,7 @@ public class GameElementMapTest {
 		
 		//added multiple, removing one shouldn't effect others
 		MobMap.put(m);
-		Mob m2 = new Mob.MobBuilder().standardName("Store keep").curHelath(7).altNames(new String[] {"George"}).build();
+		Mob m2 = new Mob.MobBuilder().standardName("Store keep").curHealth(7).altNames(new String[] {"George"}).build();
 		MobMap.put(m2);
 		
 		assertEquals(2, MobMap.getElementCount());
@@ -136,7 +136,7 @@ public class GameElementMapTest {
 		GameElementMap<Mob> MobMap = new GameElementMap<Mob>();
 		Mob m = new Mob.MobBuilder().standardName("Bob").altNames(new String[] {"Bubba", "Ray"}).build();
 		MobMap.put(m);
-		Mob m2 = new Mob.MobBuilder().standardName("Store keep").curHelath(7).altNames(new String[] {"George"}).build();
+		Mob m2 = new Mob.MobBuilder().standardName("Store keep").curHealth(7).altNames(new String[] {"George"}).build();
 		MobMap.put(m2);
 		
 		

@@ -172,7 +172,7 @@ public class WorldTest {
 	@Before
 	public void setUp(){
 		
-		 player = new Player.PlayerBuilder().standardName("jjcard").curHelath(50).defense(8).attack(5).build();
+		 player = new Player.PlayerBuilder().standardName("jjcard").maxHealth(50).curHealth(50).defense(8).attack(5).build();
 		 local = new Location("entry room", "A barren room.");
 		 
 		 Item item = new Item.ItemBuilder().standardName("item").build();
@@ -184,7 +184,7 @@ public class WorldTest {
 		 world.setTextParser(getParser());
 		 
 		 
-		 mob = new Mob.MobBuilder().standardName("Goblin").curHelath(10).defense(1).attack(4).build();
+		 mob = new Mob.MobBuilder().standardName("Goblin").curHealth(10).defense(1).attack(4).build();
 		mob.setDescription("You can tell its a goblin because it's green and broccoli usually doesn't try to kill you");
 		
 	}

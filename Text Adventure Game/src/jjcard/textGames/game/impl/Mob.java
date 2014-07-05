@@ -62,7 +62,7 @@ public class Mob extends GameElement implements IMob{
 			this.maxHealth = maxHealth;
 			return this;
 		}
-		public MobBuilder curHelath(int curHealth){
+		public MobBuilder curHealth(int curHealth){
 			this.curHealth = curHealth;
 			return this;
 		}

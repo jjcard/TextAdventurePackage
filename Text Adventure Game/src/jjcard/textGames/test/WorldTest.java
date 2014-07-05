@@ -192,7 +192,8 @@ public class WorldTest {
 		if (parser == null){
 			parser = new BasicTextParser<BasicTextTokenType>();
 			TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>(BasicTextTokenType.values());
-			dictionary.putAll(BasicTextTokenType.DIRECTION, "north", "south", "east", "west", "n");
+			dictionary.putAll(BasicTextTokenType.DIRECTION, Exit.defaultValues);
+//			dictionary.putAll(BasicTextTokenType.DIRECTION, "north", "south", "east", "west", "n");
 			dictionary.putAll(BasicTextTokenType.ITEM, "coin", "item");
 			dictionary.putAll(BasicTextTokenType.WEAPON, "shank");
 			dictionary.putAll(BasicTextTokenType.ENEMY, "goblin");

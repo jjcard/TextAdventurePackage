@@ -20,6 +20,7 @@ public class Exit extends GameElement {
 	public static final Exit UP = new Exit.ExitBuilder().standardName("UP").addAltName("U").build();
 	public static final Exit DOWN = new Exit.ExitBuilder().standardName("DOWN").addAltName("D").build();
 	
+	public static final Exit[] defaultValues = new Exit[]{NORTH, SOUTH, EAST, WEST, NORTHWEST, NORTHEAST, SOUTHEAST, SOUTHEAST, UP, DOWN};
 	private ILocation location;
 
 	public static class ExitBuilder extends GameElementBuilder{

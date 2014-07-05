@@ -17,7 +17,7 @@ import jjcard.textGames.game.parser.impl.BasicTextTokenType;
  * @author jjcard
  * 
  */
-public class World implements IWorld<BasicTextTokenType> {
+public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 	private ILocation current;
 	private Player player;
 	private PrintStream output = System.out;

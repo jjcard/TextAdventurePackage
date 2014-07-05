@@ -24,7 +24,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class WorldTest {
-	IWorld<BasicTextTokenType> world;
+	IWorld<BasicTextTokenType, ReturnCom> world;
 	Player player;
 	Location local;
 	Location hallway;

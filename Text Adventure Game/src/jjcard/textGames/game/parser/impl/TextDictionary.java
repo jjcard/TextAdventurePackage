@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import jjcard.textGames.game.IGameElement;
 import jjcard.textGames.game.parser.ITextDictionary;
 import jjcard.textGames.game.parser.ITextTokenType;
 
@@ -49,6 +50,20 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, T>
 		}
 	}
 
+	/**
+	 * Adds the standard name for the element to the map plus any alternate names.
+	 * @param element
+	 * @param value
+	 */
+	public void put(IGameElement element, T value){
+		put(element.getStandardName(), value);
+		
+		if (element.getAltNames() != null){
+			for (String altName: element.getAltNames()){
+				put(altName, value);
+			}
+		}
+	}
 	@Override
 	public void putAll(Collection<String> keys, T value) {
 		for (String key: keys){

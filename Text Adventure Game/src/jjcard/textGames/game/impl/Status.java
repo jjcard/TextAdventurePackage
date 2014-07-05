@@ -1,11 +1,18 @@
 package jjcard.textGames.game.impl;
 
-public class Status {
+public abstract class Status {
 	/**
 	 * true if the status should be done before the Mob acts, or after it in the turn. 
 	 */
-	protected boolean before = true;
+	private boolean before = true;
 	
+	
+	protected Status(){
+		
+	}
+	protected Status(boolean isBefore){
+		setIsBefore(isBefore);
+	}
 	/**
 	 * Each status should override this method. 
 	 * It should modify and return the Mob that gets entered.
@@ -19,7 +26,7 @@ public class Status {
 	public boolean isBefore(){
 		return before;
 	}
-	public void setIsBfore(boolean b){
+	public void setIsBefore(boolean b){
 		before = b;
 	}
 	public boolean isAfter(){

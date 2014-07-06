@@ -5,6 +5,7 @@ import java.util.List;
 import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.IMob;
+import jjcard.textGames.game.util.EqualsUtil;
 
 /**
  * a class to represent creatures and people.
@@ -397,28 +398,14 @@ public class Mob extends GameElement implements IMob{
 		if (this == o){
 			return true;
 		}
-		if (o == null){
-			return false;
-		}
 		if (o instanceof Mob){
 			Mob m = (Mob) o;
-			if (this.getStandardName() == null){
-				if (m.getStandardName() != null){
-					return false;
-				}
-			} else{
-				if (!this.getStandardName().equals(m.getStandardName())){
-					return false;
-				}
+			
+			if (EqualsUtil.notEqual(this.getStandardName(), m.getStandardName())){
+				return false;
 			}
-			if (this.description == null){
-				if (m.description != null){
-					return false;
-				}
-			} else {
-				if (!this.description.equals(m.description)){
-					return false;
-				}
+			if (EqualsUtil.notEqual(this.description, m.description)){
+				return false;
 			}
 			return true;
 		} else {

@@ -3,6 +3,8 @@ package jjcard.textGames.game.parser;
 import java.util.LinkedList;
 import java.util.List;
 
+import jjcard.textGames.game.util.EqualsUtil;
+
 /**
  * 
  * A class to hold to result from the parser in a way easy for the game to use.
@@ -257,41 +259,21 @@ public class TextTokenStream<T extends ITextTokenType> {
 		if (o instanceof TextTokenStream){
 			@SuppressWarnings("rawtypes")
 			TextTokenStream s = (TextTokenStream) o;
-			if (verb == s.verb){
-				//continue
-			} else {
-				if (verb == null || s.verb == null){
-					return false;
-				}
-				if (!verb.equals(s.verb)){
-					return false;
-				}				
+			
+			if (EqualsUtil.notEqual(verb, s.verb)){
+				return false;
 			}
 
 			if (!objects.equals(s.objects)){
 				return false;
 			}
 		
-			if (withObject == s.withObject){
-				//continue
-			} else {
-				if (withObject == null || s.withObject == null){
-					return false;
-				}
-				if (!withObject.equals(s.withObject)){
-					return false;
-				}				
+			if (EqualsUtil.notEqual(withObject, s.withObject)){
+				return false;
 			}
 
-			if (errors == s.errors){
-				//continue
-			} else {
-				if (errors == null|| s.errors == null){
-					return false;
-				}
-				if (!errors.equals(s.errors)){
-					return false;
-				}				
+			if (EqualsUtil.notEqual(errors, s.errors)){
+				return false;
 			}
 			//we're good people
 			return true;

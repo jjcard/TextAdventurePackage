@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import jjcard.textGames.game.IGameElement;
+import jjcard.textGames.game.util.EqualsUtil;
 
 /**
  * a basic class implementing IGameElement
@@ -68,15 +69,6 @@ public abstract class GameElement implements IGameElement {
 		this.roomDescription = b.roomDescription;
 		this.altNames = b.altNames.toArray(new String[b.altNames.size()]);
 	}
-//	public GameElement(String name){
-//		standardName = name;
-//		altNames =  new String[0];
-//	}
-//	public GameElement(String name, String[] altNames){
-//		standardName = name;
-//		this.altNames = altNames;
-//	}
-
 	public String getStandardName(){
 		return standardName;
 	}
@@ -88,6 +80,29 @@ public abstract class GameElement implements IGameElement {
 	}
 	public String[] getAltNames(){
 		return altNames;
+	}
+	
+	public boolean equals(Object o){
+		if (o == this){
+			return true;
+		}
+		
+		if (o instanceof GameElement){
+			GameElement e = (GameElement) o;
+			if (EqualsUtil.notEqual(standardName, e.standardName)){
+				return false;
+			}
+			if (EqualsUtil.notEqual(altNames, e.altNames)){
+				return false;
+			}
+			if (EqualsUtil.notEqual(roomDescription, e.roomDescription)){
+				return false;
+			}
+			
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	

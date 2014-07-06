@@ -4,6 +4,7 @@ import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.IMob;
+ import static jjcard.textGames.game.util.EqualsUtil.*;
 
 /**
  * @author jjcard
@@ -199,5 +200,30 @@ public class Location implements ILocation {
 			re.append(" The obvious exits are " + getExitsDescriptions());
 		}
 		return re.toString();
+	}
+	
+	public boolean equals(Object o){
+		if (o == this){
+			return true;
+		}
+		
+		if (o instanceof Location){
+			Location l = (Location) o;
+			if (notEqual(name, l.name)){
+				return false;
+			}
+			if (notEqual(inventory, l.inventory)){
+				return false;
+			}
+			if (notEqual(roomMob, l.roomMob)){
+				return false;
+			}
+			if (notEqual(exits, l.exits)){
+				return false;
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

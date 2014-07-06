@@ -1,6 +1,7 @@
 package jjcard.textGames.game.impl;
 
 import jjcard.textGames.game.IItem;
+import jjcard.textGames.game.util.EqualsUtil;
 
 public class Item extends GameElement implements IItem{
 	private int cost;
@@ -151,25 +152,11 @@ public class Item extends GameElement implements IItem{
 		}
 		if (o instanceof Item){
 			Item m = (Item) o;
-			if (this.standardName == null){
-				if (m.standardName != null){
-					return false;
-				}
-				
-			} else {
-				if (!this.standardName.equals(m.standardName)){
-					return false;
-				}
+			if (EqualsUtil.notEqual(standardName, m.standardName)){
+				return false;
 			}
-			
-			if (this.info == null){
-				if (m.info != null){
-					return false;
-				}
-			} else {
-				if (!this.info.equals(m.info)){
-					return false;
-				}
+			if (EqualsUtil.notEqual(info, m.info)){
+				return false;
 			}
 			return this.use.equals(m.getUse());
 		} else {

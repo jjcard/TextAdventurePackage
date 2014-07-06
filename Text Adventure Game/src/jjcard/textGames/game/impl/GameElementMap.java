@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import jjcard.textGames.game.IGameElement;
 import jjcard.textGames.game.IGameElementMap;
+import jjcard.textGames.game.util.EqualsUtil;
 
 public class GameElementMap<A extends IGameElement> implements IGameElementMap<A>{
 	private HashMap<String, String> altNamesMap;
@@ -135,6 +136,25 @@ public class GameElementMap<A extends IGameElement> implements IGameElementMap<A
 			this.put(gameElement);
 		}
 		
+	}
+	
+	public boolean equals(Object o){
+		if (o == this){
+			return true;
+		}
+		if (o instanceof GameElementMap){
+			@SuppressWarnings("rawtypes")
+			GameElementMap m = (GameElementMap) o;
+			if (EqualsUtil.notEqual(elementMap, m.elementMap)){
+				return false;
+			}
+			if (EqualsUtil.notEqual(altNamesMap, m.altNamesMap)){
+				return false;
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	

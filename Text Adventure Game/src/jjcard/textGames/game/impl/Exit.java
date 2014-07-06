@@ -1,6 +1,7 @@
 package jjcard.textGames.game.impl;
 
 import jjcard.textGames.game.ILocation;
+import jjcard.textGames.game.util.EqualsUtil;
 
 public class Exit extends GameElement {
 
@@ -84,6 +85,23 @@ public class Exit extends GameElement {
 
 	public void setLocation(ILocation location) {
 		this.location = location;
+	}
+	public boolean equals(Object o){
+		if (o == this){
+			return true;
+		}
+		
+		if (o instanceof Exit){
+			if (!super.equals(o)){
+				return false;
+			}
+			if (EqualsUtil.notEqual(location, ((Exit) o).location)){
+				return false;
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	

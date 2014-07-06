@@ -139,6 +139,27 @@ public class Player extends Mob implements HasLeveling{
 			xp = 0;
 		}
 	}
+	public boolean equals(Object o){
+		if (o == this){
+			return true;
+		}
+		if (o instanceof Player){
+			if (!super.equals(o)){
+				return false;
+			}
+			Player p = (Player) o;
+			if (p.xp != xp){
+				return false;
+			}
+			if (level != p.level){
+				return false;
+			}
+			return true;
+		} else {
+			return false;
+		}
+
+	}
 
 
 

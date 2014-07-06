@@ -68,4 +68,16 @@ public class PatternList<S> {
 			return pattern.matcher(text).matches();
 		}
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public boolean equals(Object o){
+		if (this == o){
+			return true;
+		}
+		if (o instanceof PatternList){
+			return ((PatternList) o).patternList.equals(patternList);
+		} else {
+			return false;
+		}
+	}
 }

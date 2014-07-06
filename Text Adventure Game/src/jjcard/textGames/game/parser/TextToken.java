@@ -31,4 +31,16 @@ public class TextToken<T extends ITextTokenType> implements ITextTokenType{
 	public String[] defaultWords() {
 		return type.defaultWords();
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public boolean equals(Object o){
+		if (this == o){
+			return true;
+		}
+		if (o instanceof TextToken){
+			return ((TextToken) o).type.equals(this.type) && ((TextToken) o).token.equals(this.token);
+		} else {
+			return false;
+		}
+	}
 }

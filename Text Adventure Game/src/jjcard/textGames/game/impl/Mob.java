@@ -237,9 +237,15 @@ public class Mob extends GameElement implements IMob{
 	}
 	public void changeMoney(int change){
 		money += change;
+		if (money < 0){
+			money = 0;
+		}
 	}
 	public void setMoney(int moneyN){
 		money = moneyN;
+		if (money < 0){
+			money = 0;
+		}
 	}
 	public void changeDefense(int change){
 		defense += change;
@@ -284,10 +290,24 @@ public class Mob extends GameElement implements IMob{
 	 * @return
 	 */
 	public int getFullAttack(){
-		return attack + (weapon == null? 0: weapon.getAttack());
+		return attack + getWeaponBonus();
+	}
+	/**
+	 * returns the weapon bonus or 0 if no weapon equipped
+	 * @return
+	 */
+	public int getWeaponBonus(){
+		return weapon == null? 0: weapon.getAttack();
+	}
+	/**
+	 * Returns the armor bonus or 0 if no armor equipped
+	 * @return
+	 */
+	public int getArmorBonus(){
+		return armor == null? 0: armor.getDefense();
 	}
 	public int getFullDefense(){
-		return defense + (armor == null? 0: armor.getDefense());
+		return defense + getArmorBonus();
 	}
 	public void setHostile(boolean hostile){
 		this.hostile = hostile;

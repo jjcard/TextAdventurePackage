@@ -47,7 +47,7 @@ public class Mob extends GameElement implements IMob{
 			  this.description = b.description;
 			  this.maxHealth = b.maxHealth;
 			  this.curHealth = b.curHealth;
-			  if (maxHealth < curHealth){
+			  if (maxHealth <= 0){
 				  this. maxHealth = curHealth;
 			  }
 			  this.money = b.money;
@@ -143,12 +143,15 @@ public class Mob extends GameElement implements IMob{
 	protected Mob( MobBuilder b){
 		  super(b);
 		  description = b.description;
-		  maxHealth = b.maxHealth;
-		  curHealth = b.curHealth;
-		  if (maxHealth < curHealth){
-			  maxHealth = curHealth;
+		  if (b.maxHealth > 0){
+			  //valid max health
+			setMaxHealth(b.maxHealth);  
+		  } else {
+			  setMaxHealth(b.curHealth);
 		  }
-		  money = b.money;
+		  
+		  setHealth(b.curHealth);
+		  setMoney(b.money);
 		  inventory = b.inventory;
 		  defense = b.defense;
 		  attack = b.attack;
@@ -215,22 +218,31 @@ public class Mob extends GameElement implements IMob{
 		description = newDes;
 	}
 	public void changeMaxHealth(int change){
-		maxHealth += change;
-		if(maxHealth <= 0){
-			maxHealth = 0;
+		setMaxHealth(maxHealth + change);
+	}
+	public void setMaxHealth(int maxHealth){
+		this.maxHealth = maxHealth;
+		
+		if (this.maxHealth < 0){
+			this.maxHealth = 0;
 		}
-		if (maxHealth < curHealth){
-			changeHealth(maxHealth);
+		
+		if (this.maxHealth < curHealth){
+			setHealth(this.maxHealth);
 		}
 	}
 	public void changeHealth(int change){
-		curHealth += change;
+		setHealth(curHealth + change);
+ 
+	}
+	public void setHealth(int health){
+		curHealth = health;
 		if (curHealth > maxHealth){
 			curHealth = maxHealth;
 		}
-		if (curHealth <= 0){
+		if (curHealth < 0){
 			curHealth = 0;
-		} 
+		}
 	}
 	public void addStatus(Status s){
 			statusList.add(s);

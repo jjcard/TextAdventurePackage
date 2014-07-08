@@ -14,6 +14,7 @@ import jjcard.textGames.game.IMob;
 
 public class Location implements ILocation {
 
+	private static final char SPACE = ' ';
 	private String name;
 	private String description;
 	
@@ -116,9 +117,10 @@ public class Location implements ILocation {
 	/**
 	 * removes Exit under that String
 	 * @param dir
+	 * @return 
 	 */
-	public void removeExit(String dir){
-		 exits.remove(dir); 
+	public Exit removeExit(String dir){
+		 return exits.remove(dir); 
 	}
 
 	/**
@@ -156,7 +158,7 @@ public class Location implements ILocation {
 		if (compare == 0 && description != null){
 			compare = description.compareTo(other.getDescription());
 		}
-		return getName().compareTo(other.getName());
+		return compare;
 	}
 	public String getExitsDescriptions(){
 		String re = exits.getAllStandardNamesAsString();
@@ -167,7 +169,7 @@ public class Location implements ILocation {
 		StringBuilder re = new StringBuilder();
 		for(IItem i: inventory.getElements()){
 			if ((!i.isHidden()) && (i.getRoomDescription() != null)){
-				re.append(" " + i.getRoomDescription());
+				re.append(SPACE).append(i.getRoomDescription());
 			}
 		}
 		return re.toString();
@@ -191,10 +193,10 @@ public class Location implements ILocation {
 		StringBuilder re = new StringBuilder(description);
 		
 		if (!inventory.isEmpty()){
-			re.append(" " + getInventoryDescriptions());
+			re.append(SPACE).append(getInventoryDescriptions());
 		}
 		if (!roomMob.isEmpty()){
-			re.append(" " + getMobDescriptions());
+			re.append(SPACE).append(getMobDescriptions());
 		}
 		if (!exits.isEmpty()){
 			re.append(" The obvious exits are " + getExitsDescriptions());

@@ -3,6 +3,11 @@ package jjcard.textGames.game.impl;
 import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.util.EqualsUtil;
 
+/**
+ * Class to hold an exit pertaining to a specific Location
+ * @author jjcard
+ *
+ */
 public class Exit extends GameElement {
 
 	
@@ -66,19 +71,6 @@ public class Exit extends GameElement {
 		super(b);
 		this.location = b.location;
 	}
-//	public Exit (String direction, ILocation location){
-//		super(direction);
-//		this.location = location;
-//	}
-//
-//	
-//	public Exit(String direction, ILocation location, String... altNames){
-//		super(direction, altNames);
-//		this.location = location;
-//	}
-//	public Exit(String direction, String...altNames){
-//		super(direction, altNames);
-//	}
 	public ILocation getLocation() {
 		return location;
 	}

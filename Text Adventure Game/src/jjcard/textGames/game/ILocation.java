@@ -21,7 +21,7 @@ public interface ILocation extends Comparable<ILocation>{
 	public boolean containsMob(String m);
 	public void addExit(String dir, ILocation room);
 	public void addExit(Exit exit, ILocation room);
-	public void removeExit(String dir);
+	public Exit removeExit(String dir);
 	/**
 	 * returns Location corresponding to directions
 	 * @param dir

@@ -50,8 +50,11 @@ public abstract class GameElement implements IGameElement {
 			return  this;
 		}
 		public GameElementBuilder altNames(String[] altNames){
-			this.altNames = Arrays.asList(altNames);
-			
+			if (altNames == null){
+				this.altNames = new ArrayList<String>();
+			} else {
+				this.altNames = Arrays.asList(altNames);
+			}
 			return  this;
 		}
 		public GameElementBuilder addAltName(String altName){

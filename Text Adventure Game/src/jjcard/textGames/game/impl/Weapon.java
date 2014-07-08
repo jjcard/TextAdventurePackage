@@ -79,51 +79,16 @@ public class Weapon extends Item {
 	}
 	protected Weapon(WeaponBuilder b){
 		super(b);
-		this.attack = b.attack;
-		this.critChance = b.critChance;
+		setAttack(b.attack);
+		setCritChance(b.critChance);
 		this.durability = b.durability;
 	}
-//	public Weapon() {
-//		super();
-//		attack = 0;
-//		crit = 1;
-//		durability = 100;
-//		super.setUse(ItemUse.Weapon);
-//	}
-//	public Weapon(String nameNew){
-//		super(nameNew);
-//		attack = 0;
-//		crit = 1;
-//		durability = 100;
-//		super.setUse(ItemUse.Weapon);
-//	}
-//	public Weapon(String nameNew, String info){
-//		super(nameNew, info);
-//		attack = 0;
-//		crit = 1;
-//		durability = 100;
-//		super.setUse(ItemUse.Weapon);
-//	}
-//	public Weapon(String nameNew, String info, int attackNew){
-//		super(nameNew, info);
-//		attack = attackNew;
-//		crit = 1;
-//		durability = 100;
-//		super.setUse(ItemUse.Weapon);
-//	}
-//	public Weapon(String name, String info, int attackNew, int level){
-//		super(name, info, level);
-//		attack = attackNew;
-//		crit = 1;
-//		durability = 100;
-//		super.setUse(ItemUse.Weapon);
-//	}
 	public int getAttack() {
 		return attack;
 	}
 	public int getCritChance() {
-			return critChance;
-		}
+		return critChance;
+	}
 	public int getDurability(){
 		return durability;
 	}
@@ -131,13 +96,16 @@ public class Weapon extends Item {
 		durability = durN;
 	}
 	public void changeDurability(int change){
-		durability += change;
+		setDurability(durability + change);
 	}
-	public void setAttack(int change){
-		attack += change;
-		if (attack < 0){
-			attack = 0;
+	public void setAttack(int attack){
+		this.attack = attack;
+		if (this.attack < 0){
+			this.attack = 0;
 		}
+	}
+	public void changeAttack(int change){
+		setAttack(attack + change);
 	}
 	public void changeCritChance(int change) {
 		setCritChance(change + critChance);

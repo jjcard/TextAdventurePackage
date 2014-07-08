@@ -67,30 +67,6 @@ public class Armour extends Item {
 		super(b);
 		this.defense = b.defense;
 	}
-//	public Armour(){
-//		super();
-//		defense = 0;
-//		super.setUse(ItemUse.Armour);
-//	}
-//	public Armour(String name){
-//		super(name);
-//		defense = 0;
-//		super.setUse(ItemUse.Armour);
-//	}
-//	public Armour(String name, String info){
-//		super(name, info);
-//		defense = 0;
-//	}
-//	public Armour(String name, String info, int level){
-//		super(name, info, level);
-//		defense = 0;
-//		super.setUse(ItemUse.Armour);
-//	}
-//	public Armour(String name, String info, int level, int defenseNew){
-//		super(name, info, level);
-//		defense = defenseNew;
-//		super.setUse(ItemUse.Armour);
-//	}
 	public int getDefense(){
 		return defense;
 	}

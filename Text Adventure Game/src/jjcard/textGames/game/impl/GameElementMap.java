@@ -25,6 +25,12 @@ public class GameElementMap<A extends IGameElement> implements IGameElementMap<A
 	   altNamesMap = new HashMap<String, String>(altNameMapCapacity);
 	   elementMap = new HashMap<String, A>(elementMapCapacity);
    }
+   
+   public GameElementMap(GameElementMap<A> map){
+	   super();
+	   altNamesMap = new HashMap<>(map.altNamesMap);
+	   elementMap = new HashMap<>(map.elementMap);
+   }
    private A put(String standerdName, String[] altNames, A gameElement){
 	   String standardNameUpper = standerdName.toUpperCase();
 	   if (altNames != null){
@@ -40,8 +46,6 @@ public class GameElementMap<A extends IGameElement> implements IGameElementMap<A
 	public A put(A gameElement){
 		return put(gameElement.getStandardName(), 
 				gameElement.getAltNames(), gameElement);
-			
-
 	}
 	
 	public A get(String name){

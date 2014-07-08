@@ -71,6 +71,10 @@ public class Player extends Mob implements HasLeveling{
 			super.inventory(inventory);
 			return this;
 		}
+		public PlayerBuilder addItem(IItem item){
+			super.addItem(item);
+			return this;
+		}
 		public PlayerBuilder defense(int defense){
 			super.defense(defense);
 			return this;
@@ -112,18 +116,21 @@ public class Player extends Mob implements HasLeveling{
 		this.level = b.level;
 	}
 
+	/**
+	 * Returns level
+	 */
 	public int getLevel(){
 		return level;
 	}
+	/**
+	 * Returns xp
+	 */
 	public int getXp() {
 		return xp;
 	}
 
 	public void changelevel(int change){
-		level += change;
-		if (level < 0){
-			level = 0;
-		}
+		setLevel(level + change);
 	}
 	public void setLevel(int levelN){
 		level = levelN;
@@ -132,10 +139,7 @@ public class Player extends Mob implements HasLeveling{
 		}
 	}
 	public void changeXp(int change){
-		xp += change;
-		if (xp < 0){
-			xp = 0;
-		}
+		setXp(this.xp + change);
 	}
 	public void setXp(int xpN){
 		xp = xpN;

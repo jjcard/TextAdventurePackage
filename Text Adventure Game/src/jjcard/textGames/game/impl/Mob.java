@@ -96,6 +96,10 @@ public class Mob extends GameElement implements IMob{
 			
 			return this;
 		}
+		public MobBuilder addItem(IItem item){
+			this.inventory.put(item);
+			return this;
+		}
 		public MobBuilder defense(int defense){
 			this.defense = defense;
 			return this;

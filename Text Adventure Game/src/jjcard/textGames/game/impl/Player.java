@@ -43,6 +43,10 @@ public class Player extends Mob implements HasLeveling{
 			super.addAltName(altName);
 			return this;
 		}
+		public PlayerBuilder checkHealth(boolean checkHealth){
+			super.checkHealth(checkHealth);
+			return this;
+		}
 		public PlayerBuilder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
@@ -51,8 +55,8 @@ public class Player extends Mob implements HasLeveling{
 			super.maxHealth(maxHealth);
 			return this;
 		}
-		public PlayerBuilder curHealth(int curHealth){
-			super.curHealth(curHealth);
+		public PlayerBuilder health(int curHealth){
+			super.health(curHealth);
 			return this;
 		}
 		public PlayerBuilder description(String description){

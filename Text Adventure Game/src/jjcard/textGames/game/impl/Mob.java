@@ -18,13 +18,14 @@ public class Mob extends GameElement implements IMob{
 	private int maxHealth;
 	private int curHealth;
 	private int money = 0;
-	private IGameElementMap<IItem> inventory = new GameElementMap<IItem>();
+	private IGameElementMap<IItem> inventory;
 	private int defense = 0;
 	private int attack = 0;
 	private boolean hostile = true;
-	private List<Status> statusList = new LinkedList<Status>();
+	private List<Status> statusList;
 	private Armour armor;
 	private Weapon weapon;
+	private boolean checkHealth;
 	
 	public static class MobBuilder extends GameElementBuilder{
 		private String description;
@@ -37,7 +38,8 @@ public class Mob extends GameElement implements IMob{
 		private boolean hostile = true;
 		private List<Status> statusList = new LinkedList<Status>();
 		private Armour armor;
-		private Weapon weapon;	
+		private Weapon weapon;
+		private boolean checkHealth = true;
 		
 		public MobBuilder(){
 			super();
@@ -59,11 +61,21 @@ public class Mob extends GameElement implements IMob{
 			  this.armor = b.armor;
 			  this.weapon = b.weapon;
 		}
+		/**
+		 * Indicator for the class doing validation on the health and maxHealth fields.
+		 * Default is true.
+		 * @param checkHealth
+		 * @return
+		 */
+		public MobBuilder checkHealth(boolean checkHealth){
+			this.checkHealth = checkHealth;
+			return this;
+		}
 		public MobBuilder maxHealth(int maxHealth){
 			this.maxHealth = maxHealth;
 			return this;
 		}
-		public MobBuilder curHealth(int curHealth){
+		public MobBuilder health(int curHealth){
 			this.curHealth = curHealth;
 			return this;
 		}
@@ -159,6 +171,7 @@ public class Mob extends GameElement implements IMob{
 		  statusList = b.statusList;
 		  armor = b.armor;
 		  weapon = b.weapon;
+		  checkHealth = b.checkHealth;
 	}
 
 	public String getDescription() {
@@ -220,6 +233,11 @@ public class Mob extends GameElement implements IMob{
 	public void changeMaxHealth(int change){
 		setMaxHealth(maxHealth + change);
 	}
+	/**
+	 * Sets the max Health to the given value.
+	 * If checkHealth is true, also checks if health is greater then maxHealth
+	 * @param maxHealth
+	 */
 	public void setMaxHealth(int maxHealth){
 		this.maxHealth = maxHealth;
 		
@@ -227,7 +245,7 @@ public class Mob extends GameElement implements IMob{
 			this.maxHealth = 0;
 		}
 		
-		if (this.maxHealth < curHealth){
+		if (checkHealth & this.maxHealth < curHealth){
 			setHealth(this.maxHealth);
 		}
 	}
@@ -237,10 +255,10 @@ public class Mob extends GameElement implements IMob{
 	}
 	public void setHealth(int health){
 		curHealth = health;
-		if (curHealth > maxHealth){
+		if (checkHealth && curHealth > maxHealth){
 			curHealth = maxHealth;
 		}
-		if (curHealth < 0){
+		if (checkHealth && curHealth < 0){
 			curHealth = 0;
 		}
 	}

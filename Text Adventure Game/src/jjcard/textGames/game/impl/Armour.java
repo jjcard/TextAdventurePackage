@@ -65,15 +65,18 @@ public class Armour extends Item {
 	}
 	protected Armour(ArmourBuilder b){
 		super(b);
-		this.defense = b.defense;
+		setDefense(defense);
 	}
 	public int getDefense(){
 		return defense;
 	}
-	public void setDefense(int change){
-		defense += change;
-		if (defense < 0){
-			defense = 0;
+	public void setDefense(int defense){
+		this.defense = defense;
+		if (this.defense < 0){
+			this.defense = 0;
 		}
+	}
+	public void changeDefense(int change){
+		setDefense(defense + change);
 	}
 }

@@ -1,6 +1,7 @@
 package jjcard.textGames.game.impl;
 
 import jjcard.textGames.game.IItem;
+import jjcard.textGames.game.impl.GameElement.GameElementBuilder;
 import jjcard.textGames.game.util.EqualsUtil;
 
 public class Item extends GameElement implements IItem{
@@ -73,6 +74,10 @@ public class Item extends GameElement implements IItem{
 			super.roomDescription(roomDescrip);
 			return this;
 		}
+		public ItemBuilder validateFields(boolean validateFields){
+			super.validateFields(validateFields);
+			return this;
+		}
 		public Item build(){
 			return new Item(this);
 		}
@@ -80,12 +85,12 @@ public class Item extends GameElement implements IItem{
 	
 	protected Item(ItemBuilder b){
 		  super(b);
-		  cost = b.cost;
-		  info = b.info;
-		  level = b.level;
-		  hidden = b.hidden;
-		  movable = b.movable;
-		  use = b.use;
+		  setCost(b.cost);
+		  setInfo(b.info);
+		  setLevel(b.level);
+		  setHidden(b.hidden);
+		  setMovable(b.movable);
+		  setUse(b.use);
 	}
 	public int getCost() {
 		return cost;
@@ -116,13 +121,13 @@ public class Item extends GameElement implements IItem{
 		info = change;
 	}
 	public void changeLevel(int change){
-		level += change;
-		if (level < 0){
-			level = 0;
-		}
+		setLevel(level + change);
 	}
 	public void setLevel(int levelNew){
 		level = levelNew;
+		if (doValidateFields() && level < 0){
+			level = 0;
+		}
 	}
 	public void setHidden(boolean change){
 		hidden = change;

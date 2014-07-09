@@ -5,6 +5,7 @@ import java.util.List;
 import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.Leveling.HasLeveling;
+import jjcard.textGames.game.impl.Armour.ArmourBuilder;
 
 
 public class Player extends Mob implements HasLeveling{
@@ -102,6 +103,10 @@ public class Player extends Mob implements HasLeveling{
 		}
 		public PlayerBuilder addStatus(Status status){
 			super.addStatus(status);
+			return this;
+		}
+		public PlayerBuilder validateFields(boolean validateFields){
+			super.validateFields(validateFields);
 			return this;
 		}
 		public Player build(){

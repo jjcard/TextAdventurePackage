@@ -1,6 +1,7 @@
 package jjcard.textGames.game.impl;
 
 
+
 public class Armour extends Item {
 	private int defense;
 	
@@ -59,6 +60,10 @@ public class Armour extends Item {
 			super.roomDescription(roomDescrip);
 			return this;
 		}
+		public ArmourBuilder validateFields(boolean validateFields){
+			super.validateFields(validateFields);
+			return this;
+		}
 		public Armour build(){
 			return new Armour(this);
 		}
@@ -72,7 +77,7 @@ public class Armour extends Item {
 	}
 	public void setDefense(int defense){
 		this.defense = defense;
-		if (this.defense < 0){
+		if (doValidateFields() && this.defense < 0){
 			this.defense = 0;
 		}
 	}

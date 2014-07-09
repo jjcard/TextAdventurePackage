@@ -1,5 +1,6 @@
 package jjcard.textGames.game.impl;
 
+
 public class Weapon extends Item {
 	private int attack;
 	private int critChance; //out of 100
@@ -73,6 +74,10 @@ public class Weapon extends Item {
 			super.roomDescription(roomDescrip);
 			return this;
 		}
+		public WeaponBuilder validateFields(boolean validateFields){
+			super.validateFields(validateFields);
+			return this;
+		}
 		public Weapon build(){
 			return new Weapon(this);
 		}
@@ -81,7 +86,7 @@ public class Weapon extends Item {
 		super(b);
 		setAttack(b.attack);
 		setCritChance(b.critChance);
-		this.durability = b.durability;
+		setDurability(b.durability);
 	}
 	public int getAttack() {
 		return attack;
@@ -100,7 +105,7 @@ public class Weapon extends Item {
 	}
 	public void setAttack(int attack){
 		this.attack = attack;
-		if (this.attack < 0){
+		if (doValidateFields() && this.attack < 0){
 			this.attack = 0;
 		}
 	}
@@ -112,10 +117,13 @@ public class Weapon extends Item {
 	}
 	public void setCritChance(int critN){
 		critChance = critN;
-		if (critChance < 0){
-			critChance = 0;
-		} else if (critChance > 100){
-			critChance = 100;
+		if (doValidateFields()){
+			if (critChance < 0){
+				critChance = 0;
+			} else if (critChance > 100){
+				critChance = 100;
+			}			
 		}
+
 	}
 }

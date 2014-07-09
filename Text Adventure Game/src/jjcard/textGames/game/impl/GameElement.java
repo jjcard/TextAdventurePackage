@@ -20,6 +20,7 @@ public abstract class GameElement implements IGameElement {
 	
 	protected String standardName;
 	private String[] altNames;
+	protected boolean validateFields = true;
 	
 
 	/**
@@ -35,6 +36,7 @@ public abstract class GameElement implements IGameElement {
 		private String standardName;
 		private List<String> altNames = new ArrayList<String>();
 		private String roomDescription;
+		private boolean validateFields = true;
 		
 		
 		public GameElementBuilder(){
@@ -65,12 +67,22 @@ public abstract class GameElement implements IGameElement {
 			this.roomDescription = roomDescription;
 			return this;
 		}
+		/**
+		 * a flag. If true, then the fields are validated before set.
+		 * @param validateFields
+		 * @return
+		 */
+		public GameElementBuilder validateFields(boolean validateFields){
+			this.validateFields = validateFields;
+			return this;
+		}
 	}
 	
 	protected GameElement(GameElementBuilder b){
 		this.standardName = b.standardName;
 		this.roomDescription = b.roomDescription;
 		this.altNames = b.altNames.toArray(new String[b.altNames.size()]);
+		this.validateFields = b.validateFields;
 	}
 	public String getStandardName(){
 		return standardName;
@@ -84,7 +96,9 @@ public abstract class GameElement implements IGameElement {
 	public String[] getAltNames(){
 		return altNames;
 	}
-	
+	public boolean doValidateFields(){
+		return this.validateFields;
+	}
 	public boolean equals(Object o){
 		if (o == this){
 			return true;

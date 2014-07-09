@@ -5,6 +5,7 @@ import java.util.List;
 import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.IMob;
+import jjcard.textGames.game.impl.Armour.ArmourBuilder;
 import jjcard.textGames.game.util.EqualsUtil;
 
 /**
@@ -149,6 +150,10 @@ public class Mob extends GameElement implements IMob{
 			super.roomDescription(roomDescrip);
 			return this;
 		}
+		public MobBuilder validateFields(boolean validateFields){
+			super.validateFields(validateFields);
+			return this;
+		}
 		public Mob build(){
 			return new Mob(this);
 		}
@@ -169,8 +174,8 @@ public class Mob extends GameElement implements IMob{
 		  setHealth(b.curHealth);
 		  setMoney(b.money);
 		  inventory = b.inventory;
-		  defense = b.defense;
-		  attack = b.attack;
+		  setDefense(b.defense);
+		  setAttack(b.attack);
 		  hostile = b.hostile;
 		  statusList = b.statusList;
 		  armor = b.armor;

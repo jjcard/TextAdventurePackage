@@ -1,7 +1,6 @@
 package jjcard.textGames.game.impl;
 
 import jjcard.textGames.game.IItem;
-import jjcard.textGames.game.impl.GameElement.GameElementBuilder;
 import jjcard.textGames.game.util.EqualsUtil;
 
 public class Item extends GameElement implements IItem{

@@ -5,7 +5,6 @@ import java.util.List;
 import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.Leveling.HasLeveling;
-import jjcard.textGames.game.impl.Armour.ArmourBuilder;
 
 
 public class Player extends Mob implements HasLeveling{
@@ -139,7 +138,7 @@ public class Player extends Mob implements HasLeveling{
 	}
 	public void setLevel(int levelN){
 		level = levelN;
-		if (level < 0){
+		if (doValidateFields() && level < 0){
 			level = 0;
 		}
 	}
@@ -148,7 +147,7 @@ public class Player extends Mob implements HasLeveling{
 	}
 	public void setXp(int xpN){
 		xp = xpN;
-		if (xp < 0){
+		if (doValidateFields() && xp < 0){
 			xp = 0;
 		}
 	}

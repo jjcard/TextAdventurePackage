@@ -5,7 +5,6 @@ import java.util.List;
 import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.IMob;
-import jjcard.textGames.game.impl.Armour.ArmourBuilder;
 import jjcard.textGames.game.util.EqualsUtil;
 
 /**
@@ -351,13 +350,17 @@ public class Mob extends GameElement implements IMob{
 	public int getArmorBonus(){
 		return armor == null? 0: armor.getDefense();
 	}
+	/**
+	 * gets defense plus any bonus
+	 * @return
+	 */
 	public int getFullDefense(){
 		return defense + getArmorBonus();
 	}
 	public void setHostile(boolean hostile){
 		this.hostile = hostile;
 	}
-	public void setstatusList(LinkedList<Status> s){
+	public void setStatusList(LinkedList<Status> s){
 		statusList = s;
 	}
 	public IItem addItem(IItem add){
@@ -398,6 +401,9 @@ public class Mob extends GameElement implements IMob{
 	}
 	public boolean isDead(){
 		return  getHealth() <= 0;
+	}
+	public boolean isAlive(){
+		return !isDead();
 	}
 	public String toString() {
 		return getStandardName();

@@ -249,14 +249,16 @@ public class Mob extends GameElement implements IMob{
 	 */
 	public void setMaxHealth(int maxHealth){
 		this.maxHealth = maxHealth;
-		
-		if (this.maxHealth < 0){
-			this.maxHealth = 0;
+		if (doValidateFields()){
+			if (this.maxHealth < 0){
+				this.maxHealth = 0;
+			}
+			
+			if (checkHealth & this.maxHealth < curHealth){
+				setHealth(this.maxHealth);
+			}			
 		}
-		
-		if (checkHealth & this.maxHealth < curHealth){
-			setHealth(this.maxHealth);
-		}
+
 	}
 	public void changeHealth(int change){
 		setHealth(curHealth + change);
@@ -264,12 +266,15 @@ public class Mob extends GameElement implements IMob{
 	}
 	public void setHealth(int health){
 		curHealth = health;
-		if (checkHealth && curHealth > maxHealth){
-			curHealth = maxHealth;
+		if (doValidateFields()){
+			if (checkHealth && curHealth > maxHealth){
+				curHealth = maxHealth;
+			}
+			if (checkHealth && curHealth < 0){
+				curHealth = 0;
+			}			
 		}
-		if (checkHealth && curHealth < 0){
-			curHealth = 0;
-		}
+
 	}
 	public void addStatus(Status s){
 			statusList.add(s);
@@ -277,19 +282,19 @@ public class Mob extends GameElement implements IMob{
 	}
 	public void changeMoney(int change){
 		money += change;
-		if (money < 0){
+		if (doValidateFields() && money < 0){
 			money = 0;
 		}
 	}
 	public void setMoney(int moneyN){
 		money = moneyN;
-		if (money < 0){
+		if (doValidateFields() && money < 0){
 			money = 0;
 		}
 	}
 	public void changeDefense(int change){
 		defense += change;
-		if (defense < 0){
+		if (doValidateFields() && defense < 0){
 			defense = 0;
 		}
 	}
@@ -298,7 +303,7 @@ public class Mob extends GameElement implements IMob{
 	}
 	public void changeAttack(int change){
 		attack += change;
-		if (attack < 0){
+		if (doValidateFields() && attack < 0){
 			attack = 0;
 		}
 	}

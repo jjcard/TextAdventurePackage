@@ -65,7 +65,7 @@ public class Armour extends Item {
 	}
 	protected Armour(ArmourBuilder b){
 		super(b);
-		setDefense(defense);
+		setDefense(b.defense);
 	}
 	public int getDefense(){
 		return defense;

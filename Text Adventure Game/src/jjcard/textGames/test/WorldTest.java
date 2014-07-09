@@ -107,7 +107,7 @@ public class WorldTest {
 		assertEquals(player.getFullDefense(), 8);
 		ReturnCom rc = world.executeCommands(ck);
 		assertEquals(ReturnCom.EQUIPPED_ARMOUR, rc);
-		assertEquals(player.getFullDefense(), 8 + 4);
+		assertEquals(8 + 4, player.getFullDefense() );
 	
 		
 		Weapon weapon = new Weapon.WeaponBuilder().standardName("shank").info("it can also be used as a verb").attack(3).build();

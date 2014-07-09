@@ -18,8 +18,8 @@ public class LocationTest {
 	public void setUp() throws Exception {
 		mob = new Mob.MobBuilder().standardName("Gelatinous Cube").altNames(new String[] {"The bane"}).description("Run").build();
 		item = new Item.ItemBuilder().standardName("vendor trash").info("doesn't do anything").altNames(new String[] {"worthless"}).build();
-		hallway.addExit(Exit.NORTH, room);
-		room.addExit(Exit.SOUTH, hallway);
+		hallway.addExit(Exit.NORTH.getWithLocation(room));
+		room.addExit(Exit.SOUTH_BUILD.location(hallway).build());
 		hallway.addItem(item);
 		hallway.addMob(mob);
 	}

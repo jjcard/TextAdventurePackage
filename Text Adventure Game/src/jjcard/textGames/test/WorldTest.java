@@ -179,7 +179,7 @@ public class WorldTest {
 		 local.addItem(item);
 		 hallway = new Location("hallway","a long hallway with one torch.");
 		local.addExit("NORTH", hallway);
-		hallway.addExit(Exit.SOUTH, local);
+		hallway.addExit(Exit.SOUTH.getWithLocation(local));
 		 world = new World(local, player);
 		 world.setTextParser(getParser());
 		 

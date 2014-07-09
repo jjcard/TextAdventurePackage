@@ -19,6 +19,7 @@ public interface ILocation extends Comparable<ILocation>{
 	public IMob addMob(IMob m);
 	public IMob removeMob(String key);
 	public boolean containsMob(String m);
+	public void addExit(Exit exit);
 	public void addExit(String dir, ILocation room);
 	public void addExit(Exit exit, ILocation room);
 	public Exit removeExit(String dir);

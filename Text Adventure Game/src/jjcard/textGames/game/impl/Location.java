@@ -112,6 +112,9 @@ public class Location implements ILocation {
 		exit.setLocation(room);
 		exits.put(exit);
 	}
+	public void addExit(Exit exit){
+		exits.put(exit);
+	}
 
 	
 	/**

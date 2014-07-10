@@ -3,10 +3,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import jjcard.textGames.game.IArmour;
-<<<<<<< HEAD
 import jjcard.textGames.game.IGameElement;
-=======
->>>>>>> refs/remotes/origin/master
 import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.IMob;

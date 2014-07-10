@@ -3,7 +3,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import jjcard.textGames.game.IArmour;
+<<<<<<< HEAD
 import jjcard.textGames.game.IGameElement;
+=======
+>>>>>>> refs/remotes/origin/master
 import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.IMob;
@@ -429,6 +432,7 @@ public class Mob extends GameElement implements IMob{
 		return isKeyForItem(key, armor);
 	}
 	private boolean isKeyForItem(String key, IGameElement item){
+
 		if (item == null){
 			return false;
 		}

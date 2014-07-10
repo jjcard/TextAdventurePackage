@@ -13,14 +13,17 @@ public class Weapon extends Item {
 		
 		public WeaponBuilder(){
 			super();
-			use(ItemUse.Weapon);
+			
 		}
 		public WeaponBuilder(Weapon w){
 			super(w);
 			this.attack = w.attack;
 			this.critChance = w.critChance;
-			this.durability = w.durability;
-			
+			this.durability = w.durability;	
+		}
+		public WeaponBuilder(GameElement g){
+			super(g);
+			use(ItemUse.Weapon);
 		}
 		public WeaponBuilder cost(int cost){
 			super.cost(cost);

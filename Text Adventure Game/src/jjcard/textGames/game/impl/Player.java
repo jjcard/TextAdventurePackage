@@ -23,6 +23,9 @@ public class Player extends Mob implements HasLeveling{
 			this.xp = p.xp;
 			this.level = p.level;
 		}
+		public PlayerBuilder(GameElement g){
+			super(g);
+		}
 		public PlayerBuilder standardName(String name){
 			super.standardName(name);
 			return this;

@@ -16,6 +16,10 @@ public class Armour extends Item {
 			super(a);
 			this.defense = a.defense;
 		}
+		public ArmourBuilder(GameElement a){
+			super(a);
+			use(ItemUse.Armour);
+		}
 		public ArmourBuilder cost(int cost){
 			super.cost(cost);
 			return this;

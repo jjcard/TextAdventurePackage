@@ -61,6 +61,9 @@ public class Mob extends GameElement implements IMob{
 			  this.armor = b.armor;
 			  this.weapon = b.weapon;
 		}
+		public MobBuilder(GameElement g){
+			super(g);
+		}
 		/**
 		 * Indicator for the class doing validation on the health and maxHealth fields.
 		 * Default is true.

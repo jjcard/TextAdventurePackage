@@ -5,7 +5,7 @@ import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.util.EqualsUtil;
 
 /**
- * Class to hold an exit pertaining to a specific Location
+ * Class to hold an exit pertaining to a specific ILocation
  * @author jjcard
  *
  */
@@ -35,9 +35,20 @@ public class Exit extends GameElement implements IExit {
 	public static final Exit SOUTHWEST = SOUTHWEST_BUILD.build();
 	
 
-	public static final Exit UP = new Exit.ExitBuilder().standardName("UP").addAltName("U").build();
-	public static final Exit DOWN = new Exit.ExitBuilder().standardName("DOWN").addAltName("D").build();
+	public static final Exit UP = UP_BUILD.build();
+	public static final Exit DOWN = DOWN_BUILD.build();
 	
+	/**
+	 * List that includes North, South, East, And West
+	 */
+	public static final Exit[] simpleValues = new Exit[]{NORTH, SOUTH, EAST, WEST};
+	/**
+	 * List that contains all compass directions; NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST
+	 */
+	public static final Exit[] compassValues = new Exit[]{NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST};
+	/**
+	 * List that includes all static default Exits
+	 */
 	public static final Exit[] defaultValues = new Exit[]{NORTH, SOUTH, EAST, WEST, NORTHWEST, NORTHEAST, SOUTHEAST, SOUTHEAST, UP, DOWN};
 	private ILocation location;
 
@@ -51,6 +62,9 @@ public class Exit extends GameElement implements IExit {
 		public ExitBuilder(Exit e){
 			super(e);
 			this.location = e.location;
+		}
+		public ExitBuilder(GameElement element){
+			super(element);
 		}
 		public ExitBuilder standardName(String name){
 			super.standardName(name);
@@ -91,7 +105,7 @@ public class Exit extends GameElement implements IExit {
 //		this.location = location;
 //	}
 	/**
-	 * Returns a new Exit with the same properites as the current one with the given location
+	 * Returns a new Exit with the same properties as the current one with the given location
 	 * @param location
 	 * @return
 	 */

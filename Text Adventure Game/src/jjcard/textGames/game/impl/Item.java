@@ -33,6 +33,9 @@ public class Item extends GameElement implements IItem{
 			  movable = i.movable;
 			  use = i.use;
 		}
+		public ItemBuilder(GameElement e){
+			super(e);
+		}
 		public ItemBuilder cost(int cost){
 			this.cost = cost;
 			return this;

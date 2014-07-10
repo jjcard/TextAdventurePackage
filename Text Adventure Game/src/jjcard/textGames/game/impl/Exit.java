@@ -1,5 +1,6 @@
 package jjcard.textGames.game.impl;
 
+import jjcard.textGames.game.IExit;
 import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.util.EqualsUtil;
 
@@ -8,7 +9,7 @@ import jjcard.textGames.game.util.EqualsUtil;
  * @author jjcard
  *
  */
-public class Exit extends GameElement {
+public class Exit extends GameElement implements IExit {
 
 	
 	public static final ExitBuilder NORTH_BUILD = new Exit.ExitBuilder().standardName("NORTH").addAltName("N");
@@ -86,9 +87,9 @@ public class Exit extends GameElement {
 		return location;
 	}
 
-	public void setLocation(ILocation location) {
-		this.location = location;
-	}
+//	public void setLocation(ILocation location) {
+//		this.location = location;
+//	}
 	/**
 	 * Returns a new Exit with the same properites as the current one with the given location
 	 * @param location

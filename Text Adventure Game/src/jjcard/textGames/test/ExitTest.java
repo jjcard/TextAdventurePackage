@@ -18,7 +18,6 @@ public class ExitTest {
 		Location l = new Location();
 		
 		Exit Left = Exit.SOUTH.getWithLocation(l);
-		Left.setLocation(l);
 		
 		Assert.assertNotNull(Left.getLocation());
 		Assert.assertEquals(l, Left.getLocation());
@@ -34,7 +33,7 @@ public class ExitTest {
 		Location l = new Location();
 		
 		Exit north = Exit.NORTH_BUILD.build();
-		north.setLocation(l);
+		north = north.getWithLocation(l);
 		
 		Assert.assertNotNull(north.getLocation());
 		Assert.assertEquals(l, north.getLocation());

@@ -1,10 +1,11 @@
 package jjcard.textGames.game.impl;
 
+import static jjcard.textGames.game.util.EqualsUtil.notEqual;
+import jjcard.textGames.game.IExit;
 import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.IMob;
- import static jjcard.textGames.game.util.EqualsUtil.*;
 
 /**
  * @author jjcard
@@ -20,42 +21,42 @@ public class Location implements ILocation {
 	
 	private IGameElementMap<IItem> inventory;
 	private IGameElementMap<IMob> roomMob;
-	private IGameElementMap<Exit> exits;
+	private IGameElementMap<IExit> exits;
 	
 	public Location(){
 		this.name = new String();
 		description = new String();
 		inventory = new GameElementMap<IItem>();
 		roomMob = new GameElementMap<IMob>();
-		exits = new GameElementMap<Exit>();
+		exits = new GameElementMap<IExit>();
 	}
 	public Location(String name){
 		this.name = name;
 		description = new String();
 		inventory = new GameElementMap<IItem>();
 		roomMob =  new GameElementMap<IMob>();
-		exits = new GameElementMap<Exit>();
+		exits = new GameElementMap<IExit>();
 	}
 	public Location(String name, String descripN){
 		this.name = name;
 		description = descripN;
 		inventory = new GameElementMap<IItem>();
 		roomMob =  new GameElementMap<IMob>();
-		exits = new GameElementMap<Exit>();
+		exits = new GameElementMap<IExit>();
 	}
 	public Location(String name, String descripN, IGameElementMap<IItem> invenN){
 		this.name = name;
 		description = descripN;
 		inventory = invenN;
 		roomMob =  new GameElementMap<IMob>();
-		exits = new GameElementMap<Exit>();
+		exits = new GameElementMap<IExit>();
 	}
 	public Location(String name, String descripN, IGameElementMap<IItem> invenN, IGameElementMap<IMob>  mobs){
 		this.name = name;
 		description = descripN;
 		inventory = invenN;
 		roomMob = mobs;
-		exits = new GameElementMap<Exit>();
+		exits = new GameElementMap<IExit>();
 	}
 	public String getName(){
 		return name;
@@ -69,7 +70,7 @@ public class Location implements ILocation {
 	public  IGameElementMap<IMob> getRoomMob() {
 		return roomMob;
 	}
-	public IGameElementMap<Exit> getExits() {
+	public IGameElementMap<IExit> getExits() {
 		return exits;
 	}
 	public IItem addItem(IItem add){
@@ -108,11 +109,7 @@ public class Location implements ILocation {
 		exits.put(exit);
 	}
 	
-	public void addExit(Exit exit, ILocation room){
-		exit.setLocation(room);
-		exits.put(exit);
-	}
-	public void addExit(Exit exit){
+	public void addExit(IExit exit){
 		exits.put(exit);
 	}
 
@@ -122,7 +119,7 @@ public class Location implements ILocation {
 	 * @param dir
 	 * @return 
 	 */
-	public Exit removeExit(String dir){
+	public IExit removeExit(String dir){
 		 return exits.remove(dir); 
 	}
 
@@ -132,7 +129,7 @@ public class Location implements ILocation {
 	 * @return
 	 */
 	public ILocation getExitLocation(String dir){
-		Exit exit = exits.get(dir);
+		IExit exit = exits.get(dir);
 		if (exit != null){
 			return exit.getLocation();
 		} else {

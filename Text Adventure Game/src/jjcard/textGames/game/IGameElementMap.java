@@ -9,7 +9,7 @@ public interface IGameElementMap<A extends IGameElement> {
 	 * Puts the given Game Element in the game, with the game elements 
 	 * standard Name and Alternate Names.
 	 * @param gameElement
-	 * @return
+	 * @return previous element with the standard name of the gameElement
 	 */
 	public A put(A gameElement);
 	/**

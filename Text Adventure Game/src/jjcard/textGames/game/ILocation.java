@@ -1,6 +1,5 @@
 package jjcard.textGames.game;
 
-import jjcard.textGames.game.impl.Exit;
 
 public interface ILocation extends Comparable<ILocation>{
 
@@ -10,7 +9,7 @@ public interface ILocation extends Comparable<ILocation>{
 	public void setDescription(String descrip);
 	public IGameElementMap<IItem> getInventory();
 	public IGameElementMap<IMob> getRoomMob();
-	public IGameElementMap<Exit> getExits();
+	public IGameElementMap<IExit> getExits();
 	public IItem addItem(IItem add);
 	public void setInventory(IGameElementMap<IItem> inventoryNew);
 	public void setRoomMob(IGameElementMap<IMob> roomMobNew);
@@ -19,10 +18,9 @@ public interface ILocation extends Comparable<ILocation>{
 	public IMob addMob(IMob m);
 	public IMob removeMob(String key);
 	public boolean containsMob(String m);
-	public void addExit(Exit exit);
+	public void addExit(IExit exit);
 	public void addExit(String dir, ILocation room);
-	public void addExit(Exit exit, ILocation room);
-	public Exit removeExit(String dir);
+	public IExit removeExit(String dir);
 	/**
 	 * returns Location corresponding to directions
 	 * @param dir

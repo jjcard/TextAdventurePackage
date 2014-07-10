@@ -1,7 +1,9 @@
 package jjcard.textGames.game.impl;
 
+import jjcard.textGames.game.IWeapon;
 
-public class Weapon extends Item {
+
+public class Weapon extends Item implements IWeapon{
 	private int attack;
 	private int critChance; //out of 100
 	private int durability;
@@ -13,6 +15,7 @@ public class Weapon extends Item {
 		
 		public WeaponBuilder(){
 			super();
+			use(ItemUse.Weapon);
 			
 		}
 		public WeaponBuilder(Weapon w){

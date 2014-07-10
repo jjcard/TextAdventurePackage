@@ -2,9 +2,7 @@ package jjcard.textGames.game;
 
 import java.util.List;
 
-import jjcard.textGames.game.impl.Armour;
 import jjcard.textGames.game.impl.Status;
-import jjcard.textGames.game.impl.Weapon;
 
 public interface IMob extends IGameElement{
 
@@ -14,8 +12,8 @@ public interface IMob extends IGameElement{
 	public int getMoney();
 	public IGameElementMap<IItem> getInventory();
 	public IItem getItem(String key);
-	public Armour getArmor();
-	public Weapon getWeapon();
+	public IArmour getArmor();
+	public IWeapon getWeapon();
 	/**
 	 * returns defense only. Does not add Armour bonus.
 	 * @return
@@ -36,13 +34,13 @@ public interface IMob extends IGameElement{
 	 * @param a
 	 * @return
 	 */
-	public Weapon setWeapon(String weaponName);
+	public IWeapon setWeapon(String weaponName);
 	/**
 	 * Sets the armor to armor in the inventory with given name
 	 * @param a
 	 * @return
 	 */
-	public Armour setArmour(String armorName);
+	public IArmour setArmour(String armorName);
 	
 	public String inventoryToString();
 	public String getStandardWeaponKey();
@@ -54,7 +52,7 @@ public interface IMob extends IGameElement{
 	 * Removes the weapon and returns the result
 	 * @return
 	 */
-	public Weapon removeWeapon();
+	public IWeapon removeWeapon();
 	
 	public boolean isDead();
 	
@@ -69,7 +67,7 @@ public interface IMob extends IGameElement{
 	
 	public IItem removeItem(String key);
 	
-	public Armour removeArmour();
+	public IArmour removeArmour();
 	
 	public IItem addItem(IItem add);
 	/**
@@ -78,9 +76,12 @@ public interface IMob extends IGameElement{
 	 */
 	public int getFullAttack();
 	
-	public Weapon setWeapon(Weapon w);
-	public Armour setArmour( Armour a);
+	public IWeapon setWeapon(IWeapon w);
+	public IArmour setArmour( IArmour a);
 	public void addStatus(Status s);
-	
-	public void removeInventory();
+	/**
+	 * Removes the Inventory from the mob and returns the result
+	 * @return
+	 */
+	public IGameElementMap<IItem> removeInventory();
 }

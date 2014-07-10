@@ -1,8 +1,10 @@
 package jjcard.textGames.game.impl;
 
+import jjcard.textGames.game.IArmour;
 
 
-public class Armour extends Item {
+
+public class Armour extends Item implements IArmour {
 	private int defense;
 	
 	public static class ArmourBuilder extends ItemBuilder{

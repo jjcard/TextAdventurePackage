@@ -99,6 +99,24 @@ public abstract class GameElement implements IGameElement {
 	public boolean doValidateFields(){
 		return this.validateFields;
 	}
+	
+	public boolean containsName(String name){
+		if (name == null){
+			return false;
+		}
+		if (name.equalsIgnoreCase(standardName)){
+			return true;
+		} else {
+			if (altNames != null){
+				for (String altName: altNames){
+					if (name.equalsIgnoreCase(altName)){
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+	}
 	public boolean equals(Object o){
 		if (o == this){
 			return true;

@@ -2,9 +2,11 @@ package jjcard.textGames.game.impl;
 
 import java.io.PrintStream;
 
+import jjcard.textGames.game.IArmour;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.IMob;
+import jjcard.textGames.game.IWeapon;
 import jjcard.textGames.game.IWorld;
 import jjcard.textGames.game.parser.ITextParser;
 import jjcard.textGames.game.parser.TextToken;
@@ -112,14 +114,14 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		}
 
 		if (toE.getUse().equals(ItemUse.Armour)) {
-			setPlayerArmor((Armour) toE);
+			setPlayerArmor((IArmour) toE);
 			player.removeItem(i);
 
 			output.println(i + " equipped as armor. ");
 			return ReturnCom.EQUIPPED_ARMOUR;
 		}
 		if (toE.getUse().equals(ItemUse.Weapon)) {
-			setPlayerWeapon((Weapon) toE);
+			setPlayerWeapon((IWeapon) toE);
 			player.removeItem(i);
 			output.println(i + " equipped as weapon. ");
 			return ReturnCom.EQUIPPED_WEAPON;
@@ -131,7 +133,7 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 	public ReturnCom unequipItem(String key) {
 		if (key.equalsIgnoreCase("armor") || key.equalsIgnoreCase("armour")
 				|| player.isKeyforArmor(key)) {
-			Armour it = player.removeArmour();
+			IArmour it = player.removeArmour();
 			if (it != null) {
 
 				// add it back to the inventory
@@ -145,7 +147,7 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 
 		}
 		if (key.equalsIgnoreCase("weapon") || player.isKeyForWeapon(key)) {
-			Weapon i = player.removeWeapon();
+			IWeapon i = player.removeWeapon();
 			if (i != null) {
 
 				player.addItem(i);
@@ -160,8 +162,8 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		return ReturnCom.UNEQUIPPED_ITEM_NOT_FOUND;
 	}
 
-	public void setPlayerArmor(Armour armorN) {
-		Armour add = player.setArmour(armorN);
+	public void setPlayerArmor(IArmour armorN) {
+		IArmour add = player.setArmour(armorN);
 		if (add != null) {
 			// add old armour back to inventory
 			player.addItem(add);
@@ -177,8 +179,8 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 	 *            for weaponN
 	 * @param weaponN
 	 */
-	public void setPlayerWeapon(Weapon weaponN) {
-		Weapon add = player.setWeapon(weaponN);
+	public void setPlayerWeapon(IWeapon weaponN) {
+		IWeapon add = player.setWeapon(weaponN);
 		if (add != null) {
 			// add old weapon to inventory
 			player.addItem(add);

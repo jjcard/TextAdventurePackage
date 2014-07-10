@@ -2,9 +2,11 @@ package jjcard.textGames.game.impl;
 import java.util.LinkedList;
 import java.util.List;
 
+import jjcard.textGames.game.IArmour;
 import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.IMob;
+import jjcard.textGames.game.IWeapon;
 import jjcard.textGames.game.util.EqualsUtil;
 
 /**
@@ -23,8 +25,8 @@ public class Mob extends GameElement implements IMob{
 	private int attack = 0;
 	private boolean hostile = true;
 	private List<Status> statusList;
-	private Armour armor;
-	private Weapon weapon;
+	private IArmour armor;
+	private IWeapon weapon;
 	private boolean checkHealth;
 	
 	public static class MobBuilder extends GameElementBuilder{
@@ -37,8 +39,8 @@ public class Mob extends GameElement implements IMob{
 		private int attack = 0;
 		private boolean hostile = true;
 		private List<Status> statusList = new LinkedList<Status>();
-		private Armour armor;
-		private Weapon weapon;
+		private IArmour armor;
+		private IWeapon weapon;
 		private boolean checkHealth = true;
 		
 		public MobBuilder(){
@@ -124,11 +126,11 @@ public class Mob extends GameElement implements IMob{
 			
 			return this;
 		}
-		public MobBuilder armor(Armour armour){
+		public MobBuilder armor(IArmour armour){
 			this.armor = armour;
 			return this;
 		}
-		public MobBuilder weapon(Weapon weapon){
+		public MobBuilder weapon(IWeapon weapon){
 			this.weapon = weapon;
 			return this;
 		}
@@ -204,10 +206,10 @@ public class Mob extends GameElement implements IMob{
 	public IItem getItem(String key){
 		return inventory.get(key);
 	}
-	public Armour getArmor(){
+	public IArmour getArmor(){
 		return armor;
 	}
-	public Weapon getWeapon() {
+	public IWeapon getWeapon() {
 		return weapon;
 	}
 
@@ -314,8 +316,8 @@ public class Mob extends GameElement implements IMob{
 	 * @param a
 	 * @return previous Armour
 	 */
-	public Armour setArmour( Armour a){
-		Armour re = armor;
+	public IArmour setArmour( IArmour a){
+		IArmour re = armor;
 		armor = a;
 		return re;
 	}
@@ -324,8 +326,8 @@ public class Mob extends GameElement implements IMob{
 	 * @param w
 	 * @return previous Weapon
 	 */
-	public Weapon setWeapon( Weapon w){
-		Weapon re = weapon;
+	public IWeapon setWeapon( IWeapon w){
+		IWeapon re = weapon;
 		weapon = w;
 		return re;
 	}
@@ -371,8 +373,8 @@ public class Mob extends GameElement implements IMob{
 		return inventory.put(add);
 		
 	}
-	public Armour removeArmour() {
-		Armour re = armor;
+	public IArmour removeArmour() {
+		IArmour re = armor;
 		armor = null;
 		return re;
 	}
@@ -383,8 +385,10 @@ public class Mob extends GameElement implements IMob{
 	public IItem removeItem(String key){
 		return inventory.remove(key);
 	}
-	public void removeInventory(){
+	public IGameElementMap<IItem> removeInventory(){
+		IGameElementMap<IItem> returnIn = inventory;
 		inventory = null;
+		return returnIn;
 	}
 	/**
 	 * attack this mob for this amount of damage minus the mobs defense. 
@@ -412,8 +416,8 @@ public class Mob extends GameElement implements IMob{
 		return getStandardName();
 	}
 
-	public Weapon removeWeapon() {
-		Weapon re = weapon;
+	public IWeapon removeWeapon() {
+		IWeapon re = weapon;
 		weapon = null;
 		return re;
 	}
@@ -423,7 +427,7 @@ public class Mob extends GameElement implements IMob{
 	public boolean isKeyforArmor(String key){
 		return isKeyForItem(key, armor);
 	}
-	private boolean isKeyForItem(String key, Item item){
+	private boolean isKeyForItem(String key, IItem item){
 		if (item == null){
 			return false;
 		}
@@ -470,14 +474,14 @@ public class Mob extends GameElement implements IMob{
 		return re.substring(1, re.length()-1);
 		
 	}
-	public Armour setArmour(String a){
+	public IArmour setArmour(String a){
 		IItem ar = getItem(a);
-		if (ar != null && ar instanceof Armour){
-			return setArmour((Armour) ar);
+		if (ar != null && ar instanceof IArmour){
+			return setArmour((IArmour) ar);
 		}
 		return null;
 	}
-	public Weapon setWeapon(String a){
+	public IWeapon setWeapon(String a){
 		IItem ar = getItem(a);
 		if (ar != null && ar instanceof Weapon){
 			return setWeapon( (Weapon) ar);

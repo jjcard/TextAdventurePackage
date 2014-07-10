@@ -2,8 +2,10 @@ package jjcard.textGames.game.impl;
 
 import java.util.List;
 
+import jjcard.textGames.game.IArmour;
 import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
+import jjcard.textGames.game.IWeapon;
 import jjcard.textGames.game.Leveling.HasLeveling;
 
 
@@ -95,11 +97,11 @@ public class Player extends Mob implements HasLeveling{
 			
 			return this;
 		}
-		public PlayerBuilder armor(Armour armour){
+		public PlayerBuilder armor(IArmour armour){
 			super.armor(armour);
 			return this;
 		}
-		public PlayerBuilder weapon(Weapon weapon){
+		public PlayerBuilder weapon(IWeapon weapon){
 			super.weapon(weapon);
 			return this;
 		}

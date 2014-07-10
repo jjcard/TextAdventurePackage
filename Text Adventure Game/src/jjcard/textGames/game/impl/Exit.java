@@ -101,9 +101,6 @@ public class Exit extends GameElement implements IExit {
 		return location;
 	}
 
-//	public void setLocation(ILocation location) {
-//		this.location = location;
-//	}
 	/**
 	 * Returns a new Exit with the same properties as the current one with the given location
 	 * @param location

@@ -159,7 +159,7 @@ public class Item extends GameElement implements IItem{
 		}
 		if (o instanceof Item){
 			Item m = (Item) o;
-			if (EqualsUtil.notEqual(standardName, m.standardName)){
+			if (EqualsUtil.notEqual(getStandardName(), m.getStandardName())){
 				return false;
 			}
 			if (EqualsUtil.notEqual(info, m.info)){

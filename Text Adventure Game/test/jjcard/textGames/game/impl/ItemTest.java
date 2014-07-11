@@ -1,10 +1,8 @@
 package jjcard.textGames.game.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import jjcard.textGames.game.impl.*;
 
 public class ItemTest {
 

@@ -2,15 +2,17 @@ package jjcard.textGames.game.impl;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Locale;
 
 import jjcard.textGames.game.IGameElement;
 import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.util.EqualsUtil;
 
 public class GameElementMap<A extends IGameElement> implements IGameElementMap<A>{
+	
+	private Locale locale = Locale.getDefault();
 	private HashMap<String, String> altNamesMap;
 	private HashMap<String, A> elementMap;
-	
 	
 	
    public GameElementMap(){
@@ -19,7 +21,13 @@ public class GameElementMap<A extends IGameElement> implements IGameElementMap<A
 	   altNamesMap = new HashMap<String, String>();
 	   elementMap = new HashMap<String, A>();
    }
-   
+   public GameElementMap(Locale locale){
+	   super();
+	   
+	   altNamesMap = new HashMap<String, String>();
+	   elementMap = new HashMap<String, A>();
+	   this.locale = locale;
+   }
    public GameElementMap(int elementMapCapacity, int altNameMapCapacity){
 	   super();
 	   altNamesMap = new HashMap<String, String>(altNameMapCapacity);
@@ -30,12 +38,13 @@ public class GameElementMap<A extends IGameElement> implements IGameElementMap<A
 	   super();
 	   altNamesMap = new HashMap<>(map.altNamesMap);
 	   elementMap = new HashMap<>(map.elementMap);
+	   locale = map.locale;
    }
    private A put(String standerdName, String[] altNames, A gameElement){
-	   String standardNameUpper = standerdName.toUpperCase();
+	   String standardNameUpper = standerdName.toUpperCase(locale);
 	   if (altNames != null){
 		   for (String altName: altNames){
-			   altNamesMap.put(altName.toUpperCase(), standardNameUpper);
+			   altNamesMap.put(altName.toUpperCase(locale), standardNameUpper);
 		   }		   
 	   }
 	   altNamesMap.put(standardNameUpper, standardNameUpper);
@@ -43,13 +52,20 @@ public class GameElementMap<A extends IGameElement> implements IGameElementMap<A
 
    }
 
+   /**
+    * Sets the Locale to use when changing the case on Strings
+    * @param locale
+    */
+   public void setLocale(Locale locale){
+	   this.locale = locale;
+   }
 	public A put(A gameElement){
 		return put(gameElement.getStandardName(), 
 				gameElement.getAltNames(), gameElement);
 	}
 	
 	public A get(String name){
-		String realKey = altNamesMap.get(name.toUpperCase());
+		String realKey = altNamesMap.get(name.toUpperCase(locale));
 		
 		if (realKey != null){
 			return elementMap.get(realKey);
@@ -59,13 +75,13 @@ public class GameElementMap<A extends IGameElement> implements IGameElementMap<A
 	}
 	
 	public A getFromStandardName(String standerdName){
-		return elementMap.get(standerdName.toUpperCase());
+		return elementMap.get(standerdName.toUpperCase(locale));
 	}
 	public boolean containsName(String name){
-		return altNamesMap.containsKey(name.toUpperCase());
+		return altNamesMap.containsKey(name.toUpperCase(locale));
 	}
 	public boolean containsStandardName(String standerdName){
-		return elementMap.containsKey(standerdName.toUpperCase());
+		return elementMap.containsKey(standerdName.toUpperCase(locale));
 	}
 	/**
 	 * returns the number of standard and alternate names.
@@ -83,17 +99,17 @@ public class GameElementMap<A extends IGameElement> implements IGameElementMap<A
 	}
 	
 	public A remove(String name){
-		String realKey = altNamesMap.get(name.toUpperCase());
+		String realKey = altNamesMap.get(name.toUpperCase(locale));
 		A element = elementMap.remove(realKey);
 		
 		
 		//now remove from the altname table
 		if (element.getAltNames() != null){
 			for (String altName: element.getAltNames()){
-				altNamesMap.remove(altName.toUpperCase());
+				altNamesMap.remove(altName.toUpperCase(locale));
 			}
 		}
-		altNamesMap.remove(element.getStandardName().toUpperCase());
+		altNamesMap.remove(element.getStandardName().toUpperCase(locale));
 		return element;
 	}
 	

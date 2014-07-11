@@ -1,14 +1,10 @@
-package jjcard.textGames.test;
+package jjcard.textGames.game.parser.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import jjcard.textGames.game.parser.ITextDictionary;
-import jjcard.textGames.game.parser.TextParserError;
 import jjcard.textGames.game.parser.TextTokenStream;
-import jjcard.textGames.game.parser.impl.BasicTextParser;
-import jjcard.textGames.game.parser.impl.BasicTextTokenType;
-import jjcard.textGames.game.parser.impl.TextDictionary;
 
 import org.junit.Assert;
 import org.junit.Before;

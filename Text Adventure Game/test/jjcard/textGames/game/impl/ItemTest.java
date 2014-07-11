@@ -1,4 +1,4 @@
-package jjcard.textGames.test;
+package jjcard.textGames.game.impl;
 
 import static org.junit.Assert.*;
 

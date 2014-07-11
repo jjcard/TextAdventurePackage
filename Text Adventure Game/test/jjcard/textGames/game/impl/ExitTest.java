@@ -1,4 +1,4 @@
-package jjcard.textGames.test;
+package jjcard.textGames.game.impl;
 
 import jjcard.textGames.game.impl.Exit;
 import jjcard.textGames.game.impl.Location;

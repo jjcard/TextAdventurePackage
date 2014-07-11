@@ -129,7 +129,7 @@ public abstract class GameElement implements IGameElement {
 		}
 		
 		if (o instanceof GameElement){
-			GameElement e = (GameElement) o;
+			final GameElement e = (GameElement) o;
 			if (EqualsUtil.notEqual(standardName, e.standardName)){
 				return false;
 			}
@@ -144,6 +144,17 @@ public abstract class GameElement implements IGameElement {
 		} else {
 			return false;
 		}
+	}
+	public int hashcode(){
+		int hash = 0;
+		final int prime = 23;
+		
+		hash = prime * hash + standardName == null? 0: standardName.hashCode();
+		hash = prime * hash + Arrays.hashCode(altNames);
+		hash = prime * hash + roomDescription == null? 0: roomDescription.hashCode();
+	
+		
+		return hash;
 	}
 
 	

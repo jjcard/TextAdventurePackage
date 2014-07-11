@@ -117,6 +117,12 @@ public abstract class GameElement implements IGameElement {
 			return false;
 		}
 	}
+	/**
+	 * Returns the Standard name of the GameElement
+	 */
+	public String toString(){
+		return getStandardName();
+	}
 	public boolean equals(Object o){
 		if (o == this){
 			return true;

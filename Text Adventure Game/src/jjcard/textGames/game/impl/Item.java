@@ -117,7 +117,7 @@ public class Item extends GameElement implements IItem{
 		cost = costN;
 	}
 	public void changeCost(int change){
-		cost += change;
+		setCost(cost + change);
 	}
 	public void setInfo(String change) {
 		info = change;
@@ -146,9 +146,6 @@ public class Item extends GameElement implements IItem{
 	}
 	public void setUse(ItemUse change){
 		use = change;
-	}
-	public String toString() {
-		return getStandardName();
 	}
 	public boolean equals(Object o){
 		if (o == this){

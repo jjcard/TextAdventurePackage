@@ -18,8 +18,8 @@ public abstract class GameElement implements IGameElement {
 
 	private String roomDescription;
 	
-	private String standardName;
-	private String[] altNames;
+	private final String standardName;
+	private final String[] altNames;
 	protected boolean validateFields = true;
 	
 

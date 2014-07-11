@@ -50,7 +50,7 @@ public class Exit extends GameElement implements IExit {
 	 * List that includes all static default Exits
 	 */
 	public static final Exit[] defaultValues = new Exit[]{NORTH, SOUTH, EAST, WEST, NORTHWEST, NORTHEAST, SOUTHEAST, SOUTHEAST, UP, DOWN};
-	private ILocation location;
+	private final ILocation location;
 
 	public static class ExitBuilder extends GameElementBuilder{
 		private ILocation location;

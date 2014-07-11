@@ -57,6 +57,9 @@ public class GameElementMap<A extends IGameElement> implements IGameElementMap<A
     * @param locale
     */
    public void setLocale(Locale locale){
+	   if (locale == null){
+		   throw new NullPointerException("Locale must be non-null");
+	   }
 	   this.locale = locale;
    }
 	public A put(A gameElement){

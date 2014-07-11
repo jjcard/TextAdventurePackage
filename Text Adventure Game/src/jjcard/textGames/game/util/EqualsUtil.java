@@ -54,4 +54,5 @@ public class EqualsUtil {
 		
 		return hash;
 	}
+	
 }

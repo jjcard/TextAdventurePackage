@@ -16,7 +16,7 @@ import jjcard.textGames.game.IMob;
 public class Location implements ILocation {
 
 	private static final char SPACE = ' ';
-	private String name;
+	private final String name;
 	private String description;
 	
 	private IGameElementMap<IItem> inventory;
@@ -146,9 +146,6 @@ public class Location implements ILocation {
 		return exits.containsName(dir);
 	}
 
-	public void setName(String name){
-		this.name = name;
-	}
 
 	public void setDescription(String descrip){
 		description = descrip;

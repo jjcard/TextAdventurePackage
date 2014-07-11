@@ -4,7 +4,6 @@ package jjcard.textGames.game;
 public interface ILocation extends Comparable<ILocation>{
 
 	public String getName();
-	public void setName(String name);
 	public String getDescription();
 	public void setDescription(String descrip);
 	public IGameElementMap<IItem> getInventory();

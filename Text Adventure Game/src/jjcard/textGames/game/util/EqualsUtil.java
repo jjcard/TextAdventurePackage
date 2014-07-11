@@ -1,5 +1,7 @@
 package jjcard.textGames.game.util;
 
+import java.util.Arrays;
+
 
 public class EqualsUtil {
 
@@ -20,5 +22,33 @@ public class EqualsUtil {
 	}
 	public static boolean notEqual(Object a, Object b){
 		return !equals(a, b);
+	}
+	
+	public static int getHash(final int prime, Object...objects){
+		int hash = 0;
+		
+		if (objects != null){
+			for (Object o: objects){
+				if (o instanceof Object[]){
+					hash = hash * prime + (o == null? 0: Arrays.hashCode((Object[])o));
+				} else {
+					hash = hash * prime + (o == null? 0: o.hashCode());
+				}
+				
+			}
+		}
+		
+		return hash;
+	}
+	public static int getHash(final int prime, Object[] ...objectArrays){
+		int hash = 0;
+		
+		if (objectArrays != null){
+			for (Object o: objectArrays){
+				hash = hash * prime + (o == null? 0: Arrays.hashCode((Object[])o));
+			}
+		}
+		
+		return hash;
 	}
 }

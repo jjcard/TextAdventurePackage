@@ -8,10 +8,10 @@ import jjcard.textGames.game.parser.TextTokenStream;
 public interface IWorld<T extends ITextTokenType, K> {
 
 	public Player getPlayer();
-	public void setPlayer(Player playerN);
+	public void setPlayer(Player player);
 	public ILocation getCurrent();
 	
-	public void setCurrent(ILocation locationN);		
+	public void setCurrent(ILocation location);		
 	
 	
 	public TextTokenStream<T> parseInput(String input);

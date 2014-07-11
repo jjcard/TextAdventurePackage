@@ -25,7 +25,10 @@ public class EqualsUtil {
 	}
 	
 	public static int getHash(final int prime, Object...objects){
-		int hash = 0;
+		return getHash(1, prime, objects);
+	}
+	public static int getHash(int starthingHash, final int prime, Object...objects){
+		int hash = starthingHash;
 		
 		if (objects != null){
 			for (Object o: objects){

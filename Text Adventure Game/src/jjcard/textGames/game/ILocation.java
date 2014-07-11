@@ -10,10 +10,10 @@ public interface ILocation extends Comparable<ILocation>{
 	public IGameElementMap<IMob> getRoomMob();
 	public IGameElementMap<IExit> getExits();
 	public IItem addItem(IItem add);
-	public void setInventory(IGameElementMap<IItem> inventoryNew);
-	public void setRoomMob(IGameElementMap<IMob> roomMobNew);
+	public void setInventory(IGameElementMap<IItem> inventory);
+	public void setRoomMob(IGameElementMap<IMob> roomMob);
 	public IItem removeItem(String key);
-	public boolean containsItem(String keyR);
+	public boolean containsItem(String key);
 	public IMob addMob(IMob m);
 	public IMob removeMob(String key);
 	public boolean containsMob(String m);

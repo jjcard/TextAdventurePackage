@@ -10,7 +10,7 @@ public interface IItem extends IGameElement{
 	
 	public ItemUse getUse();
 	
-	public void setUse(ItemUse change);
+	public void setUse(ItemUse use);
 	
 	/**
 	 * returns true if item can be retrieved by the player
@@ -18,9 +18,9 @@ public interface IItem extends IGameElement{
 	 */
 	public boolean canGet();
 	
-	public void setHidden(boolean change);
+	public void setHidden(boolean hidden);
 	
-	public void setMovable(boolean change);
+	public void setMovable(boolean movable);
 	
 	public int getCost();
 	

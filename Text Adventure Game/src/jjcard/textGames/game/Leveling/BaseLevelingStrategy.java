@@ -1,16 +1,16 @@
 package jjcard.textGames.game.Leveling;
 
 
-public class BaseLevelingStratagy implements LevelingStratagy {
+
+public class BaseLevelingStrategy implements LevelingStrategy<HasLeveling> {
 	private static final int[] levelingChart = new int[]{1000, 3000, 6000, 
 		10000, 15000, 21000, 28000, 36000, 45000, 55000, 66000, 78000, 
 		91000, 105000, 120000, 136000, 153000, 171000, 190000};
 	private HasLeveling client;
 	
-	public BaseLevelingStratagy(HasLeveling player) {
+	public BaseLevelingStrategy(HasLeveling player) {
 	}
-	@Override
-	public int updateLevel() {
+	protected int updateLevel() {
 		
 		int xp = client.getXp();
 		
@@ -27,6 +27,19 @@ public class BaseLevelingStratagy implements LevelingStratagy {
 			}
 		}
 		return 0;
+	}
+	@Override
+	public HasLeveling getUser() {
+		return client;
+	}
+	@Override
+	public HasLeveling update() {
+		
+		int levelNew = updateLevel();
+		if (levelNew > client.getLevel()){
+			client.setLevel(levelNew);
+		}
+		return client;
 	}
 	
 

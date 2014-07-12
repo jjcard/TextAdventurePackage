@@ -1,5 +1,11 @@
 package jjcard.textGames.game.Leveling;
 
+/**
+ * A strategy to level
+ * @author jjcard
+ *
+ * @param <A>
+ */
 public interface LevelingStrategy<A extends HasLeveling> {
 
 	

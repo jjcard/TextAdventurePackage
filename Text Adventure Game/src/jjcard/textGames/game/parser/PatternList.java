@@ -11,11 +11,18 @@ import java.util.regex.Pattern;
  * @param <S>
  */
 public class PatternList<S> {
-	private List<PatternEntry> patternList;
+	private final List<PatternEntry> patternList;
 
 	
 	public PatternList(){
 		patternList = new LinkedList<PatternEntry>();
+	}
+	/**
+	 * Constructs a PatternList with the same value as the given PatternList
+	 * @param list
+	 */
+	public PatternList(PatternList<S> list){
+		patternList = new LinkedList<PatternEntry>(list.patternList);
 	}
 	/**
 	 * Adds the given pattern and value
@@ -51,6 +58,11 @@ public class PatternList<S> {
 		return value;
 	}
 
+	/**
+	 * Class to hold the pattern and the value it returns
+	 * @author jjcard
+	 *
+	 */
 	private class PatternEntry {
 		private Pattern pattern;
 		private S value;
@@ -64,6 +76,11 @@ public class PatternList<S> {
 			return value;
 		}
 
+		/**
+		 * Returns true of text matches Pattern
+		 * @param text
+		 * @return
+		 */
 		public boolean matches(String text) {
 			return pattern.matcher(text).matches();
 		}

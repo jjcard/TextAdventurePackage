@@ -1,4 +1,7 @@
-package jjcard.textGames.game.Leveling;
+package jjcard.textGames.game.Leveling.impl;
+
+import jjcard.textGames.game.Leveling.HasLeveling;
+import jjcard.textGames.game.Leveling.LevelingStrategy;
 
 
 

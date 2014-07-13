@@ -6,9 +6,9 @@ package jjcard.textGames.game.parser;
  */
 public class TextToken<T extends ITextTokenType> implements ITextTokenType{
 
-	private String token;
+	private final String token;
 	
-	private T type;
+	private final T type;
 	
 	public TextToken(String token, T type){
 		this.token = token;

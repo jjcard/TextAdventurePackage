@@ -6,17 +6,19 @@ import jjcard.textGames.game.impl.ReturnCom;
 
 public class SimpleTextEvent implements ITextEvent{
 
-	private Commands command;
-	private ReturnCom returnCom;
-	private String commandKey;
+	private final Commands command;
+	private final ReturnCom returnCom;
+	private final String commandKey;
 	
 	public SimpleTextEvent(Commands command, String commandKey){
 		this.command = command;
 		this.commandKey = commandKey;
+		this.returnCom = null;
 	}
 	public SimpleTextEvent(ReturnCom returnCom, String commandKey){
 		this.returnCom = returnCom;
 		this.commandKey = commandKey;
+		this.command = null;
 	}
 	public SimpleTextEvent(Commands command, String commandKey, ReturnCom returnCom){
 		this.command = command;

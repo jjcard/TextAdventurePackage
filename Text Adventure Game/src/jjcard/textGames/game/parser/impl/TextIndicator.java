@@ -19,8 +19,8 @@ public enum TextIndicator implements ITextIndicator{
 	IT_INDICATOR(false, true), 
 	REPEAT_INDICATOR(true, false);
 	
-	private boolean isWholeSentence;
-	private boolean isWord;
+	private final boolean isWholeSentence;
+	private final boolean isWord;
 	
 	private TextIndicator(boolean isWholeSentence, boolean isWord){
 		this.isWholeSentence = isWholeSentence;

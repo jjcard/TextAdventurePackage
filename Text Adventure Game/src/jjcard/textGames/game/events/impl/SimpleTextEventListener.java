@@ -14,10 +14,11 @@ import jjcard.textGames.game.events.ITextEventListener;
 
 public class SimpleTextEventListener implements ITextEventListener {
 
-	public  static final String defaultTextLocation = "resources"+File.separator+"Strings.txt";
+	public static final String defaultTextLocation = "resources"+File.separator+"Strings.txt";
 	public static final String COMMENT_INDICATOR = "#";
-	private static final Pattern pairPattern = Pattern.compile("=");
-	private static final String ESCAPE_CHARACTER = "\\\\";
+	public static final String PAIR_INDICATOR = "=";
+	private static final Pattern pairPattern = Pattern.compile(PAIR_INDICATOR);
+	public static final String ESCAPE_CHARACTER = "\\\\";
 	private static final Pattern keyInputPattern = Pattern.compile("[^"+ESCAPE_CHARACTER+"]<KEY>");
 	
 	

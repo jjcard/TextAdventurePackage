@@ -13,13 +13,13 @@ import jjcard.textGames.game.util.EqualsUtil;
  */
 public class TextTokenStream<T extends ITextTokenType> {
 
-	private List<TextToken<T>> objects;
+	private final List<TextToken<T>> objects;
 
-	private TextToken<T> verb;
+	private final TextToken<T> verb;
 
-	private TextToken<T> withObject;
+	private final TextToken<T> withObject;
 
-	private List<TextParserError> errors;
+	private final List<TextParserError> errors;
 
 	public static class TextTokenStreamBuilder<T extends ITextTokenType> {
 
@@ -30,7 +30,7 @@ public class TextTokenStream<T extends ITextTokenType> {
 		private boolean validateInput = true;
 
 		public TextTokenStreamBuilder() {
-
+			super();
 		}
 
 		/**

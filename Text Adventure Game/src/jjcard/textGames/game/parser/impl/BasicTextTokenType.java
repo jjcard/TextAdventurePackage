@@ -12,8 +12,8 @@ public enum BasicTextTokenType implements ITextTokenType {
 	
 	
 	//attributes
-	private boolean isObject;
-	private String[] defaultWords;
+	private final boolean isObject;
+	private final String[] defaultWords;
 	
 	BasicTextTokenType(boolean isObject, String...defaultWords){
 		this.isObject = isObject;

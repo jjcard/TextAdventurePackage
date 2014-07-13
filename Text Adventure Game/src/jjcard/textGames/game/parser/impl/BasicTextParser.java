@@ -22,8 +22,8 @@ public class BasicTextParser<T extends ITextTokenType> extends TextIndicatorPars
 	
 
 	private ITextDictionary<T> dictionary;
-	private PatternList<T> textTokenPatterns;
-	private PatternList<TextIndicator> textIndicatorPatterns;
+	private final PatternList<T> textTokenPatterns;
+	private final PatternList<TextIndicator> textIndicatorPatterns;
 	//split pattern based on StackOverflow post by Bart Kiers
 	public static final Pattern splitPattern = Pattern.compile("[ ]+(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 	private int objectLimit = 10;

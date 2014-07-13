@@ -10,12 +10,15 @@ import jjcard.textGames.game.events.ITextEventManager;
 public class TextEventManager implements ITextEventManager{
 	
 	private static TextEventManager instance = null;
-	private Map<Class<? extends ITextEvent>, ITextEventListener> listenerMap;
+	private final Map<Class<? extends ITextEvent>, ITextEventListener> listenerMap;
 	private TextEventManager(){
 		listenerMap = new HashMap<Class<? extends ITextEvent>, ITextEventListener>();
 	}
 	
-	
+	/**
+	 * Returns the instance of the TextEventmanager
+	 * @return
+	 */
 	public static TextEventManager getInstance(){
 		if (instance == null){
 			instance = new TextEventManager();

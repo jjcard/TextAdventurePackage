@@ -12,7 +12,7 @@ public interface IMob extends IGameElement{
 	public int getMoney();
 	public IGameElementMap<IItem> getInventory();
 	public IItem getItem(String key);
-	public IArmour getArmor();
+	public IArmour getArmour();
 	public IWeapon getWeapon();
 	/**
 	 * returns defense only. Does not add Armour bonus.
@@ -36,17 +36,17 @@ public interface IMob extends IGameElement{
 	 */
 	public IWeapon setWeapon(String weaponName);
 	/**
-	 * Sets the armor to armor in the inventory with given name
+	 * Sets the armour to armour in the inventory with given name
 	 * @param a
 	 * @return
 	 */
-	public IArmour setArmour(String armorName);
+	public IArmour setArmour(String armourName);
 	
 	public String inventoryToString();
 	public String getStandardWeaponKey();
 	public boolean isKeyForWeapon(String key);
-	public boolean isKeyforArmor(String key);
-	public String getStandardArmorKey();
+	public boolean isKeyforArmour(String key);
+	public String getStandardArmourKey();
 	
 	/**
 	 * Removes the weapon and returns the result

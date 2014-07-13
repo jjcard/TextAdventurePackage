@@ -97,8 +97,8 @@ public class Player extends Mob implements HasLeveling{
 			
 			return this;
 		}
-		public PlayerBuilder armor(IArmour armour){
-			super.armor(armour);
+		public PlayerBuilder armour(IArmour armour){
+			super.armour(armour);
 			return this;
 		}
 		public PlayerBuilder weapon(IWeapon weapon){

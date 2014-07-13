@@ -26,7 +26,7 @@ public class Mob extends GameElement implements IMob{
 	private int attack = 0;
 	private boolean hostile = true;
 	private List<Status> statusList;
-	private IArmour armor;
+	private IArmour armour;
 	private IWeapon weapon;
 	private boolean checkHealth;
 	
@@ -40,7 +40,7 @@ public class Mob extends GameElement implements IMob{
 		private int attack = 0;
 		private boolean hostile = true;
 		private List<Status> statusList = new LinkedList<Status>();
-		private IArmour armor;
+		private IArmour armour;
 		private IWeapon weapon;
 		private boolean checkHealth = true;
 		
@@ -61,7 +61,7 @@ public class Mob extends GameElement implements IMob{
 			  this.attack = b.attack;
 			  this.hostile = b.hostile;
 			  this.statusList = b.statusList;
-			  this.armor = b.armor;
+			  this.armour = b.armour;
 			  this.weapon = b.weapon;
 		}
 		public MobBuilder(GameElement g){
@@ -127,8 +127,8 @@ public class Mob extends GameElement implements IMob{
 			
 			return this;
 		}
-		public MobBuilder armor(IArmour armour){
-			this.armor = armour;
+		public MobBuilder armour(IArmour armour){
+			this.armour = armour;
 			return this;
 		}
 		public MobBuilder weapon(IWeapon weapon){
@@ -183,7 +183,7 @@ public class Mob extends GameElement implements IMob{
 		  setAttack(b.attack);
 		  hostile = b.hostile;
 		  statusList = b.statusList;
-		  armor = b.armor;
+		  armour = b.armour;
 		  weapon = b.weapon;
 		  checkHealth = b.checkHealth;
 	}
@@ -207,8 +207,8 @@ public class Mob extends GameElement implements IMob{
 	public IItem getItem(String key){
 		return inventory.get(key);
 	}
-	public IArmour getArmor(){
-		return armor;
+	public IArmour getArmour(){
+		return armour;
 	}
 	public IWeapon getWeapon() {
 		return weapon;
@@ -313,13 +313,13 @@ public class Mob extends GameElement implements IMob{
 		}
 	}
 	/**
-	 * Sets armour with given armorKey and returns previous armour
+	 * Sets armour with given armourKey and returns previous armour
 	 * @param a
 	 * @return previous Armour
 	 */
 	public IArmour setArmour( IArmour a){
-		IArmour re = armor;
-		armor = a;
+		IArmour re = armour;
+		armour = a;
 		return re;
 	}
 	/**
@@ -350,18 +350,18 @@ public class Mob extends GameElement implements IMob{
 		return weapon == null? 0: weapon.getAttack();
 	}
 	/**
-	 * Returns the armor bonus or 0 if no armor equipped
+	 * Returns the armour bonus or 0 if no armour equipped
 	 * @return
 	 */
-	public int getArmorBonus(){
-		return armor == null? 0: armor.getDefense();
+	public int getArmourBonus(){
+		return armour == null? 0: armour.getDefense();
 	}
 	/**
 	 * gets defense plus any bonus
 	 * @return
 	 */
 	public int getFullDefense(){
-		return defense + getArmorBonus();
+		return defense + getArmourBonus();
 	}
 	public void setHostile(boolean hostile){
 		this.hostile = hostile;
@@ -375,8 +375,8 @@ public class Mob extends GameElement implements IMob{
 		
 	}
 	public IArmour removeArmour() {
-		IArmour re = armor;
-		armor = null;
+		IArmour re = armour;
+		armour = null;
 		return re;
 	}
 	public void addAllItems(IGameElementMap<IItem> addMap){
@@ -422,11 +422,11 @@ public class Mob extends GameElement implements IMob{
 		weapon = null;
 		return re;
 	}
-	public String getStandardArmorKey(){
-		return armor == null? null: armor.getStandardName();
+	public String getStandardArmourKey(){
+		return armour == null? null: armour.getStandardName();
 	}
-	public boolean isKeyforArmor(String key){
-		return isKeyForItem(key, armor);
+	public boolean isKeyforArmour(String key){
+		return isKeyForItem(key, armour);
 	}
 	private boolean isKeyForItem(String key, IGameElement item){
 

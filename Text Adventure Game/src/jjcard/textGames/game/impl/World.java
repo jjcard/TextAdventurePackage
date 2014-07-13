@@ -114,10 +114,10 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		}
 
 		if (toE.getUse().equals(ItemUse.Armour)) {
-			setPlayerArmor((IArmour) toE);
+			setPlayerArmour((IArmour) toE);
 			player.removeItem(i);
 
-			output.println(i + " equipped as armor. ");
+			output.println(i + " equipped as armour. ");
 			return ReturnCom.EQUIPPED_ARMOUR;
 		}
 		if (toE.getUse().equals(ItemUse.Weapon)) {
@@ -131,17 +131,17 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 	}
 
 	public ReturnCom unequipItem(String key) {
-		if (key.equalsIgnoreCase("armor") || key.equalsIgnoreCase("armour")
-				|| player.isKeyforArmor(key)) {
+		if (key.equalsIgnoreCase("armour") || key.equalsIgnoreCase("armour")
+				|| player.isKeyforArmour(key)) {
 			IArmour it = player.removeArmour();
 			if (it != null) {
 
 				// add it back to the inventory
 				player.addItem(it);
-				output.println(key + " has been unequipped from armor. ");
+				output.println(key + " has been unequipped from armour. ");
 				return ReturnCom.UNEQUIPPED_ARMOUR;
 			} else {
-				output.println("No armor equipped. ");
+				output.println("No armour equipped. ");
 				return ReturnCom.UNEQUIPPED_NO_ARMOUR;
 			}
 
@@ -162,8 +162,8 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		return ReturnCom.UNEQUIPPED_ITEM_NOT_FOUND;
 	}
 
-	public void setPlayerArmor(IArmour armorN) {
-		IArmour add = player.setArmour(armorN);
+	public void setPlayerArmour(IArmour armourN) {
+		IArmour add = player.setArmour(armourN);
 		if (add != null) {
 			// add old armour back to inventory
 			player.addItem(add);

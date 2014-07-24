@@ -5,6 +5,7 @@ import java.util.List;
 import jjcard.textGames.game.IArmour;
 import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
+import jjcard.textGames.game.IStatus;
 import jjcard.textGames.game.IWeapon;
 import jjcard.textGames.game.Leveling.HasLeveling;
 
@@ -92,7 +93,7 @@ public class Player extends Mob implements HasLeveling{
 			super.hostile(hostile);
 			return this;
 		}
-		public PlayerBuilder statusList(List<Status> statusList){
+		public PlayerBuilder statusList(List<IStatus> statusList){
 			super.statusList(statusList);
 			
 			return this;
@@ -105,7 +106,7 @@ public class Player extends Mob implements HasLeveling{
 			super.weapon(weapon);
 			return this;
 		}
-		public PlayerBuilder addStatus(Status status){
+		public PlayerBuilder addStatus(IStatus status){
 			super.addStatus(status);
 			return this;
 		}

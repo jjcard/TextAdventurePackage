@@ -7,6 +7,7 @@ import jjcard.textGames.game.IGameElement;
 import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.IMob;
+import jjcard.textGames.game.IStatus;
 import jjcard.textGames.game.IWeapon;
 import jjcard.textGames.game.util.EqualsUtil;
 
@@ -25,7 +26,7 @@ public class Mob extends GameElement implements IMob{
 	private int defense = 0;
 	private int attack = 0;
 	private boolean hostile = true;
-	private List<Status> statusList;
+	private List<IStatus> statusList;
 	private IArmour armour;
 	private IWeapon weapon;
 	private boolean checkHealth;
@@ -39,7 +40,7 @@ public class Mob extends GameElement implements IMob{
 		private int defense = 0;
 		private int attack = 0;
 		private boolean hostile = true;
-		private List<Status> statusList = new LinkedList<Status>();
+		private List<IStatus> statusList = new LinkedList<IStatus>();
 		private IArmour armour;
 		private IWeapon weapon;
 		private boolean checkHealth = true;
@@ -118,9 +119,9 @@ public class Mob extends GameElement implements IMob{
 			this.hostile = hostile;
 			return this;
 		}
-		public MobBuilder statusList(List<Status> statusList){
+		public MobBuilder statusList(List<IStatus> statusList){
 			if (statusList == null){
-				this.statusList = new LinkedList<Status>();
+				this.statusList = new LinkedList<IStatus>();
 			} else {
 				this.statusList = statusList;	
 			}
@@ -135,7 +136,7 @@ public class Mob extends GameElement implements IMob{
 			this.weapon = weapon;
 			return this;
 		}
-		public MobBuilder addStatus(Status status){
+		public MobBuilder addStatus(IStatus status){
 			statusList.add(status);
 			return this;
 		}
@@ -231,13 +232,13 @@ public class Mob extends GameElement implements IMob{
 	public boolean isHostile() {
 		return hostile;
 	}
-	public List<Status> getStatusList() {
+	public List<IStatus> getStatusList() {
 		return statusList;
 	}
-	public boolean containsStatus(Status s){
+	public boolean containsStatus(IStatus s){
 		return statusList.contains(s);
 	}
-	public boolean removeStatus(Status s){
+	public boolean removeStatus(IStatus s){
 		return statusList.remove(s);
 	}
 
@@ -281,7 +282,7 @@ public class Mob extends GameElement implements IMob{
 		}
 
 	}
-	public void addStatus(Status s){
+	public void addIStatus(IStatus s){
 			statusList.add(s);
 
 	}
@@ -366,7 +367,7 @@ public class Mob extends GameElement implements IMob{
 	public void setHostile(boolean hostile){
 		this.hostile = hostile;
 	}
-	public void setStatusList(LinkedList<Status> s){
+	public void setIStatusList(LinkedList<IStatus> s){
 		statusList = s;
 	}
 	public IItem addItem(IItem add){

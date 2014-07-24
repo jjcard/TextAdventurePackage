@@ -2,8 +2,6 @@ package jjcard.textGames.game;
 
 import java.util.List;
 
-import jjcard.textGames.game.impl.Status;
-
 public interface IMob extends IGameElement{
 
 	public String getDescription();
@@ -26,9 +24,9 @@ public interface IMob extends IGameElement{
 	 */
 	public int getBasicAttack();
 	public boolean isHostile();
-	public List<Status> getStatusList();
-	public boolean containsStatus(Status s);
-	public boolean removeStatus(Status s);
+	public List<IStatus> getStatusList();
+	public boolean containsStatus(IStatus s);
+	public boolean removeStatus(IStatus s);
 	/**
 	 * Sets the weapon to Weapon in the inventory with given name
 	 * @param a
@@ -78,7 +76,7 @@ public interface IMob extends IGameElement{
 	
 	public IWeapon setWeapon(IWeapon w);
 	public IArmour setArmour( IArmour a);
-	public void addStatus(Status s);
+	public void addIStatus(IStatus s);
 	/**
 	 * Removes the Inventory from the mob and returns the result
 	 * @return

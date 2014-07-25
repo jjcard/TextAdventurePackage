@@ -1,6 +1,9 @@
 package jjcard.textGames.game;
 
-
+/**
+ * An ILocation contains a collection of IItems, IMobs, and IExits and methods to use them.
+ *
+ */
 public interface ILocation extends Comparable<ILocation>{
 
 	/**
@@ -23,6 +26,11 @@ public interface ILocation extends Comparable<ILocation>{
 	public boolean containsMob(String m);
 	public void addExit(IExit exit);
 	public void addExit(String dir, ILocation room);
+	/**
+	 * Removes the exit with the given direction and returns it.
+	 * @param dir
+	 * @return
+	 */
 	public IExit removeExit(String dir);
 	/**
 	 * returns Location corresponding to directions
@@ -38,6 +46,10 @@ public interface ILocation extends Comparable<ILocation>{
 	 * @return room description, description of items and mobs in room, and exits. 
 	 */
 	public String showRoom();
+	/**
+	 * Gets the description for the exits.
+	 * @return
+	 */
 	public String getExitsDescriptions();
 	public String getInventoryDescriptions();
 	public String getMobDescriptions();

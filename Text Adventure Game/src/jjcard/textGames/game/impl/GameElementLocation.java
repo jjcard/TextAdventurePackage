@@ -43,6 +43,9 @@ public class GameElementLocation extends GameElement implements ILocation {
 			super.addAltName(altName);
 			return this;
 		}
+		/**
+		 * the room description and also the description
+		 */
 		public GameElementLocationBuilder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
@@ -95,11 +98,17 @@ public class GameElementLocation extends GameElement implements ILocation {
 	}
 
 
+	/**
+	 * Gets the name aka the StandardName
+	 */
 	@Override
 	public String getName() {
 		return getStandardName();
 	}
 
+	/**
+	 * Gets the description aka the room description.
+	 */
 	@Override
 	public String getDescription() {
 		return getRoomDescription();
@@ -213,8 +222,7 @@ public class GameElementLocation extends GameElement implements ILocation {
 		return compare;
 	}
 	public String getExitsDescriptions(){
-		String re = exits.getAllStandardNamesAsString();
-		return re.substring(1, re.length()-1);
+		return exits.getAllStandardNamesAsString();
 	}
 	public String getInventoryDescriptions(){
 		

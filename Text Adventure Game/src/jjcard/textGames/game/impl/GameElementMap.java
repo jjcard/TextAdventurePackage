@@ -3,6 +3,7 @@ package jjcard.textGames.game.impl;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Set;
 
 import jjcard.textGames.game.IGameElement;
 import jjcard.textGames.game.IGameElementMap;
@@ -126,7 +127,8 @@ public class GameElementMap<A extends IGameElement> implements IGameElementMap<A
 	}
 	
 	public String getAllStandardNamesAsString(){
-		return elementMap.keySet().toString();
+		String keys = elementMap.keySet().toString();
+		return keys.toString().substring(1, keys.length() -1);
 	}
 	public String[] getAllStandardNamesSaveCase(){
 		String[] names = new String[getElementCount()];

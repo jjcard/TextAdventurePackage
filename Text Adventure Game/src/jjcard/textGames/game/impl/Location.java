@@ -108,7 +108,7 @@ public class Location implements ILocation {
 
 	}
 	/**
-	 * adds Exit with given String in Uppercase and location
+	 * adds Exit with given String and location
 	 * @param dir
 	 * @param room
 	 */
@@ -166,8 +166,7 @@ public class Location implements ILocation {
 		return compare;
 	}
 	public String getExitsDescriptions(){
-		String re = exits.getAllStandardNamesAsString();
-		return re.substring(1, re.length()-1);
+		return exits.getAllStandardNamesAsString();
 	}
 	public String getInventoryDescriptions(){
 		

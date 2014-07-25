@@ -43,6 +43,10 @@ public interface IGameElementMap<A extends IGameElement> {
 	
 	public String[] getAllStandardNames();
 	
+	/**
+	 * Gets all the standard names in a way that can be shown to the player. Standard way would be a comma delaminated list.
+	 * @return
+	 */
 	public String getAllStandardNamesAsString();
 	
 	public String[] getAllStandardNamesSaveCase();

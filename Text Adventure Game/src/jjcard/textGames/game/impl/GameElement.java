@@ -12,7 +12,7 @@ import jjcard.textGames.game.util.EqualsUtil;
  * @author jjcard
  *
  */
-public abstract class GameElement implements IGameElement {
+public abstract class GameElement implements IGameElement{
 	
 	
 
@@ -149,6 +149,7 @@ public abstract class GameElement implements IGameElement {
 		final int prime = 23;		
 		return EqualsUtil.getHash(prime, standardName, altNames, roomDescription);
 	}
+
 
 	
 	

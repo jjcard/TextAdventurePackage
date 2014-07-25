@@ -7,8 +7,7 @@ import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.IMob;
 /**
- * An Iplementation of ILocation that is also a GameElement and follows the builder pattern.
- * @author User
+ * An Implementation of ILocation that is also a GameElement and follows the builder pattern.
  *
  */
 public class GameElementLocation extends GameElement implements ILocation {
@@ -56,7 +55,11 @@ public class GameElementLocation extends GameElement implements ILocation {
 			}
 			return this;
 		}
-		public GameElementBuilder roomMobs(IGameElementMap<IMob> roomMobs){
+		public GameElementLocationBuilder addExit(IExit exit){
+			this.exits.put(exit);
+			return this;
+		}
+		public GameElementLocationBuilder roomMobs(IGameElementMap<IMob> roomMobs){
 			if (roomMobs == null){
 				this.roomMob = new GameElementMap<IMob>();
 			} else {
@@ -64,12 +67,20 @@ public class GameElementLocation extends GameElement implements ILocation {
 			}	
 			return this;
 		}
-		public GameElementBuilder inventory(IGameElementMap<IItem> inventory){
+		public GameElementLocationBuilder addMob(IMob mob){
+			this.roomMob.put(mob);
+			return this;
+		}
+		public GameElementLocationBuilder inventory(IGameElementMap<IItem> inventory){
 			if (inventory == null){
 				this.inventory = new GameElementMap<IItem>();
 			} else {
 				this.inventory = inventory;
 			}
+			return this;
+		}
+		public GameElementLocationBuilder addItem(IItem item){
+			this.inventory.put(item);
 			return this;
 		}
 		public GameElementLocation build(){

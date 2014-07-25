@@ -32,7 +32,7 @@ public class Location implements ILocation {
 	}
 	public Location(String name){
 		this.name = name;
-		description = new String();
+		description = "";
 		inventory = new GameElementMap<IItem>();
 		roomMob =  new GameElementMap<IMob>();
 		exits = new GameElementMap<IExit>();
@@ -47,15 +47,15 @@ public class Location implements ILocation {
 	public Location(String name, String descripN, IGameElementMap<IItem> invenN){
 		this.name = name;
 		description = descripN;
-		inventory = invenN;
+		setInventory(invenN);
 		roomMob =  new GameElementMap<IMob>();
 		exits = new GameElementMap<IExit>();
 	}
 	public Location(String name, String descripN, IGameElementMap<IItem> invenN, IGameElementMap<IMob>  mobs){
 		this.name = name;
 		description = descripN;
-		inventory = invenN;
-		roomMob = mobs;
+		setInventory(invenN);
+		setMobs(mobs);
 		exits = new GameElementMap<IExit>();
 	}
 	public String getName(){
@@ -77,10 +77,18 @@ public class Location implements ILocation {
 		return inventory.put(add);
 	}
 	public void setInventory(IGameElementMap<IItem> inventoryNew){
-		inventory = inventoryNew;
+		if (inventoryNew == null){
+			inventory = new GameElementMap<IItem>();
+		} else {
+			inventory = inventoryNew;
+		}
 	}
 	public void setMobs(IGameElementMap<IMob> roomMobNew){
-		roomMob = roomMobNew;
+		if (roomMobNew == null){
+			this.roomMob = new GameElementMap<IMob>();
+		} else {
+			this.roomMob = roomMobNew;
+		}
 	}
 	public IItem removeItem(String key){
 		return inventory.remove(key);

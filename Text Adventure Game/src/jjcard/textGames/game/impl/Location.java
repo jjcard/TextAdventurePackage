@@ -67,7 +67,7 @@ public class Location implements ILocation {
 	public IGameElementMap<IItem> getInventory(){
 		return inventory;
 	}
-	public  IGameElementMap<IMob> getRoomMob() {
+	public  IGameElementMap<IMob> getMobs() {
 		return roomMob;
 	}
 	public IGameElementMap<IExit> getExits() {
@@ -79,7 +79,7 @@ public class Location implements ILocation {
 	public void setInventory(IGameElementMap<IItem> inventoryNew){
 		inventory = inventoryNew;
 	}
-	public void setRoomMob(IGameElementMap<IMob> roomMobNew){
+	public void setMobs(IGameElementMap<IMob> roomMobNew){
 		roomMob = roomMobNew;
 	}
 	public IItem removeItem(String key){

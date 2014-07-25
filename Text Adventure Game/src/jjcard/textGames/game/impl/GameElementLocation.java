@@ -114,7 +114,7 @@ public class GameElementLocation extends GameElement implements ILocation {
 	public IGameElementMap<IItem> getInventory(){
 		return inventory;
 	}
-	public  IGameElementMap<IMob> getRoomMob() {
+	public  IGameElementMap<IMob> getMobs() {
 		return roomMob;
 	}
 	public IGameElementMap<IExit> getExits() {
@@ -124,10 +124,20 @@ public class GameElementLocation extends GameElement implements ILocation {
 		return inventory.put(add);
 	}
 	public void setInventory(IGameElementMap<IItem> inventoryNew){
-		inventory = inventoryNew;
+		if (inventoryNew == null){
+			inventory = new GameElementMap<IItem>();
+		} else {
+			inventory = inventoryNew;
+		}
+		
 	}
-	public void setRoomMob(IGameElementMap<IMob> roomMobNew){
-		roomMob = roomMobNew;
+	public void setMobs(IGameElementMap<IMob> roomMob){
+		if (roomMob == null){
+			this.roomMob = new GameElementMap<IMob>();
+		} else {
+			this.roomMob = roomMob;
+		}
+		
 	}
 	public IItem removeItem(String key){
 		return inventory.remove(key);

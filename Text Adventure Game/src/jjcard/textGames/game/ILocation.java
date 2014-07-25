@@ -3,15 +3,19 @@ package jjcard.textGames.game;
 
 public interface ILocation extends Comparable<ILocation>{
 
+	/**
+	 * Gets the name of the Location. Should only be set once.
+	 * @return
+	 */
 	public String getName();
 	public String getDescription();
-	public void setDescription(String descrip);
+	public void setDescription(String description);
 	public IGameElementMap<IItem> getInventory();
-	public IGameElementMap<IMob> getRoomMob();
+	public IGameElementMap<IMob> getMobs();
 	public IGameElementMap<IExit> getExits();
 	public IItem addItem(IItem add);
 	public void setInventory(IGameElementMap<IItem> inventory);
-	public void setRoomMob(IGameElementMap<IMob> roomMob);
+	public void setMobs(IGameElementMap<IMob> mobs);
 	public IItem removeItem(String key);
 	public boolean containsItem(String key);
 	public IMob addMob(IMob m);

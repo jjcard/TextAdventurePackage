@@ -84,7 +84,7 @@ public abstract class GameElement implements IGameElement {
 		this.altNames = b.altNames.toArray(new String[b.altNames.size()]);
 		this.validateFields = b.validateFields;
 	}
-	public String getStandardName(){
+	public final String getStandardName(){
 		return standardName;
 	}
 	public String getRoomDescription() {
@@ -93,7 +93,7 @@ public abstract class GameElement implements IGameElement {
 	public void setRoomDescription(String roomDescription) {
 		this.roomDescription = roomDescription;
 	}
-	public String[] getAltNames(){
+	public final String[] getAltNames(){
 		return altNames;
 	}
 	public boolean doValidateFields(){

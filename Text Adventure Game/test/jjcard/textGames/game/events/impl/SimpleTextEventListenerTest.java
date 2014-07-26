@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 import jjcard.textGames.game.events.impl.SimpleTextEventListener;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.After;
 import org.junit.Before;

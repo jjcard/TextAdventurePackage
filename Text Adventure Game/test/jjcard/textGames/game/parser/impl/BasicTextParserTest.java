@@ -16,6 +16,7 @@ public class BasicTextParserTest {
 	public void setUp() throws Exception {
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Test
 	public void test() {
 		BasicTextParser parser = new BasicTextParser();

@@ -78,6 +78,11 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, T>
 		}
 		
 	}
+	public void putAllElements(Collection<IGameElement> keys, T value){
+		for (IGameElement g: keys){
+			put(g, value);
+		}
+	}
 	public void putAll(T value, String...keys){
 		for (String key: keys){
 			put(key, value);

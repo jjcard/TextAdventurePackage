@@ -6,9 +6,6 @@ import static org.junit.Assert.assertTrue;
 import jjcard.textGames.game.events.ITextEvent;
 import jjcard.textGames.game.events.ITextEventListener;
 import jjcard.textGames.game.events.ITextEventManager;
-import jjcard.textGames.game.events.impl.SimpleTextEvent;
-import jjcard.textGames.game.events.impl.TextEventManager;
-import jjcard.textGames.game.impl.Commands;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +20,7 @@ public class TextEventManagerTest {
 	public void noEventListenerTest() {
 		ITextEventManager evntMgr = TextEventManager.getInstance();
 		evntMgr.registerEventListener(null, SimpleTextEvent.class);
-		boolean succeded = evntMgr.generateEvent(new SimpleTextEvent(Commands.ATTACK, "Nothing"));
+		boolean succeded = evntMgr.generateEvent(new SimpleTextEvent("attack", "Nothing"));
 		assertFalse(succeded);
 	}
 	
@@ -35,7 +32,7 @@ public class TextEventManagerTest {
 			public boolean handleEvent(ITextEvent event) {
 				SimpleTextEvent e = (SimpleTextEvent) event;
 				
-				assertEquals(Commands.GET, e.getCommand());
+				assertEquals("get", e.getKey());
 				assertEquals("Win", e.getCommandKey());
 				return true;
 			}
@@ -43,7 +40,7 @@ public class TextEventManagerTest {
 		
 		evntMgr.registerEventListener(listener, SimpleTextEvent.class);
 		
-		boolean succeded = evntMgr.generateEvent(new SimpleTextEvent(Commands.GET, "Win"));
+		boolean succeded = evntMgr.generateEvent(new SimpleTextEvent("get", "Win"));
 		assertTrue(succeded);
 	}
 

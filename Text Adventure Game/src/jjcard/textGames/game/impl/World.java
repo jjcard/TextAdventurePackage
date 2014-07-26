@@ -192,38 +192,6 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		return current.containsExit(dir);
 	}
 
-	/**
-	 * does basic operations with given CommandsAndKey given and returns
-	 * ReturnCom
-	 * 
-	 * @param comkey
-	 * @return ReturnCom detailing what happened
-	 */
-	public ReturnCom executeCommands(CommandAndKey comkey) {
-		String key = comkey.getKey();
-		switch (comkey.getCommand()) {
-		case ATTACK:
-			return attackMob(key);
-		case LOOK:
-			return lookAt(key);
-
-		case MOVE:
-			return movePlayer(key);
-		case GET:
-			return getItemFromRoom(key);
-		case LOOT_ALL:
-			return lootAllMob(key);
-		case DROP:
-			return dropItem(key);
-		case EQUIP:
-			return equipItem(key);
-		case UNEQUIP:
-			return unequipItem(key);
-		default:
-			return ReturnCom.COMMAND_NOT_FOUND;
-
-		}
-	}
 
 	/**
 	 * does basic parsing for input Strings and returns the Command and and key

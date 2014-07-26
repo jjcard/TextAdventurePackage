@@ -1,6 +1,7 @@
 package jjcard.textGames.game.parser.impl;
 
 import jjcard.textGames.game.parser.ITextTokenType;
+import jjcard.textGames.game.parser.impl.TextDictionaryFileUtil.ValueConvertor;
 
 public enum BasicTextTokenType implements ITextTokenType {
 	//objects
@@ -32,5 +33,12 @@ public enum BasicTextTokenType implements ITextTokenType {
 	@Override
 	public String[] defaultWords() {
 		return defaultWords;
+	}
+	public static class BasicTextTokenTypeConverter implements ValueConvertor<BasicTextTokenType>{
+		@Override
+		public BasicTextTokenType valueOf(String string) {
+			return BasicTextTokenType.valueOf(string);
+		}
+		
 	}
 }

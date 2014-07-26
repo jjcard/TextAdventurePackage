@@ -82,7 +82,7 @@ public class SimpleTextEventListener implements ITextEventListener {
 	@Override
 	public boolean handleEvent(ITextEvent event) {
 		SimpleTextEvent e  = (SimpleTextEvent) event;
-		String key = e.getKey();
+		String key = event.getKey();
 		
 		String toPrint = printMap.get(key);
 		

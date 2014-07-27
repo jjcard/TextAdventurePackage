@@ -14,24 +14,24 @@ import jjcard.textGames.game.events.ITextEventListener;
 
 public class SimpleTextEventListener implements ITextEventListener {
 
-	public static final String defaultTextLocation = "resources"+File.separator+"Strings.txt";
+	public static final String DEFAULT_TEXT_LOCATION = "resources"+File.separator+"Strings.txt";
 	public static final String COMMENT_INDICATOR = "#";
 	public static final String PAIR_INDICATOR = "=";
-	private static final Pattern pairPattern = Pattern.compile(PAIR_INDICATOR);
+	private static final Pattern PAIR_PATTERN = Pattern.compile(PAIR_INDICATOR);
 	public static final String ESCAPE_CHARACTER = "\\\\";
-	private static final Pattern keyInputPattern = Pattern.compile("[^"+ESCAPE_CHARACTER+"]<KEY>");
+	private static final Pattern KEY_INPUT_PATTERN = Pattern.compile("[^"+ESCAPE_CHARACTER+"]<KEY>");
 	
 	
-	private Map<String, String> printMap;
+	private final Map<String, String> printMap;
 	private PrintStream out = System.out;
 	
 	public SimpleTextEventListener() throws IOException{
 		printMap = new TreeMap<String, String>();
-		loadPrintMap(defaultTextLocation);
+		loadPrintMap(DEFAULT_TEXT_LOCATION);
 	}
 	public SimpleTextEventListener(PrintStream out) throws IOException{
 		printMap = new TreeMap<String, String>();
-		loadPrintMap(defaultTextLocation);
+		loadPrintMap(DEFAULT_TEXT_LOCATION);
 		this.out = out;
 	}
 	public SimpleTextEventListener(String fileLocation) throws IOException{
@@ -52,7 +52,7 @@ public class SimpleTextEventListener implements ITextEventListener {
 			
 			while ((line = bfr.readLine()) != null){
 				if (!line.startsWith(COMMENT_INDICATOR) && !line.isEmpty()){
-					String[] pair = pairPattern.split(line);
+					String[] pair = PAIR_PATTERN.split(line);
 					
 					if (pair.length < 2){
 						//Do something
@@ -72,7 +72,7 @@ public class SimpleTextEventListener implements ITextEventListener {
 	private String formatString(String value, String keyReplace){
 		String formatedString = value;
 		if (keyReplace != null){
-			keyInputPattern.matcher(value).replaceAll(keyReplace);	
+			KEY_INPUT_PATTERN.matcher(value).replaceAll(keyReplace);	
 		}
 		
 		return formatedString;

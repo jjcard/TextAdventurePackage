@@ -24,7 +24,7 @@ public class Weapon extends Item implements IWeapon{
 			this.critChance = w.critChance;
 			this.durability = w.durability;	
 		}
-		public WeaponBuilder(GameElement g){
+		public WeaponBuilder(AbstractGameElement g){
 			super(g);
 			use(ItemUse.Weapon);
 		}

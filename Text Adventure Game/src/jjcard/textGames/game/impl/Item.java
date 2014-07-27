@@ -3,7 +3,7 @@ package jjcard.textGames.game.impl;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.util.EqualsUtil;
 
-public class Item extends GameElement implements IItem{
+public class Item extends AbstractGameElement implements IItem{
 	private int cost;
 	private String info;
 	private int level;
@@ -33,7 +33,7 @@ public class Item extends GameElement implements IItem{
 			  movable = i.movable;
 			  use = i.use;
 		}
-		public ItemBuilder(GameElement e){
+		public ItemBuilder(AbstractGameElement e){
 			super(e);
 		}
 		public ItemBuilder cost(int cost){

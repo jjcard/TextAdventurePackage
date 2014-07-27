@@ -11,8 +11,8 @@ import jjcard.textGames.game.util.EqualsUtil;
 public class GameElementMap<A extends IGameElement> implements IGameElementMap<A>{
 	
 	private Locale locale = Locale.getDefault();
-	private HashMap<String, String> altNamesMap;
-	private HashMap<String, A> elementMap;
+	private final HashMap<String, String> altNamesMap;
+	private final HashMap<String, A> elementMap;
 	
 	
    public GameElementMap(){

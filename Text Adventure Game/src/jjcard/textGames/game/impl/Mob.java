@@ -16,8 +16,8 @@ import jjcard.textGames.game.util.EqualsUtil;
  * @author jjcard
  *
  */
-public class Mob extends GameElement implements IMob{
-	public static int DEFAULT_HEALTH = 10;
+public class Mob extends AbstractGameElement implements IMob{
+	public static final int DEFAULT_HEALTH = 10;
 	private String description;
 	private int maxHealth;
 	private int curHealth;
@@ -65,7 +65,7 @@ public class Mob extends GameElement implements IMob{
 			  this.armour = b.armour;
 			  this.weapon = b.weapon;
 		}
-		public MobBuilder(GameElement g){
+		public MobBuilder(AbstractGameElement g){
 			super(g);
 		}
 		/**

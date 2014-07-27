@@ -14,12 +14,12 @@ public class Armour extends Item implements IArmour {
 			super();
 			use(ItemUse.Armour);
 		}
-		public ArmourBuilder(Armour a){
-			super(a);
-			this.defense = a.defense;
+		public ArmourBuilder(Armour armour){
+			super(armour);
+			this.defense = armour.defense;
 		}
-		public ArmourBuilder(GameElement a){
-			super(a);
+		public ArmourBuilder(AbstractGameElement element){
+			super(element);
 			use(ItemUse.Armour);
 		}
 		public ArmourBuilder cost(int cost){
@@ -74,9 +74,9 @@ public class Armour extends Item implements IArmour {
 			return new Armour(this);
 		}
 	}
-	protected Armour(ArmourBuilder b){
-		super(b);
-		setDefense(b.defense);
+	protected Armour(ArmourBuilder builder){
+		super(builder);
+		setDefense(builder.defense);
 	}
 	public int getDefense(){
 		return defense;

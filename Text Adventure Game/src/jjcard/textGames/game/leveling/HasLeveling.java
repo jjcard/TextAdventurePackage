@@ -1,4 +1,4 @@
-package jjcard.textGames.game.Leveling;
+package jjcard.textGames.game.leveling;
 
 /**
  * Interface classes need to implement in order to use a LevelingStrategy

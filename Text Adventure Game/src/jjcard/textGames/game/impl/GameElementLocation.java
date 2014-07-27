@@ -10,7 +10,7 @@ import jjcard.textGames.game.IMob;
  * An Implementation of ILocation that is also a GameElement and follows the builder pattern.
  *
  */
-public class GameElementLocation extends GameElement implements ILocation {
+public class GameElementLocation extends AbstractGameElement implements ILocation {
 
 	private static final char SPACE = ' ';
 	private static final String EXIT_START = "The obvious exits are";
@@ -28,8 +28,8 @@ public class GameElementLocation extends GameElement implements ILocation {
 		public GameElementLocationBuilder(){
 			super();
 		}
-		public GameElementLocationBuilder(GameElement e){
-			super(e);
+		public GameElementLocationBuilder(AbstractGameElement element){
+			super(element);
 		}
 		public GameElementLocationBuilder standardName(String name){
 			super.standardName(name);
@@ -90,11 +90,11 @@ public class GameElementLocation extends GameElement implements ILocation {
 			return new GameElementLocation(this);
 		}
 	}
-	protected GameElementLocation(GameElementLocationBuilder b) {
-		super(b);
-		this.roomMob = b.roomMob;
-		this.exits = b.exits;
-		this.inventory = b.inventory;
+	protected GameElementLocation(GameElementLocationBuilder builder) {
+		super(builder);
+		this.roomMob = builder.roomMob;
+		this.exits = builder.exits;
+		this.inventory = builder.inventory;
 	}
 
 
@@ -151,18 +151,18 @@ public class GameElementLocation extends GameElement implements ILocation {
 	public IItem removeItem(String key){
 		return inventory.remove(key);
 	}
-	public boolean containsItem(String keyR){
-		return inventory.containsName(keyR);
+	public boolean containsItem(String key){
+		return inventory.containsName(key);
 	}
-	public IMob addMob(IMob m){
-		return roomMob.put(m);
+	public IMob addMob(IMob mob){
+		return roomMob.put(mob);
 		
 	}
 	public IMob removeMob(String key){
 		return roomMob.remove(key);
 	}
-	public boolean containsMob(String m){
-		return roomMob.containsName(m);
+	public boolean containsMob(String key){
+		return roomMob.containsName(key);
 
 	}
 	/**

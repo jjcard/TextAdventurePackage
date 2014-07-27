@@ -40,11 +40,11 @@ public class BasicTextParserTest {
 		String text2 = "And then I said \" Poker? I hardly knew her!\"";
 		String[] text2Expected = new String[]{"And", "then", "I", "said", "\" Poker? I hardly knew her!\""};
 		
-		String[] result1 = BasicTextParser.splitPattern.split(text1);
+		String[] result1 = BasicTextParser.SPLIT_PATTERN.split(text1);
 		
 		Assert.assertArrayEquals(text1Expected, result1);
 		
-		String[] result2 = BasicTextParser.splitPattern.split(text2);
+		String[] result2 = BasicTextParser.SPLIT_PATTERN.split(text2);
 		
 		Assert.assertArrayEquals(text2Expected, result2);
 	}

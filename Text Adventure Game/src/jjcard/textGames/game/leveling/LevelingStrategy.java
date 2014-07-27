@@ -1,4 +1,4 @@
-package jjcard.textGames.game.Leveling;
+package jjcard.textGames.game.leveling;
 
 /**
  * A strategy to level

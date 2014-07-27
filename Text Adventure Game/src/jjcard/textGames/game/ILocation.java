@@ -21,9 +21,9 @@ public interface ILocation extends Comparable<ILocation>{
 	public void setMobs(IGameElementMap<IMob> mobs);
 	public IItem removeItem(String key);
 	public boolean containsItem(String key);
-	public IMob addMob(IMob m);
+	public IMob addMob(IMob mob);
 	public IMob removeMob(String key);
-	public boolean containsMob(String m);
+	public boolean containsMob(String key);
 	public void addExit(IExit exit);
 	public void addExit(String dir, ILocation room);
 	/**

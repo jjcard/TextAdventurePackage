@@ -7,7 +7,7 @@ import jjcard.textGames.game.events.ITextEvent;
 import jjcard.textGames.game.events.ITextEventListener;
 import jjcard.textGames.game.events.ITextEventManager;
 
-public class TextEventManager implements ITextEventManager{
+public final class TextEventManager implements ITextEventManager{
 	
 	private static TextEventManager instance = null;
 	private final Map<Class<? extends ITextEvent>, ITextEventListener> listenerMap;
@@ -29,8 +29,8 @@ public class TextEventManager implements ITextEventManager{
 
 	@Override
 	public ITextEventListener registerEventListener(ITextEventListener listener,
-			Class<? extends ITextEvent> c) {
-		return listenerMap.put(c, listener);
+			Class<? extends ITextEvent> event) {
+		return listenerMap.put(event, listener);
 	}
 
 

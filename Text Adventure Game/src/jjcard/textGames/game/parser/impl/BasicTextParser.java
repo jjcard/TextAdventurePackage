@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import jjcard.textGames.game.parser.AbstractTextIndicatorParser;
 import jjcard.textGames.game.parser.ITextDictionary;
 import jjcard.textGames.game.parser.ITextTokenType;
 import jjcard.textGames.game.parser.PatternList;
-import jjcard.textGames.game.parser.TextIndicatorParser;
 import jjcard.textGames.game.parser.TextParserError;
 import jjcard.textGames.game.parser.TextToken;
 import jjcard.textGames.game.parser.TextTokenStream;
@@ -18,14 +18,14 @@ import jjcard.textGames.game.parser.TextTokenStream.TextTokenStreamBuilder;
  *
  * @param <T>
  */
-public class BasicTextParser<T extends ITextTokenType> extends TextIndicatorParser<T, TextIndicator> {
+public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndicatorParser<T, TextIndicator> {
 	
 
 	private ITextDictionary<T> dictionary;
 	private final PatternList<T> textTokenPatterns;
 	private final PatternList<TextIndicator> textIndicatorPatterns;
 	//split pattern based on StackOverflow post by Bart Kiers
-	public static final Pattern splitPattern = Pattern.compile("[ ]+(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+	public static final Pattern SPLIT_PATTERN = Pattern.compile("[ ]+(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 	private int objectLimit = 10;
 	
 	private TextTokenStream<T> previousStream;
@@ -48,7 +48,7 @@ public class BasicTextParser<T extends ITextTokenType> extends TextIndicatorPars
 	}
 	@Override
 	protected String[] splitText(String text) {
-		String[] words = splitPattern.split(text);
+		String[] words = SPLIT_PATTERN.split(text);
 		return words;
 	}
 
@@ -203,8 +203,7 @@ public class BasicTextParser<T extends ITextTokenType> extends TextIndicatorPars
 	
 	@Override
 	protected void startParsing(String text) {
-
-		
+		//nothing to see here folks
 	}
 	@Override
 	protected TextTokenStreamBuilder<T> handleWholeSentenceIndicator(

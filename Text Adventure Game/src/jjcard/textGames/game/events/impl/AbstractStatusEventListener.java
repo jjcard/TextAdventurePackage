@@ -8,7 +8,7 @@ import jjcard.textGames.game.events.ITextEventListener;
  * @author jjcard
  *
  */
-public abstract class StatusEventListener implements ITextEventListener, IStatus {
+public abstract class AbstractStatusEventListener implements ITextEventListener, IStatus {
 
 	private boolean isDone;
 
@@ -32,7 +32,7 @@ public abstract class StatusEventListener implements ITextEventListener, IStatus
 	}
 	@Override
 	public boolean handleEvent(ITextEvent event) {
-		StatusEvent statusEvent = (StatusEvent) event;
+		AbstractStatusEvent statusEvent = (AbstractStatusEvent) event;
 		effect(statusEvent.isMobTurn());
 		return true;
 	}

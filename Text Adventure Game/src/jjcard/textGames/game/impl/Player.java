@@ -7,7 +7,7 @@ import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.IStatus;
 import jjcard.textGames.game.IWeapon;
-import jjcard.textGames.game.Leveling.HasLeveling;
+import jjcard.textGames.game.leveling.HasLeveling;
 
 
 public class Player extends Mob implements HasLeveling{
@@ -26,7 +26,7 @@ public class Player extends Mob implements HasLeveling{
 			this.xp = p.xp;
 			this.level = p.level;
 		}
-		public PlayerBuilder(GameElement g){
+		public PlayerBuilder(AbstractGameElement g){
 			super(g);
 		}
 		public PlayerBuilder standardName(String name){

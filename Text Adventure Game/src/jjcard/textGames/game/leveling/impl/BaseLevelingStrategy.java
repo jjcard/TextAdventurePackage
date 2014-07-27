@@ -1,12 +1,12 @@
-package jjcard.textGames.game.Leveling.impl;
+package jjcard.textGames.game.leveling.impl;
 
-import jjcard.textGames.game.Leveling.HasLeveling;
-import jjcard.textGames.game.Leveling.LevelingStrategy;
+import jjcard.textGames.game.leveling.HasLeveling;
+import jjcard.textGames.game.leveling.LevelingStrategy;
 
 
 
 public class BaseLevelingStrategy implements LevelingStrategy<HasLeveling> {
-	private static final int[] levelingChart = new int[]{1000, 3000, 6000, 
+	private static final int[] LEVELING_CHART = new int[]{1000, 3000, 6000, 
 		10000, 15000, 21000, 28000, 36000, 45000, 55000, 66000, 78000, 
 		91000, 105000, 120000, 136000, 153000, 171000, 190000};
 	private final HasLeveling client;
@@ -25,8 +25,8 @@ public class BaseLevelingStrategy implements LevelingStrategy<HasLeveling> {
 		
 	}
 	protected int getLevelFromChart(int xp){
-		for (int i = 0; i < levelingChart.length; i++){
-			if (levelingChart[i] < xp){
+		for (int i = 0; i < LEVELING_CHART.length; i++){
+			if (LEVELING_CHART[i] < xp){
 				return i;
 			}
 		}

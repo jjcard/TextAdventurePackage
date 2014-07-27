@@ -8,7 +8,7 @@ import jjcard.textGames.game.parser.TextTokenStream.TextTokenStreamBuilder;
  * @param <T>
  * @param <K>
  */
-public abstract class TextIndicatorParser<T extends ITextTokenType, K extends ITextIndicator>
+public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K extends ITextIndicator>
 		implements ITextParser<T> {
 
 	/**

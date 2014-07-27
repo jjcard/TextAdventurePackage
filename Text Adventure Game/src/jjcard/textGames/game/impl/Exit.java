@@ -9,7 +9,7 @@ import jjcard.textGames.game.util.EqualsUtil;
  * @author jjcard
  *
  */
-public class Exit extends GameElement implements IExit {
+public class Exit extends AbstractGameElement implements IExit {
 
 	
 	public static final ExitBuilder NORTH_BUILD = new Exit.ExitBuilder().standardName("NORTH").addAltName("N");
@@ -59,11 +59,11 @@ public class Exit extends GameElement implements IExit {
 		public ExitBuilder(){
 			super();
 		}
-		public ExitBuilder(Exit e){
-			super(e);
-			this.location = e.location;
+		public ExitBuilder(Exit exit){
+			super(exit);
+			this.location = exit.location;
 		}
-		public ExitBuilder(GameElement element){
+		public ExitBuilder(AbstractGameElement element){
 			super(element);
 		}
 		public ExitBuilder standardName(String name){
@@ -93,9 +93,9 @@ public class Exit extends GameElement implements IExit {
 		
 	}
 	
-	protected Exit(ExitBuilder b){
-		super(b);
-		this.location = b.location;
+	protected Exit(ExitBuilder builder){
+		super(builder);
+		this.location = builder.location;
 	}
 	public ILocation getLocation() {
 		return location;
@@ -109,16 +109,16 @@ public class Exit extends GameElement implements IExit {
 	public Exit getWithLocation(ILocation location){
 		return new ExitBuilder(this).location(location).build();
 	}
-	public boolean equals(Object o){
-		if (o == this){
+	public boolean equals(Object object){
+		if (object == this){
 			return true;
 		}
 		
-		if (o instanceof Exit){
-			if (!super.equals(o)){
+		if (object instanceof Exit){
+			if (!super.equals(object)){
 				return false;
 			}
-			if (EqualsUtil.notEqual(location, ((Exit) o).location)){
+			if (EqualsUtil.notEqual(location, ((Exit) object).location)){
 				return false;
 			}
 			return true;

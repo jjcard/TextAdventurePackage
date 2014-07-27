@@ -65,9 +65,9 @@ task wrapper(type: Wrapper){
 	gradleVersion = '2.0'
 }
 pmd {
-	ruleSets = ["basic"]
+	ruleSets = ["java-basic", "java-naming", "java-braces", "java-design", "java-unnecessary"]
 	ignoreFailures = true;
-	//ruleSets = ["basic", "unnecessary","naming", "braces", "design", "coupling", "optimization"]
+//	ruleSets = ["java-basic", "java-unnecessary","java-naming", "java-braces", "java-design", "java-coupling", "java-optimization"]
 }
 findbugs {
 	ignoreFailures = true

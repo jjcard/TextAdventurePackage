@@ -25,8 +25,8 @@ public interface IMob extends IGameElement{
 	public int getBasicAttack();
 	public boolean isHostile();
 	public List<IStatus> getStatusList();
-	public boolean containsStatus(IStatus s);
-	public boolean removeStatus(IStatus s);
+	public boolean containsStatus(IStatus status);
+	public boolean removeStatus(IStatus status);
 	/**
 	 * Sets the weapon to Weapon in the inventory with given name
 	 * @param a
@@ -74,9 +74,9 @@ public interface IMob extends IGameElement{
 	 */
 	public int getFullAttack();
 	
-	public IWeapon setWeapon(IWeapon w);
-	public IArmour setArmour( IArmour a);
-	public void addIStatus(IStatus s);
+	public IWeapon setWeapon(IWeapon weapon);
+	public IArmour setArmour( IArmour armour);
+	public void addIStatus(IStatus status);
 	/**
 	 * Removes the Inventory from the mob and returns the result
 	 * @return

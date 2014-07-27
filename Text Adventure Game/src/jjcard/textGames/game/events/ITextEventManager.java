@@ -12,7 +12,7 @@ public interface ITextEventManager {
 	 * @param c
 	 * @return
 	 */
-	public ITextEventListener registerEventListener(ITextEventListener listener, Class<? extends ITextEvent> c);
+	public ITextEventListener registerEventListener(ITextEventListener listener, Class<? extends ITextEvent> eventClass);
 	
 	/**
 	 * Generates a event and calls the listener associated with the event class.

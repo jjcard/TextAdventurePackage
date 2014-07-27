@@ -12,7 +12,7 @@ import jjcard.textGames.game.util.EqualsUtil;
  * @author jjcard
  *
  */
-public abstract class GameElement implements IGameElement{
+public abstract class AbstractGameElement implements IGameElement{
 	
 	
 
@@ -42,7 +42,7 @@ public abstract class GameElement implements IGameElement{
 		public GameElementBuilder(){
 			
 		}
-		public GameElementBuilder(GameElement g){
+		public GameElementBuilder(AbstractGameElement g){
 			this.standardName = g.standardName;
 			this.roomDescription = g.roomDescription;
 			this.altNames = Arrays.asList(g.altNames);
@@ -78,7 +78,7 @@ public abstract class GameElement implements IGameElement{
 		}
 	}
 	
-	protected GameElement(GameElementBuilder b){
+	protected AbstractGameElement(GameElementBuilder b){
 		this.standardName = b.standardName;
 		this.roomDescription = b.roomDescription;
 		this.altNames = b.altNames.toArray(new String[b.altNames.size()]);
@@ -123,13 +123,13 @@ public abstract class GameElement implements IGameElement{
 	public String toString(){
 		return getStandardName();
 	}
-	public boolean equals(Object o){
-		if (o == this){
+	public boolean equals(Object object){
+		if (object == this){
 			return true;
 		}
 		
-		if (o instanceof GameElement){
-			final GameElement e = (GameElement) o;
+		if (object instanceof AbstractGameElement){
+			final AbstractGameElement e = (AbstractGameElement) object;
 			if (EqualsUtil.notEqual(standardName, e.standardName)){
 				return false;
 			}

@@ -28,6 +28,10 @@ public class TextDictionaryFileUtil {
 	public static <T extends ITextTokenType> ITextDictionary<T> loadDictionaryFromFile(ValueConvertor<T> converter, String fileLocation) throws IOException{
 		return loadDictionaryFromFile(converter, new TextDictionary<T>(), new File(fileLocation));
 	}
+	
+	public static <T extends ITextTokenType> ITextDictionary<T> loadDictionaryFromFile(ValueConvertor<T> converter, BufferedReader bfr) throws IOException {
+		return loadDictionaryFromFile(converter, new TextDictionary<T>(), bfr);
+	}
 	/**
 	 * Parses the file using the given ValueConvertor to turn Strings into T. The Fields are read as pairs, one per line, separated by a '='. 
 	 * @param converter
@@ -56,7 +60,14 @@ public class TextDictionaryFileUtil {
 			throw new IOException("File cannot be found");
 		}
 	}
-	
+	/**
+	 * Parses the file using the given ValueConvertor to turn Strings into T. The Fields are read as pairs, one per line, separated by a '='. 
+	 * @param converter
+	 * @param dictionary
+	 * @param bfr
+	 * @return
+	 * @throws IOException
+	 */
 	public static <T extends ITextTokenType> ITextDictionary<T> loadDictionaryFromFile(ValueConvertor<T> converter, ITextDictionary<T> dictionary, BufferedReader bfr) throws IOException{
 		String line;
 		

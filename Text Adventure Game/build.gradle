@@ -1,6 +1,8 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'pmd'
+apply plugin: "findbugs"
+
 
 sourceCompatibility = 1.7
 version = '0.4.SNAPSHOT'
@@ -64,6 +66,10 @@ task wrapper(type: Wrapper){
 }
 pmd {
 	ruleSets = ["basic"]
+	ignoreFailures = true;
 	//ruleSets = ["basic", "unnecessary","naming", "braces", "design", "coupling", "optimization"]
+}
+findbugs {
+	ignoreFailures = true
 }
 

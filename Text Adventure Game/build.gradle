@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'pmd'
 
 sourceCompatibility = 1.7
 version = '0.4.SNAPSHOT'
@@ -60,5 +61,9 @@ configurations {
 
 task wrapper(type: Wrapper){
 	gradleVersion = '2.0'
+}
+pmd {
+	ruleSets = ["basic"]
+	//ruleSets = ["basic", "unnecessary","naming", "braces", "design", "coupling", "optimization"]
 }
 

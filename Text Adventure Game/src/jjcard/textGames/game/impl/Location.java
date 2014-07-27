@@ -172,7 +172,7 @@ public class Location implements ILocation {
 		
 		StringBuilder re = new StringBuilder();
 		for(IItem i: inventory.getElements()){
-			if ((!i.isHidden()) && (i.getRoomDescription() != null)){
+			if (!i.isHidden() && i.getRoomDescription() != null){
 				re.append(SPACE).append(i.getRoomDescription());
 			}
 		}

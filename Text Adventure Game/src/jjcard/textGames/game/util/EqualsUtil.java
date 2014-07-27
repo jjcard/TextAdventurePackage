@@ -33,7 +33,7 @@ public class EqualsUtil {
 		if (objects != null){
 			for (Object o: objects){
 				if (o instanceof Object[]){
-					hash = hash * prime + (o == null? 0: Arrays.hashCode((Object[])o));
+					hash = hash * prime + Arrays.hashCode((Object[])o);
 				} else {
 					hash = hash * prime + (o == null? 0: o.hashCode());
 				}

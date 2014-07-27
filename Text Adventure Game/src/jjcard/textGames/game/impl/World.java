@@ -369,9 +369,9 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 			// For objects that can also be used to infer their verbs
 			switch (object.getType()) {
 			case DIRECTION:
-				movePlayer(token);
+				return movePlayer(token);
 			case INVENTORY:
-				info(token);
+				return info(token);
 			default:
 				return ReturnCom.COMMAND_NOT_FOUND;
 			}

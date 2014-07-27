@@ -72,4 +72,10 @@ pmd {
 findbugs {
 	ignoreFailures = true
 }
+tasks.withType(FindBugs) {
+	reports {
+		xml.enabled = false
+		html.enabled = true
+	}
+ }
 

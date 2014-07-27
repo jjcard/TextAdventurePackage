@@ -24,8 +24,8 @@ public class Location implements ILocation {
 	private IGameElementMap<IExit> exits;
 	
 	public Location(){
-		this.name = new String();
-		description = new String();
+		this.name = "";
+		description = "";
 		inventory = new GameElementMap<IItem>();
 		roomMob = new GameElementMap<IMob>();
 		exits = new GameElementMap<IExit>();

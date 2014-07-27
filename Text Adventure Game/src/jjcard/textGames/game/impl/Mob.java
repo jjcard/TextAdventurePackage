@@ -260,7 +260,7 @@ public class Mob extends GameElement implements IMob{
 				this.maxHealth = 0;
 			}
 			
-			if (checkHealth & this.maxHealth < curHealth){
+			if (checkHealth && this.maxHealth < curHealth){
 				setHealth(this.maxHealth);
 			}			
 		}

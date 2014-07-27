@@ -9,7 +9,7 @@ import jjcard.textGames.game.parser.ITextDictionary;
 import jjcard.textGames.game.parser.ITextTokenType;
 
 public class TextDictionaryFileUtil {
-	public static final String pairPattern = "=";
+	public static final String PAIR_PATTERN = "=";
 	public static final String COMMENT_INDICATOR = "#";
 	public static interface ValueConvertor<T extends ITextTokenType>{
 		public T valueOf(String string);
@@ -74,7 +74,7 @@ public class TextDictionaryFileUtil {
 		while ((line = bfr.readLine()) != null){
 			line = line.trim();
 			if (!line.startsWith(COMMENT_INDICATOR) && !line.isEmpty()){
-				String[] pair = line.split(pairPattern, 2);
+				String[] pair = line.split(PAIR_PATTERN, 2);
 				
 				if (pair.length < 2){
 					//Do something

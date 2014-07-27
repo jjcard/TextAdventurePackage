@@ -48,8 +48,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	}
 	@Override
 	protected String[] splitText(String text) {
-		String[] words = SPLIT_PATTERN.split(text);
-		return words;
+		return SPLIT_PATTERN.split(text);
 	}
 
 	protected void handleRepeatIndicator(TextTokenStreamBuilder<T> builder,

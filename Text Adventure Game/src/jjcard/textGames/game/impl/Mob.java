@@ -29,7 +29,7 @@ public class Mob extends AbstractGameElement implements IMob{
 	private List<IStatus> statusList;
 	private IArmour armour;
 	private IWeapon weapon;
-	private boolean checkHealth;
+	private final boolean checkHealth;
 	
 	public static class MobBuilder extends GameElementBuilder{
 		private String description;

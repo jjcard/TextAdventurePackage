@@ -64,8 +64,8 @@ public class PatternList<S> {
 	 *
 	 */
 	private class PatternEntry {
-		private Pattern pattern;
-		private S value;
+		private final Pattern pattern;
+		private final S value;
 
 		public PatternEntry(Pattern p, S value) {
 			this.pattern = p;

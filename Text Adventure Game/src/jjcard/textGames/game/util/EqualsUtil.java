@@ -3,7 +3,7 @@ package jjcard.textGames.game.util;
 import java.util.Arrays;
 
 
-public class EqualsUtil {
+public final class EqualsUtil {
 
 	
 	private EqualsUtil(){

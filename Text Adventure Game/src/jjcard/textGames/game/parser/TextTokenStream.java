@@ -211,7 +211,7 @@ public class TextTokenStream<T extends ITextTokenType> {
 	 * @return
 	 */
 	public boolean hasObject() {
-		return objects.size() > 0;
+		return !objects.isEmpty();
 	}
 
 	/**

@@ -51,30 +51,34 @@ public class TextDictionaryFileUtil {
 		
 		if (file.exists()){
 			BufferedReader bfr = new BufferedReader(new FileReader(file));
-			String line;
-			
-			while ((line = bfr.readLine()) != null){
-				line = line.trim();
-				if (!line.startsWith(COMMENT_INDICATOR) && !line.isEmpty()){
-					String[] pair = line.split(pairPattern, 2);
-					
-					if (pair.length < 2){
-						//Do something
-						System.err.println("line found without full pair");
-					} else {
-						String key = pair[0].trim();
-						
-						T value = converter.valueOf(pair[1]);
-//						String value = pair[1];
-						dictionary.put(key, value);
-					}
-				}
-			}
-			bfr.close();
-			return dictionary;
+			return loadDictionaryFromFile(converter, dictionary, bfr);
 		} else {
 			throw new IOException("File cannot be found");
 		}
+	}
+	
+	public static <T extends ITextTokenType> ITextDictionary<T> loadDictionaryFromFile(ValueConvertor<T> converter, ITextDictionary<T> dictionary, BufferedReader bfr) throws IOException{
+		String line;
+		
+		while ((line = bfr.readLine()) != null){
+			line = line.trim();
+			if (!line.startsWith(COMMENT_INDICATOR) && !line.isEmpty()){
+				String[] pair = line.split(pairPattern, 2);
+				
+				if (pair.length < 2){
+					//Do something
+					System.err.println("line found without full pair");
+				} else {
+					String key = pair[0].trim();
+					
+					T value = converter.valueOf(pair[1]);
+//					String value = pair[1];
+					dictionary.put(key, value);
+				}
+			}
+		}
+		bfr.close();
+		return dictionary;
 	}
 //	public static <T extends ITextTokenType> ITextDictionary<T> loadDictionaryWithListFromFile(ValueConvertor<T> converter, ITextDictionary<T> dictionary, File file) throws IOException{
 //		if (file.exists()){

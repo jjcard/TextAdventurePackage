@@ -11,8 +11,7 @@ import jjcard.textGames.game.parser.ITextTokenType;
 import jjcard.textGames.game.parser.PatternList;
 import jjcard.textGames.game.parser.TextParserError;
 import jjcard.textGames.game.parser.TextToken;
-import jjcard.textGames.game.parser.TextTokenStream;
-import jjcard.textGames.game.parser.TextTokenStream.TextTokenStreamBuilder;
+import jjcard.textGames.game.parser.impl.TextTokenStream.TextTokenStreamBuilder;
 /**
  * Basic text parser class.
  *

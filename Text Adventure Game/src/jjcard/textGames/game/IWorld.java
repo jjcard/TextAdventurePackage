@@ -2,8 +2,8 @@ package jjcard.textGames.game;
 
 import jjcard.textGames.game.impl.Player;
 import jjcard.textGames.game.parser.ITextParser;
+import jjcard.textGames.game.parser.ITextTokenStream;
 import jjcard.textGames.game.parser.ITextTokenType;
-import jjcard.textGames.game.parser.TextTokenStream;
 
 public interface IWorld<T extends ITextTokenType, K> {
 
@@ -14,9 +14,9 @@ public interface IWorld<T extends ITextTokenType, K> {
 	public void setCurrent(ILocation location);		
 	
 	
-	public TextTokenStream<T> parseInput(String input);
+	public ITextTokenStream<T> parseInput(String input);
 	
-	public K executeCommands(TextTokenStream<T> stream);
+	public K executeCommands(ITextTokenStream<T> stream);
 	
 	public boolean goDirection(String dir);
 	

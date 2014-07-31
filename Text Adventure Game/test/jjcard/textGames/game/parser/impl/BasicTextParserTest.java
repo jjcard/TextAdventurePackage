@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import jjcard.textGames.game.parser.ITextDictionary;
-import jjcard.textGames.game.parser.TextTokenStream;
 
 import org.junit.Assert;
 import org.junit.Before;

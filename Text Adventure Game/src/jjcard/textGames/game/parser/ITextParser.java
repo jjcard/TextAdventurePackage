@@ -1,5 +1,6 @@
 package jjcard.textGames.game.parser;
 
+
 /**
  * 
  * Interface TextParsers should use.
@@ -12,7 +13,7 @@ public interface ITextParser<T extends ITextTokenType> {
 	 * Parses the String and returns a TextTokenStream containing the parsed result.
 	 * @param text
 	 */
-	public TextTokenStream<T> parseText(String text);
+	public ITextTokenStream<T> parseText(String text);
 	
 	/**
 	 * Sets the library the parser will use.

@@ -1,8 +1,12 @@
-package jjcard.textGames.game.parser;
+package jjcard.textGames.game.parser.impl;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import jjcard.textGames.game.parser.ITextTokenStream;
+import jjcard.textGames.game.parser.ITextTokenType;
+import jjcard.textGames.game.parser.TextParserError;
+import jjcard.textGames.game.parser.TextToken;
 import jjcard.textGames.game.util.EqualsUtil;
 
 /**
@@ -11,7 +15,7 @@ import jjcard.textGames.game.util.EqualsUtil;
  * 
  * @param <T>
  */
-public class TextTokenStream<T extends ITextTokenType> {
+public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStream<T>{
 
 	private final List<TextToken<T>> objects;
 

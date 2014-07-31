@@ -9,8 +9,8 @@ import jjcard.textGames.game.IMob;
 import jjcard.textGames.game.IWeapon;
 import jjcard.textGames.game.IWorld;
 import jjcard.textGames.game.parser.ITextParser;
+import jjcard.textGames.game.parser.ITextTokenStream;
 import jjcard.textGames.game.parser.TextToken;
-import jjcard.textGames.game.parser.TextTokenStream;
 import jjcard.textGames.game.parser.impl.BasicTextTokenType;
 
 /**
@@ -201,7 +201,7 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 	 *            String
 	 * @return CommandAndKey
 	 */
-	public TextTokenStream<BasicTextTokenType> parseInput(String input) {
+	public ITextTokenStream<BasicTextTokenType> parseInput(String input) {
 		return parser.parseText(input);
 	}
 
@@ -338,7 +338,7 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 	}
 
 	@Override
-	public ReturnCom executeCommands(TextTokenStream<BasicTextTokenType> stream) {
+	public ReturnCom executeCommands(ITextTokenStream<BasicTextTokenType> stream) {
 		TextToken<BasicTextTokenType> object = stream.getFirstObject();
 		String token = object == null ? null : object.getToken();
 		if (token != null) {

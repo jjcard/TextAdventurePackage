@@ -5,17 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import jjcard.textGames.game.IWorld;
-import jjcard.textGames.game.impl.Armour;
-import jjcard.textGames.game.impl.Exit;
-import jjcard.textGames.game.impl.Item;
-import jjcard.textGames.game.impl.Location;
-import jjcard.textGames.game.impl.Mob;
-import jjcard.textGames.game.impl.Player;
-import jjcard.textGames.game.impl.ReturnCom;
-import jjcard.textGames.game.impl.Weapon;
-import jjcard.textGames.game.impl.World;
 import jjcard.textGames.game.parser.ITextParser;
-import jjcard.textGames.game.parser.TextTokenStream;
+import jjcard.textGames.game.parser.ITextTokenStream;
 import jjcard.textGames.game.parser.impl.BasicTextParser;
 import jjcard.textGames.game.parser.impl.BasicTextTokenType;
 import jjcard.textGames.game.parser.impl.TextDictionary;
@@ -41,7 +32,7 @@ public class WorldTest {
 		assertEquals("entry room", world.getCurrent().getName());
 		world.goDirection("north");
 		assertEquals("hallway", world.getCurrent().getName());
-		TextTokenStream<BasicTextTokenType> ck = world.parseInput("move south");
+		ITextTokenStream<BasicTextTokenType> ck = world.parseInput("move south");
 		assertEquals(ck.getVerb().getType(), BasicTextTokenType.MOVE);
 		assertEquals(ck.getFirstObject().getToken(), "south");
 		ReturnCom rc = world.executeCommands(ck);
@@ -52,7 +43,7 @@ public class WorldTest {
 	public void MobsWorldTest(){
 		local.addMob( mob);
 		assertEquals(world.getCurrent().getMob("goblin"), mob);
-		TextTokenStream<BasicTextTokenType> ck = world.parseInput("Look goblin");
+		ITextTokenStream<BasicTextTokenType> ck = world.parseInput("Look goblin");
 		assertEquals(ck.getVerb().getType(), BasicTextTokenType.LOOK);
 		assertEquals(ck.getFirstObject().getToken(), "goblin");
 		ck = world.parseInput("look at goblin");
@@ -74,7 +65,7 @@ public class WorldTest {
 	@Test
 	public void WorldCombatTest(){
 		local.addMob(mob);
-		TextTokenStream<BasicTextTokenType> ck = world.parseInput("attack goblin");
+		ITextTokenStream<BasicTextTokenType> ck = world.parseInput("attack goblin");
 		assertEquals(ck.getVerb().getType(), BasicTextTokenType.ATTACK);
 		assertEquals(ck.getFirstObject().getToken(), "goblin");
 		assertEquals(mob.getHealth(), 10);
@@ -101,7 +92,7 @@ public class WorldTest {
 	public void EquipWorldTest(){
 		Armour wool = new Armour.ArmourBuilder().standardName("wool").info("its itchness might be a defense").level(0).defense(4).build();
 		player.addItem( wool);
-		TextTokenStream<BasicTextTokenType> ck = world.parseInput("equip wool");
+		ITextTokenStream<BasicTextTokenType> ck = world.parseInput("equip wool");
 		assertEquals(ck.getVerb().getType(), BasicTextTokenType.EQUIP);
 		assertEquals(ck.getFirstObject().getToken(), "wool");
 		assertEquals(player.getFullDefense(), 8);
@@ -151,7 +142,7 @@ public class WorldTest {
 	public void ItemWorldTest(){
 		assertTrue(world.getCurrent().containsItem("item"));
 		assertFalse(player.containsItem("item"));
-		TextTokenStream<BasicTextTokenType> ck = world.parseInput("get item");
+		ITextTokenStream<BasicTextTokenType> ck = world.parseInput("get item");
 		assertEquals(ck.getFirstObject().getToken(), "item");
 		assertEquals(ck.getFirstObject().getType(), BasicTextTokenType.ITEM);
 		assertEquals(ck.getVerb().getType(), BasicTextTokenType.GET);

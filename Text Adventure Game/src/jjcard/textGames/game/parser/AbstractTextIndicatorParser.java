@@ -1,6 +1,7 @@
 package jjcard.textGames.game.parser;
 
-import jjcard.textGames.game.parser.TextTokenStream.TextTokenStreamBuilder;
+import jjcard.textGames.game.parser.impl.TextTokenStream;
+import jjcard.textGames.game.parser.impl.TextTokenStream.TextTokenStreamBuilder;
 
 /**
  * An abstract class that that be extended to handle some of the basic parts of parsing using ITextIndicators.

@@ -1,5 +1,7 @@
 package jjcard.textGames.game.parser.impl;
 
+import java.util.Arrays;
+
 import jjcard.textGames.game.parser.ITextTokenType;
 import jjcard.textGames.game.parser.impl.TextDictionaryFileUtil.ValueConvertor;
 
@@ -9,16 +11,18 @@ public enum BasicTextTokenType implements ITextTokenType {
 	
 	//verbs
 	 TALK(false, "talk"), LOOK(false, "look"), GET(false, "get"), MOVE(false, "move"), LOOT(false, "loot"), EQUIP(false, "equip"), UNEQUIP(false, "unequip"), 
-	 SAVE(false, "save"), QUIT(false, "quit"), DROP(false, "drop"), ATTACK(false, "attack"), INFO(false);
+	 SAVE(false, "save"), QUIT(false, "quit"), DROP(false, "drop"), ATTACK(false, "attack"), INFO(false), BUY(false, "buy"), SELL(false, "sell");
 	
 	
 	//attributes
 	private final boolean isObject;
 	private final String[] defaultWords;
+	private final int length;
 	
 	BasicTextTokenType(boolean isObject, String...defaultWords){
 		this.isObject = isObject;
 		this.defaultWords = defaultWords;
+		this.length = defaultWords.length;
 	}
 	BasicTextTokenType(){
 		this(true);
@@ -32,7 +36,7 @@ public enum BasicTextTokenType implements ITextTokenType {
 	}
 	@Override
 	public String[] defaultWords() {
-		return defaultWords;
+		return Arrays.copyOf(defaultWords, length);
 	}
 	public static class BasicTextTokenTypeConverter implements ValueConvertor<BasicTextTokenType>{
 		@Override

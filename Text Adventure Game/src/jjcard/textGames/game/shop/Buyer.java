@@ -13,6 +13,5 @@ public interface Buyer<T extends ITextTokenType> {
 	
 	public void buy(IMob seller, T item, int amount);
 	
-//	public List<IItem> getInventory();
 	
 }

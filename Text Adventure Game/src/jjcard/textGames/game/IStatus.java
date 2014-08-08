@@ -1,6 +1,9 @@
 package jjcard.textGames.game;
 
-
+/**
+ * Semi-Experimental: Subject to Change
+ *
+ */
 public interface IStatus {
 	
 	
@@ -24,7 +27,6 @@ public interface IStatus {
 	 * mobsTurn is true if it is the turn of the Mob this status is attached to.
 	 * @param mob the Mob
 	 * @param mobsTurn the boolean
-	 * @return
 	 */
 	public void effect(boolean mobsTurn);
 	/**

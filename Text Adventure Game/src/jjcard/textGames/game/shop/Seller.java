@@ -2,6 +2,7 @@ package jjcard.textGames.game.shop;
 
 import java.util.List;
 
+import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.IMob;
 /**
  * 
@@ -12,9 +13,9 @@ import jjcard.textGames.game.IMob;
 public interface Seller {
 
 	
-	public void sell(IMob buyer, IShopItem item);
+	public IItem sell(IMob buyer, IShopItem item);
 	
-	public void sell(IMob buyer, IShopItem item, int amount);
+	public IItem sell(IMob buyer, IShopItem item, int amount);
 	
 	public List<IShopItem> getInventory();
 }

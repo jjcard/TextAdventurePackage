@@ -108,7 +108,7 @@ public class Location implements ILocation {
 		
 	}
 	public IMob removeMob(String key){
-		return roomMob.remove(key);
+		return MAP_UTIL.removeItemFromMap(roomMob, key);
 	}
 	public boolean containsMob(String m){
 		return MAP_UTIL.containsKey(roomMob, m);
@@ -127,8 +127,6 @@ public class Location implements ILocation {
 	public IExit addExit(IExit exit){
 		return MAP_UTIL.addItemToMap(exits, exit);
 	}
-
-	
 	/**
 	 * removes Exit under that String
 	 * @param dir

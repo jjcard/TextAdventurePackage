@@ -158,8 +158,6 @@ public class Mob extends AbstractGameElement implements IMob{
 		public Mob build(){
 			return new Mob(this);
 		}
-		
-		
 	}
 	
 	protected Mob( MobBuilder b){

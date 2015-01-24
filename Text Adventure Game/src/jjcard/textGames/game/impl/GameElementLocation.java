@@ -146,7 +146,7 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		
 	}
 	public IItem removeItem(String key){
-		return inventory.remove(key);
+		return MAP_UTIL.removeItemFromMap(inventory, key);
 	}
 	public boolean containsItem(String key){
 		return MAP_UTIL.containsKey(inventory, key);
@@ -156,7 +156,7 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		
 	}
 	public IMob removeMob(String key){
-		return roomMob.remove(key);
+		return MAP_UTIL.removeItemFromMap(roomMob,key);
 	}
 	public boolean containsMob(String key){
 		return MAP_UTIL.containsKey(roomMob,key);
@@ -184,7 +184,7 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 	 * @return 
 	 */
 	public IExit removeExit(String dir){
-		 return exits.remove(dir); 
+		 return MAP_UTIL.removeItemFromMap(exits,dir); 
 	}
 
 	/**
@@ -193,18 +193,21 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 	 * @return
 	 */
 	public ILocation getExitLocation(String dir){
-		IExit exit = exits.get(dir);
+		IExit exit = getExit(dir);
 		if (exit != null){
 			return exit.getLocation();
 		} else {
 			return null;
 		}
 	}
+	public IExit getExit(String dir){
+		return MAP_UTIL.getItemFromMap(exits, dir);
+	}
 	public IMob getMob(String key){
-		return roomMob.get(key);
+		return MAP_UTIL.getItemFromMap(roomMob,key);
 	}
 	public IItem getItem(String key){
-		return inventory.get(key);
+		return MAP_UTIL.getItemFromMap(inventory,key);
 	}
 	public boolean containsExit(String dir){
 		return MAP_UTIL.containsKey(exits,dir);

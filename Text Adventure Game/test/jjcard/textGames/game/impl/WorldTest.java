@@ -182,7 +182,7 @@ public class WorldTest {
 	private ITextParser<BasicTextTokenType> getParser(){
 		if (parser == null){
 			parser = new BasicTextParser<BasicTextTokenType>();
-			TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>(BasicTextTokenType.values());
+			TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<BasicTextTokenType>(BasicTextTokenType.values());
 			dictionary.putAll(BasicTextTokenType.DIRECTION, Exit.defaultValues);
 			dictionary.putAll(BasicTextTokenType.ITEM, "coin", "item");
 			dictionary.putAll(BasicTextTokenType.WEAPON, "shank");

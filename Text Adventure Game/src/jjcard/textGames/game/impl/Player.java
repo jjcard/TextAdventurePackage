@@ -1,9 +1,9 @@
 package jjcard.textGames.game.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import jjcard.textGames.game.IArmour;
-import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.IStatus;
 import jjcard.textGames.game.IWeapon;
@@ -41,14 +41,6 @@ public class Player extends Mob implements HasLeveling{
 			this.xp = xp;
 			return this;
 		}
-		public PlayerBuilder altNames(String[] altNames){
-			super.altNames(altNames);
-			return this;
-		}
-		public PlayerBuilder addAltName(String altName){
-			super.addAltName(altName);
-			return this;
-		}
 		public PlayerBuilder checkHealth(boolean checkHealth){
 			super.checkHealth(checkHealth);
 			return this;
@@ -73,7 +65,7 @@ public class Player extends Mob implements HasLeveling{
 			super.money(money);
 			return this;
 		}
-		public PlayerBuilder inventory(IGameElementMap<IItem> inventory){
+		public PlayerBuilder inventory(Map<String, IItem> inventory){
 			super.inventory(inventory);
 			return this;
 		}

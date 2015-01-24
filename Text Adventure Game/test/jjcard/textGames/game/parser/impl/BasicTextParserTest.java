@@ -3,6 +3,7 @@ package jjcard.textGames.game.parser.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import jjcard.textGames.game.parser.ITextDefinition;
 import jjcard.textGames.game.parser.ITextDictionary;
 
 import org.junit.Assert;
@@ -51,8 +52,8 @@ public class BasicTextParserTest {
 	public void testParsing1(){
 		
 		ITextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>();
-		dictionary.put("go", BasicTextTokenType.MOVE);
-		dictionary.put("bread", BasicTextTokenType.ITEM);
+		dictionary.put("go", SimpleTextDefinition.getInstance(BasicTextTokenType.MOVE));
+		dictionary.put("bread", SimpleTextDefinition.getInstance(BasicTextTokenType.ITEM));
 		String text = "Go to brEaD";
 		
 		BasicTextParser<BasicTextTokenType> parser = new BasicTextParser<>(dictionary);
@@ -72,10 +73,11 @@ public class BasicTextParserTest {
 	@Test
 	public void testPatternParsing(){
 		ITextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>();
-		dictionary.put("say", BasicTextTokenType.TALK);
+		ITextDefinition<BasicTextTokenType> def = new SimpleTextDefinition<BasicTextTokenType>(BasicTextTokenType.TALK);
+		dictionary.put("say", def);
 		String text = "And then I say \"I really hope this works\"";
 		BasicTextParser<BasicTextTokenType> parser = new BasicTextParser<>(dictionary);
-		parser.addTextTokenTypePattern("\".*\"", BasicTextTokenType.WORDS);
+		parser.addTextTokenTypePattern("\".*\"", SimpleTextDefinition.getInstance(BasicTextTokenType.WORDS));
 		
 		
 		TextTokenStream<BasicTextTokenType> stream = parser.parseText(text);

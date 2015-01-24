@@ -1,5 +1,7 @@
 package jjcard.textGames.game;
 
+import java.util.Map;
+
 /**
  * An ILocation contains a collection of IItems, IMobs, and IExits and methods to use them.
  *
@@ -13,19 +15,19 @@ public interface ILocation extends Comparable<ILocation>{
 	public String getName();
 	public String getDescription();
 	public void setDescription(String description);
-	public IGameElementMap<IItem> getInventory();
-	public IGameElementMap<IMob> getMobs();
-	public IGameElementMap<IExit> getExits();
+	public Map<String, IItem> getInventory();
+	public Map<String, IMob> getMobs();
+	public Map<String, IExit> getExits();
 	public IItem addItem(IItem add);
-	public void setInventory(IGameElementMap<IItem> inventory);
-	public void setMobs(IGameElementMap<IMob> mobs);
+	public void setInventory(Map<String, IItem> inventory);
+	public void setMobs(Map<String, IMob> mobs);
 	public IItem removeItem(String key);
 	public boolean containsItem(String key);
 	public IMob addMob(IMob mob);
 	public IMob removeMob(String key);
 	public boolean containsMob(String key);
-	public void addExit(IExit exit);
-	public void addExit(String dir, ILocation room);
+	public IExit addExit(IExit exit);
+	public IExit addExit(String dir, ILocation room);
 	/**
 	 * Removes the exit with the given direction and returns it.
 	 * @param dir

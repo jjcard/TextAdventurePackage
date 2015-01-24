@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Map;
+import java.util.TreeMap;
 
 import jjcard.textGames.game.parser.ITextDictionary;
 import jjcard.textGames.game.parser.ITextTokenType;
@@ -70,21 +72,33 @@ public class TextDictionaryFileUtil {
 	 */
 	public static <T extends ITextTokenType> ITextDictionary<T> loadDictionaryFromFile(ValueConvertor<T> converter, ITextDictionary<T> dictionary, BufferedReader bfr) throws IOException{
 		String line;
-		
+		int lineCount = 0;
 		while ((line = bfr.readLine()) != null){
 			line = line.trim();
+			lineCount++;
 			if (!line.startsWith(COMMENT_INDICATOR) && !line.isEmpty()){
-				String[] pair = line.split(PAIR_PATTERN, 2);
+				String[] pair = line.split(PAIR_PATTERN, 3);
 				
 				if (pair.length < 2){
 					//Do something
-					System.err.println("line found without full pair");
+					System.err.println("line:"+ lineCount + " found without full pair");
 				} else {
 					String key = pair[0].trim();
 					
 					T value = converter.valueOf(pair[1]);
-//					String value = pair[1];
-					dictionary.put(key, value);
+					AbstractTextDefinition<T> definition;
+					if (pair.length >=3){
+						definition = new SimpleTextDefinition<>(value);
+	//					String value = pair[1];
+						dictionary.put(key, definition);						
+					} else {
+						//have map of values
+						Map<String, String> standardMap = new TreeMap<String, String>();
+						String[] standarizedMap = pair[2].split("");
+						
+						
+					}
+
 				}
 			}
 		}

@@ -1,15 +1,17 @@
 package jjcard.textGames.game.impl;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import jjcard.textGames.game.IArmour;
 import jjcard.textGames.game.IGameElement;
-import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.IMob;
 import jjcard.textGames.game.IStatus;
 import jjcard.textGames.game.IWeapon;
 import jjcard.textGames.game.util.EqualsUtil;
+import jjcard.textGames.game.util.MapUtil;
 
 /**
  * a class to represent creatures and people.
@@ -22,7 +24,7 @@ public class Mob extends AbstractGameElement implements IMob{
 	private int maxHealth;
 	private int curHealth;
 	private int money = 0;
-	private IGameElementMap<IItem> inventory;
+	private Map<String, IItem> inventory;
 	private int defense = 0;
 	private int attack = 0;
 	private boolean hostile = true;
@@ -30,13 +32,14 @@ public class Mob extends AbstractGameElement implements IMob{
 	private IArmour armour;
 	private IWeapon weapon;
 	private final boolean checkHealth;
+	private static final MapUtil MAP_UTIL = MapUtil.getInstance();
 	
 	public static class MobBuilder extends GameElementBuilder{
 		private String description;
 		private int maxHealth;
 		private int curHealth;
 		private int money = 0;
-		private IGameElementMap<IItem> inventory = new GameElementMap<IItem>();
+		private Map<String, IItem> inventory = new HashMap<String, IItem>();
 		private int defense = 0;
 		private int attack = 0;
 		private boolean hostile = true;
@@ -94,9 +97,9 @@ public class Mob extends AbstractGameElement implements IMob{
 			this.money = money;
 			return this;
 		}
-		public MobBuilder inventory(IGameElementMap<IItem> inventory){
+		public MobBuilder inventory(Map<String, IItem> inventory){
 			if (inventory == null){
-				this.inventory = new GameElementMap<IItem>();
+				this.inventory = new HashMap<String, IItem>();
 			} else {
 				this.inventory = inventory;	
 			}
@@ -104,7 +107,7 @@ public class Mob extends AbstractGameElement implements IMob{
 			return this;
 		}
 		public MobBuilder addItem(IItem item){
-			this.inventory.put(item);
+			this.inventory.put(item.getStandardName(), item);
 			return this;
 		}
 		public MobBuilder defense(int defense){
@@ -142,14 +145,6 @@ public class Mob extends AbstractGameElement implements IMob{
 		}
 		public MobBuilder standardName(String name){
 			super.standardName(name);
-			return this;
-		}
-		public MobBuilder altNames(String[] altNames){
-			super.altNames(altNames);
-			return this;
-		}
-		public MobBuilder addAltName(String altName){
-			super.addAltName(altName);
 			return this;
 		}
 		public MobBuilder roomDescription(String roomDescrip){
@@ -202,11 +197,11 @@ public class Mob extends AbstractGameElement implements IMob{
 	public int getMoney(){
 		return money;
 	}
-	public IGameElementMap<IItem> getInventory() {
+	public Map<String, IItem> getInventory() {
 		return inventory;
 	}
 	public IItem getItem(String key){
-		return inventory.get(key);
+		return MAP_UTIL.getItemFromMap(inventory, key);
 	}
 	public IArmour getArmour(){
 		return armour;
@@ -371,24 +366,22 @@ public class Mob extends AbstractGameElement implements IMob{
 		statusList = s;
 	}
 	public IItem addItem(IItem add){
-		
-		return inventory.put(add);
-		
+		return MAP_UTIL.addItemToMap(inventory, add);
 	}
 	public IArmour removeArmour() {
 		IArmour re = armour;
 		armour = null;
 		return re;
 	}
-	public void addAllItems(IGameElementMap<IItem> addMap){
+	public void addAllItems(Map<String, IItem> addMap){
 		inventory.putAll(addMap);
 		
 		}
 	public IItem removeItem(String key){
-		return inventory.remove(key);
+		return MAP_UTIL.removeItemFromMap(inventory, key);
 	}
-	public IGameElementMap<IItem> removeInventory(){
-		IGameElementMap<IItem> returnIn = inventory;
+	public Map<String, IItem> removeInventory(){
+		Map<String, IItem> returnIn = inventory;
 		inventory = null;
 		return returnIn;
 	}
@@ -403,10 +396,10 @@ public class Mob extends AbstractGameElement implements IMob{
 		return curHealth;
 	}
 	public boolean containsItem(String key){
-		return inventory.containsName(key);
+		return MAP_UTIL.containsKey(inventory, key);
 	}
 	public int inventorySize() {
-		return inventory.getElementCount();
+		return inventory.size();
 	}
 	public boolean isDead(){
 		return  getHealth() <= 0;
@@ -436,16 +429,8 @@ public class Mob extends AbstractGameElement implements IMob{
 		}
 		if (key.equalsIgnoreCase(item.getStandardName())){
 			return true;
-		} else {
-			if (item.getAltNames() != null){
-				for (String altName: item.getAltNames()){
-					if (key.equalsIgnoreCase(altName)){
-						return true;
-					}
-				}
-			}
-			return false;
 		}
+		return false;
 	}
 	public boolean isKeyForWeapon(String key){
 		return isKeyForItem(key, weapon);
@@ -473,8 +458,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		}
 	}
 	public String inventoryToString(){
-		String re = inventory.getAllStandardNamesAsString();
-		return re.substring(1, re.length()-1);
+		return MAP_UTIL.getKeysAsString(inventory);
 		
 	}
 	public IArmour setArmour(String a){

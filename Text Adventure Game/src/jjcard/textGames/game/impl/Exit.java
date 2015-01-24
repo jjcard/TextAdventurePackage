@@ -12,16 +12,16 @@ import jjcard.textGames.game.util.EqualsUtil;
 public class Exit extends AbstractGameElement implements IExit {
 
 	
-	public static final ExitBuilder NORTH_BUILD = new Exit.ExitBuilder().standardName("NORTH").addAltName("N");
-	public static final ExitBuilder SOUTH_BUILD = new Exit.ExitBuilder().standardName("SOUTH").addAltName("S");
-	public static final ExitBuilder EAST_BUILD = new Exit.ExitBuilder().standardName("EAST").addAltName("E");
-	public static final ExitBuilder WEST_BUILD = new Exit.ExitBuilder().standardName("WEST").addAltName("W");
-	public static final ExitBuilder NORTHEAST_BUILD = new Exit.ExitBuilder().standardName("NORTHEAST").addAltName("NE");
-	public static final ExitBuilder NORTHWEST_BUILD = new Exit.ExitBuilder().standardName("NORTHWEST").addAltName("NW");
-	public static final ExitBuilder SOUTHEAST_BUILD = new Exit.ExitBuilder().standardName("SOUTHEAST").addAltName("SE");
-	public static final ExitBuilder SOUTHWEST_BUILD = new Exit.ExitBuilder().standardName("SOUTHWEST").addAltName("SW");
-	public static final ExitBuilder UP_BUILD = new Exit.ExitBuilder().standardName("UP").addAltName("U");
-	public static final ExitBuilder DOWN_BUILD = new Exit.ExitBuilder().standardName("DOWN").addAltName("D");
+	public static final ExitBuilder NORTH_BUILD = new Exit.ExitBuilder().standardName("NORTH");
+	public static final ExitBuilder SOUTH_BUILD = new Exit.ExitBuilder().standardName("SOUTH");
+	public static final ExitBuilder EAST_BUILD = new Exit.ExitBuilder().standardName("EAST");
+	public static final ExitBuilder WEST_BUILD = new Exit.ExitBuilder().standardName("WEST");
+	public static final ExitBuilder NORTHEAST_BUILD = new Exit.ExitBuilder().standardName("NORTHEAST");
+	public static final ExitBuilder NORTHWEST_BUILD = new Exit.ExitBuilder().standardName("NORTHWEST");
+	public static final ExitBuilder SOUTHEAST_BUILD = new Exit.ExitBuilder().standardName("SOUTHEAST");
+	public static final ExitBuilder SOUTHWEST_BUILD = new Exit.ExitBuilder().standardName("SOUTHWEST");
+	public static final ExitBuilder UP_BUILD = new Exit.ExitBuilder().standardName("UP");
+	public static final ExitBuilder DOWN_BUILD = new Exit.ExitBuilder().standardName("DOWN");
 	
 	
 	public static final Exit NORTH = NORTH_BUILD.build();
@@ -68,14 +68,6 @@ public class Exit extends AbstractGameElement implements IExit {
 		}
 		public ExitBuilder standardName(String name){
 			super.standardName(name);
-			return this;
-		}
-		public ExitBuilder altNames(String[] altNames){
-			super.altNames(altNames);
-			return this;
-		}
-		public ExitBuilder addAltName(String altName){
-			super.addAltName(altName);
 			return this;
 		}
 		public ExitBuilder roomDescription(String roomDescrip){

@@ -54,14 +54,6 @@ public class Armour extends Item implements IArmour {
 			super.standardName(name);
 			return this;
 		}
-		public ArmourBuilder altNames(String[] altNamesArray){
-			super.altNames(altNamesArray);
-			return this;
-		}
-		public ArmourBuilder addAltName(String altName){
-			super.addAltName(altName);
-			return this;
-		}
 		public ArmourBuilder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;

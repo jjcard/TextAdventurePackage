@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import jjcard.textGames.game.parser.AbstractTextIndicatorParser;
+import jjcard.textGames.game.parser.ITextDefinition;
 import jjcard.textGames.game.parser.ITextDictionary;
 import jjcard.textGames.game.parser.ITextTokenType;
 import jjcard.textGames.game.parser.PatternList;
@@ -21,7 +22,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	
 
 	private ITextDictionary<T> dictionary;
-	private final PatternList<T> textTokenPatterns;
+	private final PatternList<ITextDefinition<T>> textTokenPatterns;
 	private final PatternList<TextIndicator> textIndicatorPatterns;
 	//split pattern based on StackOverflow post by Bart Kiers
 	public static final Pattern SPLIT_PATTERN = Pattern.compile("[ ]+(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
@@ -60,21 +61,21 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		
 	}
 	/**
-	 * creates a Pattern matching the given String and Adds the pattern to the list matching to the given TextTokenType.
+	 * creates a Pattern matching the given String and Adds the pattern to the list matching to the given AbstractTextDefinition.
 	 * For each word, will be checked in the order given.
 	 * @param regexPattern
 	 * @param type
 	 */
-	public void addTextTokenTypePattern(String regexPattern, T type){
+	public void addTextTokenTypePattern(String regexPattern, ITextDefinition<T> type){
 		addTextTokenTypePattern(Pattern.compile(regexPattern), type);
 	}
 	/**
-	 * Adds the given pattern to the list matching to the given TextTokenType.
+	 * Adds the given pattern to the list matching to the given AbstractTextDefinition.
 	 * For each word, will be checked in the order given.
 	 * @param pattern
 	 * @param type
 	 */
-	public void addTextTokenTypePattern(Pattern pattern, T type){
+	public void addTextTokenTypePattern(Pattern pattern, ITextDefinition<T> type){
 		textTokenPatterns.add(pattern, type);
 	}
 	/**
@@ -180,13 +181,14 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		
 	}
 	@Override
-	protected T getType(String word) {
-		T type = dictionary.get(word);
-		if (type == null){
+	protected ITextDefinition<T> getDefinition(String word) {
+		//TODO something else here
+		ITextDefinition<T> def =  dictionary.get(word);
+		if (def == null){
 			//check against patterns
-			 type = textTokenPatterns.get(word);
+			def = textTokenPatterns.get(word);
 		}
-		return type;
+		return def;
 	}
 
 	@Override

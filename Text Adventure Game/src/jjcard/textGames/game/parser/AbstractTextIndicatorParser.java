@@ -31,10 +31,12 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 			String[] words = splitText(input);
 			handleStartOfWordParsing(builder, words);
 			for (String word : words) {
-				T type = getType(word);
-				if (type != null) {
+				ITextDefinition<T> def = getDefinition(word);
+				
+				if (def != null) {
+					T type = def.getType();
 					// has a type defined in the dictionary
-					TextToken<T> token = new TextToken<T>(word, type);
+					TextToken<T> token = new TextToken<T>(word, def.getStandardToken(word), type);
 					if (token.isObject()) {
 						if (withObjectIndicator) {
 							builder = handleWithObject(builder, token);
@@ -126,7 +128,7 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	 * @param word
 	 * @return
 	 */
-	protected abstract T getType(String word);
+	protected abstract ITextDefinition<T> getDefinition(String word);
 
 	/**
 	 * Called 

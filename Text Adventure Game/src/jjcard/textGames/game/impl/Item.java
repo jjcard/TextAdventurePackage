@@ -64,14 +64,6 @@ public class Item extends AbstractGameElement implements IItem{
 			super.standardName(name);
 			return this;
 		}
-		public ItemBuilder altNames(String[] altNamesArray){
-			super.altNames(altNamesArray);
-			return this;
-		}
-		public ItemBuilder addAltName(String altName){
-			super.addAltName(altName);
-			return this;
-		}
 		public ItemBuilder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;

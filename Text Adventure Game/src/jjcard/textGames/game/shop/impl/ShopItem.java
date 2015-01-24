@@ -45,10 +45,6 @@ public class ShopItem<T extends IItem> implements IShopItem{
 		return item.getStandardName();
 	}
 	@Override
-	public String[] getAltNames() {
-		return item.getAltNames();
-	}
-	@Override
 	public boolean isInfinite() {
 		return amount == -1;
 	}

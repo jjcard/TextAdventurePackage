@@ -6,6 +6,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import jjcard.textGames.game.IGameElement;
+import jjcard.textGames.game.parser.ITextDefinition;
 import jjcard.textGames.game.parser.ITextDictionary;
 import jjcard.textGames.game.parser.ITextTokenType;
 
@@ -14,7 +15,7 @@ import jjcard.textGames.game.parser.ITextTokenType;
  * Should have all the verbs and objects used in the game, or else parsing may not work correctly.
  *
  */
-public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, T>implements ITextDictionary<T>{
+public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, ITextDefinition<T>>implements ITextDictionary<T>{
 
 //	private static final Pattern pairPattern = Pattern.compile("=");
 //	public static final String COMMENT_INDICATOR = "#";
@@ -27,10 +28,10 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, T>
 	public TextDictionary(){
 		super();
 	}
-	public TextDictionary(Map<String, ? extends T> map){
+	public TextDictionary(Map<String, ? extends ITextDefinition<T>> map){
 		super(map);
 	}
-	public TextDictionary(SortedMap<String, ? extends T> map){
+	public TextDictionary(SortedMap<String, ? extends ITextDefinition<T>> map){
 		super(map);
 	}
 	/**
@@ -38,12 +39,26 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, T>
 	 * @param values
 	 */
 	@SafeVarargs
+	public TextDictionary(AbstractTextDefinition<T>...values){
+		super();
+		if (values != null){
+			for (AbstractTextDefinition<T> value: values){
+				if (value.getType().defaultWords() != null){
+					putAll(value, value.getType().defaultWords());	
+				}
+				
+			}
+		}
+	}
+	
+	@SafeVarargs
 	public TextDictionary(T...values){
 		super();
 		if (values != null){
 			for (T value: values){
 				if (value.defaultWords() != null){
-					putAll(value, value.defaultWords());	
+					AbstractTextDefinition<T> definition = new SimpleTextDefinition<T>(value);
+					putAll(definition , value.defaultWords());	
 				}
 				
 			}
@@ -54,44 +69,54 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, T>
 	 * @param element
 	 * @param value
 	 */
-	public void putAll(T value, IGameElement... elements){
+	public void putAll(AbstractTextDefinition<T> value, IGameElement... elements){
 		for (IGameElement element: elements){
 			put(element, value);
 		}
 	}
+	public void putAll(T value, IGameElement... elements){
+		for (IGameElement element: elements){
+			put(element, new SimpleTextDefinition<T>(value));
+		}
+	}
 	/**
-	 * Adds the standard name for the element to the map plus any alternate names.
+	 * Adds the standard name for the element to the map.
 	 * @param element
 	 * @param value
 	 */
-	public void put(IGameElement element, T value){
+	public void put(IGameElement element, ITextDefinition<T> value){
 		put(element.getStandardName(), value);
 		
-		if (element.getAltNames() != null){
-			putAll(value, element.getAltNames());
-		}
 	}
 	@Override
-	public void putAll(Collection<String> keys, T value) {
+	public void putAll(Collection<String> keys, ITextDefinition<T> value) {
 		for (String key: keys){
 			put(key, value);
 		}
 		
 	}
-	public void putAllElements(Collection<IGameElement> keys, T value){
+	public void putAllElements(Collection<IGameElement> keys, ITextDefinition<T> value){
 		for (IGameElement g: keys){
 			put(g, value);
 		}
 	}
-	public void putAll(T value, String...keys){
+	public void put(AbstractTextDefinition<T> value, IGameElement element, String...keys){
+		put(element, value);
+		putAll(value, keys);
+	}
+	public void putAll(AbstractTextDefinition<T> value, String...keys){
 		for (String key: keys){
 			put(key, value);
 		}
 	}
-	public T put(String key, T value){
+	public void putAll(T value, String...keys){
+		AbstractTextDefinition<T> def = new SimpleTextDefinition<T>(value);
+		putAll(def, keys);
+	}
+	public ITextDefinition<T> put(String key, ITextDefinition<T> value){
 		return super.put(automaticCasing? key.toLowerCase():key, value);
 	}
-	public T get(Object key){
+	public ITextDefinition<T> get(Object key){
 		return super.get(automaticCasing? key.toString().toLowerCase(): key);
 	}
 	@Override

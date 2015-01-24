@@ -21,10 +21,10 @@ public interface IGameElement {
 	public String getRoomDescription();
 	
 	
-	/**
-	 * Returns a array of any alternate names the element can be found under.
-	 * @return
-	 */
-	public String[] getAltNames();
+//	/**
+//	 * Returns a array of any alternate names the element can be found under.
+//	 * @return
+//	 */
+//	public String[] getAltNames();
 
 }

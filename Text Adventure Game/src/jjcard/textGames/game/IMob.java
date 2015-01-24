@@ -1,6 +1,7 @@
 package jjcard.textGames.game;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IMob extends IGameElement{
 
@@ -8,7 +9,7 @@ public interface IMob extends IGameElement{
 	public int getMaxHealth();
 	public int getHealth();
 	public int getMoney();
-	public IGameElementMap<IItem> getInventory();
+	public Map<String, IItem> getInventory();
 	public IItem getItem(String key);
 	public IArmour getArmour();
 	public IWeapon getWeapon();
@@ -81,5 +82,5 @@ public interface IMob extends IGameElement{
 	 * Removes the Inventory from the mob and returns the result
 	 * @return
 	 */
-	public IGameElementMap<IItem> removeInventory();
+	public Map<String, IItem> removeInventory();
 }

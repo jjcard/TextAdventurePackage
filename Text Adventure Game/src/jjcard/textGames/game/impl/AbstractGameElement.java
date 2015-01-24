@@ -1,9 +1,5 @@
 package jjcard.textGames.game.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import jjcard.textGames.game.IGameElement;
 import jjcard.textGames.game.util.EqualsUtil;
 
@@ -19,7 +15,7 @@ public abstract class AbstractGameElement implements IGameElement{
 	private String roomDescription;
 	
 	private final String standardName;
-	private final String[] altNames;
+//	private final String[] altNames;
 	protected boolean validateFields = true;
 	
 
@@ -34,7 +30,6 @@ public abstract class AbstractGameElement implements IGameElement{
 	 */
 	public static class GameElementBuilder{
 		private String standardName;
-		private List<String> altNames = new ArrayList<String>();
 		private String roomDescription;
 		private boolean validateFields = true;
 		
@@ -45,22 +40,9 @@ public abstract class AbstractGameElement implements IGameElement{
 		public GameElementBuilder(AbstractGameElement g){
 			this.standardName = g.standardName;
 			this.roomDescription = g.roomDescription;
-			this.altNames = Arrays.asList(g.altNames);
 		}
 		public GameElementBuilder standardName(String name){
 			this.standardName = name;
-			return  this;
-		}
-		public GameElementBuilder altNames(String[] altNames){
-			if (altNames == null){
-				this.altNames = new ArrayList<String>();
-			} else {
-				this.altNames = Arrays.asList(altNames);
-			}
-			return  this;
-		}
-		public GameElementBuilder addAltName(String altName){
-			this.altNames.add(altName);
 			return  this;
 		}
 		public GameElementBuilder roomDescription(String roomDescription){
@@ -81,7 +63,6 @@ public abstract class AbstractGameElement implements IGameElement{
 	protected AbstractGameElement(GameElementBuilder b){
 		this.standardName = b.standardName;
 		this.roomDescription = b.roomDescription;
-		this.altNames = b.altNames.toArray(new String[b.altNames.size()]);
 		this.validateFields = b.validateFields;
 	}
 	public final String getStandardName(){
@@ -93,29 +74,9 @@ public abstract class AbstractGameElement implements IGameElement{
 	public void setRoomDescription(String roomDescription) {
 		this.roomDescription = roomDescription;
 	}
-	public final String[] getAltNames(){
-		return altNames;
-	}
+
 	public boolean doValidateFields(){
 		return this.validateFields;
-	}
-	
-	public boolean containsName(String name){
-		if (name == null){
-			return false;
-		}
-		if (name.equalsIgnoreCase(standardName)){
-			return true;
-		} else {
-			if (altNames != null){
-				for (String altName: altNames){
-					if (name.equalsIgnoreCase(altName)){
-						return true;
-					}
-				}
-			}
-			return false;
-		}
 	}
 	/**
 	 * Returns the Standard name of the GameElement
@@ -133,9 +94,6 @@ public abstract class AbstractGameElement implements IGameElement{
 			if (EqualsUtil.notEqual(standardName, e.standardName)){
 				return false;
 			}
-			if (EqualsUtil.notEqual(altNames, e.altNames)){
-				return false;
-			}
 			if (EqualsUtil.notEqual(roomDescription, e.roomDescription)){
 				return false;
 			}
@@ -147,7 +105,7 @@ public abstract class AbstractGameElement implements IGameElement{
 	}
 	public int hashCode(){
 		final int prime = 23;		
-		return EqualsUtil.getHash(prime, standardName, altNames, roomDescription);
+		return EqualsUtil.getHash(prime, standardName, roomDescription);
 	}
 
 

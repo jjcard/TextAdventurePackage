@@ -68,14 +68,6 @@ public class Weapon extends Item implements IWeapon{
 			super.standardName(name);
 			return this;
 		}
-		public WeaponBuilder altNames(String[] altNamesArray){
-			super.altNames(altNamesArray);
-			return this;
-		}
-		public WeaponBuilder addAltName(String altName){
-			super.addAltName(altName);
-			return this;
-		}
 		public WeaponBuilder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;

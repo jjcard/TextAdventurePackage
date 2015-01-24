@@ -1,11 +1,15 @@
 package jjcard.textGames.game.impl;
 
 import static jjcard.textGames.game.util.EqualsUtil.notEqual;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import jjcard.textGames.game.IExit;
-import jjcard.textGames.game.IGameElementMap;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.IMob;
+import jjcard.textGames.game.util.MapUtil;
 
 /**
  * @author jjcard
@@ -14,49 +18,52 @@ import jjcard.textGames.game.IMob;
 
 
 public class Location implements ILocation {
-
+	private static final MapUtil MAP_UTIL = MapUtil.getInstance();
 	private static final char SPACE = ' ';
 	private final String name;
 	private String description;
 	
-	private IGameElementMap<IItem> inventory;
-	private IGameElementMap<IMob> roomMob;
-	private IGameElementMap<IExit> exits;
+//	private IGameElementMap<IItem> inventory;
+//	private IGameElementMap<IMob> roomMob;
+//	private IGameElementMap<IExit> exits;
+	private Map<String, IItem >inventory;
+	private Map<String, IMob> roomMob;
+	private Map<String, IExit> exits;
 	
 	public Location(){
 		this.name = "";
 		description = "";
-		inventory = new GameElementMap<IItem>();
-		roomMob = new GameElementMap<IMob>();
-		exits = new GameElementMap<IExit>();
+		inventory = new HashMap<String, IItem>();
+		roomMob = new HashMap<String, IMob>();
+		exits = new HashMap<String, IExit>();
 	}
 	public Location(String name){
 		this.name = name;
 		description = "";
-		inventory = new GameElementMap<IItem>();
-		roomMob =  new GameElementMap<IMob>();
-		exits = new GameElementMap<IExit>();
+		inventory = new HashMap<String, IItem>();
+		roomMob =  new HashMap<String, IMob>();
+		exits = new HashMap<String, IExit>();
 	}
 	public Location(String name, String descripN){
 		this.name = name;
 		description = descripN;
-		inventory = new GameElementMap<IItem>();
-		roomMob =  new GameElementMap<IMob>();
-		exits = new GameElementMap<IExit>();
+		inventory = new HashMap<String, IItem>();
+		roomMob =  new HashMap<String, IMob>();
+		exits = new HashMap<String, IExit>();
 	}
-	public Location(String name, String descripN, IGameElementMap<IItem> invenN){
+	public Location(String name, String descripN, Map<String, IItem> invenN){
 		this.name = name;
 		description = descripN;
 		setInventory(invenN);
-		roomMob =  new GameElementMap<IMob>();
-		exits = new GameElementMap<IExit>();
+		roomMob =  new HashMap<String, IMob>();
+		exits = new HashMap<String, IExit>();
 	}
-	public Location(String name, String descripN, IGameElementMap<IItem> invenN, IGameElementMap<IMob>  mobs){
+	public Location(String name, String descripN, Map<String, IItem> invenN, Map<String, IMob>  mobs){
 		this.name = name;
 		description = descripN;
 		setInventory(invenN);
 		setMobs(mobs);
-		exits = new GameElementMap<IExit>();
+		exits = new HashMap<String, IExit>();
 	}
 	public String getName(){
 		return name;
@@ -64,47 +71,47 @@ public class Location implements ILocation {
 	public String getDescription(){
 		return description;
 	}
-	public IGameElementMap<IItem> getInventory(){
+	public Map<String, IItem> getInventory(){
 		return inventory;
 	}
-	public  IGameElementMap<IMob> getMobs() {
+	public  Map<String, IMob> getMobs() {
 		return roomMob;
 	}
-	public IGameElementMap<IExit> getExits() {
+	public Map<String, IExit> getExits() {
 		return exits;
 	}
 	public IItem addItem(IItem add){
-		return inventory.put(add);
+		return MAP_UTIL.addItemToMap(inventory, add);
 	}
-	public void setInventory(IGameElementMap<IItem> inventoryNew){
+	public void setInventory(Map<String, IItem> inventoryNew){
 		if (inventoryNew == null){
-			inventory = new GameElementMap<IItem>();
+			inventory = new HashMap<String, IItem>();
 		} else {
 			inventory = inventoryNew;
 		}
 	}
-	public void setMobs(IGameElementMap<IMob> roomMobNew){
+	public void setMobs(Map<String, IMob> roomMobNew){
 		if (roomMobNew == null){
-			this.roomMob = new GameElementMap<IMob>();
+			this.roomMob = new HashMap<String, IMob>();
 		} else {
 			this.roomMob = roomMobNew;
 		}
 	}
 	public IItem removeItem(String key){
-		return inventory.remove(key);
+		return MAP_UTIL.removeItemFromMap(inventory, key);
 	}
 	public boolean containsItem(String keyR){
-		return inventory.containsName(keyR);
+		return MAP_UTIL.containsKey(inventory,keyR);
 	}
 	public IMob addMob(IMob m){
-		return roomMob.put(m);
+		return MAP_UTIL.addItemToMap(roomMob, m);
 		
 	}
 	public IMob removeMob(String key){
 		return roomMob.remove(key);
 	}
 	public boolean containsMob(String m){
-		return roomMob.containsName(m);
+		return MAP_UTIL.containsKey(roomMob, m);
 
 	}
 	/**
@@ -112,13 +119,13 @@ public class Location implements ILocation {
 	 * @param dir
 	 * @param room
 	 */
-	public void addExit(String dir, ILocation room){
+	public IExit addExit(String dir, ILocation room){
 		Exit exit = new Exit.ExitBuilder().standardName(dir).location(room).build();
-		exits.put(exit);
+		return MAP_UTIL.addItemToMap(exits, exit);
 	}
 	
-	public void addExit(IExit exit){
-		exits.put(exit);
+	public IExit addExit(IExit exit){
+		return MAP_UTIL.addItemToMap(exits, exit);
 	}
 
 	
@@ -128,7 +135,7 @@ public class Location implements ILocation {
 	 * @return 
 	 */
 	public IExit removeExit(String dir){
-		 return exits.remove(dir); 
+		return MAP_UTIL.removeItemFromMap(exits, dir);
 	}
 
 	/**
@@ -137,21 +144,24 @@ public class Location implements ILocation {
 	 * @return
 	 */
 	public ILocation getExitLocation(String dir){
-		IExit exit = exits.get(dir);
+		IExit exit = getExit(dir);
 		if (exit != null){
 			return exit.getLocation();
 		} else {
 			return null;
 		}
 	}
+	public IExit getExit(String dir){
+		return MAP_UTIL.getItemFromMap(exits, dir);
+	}
 	public IMob getMob(String key){
-		return roomMob.get(key);
+		return MAP_UTIL.getItemFromMap(roomMob,key);
 	}
 	public IItem getItem(String key){
-		return inventory.get(key);
+		return MAP_UTIL.getItemFromMap(inventory, key);
 	}
 	public boolean containsExit(String dir){
-		return exits.containsName(dir);
+		return MAP_UTIL.containsKey(exits, dir);
 	}
 
 
@@ -166,12 +176,12 @@ public class Location implements ILocation {
 		return compare;
 	}
 	public String getExitsDescriptions(){
-		return exits.getAllStandardNamesAsString();
+		return MAP_UTIL.getKeysAsString(exits);
 	}
 	public String getInventoryDescriptions(){
 		
 		StringBuilder re = new StringBuilder();
-		for(IItem i: inventory.getElements()){
+		for(IItem i: inventory.values()){
 			if (!i.isHidden() && i.getRoomDescription() != null){
 				re.append(SPACE).append(i.getRoomDescription());
 			}
@@ -180,7 +190,7 @@ public class Location implements ILocation {
 	}
 	public String getMobDescriptions(){
 		StringBuilder re = new StringBuilder();
-		for(IMob m: roomMob.getElements()){
+		for(IMob m: roomMob.values()){
 			if (m.getRoomDescription() != null){
 				re.append(m.getRoomDescription());
 			}

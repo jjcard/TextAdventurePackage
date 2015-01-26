@@ -6,13 +6,20 @@ import java.util.Map;
 import java.util.Set;
 
 import jjcard.textGames.game.IGameElement;
-
+/**
+ * Singleton to help work with Maps that deal with String keys and IGameElements.
+ *
+ */
 public final class MapUtil {
 	
 	private Locale locale = Locale.getDefault();
 	
 	private static MapUtil instance;
 	private boolean setUppercase = true;
+	/**
+	 * get instance
+	 * @return get instance of MapUtil
+	 */
 	public static MapUtil getInstance(){
 		if (instance == null){
 			instance = new MapUtil();
@@ -23,16 +30,21 @@ public final class MapUtil {
 		//singleton
 	}
 	/**
-	 * Set if keys put into and retrieved from the map should be set to uppercase first
+	 * Set if keys put into and retrieved from the map should be set to uppercase first.
+	 * This is done so the String keys of the map can ignore casing. <code> true </code> by default.
 	 * @param setUppercase
 	 */
 	public void setSetUppercase(boolean setUppercase){
 		this.setUppercase = setUppercase;
 	}
+	/**
+	 * Sets the Locale that is used to change the case of the String keys.
+	 * @param locale
+	 */
 	public void setLocale(Locale locale){
 		this.locale = locale;
 	}
-	public  <K extends IGameElement> K addItemToMap(Map<String, K> map, K item){
+	public <K extends IGameElement> K addItemToMap(Map<String, K> map, K item){
 		K previous = map.put(getUppercase(item.getStandardName()), item);
 		return previous;
 	}

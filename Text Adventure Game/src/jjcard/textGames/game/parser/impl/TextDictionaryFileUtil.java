@@ -9,7 +9,12 @@ import java.util.TreeMap;
 
 import jjcard.textGames.game.parser.ITextDictionary;
 import jjcard.textGames.game.parser.ITextTokenType;
-
+@Deprecated
+/**
+ * The functionality started here will most likely be replaced by JSON support
+ * @author User
+ *
+ */
 public class TextDictionaryFileUtil {
 	public static final String PAIR_PATTERN = "=";
 	public static final String COMMENT_INDICATOR = "#";

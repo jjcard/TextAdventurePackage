@@ -3,7 +3,6 @@ package jjcard.textGames.game.parser.impl;
 import java.util.Arrays;
 
 import jjcard.textGames.game.parser.ITextTokenType;
-import jjcard.textGames.game.parser.impl.TextDictionaryFileUtil.ValueConvertor;
 
 public enum BasicTextTokenType implements ITextTokenType {
 	//objects
@@ -37,12 +36,5 @@ public enum BasicTextTokenType implements ITextTokenType {
 	@Override
 	public String[] defaultWords() {
 		return Arrays.copyOf(defaultWords, length);
-	}
-	public static class BasicTextTokenTypeConverter implements ValueConvertor<BasicTextTokenType>{
-		@Override
-		public BasicTextTokenType valueOf(String string) {
-			return BasicTextTokenType.valueOf(string);
-		}
-		
 	}
 }

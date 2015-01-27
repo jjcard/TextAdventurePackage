@@ -1,14 +1,23 @@
 package jjcard.textGames.game.impl;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.util.ObjectsUtil;
-
+@JsonDeserialize(builder = Item.ItemBuilder.class)
 public class Item extends AbstractGameElement implements IItem{
+	@JsonProperty("cost")
 	private int cost;
+	@JsonProperty("info")
 	private String info;
+	@JsonProperty("lvl")
 	private int level;
+	@JsonProperty("hid")
 	private boolean hidden = false;
+	@JsonProperty("mov")
 	private boolean movable = true;
+	@JsonProperty("use")
 	private ItemUse use = ItemUse.Item;
 	
 	
@@ -36,38 +45,47 @@ public class Item extends AbstractGameElement implements IItem{
 		public ItemBuilder(AbstractGameElement e){
 			super(e);
 		}
+		@JsonProperty("cost")
 		public ItemBuilder cost(int cost){
 			this.cost = cost;
 			return this;
 		}
+		@JsonProperty("info")
 		public ItemBuilder info(String info){
 			this.info = info;
 			return this;
 		}
+		@JsonProperty("lvl")
 		public ItemBuilder level(int level){
 			this.level = level;
 			return this;
 		}
+		@JsonProperty("hid")
 		public ItemBuilder hidden(boolean hidden){
 			this.hidden = hidden;
 			return this;
 		}
+		@JsonProperty("mov")
 		public ItemBuilder movable(boolean movable){
 			this.movable = movable;
 			return this;
 		}
+		@JsonProperty("use")
 		public ItemBuilder use(ItemUse use){
 			this.use = use;
 			return this;
 		}
+		@JsonProperty("name")
 		public ItemBuilder standardName(String name){
 			super.standardName(name);
 			return this;
 		}
+		@JsonProperty("roomDescrip")
 		public ItemBuilder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
 		}
+		@JsonProperty("valFields")
 		public ItemBuilder validateFields(boolean validateFields){
 			super.validateFields(validateFields);
 			return this;

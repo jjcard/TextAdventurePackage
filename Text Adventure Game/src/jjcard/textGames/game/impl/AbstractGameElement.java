@@ -3,19 +3,20 @@ package jjcard.textGames.game.impl;
 import jjcard.textGames.game.IGameElement;
 import jjcard.textGames.game.util.ObjectsUtil;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * a basic class implementing IGameElement
  * @author jjcard
  *
  */
 public abstract class AbstractGameElement implements IGameElement{
-	
-	
-
+	@JsonProperty("roomDescrip")
 	private String roomDescription;
-	
+	@JsonProperty("name")
 	private final String standardName;
 //	private final String[] altNames;
+	@JsonProperty("valFields")
 	protected boolean validateFields = true;
 	
 

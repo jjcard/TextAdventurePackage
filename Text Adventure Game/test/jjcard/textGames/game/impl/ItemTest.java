@@ -2,7 +2,15 @@ package jjcard.textGames.game.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 import org.junit.Test;
+
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ItemTest {
 
@@ -48,6 +56,22 @@ public class ItemTest {
 		assertEquals(weapon.getDurability(), 112);
 		
 		
+	}
+	@Test
+	public void jsonTest() throws JsonGenerationException, JsonMappingException, IOException{
+		int cost = 55;
+		String name = "fsafsd";
+		Item item = new Item.ItemBuilder().standardName(name).cost(cost).build();
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ObjectMapper m = new ObjectMapper();
+		m.writeValue(out, item);
+		
+		
+		Item in = m.readValue(new ByteArrayInputStream(out.toByteArray()), Item.class);
+		
+		assertEquals(item, in);
+		assertEquals(55, in.getCost());
+		assertEquals(name, in.getStandardName());
 	}
 
 }

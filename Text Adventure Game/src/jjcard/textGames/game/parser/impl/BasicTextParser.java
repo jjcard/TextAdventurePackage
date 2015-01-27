@@ -24,8 +24,12 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	private ITextDictionary<T> dictionary;
 	private final PatternList<ITextDefinition<T>> textTokenPatterns;
 	private final PatternList<TextIndicator> textIndicatorPatterns;
+	/**
+	 * The characters that are wanted to be split by
+	 */
+	private static final String DELIMINATORS = " ,.";
 	//split pattern based on StackOverflow post by Bart Kiers
-	public static final Pattern SPLIT_PATTERN = Pattern.compile("[ ]+(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+	public static final Pattern SPLIT_PATTERN = Pattern.compile("["+ DELIMINATORS +"]+(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 	private int objectLimit = 10;
 	
 	private TextTokenStream<T> previousStream;

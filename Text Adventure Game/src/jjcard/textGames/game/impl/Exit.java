@@ -89,6 +89,9 @@ public class Exit extends AbstractGameElement implements IExit {
 		super(builder);
 		this.location = builder.location;
 	}
+	/**
+	 * Gets the Location
+	 */
 	public ILocation getLocation() {
 		return location;
 	}
@@ -96,7 +99,7 @@ public class Exit extends AbstractGameElement implements IExit {
 	/**
 	 * Returns a new Exit with the same properties as the current one with the given location
 	 * @param location
-	 * @return
+	 * @return copy of Exit with location
 	 */
 	public Exit getWithLocation(ILocation location){
 		return new ExitBuilder(this).location(location).build();

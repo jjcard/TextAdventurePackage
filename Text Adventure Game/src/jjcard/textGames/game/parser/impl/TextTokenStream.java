@@ -176,7 +176,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	 * Returns true if the TextTokenStream has a object token in the withObject
 	 * field.
 	 * 
-	 * @return
+	 * @return true if has with object
 	 */
 	public boolean hasWithObject() {
 		return withObject != null;
@@ -185,7 +185,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	/**
 	 * Returns the list of Object TextTokens
 	 * 
-	 * @return
+	 * @return objects
 	 */
 	public List<TextToken<T>> getObjects() {
 		return objects;
@@ -194,7 +194,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	/**
 	 * Returns the verb TextToken
 	 * 
-	 * @return
+	 * @return verb
 	 */
 	public TextToken<T> getVerb() {
 		return verb;
@@ -203,7 +203,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	/**
 	 * Returns the withObject TextToken
 	 * 
-	 * @return
+	 * @return with object
 	 */
 	public TextToken<T> getWithObject() {
 		return withObject;
@@ -212,7 +212,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	/**
 	 * returns true if there is an object token in the objects list.
 	 * 
-	 * @return
+	 * @return true if has any object
 	 */
 	public boolean hasObject() {
 		return !objects.isEmpty();
@@ -222,7 +222,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	 * Returns the first Object token if the list if there is one, null
 	 * otherwise.
 	 * 
-	 * @return
+	 * @return first object
 	 */
 	public TextToken<T> getFirstObject() {
 		return hasObject() ? objects.get(0) : null;
@@ -231,7 +231,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	/**
 	 * Returns the error list.
 	 * 
-	 * @return
+	 * @return errors
 	 */
 	public List<TextParserError> getErrors() {
 		return errors;
@@ -241,7 +241,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	 * Returns true if the error list contains the given error
 	 * 
 	 * @param e
-	 * @return
+	 * @return true if contains error
 	 */
 	public boolean containsError(TextParserError e) {
 		return errors.contains(e);
@@ -250,7 +250,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	/**
 	 * Returns true of the stream has any errors
 	 * 
-	 * @return
+	 * @return true if has errors
 	 */
 	public boolean hasErrors() {
 		return !errors.isEmpty();

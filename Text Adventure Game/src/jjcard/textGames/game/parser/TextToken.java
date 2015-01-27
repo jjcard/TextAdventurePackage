@@ -61,7 +61,9 @@ public class TextToken<T extends ITextTokenType> implements ITextTokenType{
 	public String[] defaultWords() {
 		return type.defaultWords();
 	}
-	
+	public String toString(){
+		return "TextToken=[type=" + type + ", token=" + token + ", standardToken=" + standardToken + "]";
+	}
 	@SuppressWarnings("rawtypes")
 	public boolean equals(Object o){
 		if (this == o){

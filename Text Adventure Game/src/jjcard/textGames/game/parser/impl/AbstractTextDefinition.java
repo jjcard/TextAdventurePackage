@@ -23,6 +23,10 @@ public abstract class AbstractTextDefinition<T extends ITextTokenType> implement
 	 */
 	public abstract String getStandardToken(String token);
 	
+	public String toString(){
+		return getClass().getSimpleName() + "=" + type;
+	}
+	
 	
 
 }

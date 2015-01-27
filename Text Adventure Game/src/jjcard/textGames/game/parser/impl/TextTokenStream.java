@@ -255,7 +255,9 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	public boolean hasErrors() {
 		return !errors.isEmpty();
 	}
-	
+	public String toString(){
+		return "verb=" + verb + ", objects=" + objects + ", errors=" + errors;
+	}
 	public boolean equals(Object o){
 		if (this == o){
 			return true;

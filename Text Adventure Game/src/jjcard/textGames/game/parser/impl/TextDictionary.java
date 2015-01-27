@@ -39,10 +39,10 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 	 * @param values
 	 */
 	@SafeVarargs
-	public TextDictionary(AbstractTextDefinition<T>...values){
+	public TextDictionary(ITextDefinition<T>...values){
 		super();
 		if (values != null){
-			for (AbstractTextDefinition<T> value: values){
+			for (ITextDefinition<T> value: values){
 				if (value.getType().defaultWords() != null){
 					putAll(value, value.getType().defaultWords());	
 				}
@@ -57,7 +57,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 		if (values != null){
 			for (T value: values){
 				if (value.defaultWords() != null){
-					AbstractTextDefinition<T> definition = new SimpleTextDefinition<T>(value);
+					ITextDefinition<T> definition = new SimpleTextDefinition<T>(value);
 					putAll(definition , value.defaultWords());	
 				}
 				
@@ -69,7 +69,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 	 * @param element
 	 * @param value
 	 */
-	public void putAll(AbstractTextDefinition<T> value, IGameElement... elements){
+	public void putAll(ITextDefinition<T> value, IGameElement... elements){
 		for (IGameElement element: elements){
 			put(element, value);
 		}
@@ -100,17 +100,17 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 			put(g, value);
 		}
 	}
-	public void put(AbstractTextDefinition<T> value, IGameElement element, String...keys){
+	public void put(ITextDefinition<T> value, IGameElement element, String...keys){
 		put(element, value);
 		putAll(value, keys);
 	}
-	public void putAll(AbstractTextDefinition<T> value, String...keys){
+	public void putAll(ITextDefinition<T> value, String...keys){
 		for (String key: keys){
 			put(key, value);
 		}
 	}
 	public void putAll(T value, String...keys){
-		AbstractTextDefinition<T> def = new SimpleTextDefinition<T>(value);
+		ITextDefinition<T> def = new SimpleTextDefinition<T>(value);
 		putAll(def, keys);
 	}
 	public ITextDefinition<T> put(String key, ITextDefinition<T> value){

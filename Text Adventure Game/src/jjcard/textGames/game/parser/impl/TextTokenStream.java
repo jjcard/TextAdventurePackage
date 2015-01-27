@@ -7,7 +7,7 @@ import jjcard.textGames.game.parser.ITextTokenStream;
 import jjcard.textGames.game.parser.ITextTokenType;
 import jjcard.textGames.game.parser.TextParserError;
 import jjcard.textGames.game.parser.TextToken;
-import jjcard.textGames.game.util.EqualsUtil;
+import static jjcard.textGames.game.util.ObjectsUtil.notEqual;
 
 /**
  * 
@@ -266,7 +266,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 			@SuppressWarnings("rawtypes")
 			TextTokenStream s = (TextTokenStream) o;
 			
-			if (EqualsUtil.notEqual(verb, s.verb)){
+			if (notEqual(verb, s.verb)){
 				return false;
 			}
 
@@ -274,11 +274,11 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 				return false;
 			}
 		
-			if (EqualsUtil.notEqual(withObject, s.withObject)){
+			if (notEqual(withObject, s.withObject)){
 				return false;
 			}
 
-			if (EqualsUtil.notEqual(errors, s.errors)){
+			if (notEqual(errors, s.errors)){
 				return false;
 			}
 			//we're good people

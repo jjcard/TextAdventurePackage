@@ -2,7 +2,7 @@ package jjcard.textGames.game.impl;
 
 import jjcard.textGames.game.IExit;
 import jjcard.textGames.game.ILocation;
-import jjcard.textGames.game.util.EqualsUtil;
+import jjcard.textGames.game.util.ObjectsUtil;
 
 /**
  * Class to hold an exit pertaining to a specific ILocation
@@ -110,7 +110,7 @@ public class Exit extends AbstractGameElement implements IExit {
 			if (!super.equals(object)){
 				return false;
 			}
-			if (EqualsUtil.notEqual(location, ((Exit) object).location)){
+			if (ObjectsUtil.notEqual(location, ((Exit) object).location)){
 				return false;
 			}
 			return true;

@@ -10,7 +10,7 @@ import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.IMob;
 import jjcard.textGames.game.IStatus;
 import jjcard.textGames.game.IWeapon;
-import jjcard.textGames.game.util.EqualsUtil;
+import jjcard.textGames.game.util.ObjectsUtil;
 import jjcard.textGames.game.util.MapUtil;
 
 /**
@@ -444,10 +444,10 @@ public class Mob extends AbstractGameElement implements IMob{
 		if (o instanceof Mob){
 			Mob m = (Mob) o;
 			
-			if (EqualsUtil.notEqual(this.getStandardName(), m.getStandardName())){
+			if (ObjectsUtil.notEqual(this.getStandardName(), m.getStandardName())){
 				return false;
 			}
-			if (EqualsUtil.notEqual(this.description, m.description)){
+			if (ObjectsUtil.notEqual(this.description, m.description)){
 				return false;
 			}
 			return true;

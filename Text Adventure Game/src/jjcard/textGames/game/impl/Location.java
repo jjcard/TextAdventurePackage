@@ -1,6 +1,6 @@
 package jjcard.textGames.game.impl;
 
-import static jjcard.textGames.game.util.EqualsUtil.notEqual;
+import static jjcard.textGames.game.util.ObjectsUtil.notEqual;
 
 import java.util.HashMap;
 import java.util.Map;

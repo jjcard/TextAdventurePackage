@@ -1,5 +1,6 @@
 package jjcard.textGames.game.util;
 
+ import static jjcard.textGames.game.util.ObjectsUtil.checkArg;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
@@ -42,6 +43,7 @@ public final class MapUtil {
 	 * @param locale
 	 */
 	public void setLocale(Locale locale){
+		checkArg(locale, "locale");
 		this.locale = locale;
 	}
 	public <K extends IGameElement> K addItemToMap(Map<String, K> map, K item){

@@ -1,7 +1,7 @@
 package jjcard.textGames.game.impl;
 
 import jjcard.textGames.game.IGameElement;
-import jjcard.textGames.game.util.EqualsUtil;
+import jjcard.textGames.game.util.ObjectsUtil;
 
 /**
  * a basic class implementing IGameElement
@@ -91,10 +91,10 @@ public abstract class AbstractGameElement implements IGameElement{
 		
 		if (object instanceof AbstractGameElement){
 			final AbstractGameElement e = (AbstractGameElement) object;
-			if (EqualsUtil.notEqual(standardName, e.standardName)){
+			if (ObjectsUtil.notEqual(standardName, e.standardName)){
 				return false;
 			}
-			if (EqualsUtil.notEqual(roomDescription, e.roomDescription)){
+			if (ObjectsUtil.notEqual(roomDescription, e.roomDescription)){
 				return false;
 			}
 			
@@ -105,7 +105,7 @@ public abstract class AbstractGameElement implements IGameElement{
 	}
 	public int hashCode(){
 		final int prime = 23;		
-		return EqualsUtil.getHash(prime, standardName, roomDescription);
+		return ObjectsUtil.getHash(prime, standardName, roomDescription);
 	}
 
 

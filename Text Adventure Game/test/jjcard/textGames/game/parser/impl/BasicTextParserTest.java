@@ -36,7 +36,7 @@ public class BasicTextParserTest {
 	@Test
 	public void testSplitPattern(){
 		String text1 = "Sally sells Sea Shells by the sea shore.";
-		String[] text1Expected = new String[]{"Sally", "sells", "Sea", "Shells", "by", "the", "sea", "shore."};
+		String[] text1Expected = new String[]{"Sally", "sells", "Sea", "Shells", "by", "the", "sea", "shore"};
 		String text2 = "And then I said \" Poker? I hardly knew her!\"";
 		String[] text2Expected = new String[]{"And", "then", "I", "said", "\" Poker? I hardly knew her!\""};
 		

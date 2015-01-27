@@ -1,7 +1,7 @@
 package jjcard.textGames.game.impl;
 
 import jjcard.textGames.game.IItem;
-import jjcard.textGames.game.util.EqualsUtil;
+import jjcard.textGames.game.util.ObjectsUtil;
 
 public class Item extends AbstractGameElement implements IItem{
 	private int cost;
@@ -148,10 +148,10 @@ public class Item extends AbstractGameElement implements IItem{
 		}
 		if (o instanceof Item){
 			Item m = (Item) o;
-			if (EqualsUtil.notEqual(getStandardName(), m.getStandardName())){
+			if (ObjectsUtil.notEqual(getStandardName(), m.getStandardName())){
 				return false;
 			}
-			if (EqualsUtil.notEqual(info, m.info)){
+			if (ObjectsUtil.notEqual(info, m.info)){
 				return false;
 			}
 			return this.use.equals(m.getUse());

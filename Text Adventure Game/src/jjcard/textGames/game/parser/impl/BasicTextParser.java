@@ -30,7 +30,8 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	private static final String DELIMINATORS = " ,.";
 	//split pattern based on StackOverflow post by Bart Kiers
 	public static final Pattern SPLIT_PATTERN = Pattern.compile("["+ DELIMINATORS +"]+(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-	private int objectLimit = 10;
+	private static final int DEFAULT_OBJECT_LIMIT = 10;
+	private int objectLimit = DEFAULT_OBJECT_LIMIT;
 	
 	private TextTokenStream<T> previousStream;
 	private Map<String, TextIndicator> indicatorMap;
@@ -102,7 +103,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	}
 	/**
 	 * Sets the limit on the number of objects allowed before adding an error to the stream.
-	 * A number less then 1 indicates no checking.
+	 * A number less then 1 indicates no checking. The default is 10.
 	 * @param objectLimit
 	 */
 	public void setObjectLimit(int objectLimit){
@@ -111,7 +112,6 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	@Override
 	public void setTextDictionary(ITextDictionary<T> dictionary) {
 		this.dictionary = dictionary;
-		
 	}
 	@Override
 	public ITextDictionary<T> getTextDictionary() {
@@ -120,8 +120,6 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	public void clear(){
 		previousStream = null;
 	}
-
-
 	public void setIndicatorMap(Map<String, TextIndicator> indicatorMap){
 		this.indicatorMap = indicatorMap;
 	}
@@ -131,7 +129,6 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	@Override
 	protected void endParsing(TextTokenStreamBuilder<T> builder) {
 		previousStream = builder.build();
-		
 	}
 	@Override
 	protected TextTokenStreamBuilder<T> handleVerb(TextTokenStreamBuilder<T> builder,
@@ -142,7 +139,6 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		} else {
 			verb = token;
 		}
-		
 		return builder;
 	}
 	@Override
@@ -152,9 +148,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		if (checkingObjects && objects.size() > objectLimit){
 			builder.addError(TextParserError.TOO_MANY_OBJECTS);
 		}
-		
 		return builder;
-		
 	}
 	@Override
 	protected TextTokenStreamBuilder<T> handleWithObject(TextTokenStreamBuilder<T> builder,
@@ -165,7 +159,6 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 			withObject = token;
 		}
 		return builder;
-		
 	}
 	@Override
 	protected TextTokenStreamBuilder<T> handleWordIndicator(TextTokenStreamBuilder<T> builder,
@@ -180,9 +173,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		default:
 			break;
 		}
-		
 		return builder;
-		
 	}
 	@Override
 	protected ITextDefinition<T> getDefinition(String word) {
@@ -216,7 +207,6 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		switch (indicator) {
 		case REPEAT_INDICATOR:
 			return new TextTokenStreamBuilder<>(previousStream);
-
 		default:
 			break;
 		}
@@ -226,7 +216,6 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	protected void handleEndOfWordParsing(TextTokenStreamBuilder<T> builder,
 			String[] words) {
 		builder.objects(objects).verb(verb).withObject(withObject);
-		
 	}
 	@Override
 	protected void handleStartOfWordParsing(TextTokenStreamBuilder<T> builder,
@@ -236,9 +225,6 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		verb = null;
 		withObject = null;
 		withObjectIndicator = false;
-		
 	}
-	
-
 	
 }

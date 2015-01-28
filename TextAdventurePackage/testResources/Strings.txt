@@ -1,0 +1,5 @@
+#Test string.txt
+
+ITEM_NOT_FOUND==You can't see that item
+START==Welcome to the game!  
+=

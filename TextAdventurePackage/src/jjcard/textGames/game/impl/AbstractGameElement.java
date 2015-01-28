@@ -4,18 +4,20 @@ import jjcard.textGames.game.IGameElement;
 import jjcard.textGames.game.util.ObjectsUtil;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * a basic class implementing IGameElement
  * @author jjcard
  *
  */
+
+@JsonDeserialize(builder = AbstractGameElement.GameElementBuilder.class)
 public abstract class AbstractGameElement implements IGameElement{
 	@JsonProperty("roomDescrip")
 	private String roomDescription;
 	@JsonProperty("name")
 	private final String standardName;
-//	private final String[] altNames;
 	@JsonProperty("valFields")
 	protected boolean validateFields = true;
 	
@@ -42,10 +44,12 @@ public abstract class AbstractGameElement implements IGameElement{
 			this.standardName = g.standardName;
 			this.roomDescription = g.roomDescription;
 		}
+		@JsonProperty("name")
 		public GameElementBuilder standardName(String name){
 			this.standardName = name;
 			return  this;
 		}
+		@JsonProperty("roomDescrip")
 		public GameElementBuilder roomDescription(String roomDescription){
 			this.roomDescription = roomDescription;
 			return this;
@@ -55,6 +59,7 @@ public abstract class AbstractGameElement implements IGameElement{
 		 * @param validateFields
 		 * @return
 		 */
+		@JsonProperty("valFields")
 		public GameElementBuilder validateFields(boolean validateFields){
 			this.validateFields = validateFields;
 			return this;
@@ -108,11 +113,4 @@ public abstract class AbstractGameElement implements IGameElement{
 		final int prime = 23;		
 		return ObjectsUtil.getHash(prime, standardName, roomDescription);
 	}
-
-
-	
-	
-	
-	
-
 }

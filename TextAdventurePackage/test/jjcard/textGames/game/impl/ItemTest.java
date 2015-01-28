@@ -66,7 +66,7 @@ public class ItemTest {
 		ObjectMapper m = new ObjectMapper();
 		m.writeValue(out, item);
 		
-		
+		System.out.println(out.toString());
 		Item in = m.readValue(new ByteArrayInputStream(out.toByteArray()), Item.class);
 		
 		assertEquals(item, in);

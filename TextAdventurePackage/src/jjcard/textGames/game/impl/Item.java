@@ -75,17 +75,14 @@ public class Item extends AbstractGameElement implements IItem{
 			this.use = use;
 			return this;
 		}
-		@JsonProperty("name")
 		public ItemBuilder standardName(String name){
 			super.standardName(name);
 			return this;
 		}
-		@JsonProperty("roomDescrip")
 		public ItemBuilder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
 		}
-		@JsonProperty("valFields")
 		public ItemBuilder validateFields(boolean validateFields){
 			super.validateFields(validateFields);
 			return this;

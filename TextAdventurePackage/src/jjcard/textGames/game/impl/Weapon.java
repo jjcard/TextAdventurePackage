@@ -1,11 +1,17 @@
 package jjcard.textGames.game.impl;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import jjcard.textGames.game.IWeapon;
 
-
+@JsonDeserialize(builder = Weapon.WeaponBuilder.class)
 public class Weapon extends Item implements IWeapon{
+	@JsonProperty("att")
 	private int attack;
+	@JsonProperty("crit")
 	private int critChance; //out of 100
+	@JsonProperty("dur")
 	private int durability;
 	
 	public static class WeaponBuilder extends ItemBuilder{
@@ -32,14 +38,17 @@ public class Weapon extends Item implements IWeapon{
 			super.cost(cost);
 			return this;
 		}
+		@JsonProperty("att")
 		public WeaponBuilder attack(int attack){
 			this.attack = attack;
 			return this;
 		}
+		@JsonProperty("crit")
 		public WeaponBuilder critChance (int critChance){
 			this.critChance = critChance;
 			return this;
 		}
+		@JsonProperty("dur")
 		public WeaponBuilder durability(int durability){
 			this.durability = durability;
 			return this;

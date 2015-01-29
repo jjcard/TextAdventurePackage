@@ -1,10 +1,14 @@
 package jjcard.textGames.game.impl;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import jjcard.textGames.game.IArmour;
 
 
-
+@JsonDeserialize(builder = Armour.ArmourBuilder.class)
 public class Armour extends Item implements IArmour {
+	@JsonProperty("def")
 	private int defense;
 	
 	public static class ArmourBuilder extends ItemBuilder{
@@ -26,6 +30,7 @@ public class Armour extends Item implements IArmour {
 			super.cost(cost);
 			return this;
 		}
+		@JsonProperty("def")
 		public ArmourBuilder defense(int defense){
 			this.defense = defense;
 			return this;

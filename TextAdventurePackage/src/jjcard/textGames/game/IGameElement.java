@@ -1,5 +1,8 @@
 package jjcard.textGames.game;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+
 /**
  * a interface with some basic elements needed for most elements in the game.
  * the standard name and alternate names are used to to refer
@@ -8,6 +11,7 @@ package jjcard.textGames.game;
  * @author jjcard
  *
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = As.PROPERTY, property = "@class")
 public interface IGameElement {
 	/**
 	 * Returns the standard name for the element.
@@ -19,12 +23,4 @@ public interface IGameElement {
 	 * @return
 	 */
 	public String getRoomDescription();
-	
-	
-//	/**
-//	 * Returns a array of any alternate names the element can be found under.
-//	 * @return
-//	 */
-//	public String[] getAltNames();
-
 }

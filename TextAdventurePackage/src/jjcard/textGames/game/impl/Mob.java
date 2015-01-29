@@ -4,6 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import jjcard.textGames.game.IArmour;
 import jjcard.textGames.game.IGameElement;
 import jjcard.textGames.game.IItem;
@@ -18,20 +22,34 @@ import jjcard.textGames.game.util.MapUtil;
  * @author jjcard
  *
  */
+@JsonDeserialize(builder = Mob.MobBuilder.class)
 public class Mob extends AbstractGameElement implements IMob{
 	public static final int DEFAULT_HEALTH = 10;
+	@JsonProperty("descrip")
 	private String description;
+	@JsonProperty("maxHealth")
 	private int maxHealth;
+	@JsonProperty("health")
 	private int curHealth;
+	@JsonProperty("money")
 	private int money = 0;
+	@JsonProperty("inven")
 	private Map<String, IItem> inventory;
+	@JsonProperty("def")
 	private int defense = 0;
+	@JsonProperty("att")
 	private int attack = 0;
+	@JsonProperty("hostile")
 	private boolean hostile = true;
+	@JsonProperty("statuses")
 	private List<IStatus> statusList;
+	@JsonProperty("armr")
 	private IArmour armour;
+	@JsonProperty("weapon")
 	private IWeapon weapon;
+	@JsonProperty("chHealth")
 	private final boolean checkHealth;
+	@JsonIgnore
 	private static final MapUtil MAP_UTIL = MapUtil.getInstance();
 	
 	public static class MobBuilder extends GameElementBuilder{
@@ -77,26 +95,32 @@ public class Mob extends AbstractGameElement implements IMob{
 		 * @param checkHealth
 		 * @return
 		 */
+		@JsonProperty("chHealth")
 		public MobBuilder checkHealth(boolean checkHealth){
 			this.checkHealth = checkHealth;
 			return this;
 		}
+		@JsonProperty("maxHealth")
 		public MobBuilder maxHealth(int maxHealth){
 			this.maxHealth = maxHealth;
 			return this;
 		}
+		@JsonProperty("health")
 		public MobBuilder health(int curHealth){
 			this.curHealth = curHealth;
 			return this;
 		}
+		@JsonProperty("descrip")
 		public MobBuilder description(String description){
 			this.description = description;
 			return this;
 		}
+		@JsonProperty("money")
 		public MobBuilder money(int money){
 			this.money = money;
 			return this;
 		}
+		@JsonProperty("inven")
 		public MobBuilder inventory(Map<String, IItem> inventory){
 			if (inventory == null){
 				this.inventory = new HashMap<String, IItem>();
@@ -110,18 +134,22 @@ public class Mob extends AbstractGameElement implements IMob{
 			this.inventory.put(item.getStandardName(), item);
 			return this;
 		}
+		@JsonProperty("def")
 		public MobBuilder defense(int defense){
 			this.defense = defense;
 			return this;
 		}
+		@JsonProperty("att")
 		public MobBuilder attack(int attack){
 			this.attack = attack;
 			return this;
 		}
+		@JsonProperty("hostile")
 		public MobBuilder hostile(boolean hostile){
 			this.hostile = hostile;
 			return this;
 		}
+		@JsonProperty("statuses")
 		public MobBuilder statusList(List<IStatus> statusList){
 			if (statusList == null){
 				this.statusList = new LinkedList<IStatus>();
@@ -131,10 +159,12 @@ public class Mob extends AbstractGameElement implements IMob{
 			
 			return this;
 		}
+		@JsonProperty("armr")
 		public MobBuilder armour(IArmour armour){
 			this.armour = armour;
 			return this;
 		}
+		@JsonProperty("weapon")
 		public MobBuilder weapon(IWeapon weapon){
 			this.weapon = weapon;
 			return this;
@@ -212,6 +242,7 @@ public class Mob extends AbstractGameElement implements IMob{
 	 * returns defense only. Does not add armour bonus.
 	 * @return
 	 */
+	@JsonProperty("def")
 	public int getBasicDefense() {
 		return defense;
 	}
@@ -219,6 +250,7 @@ public class Mob extends AbstractGameElement implements IMob{
 	 * returns attack only. Does not add weapon bonus.
 	 * @return
 	 */
+	@JsonProperty("att")
 	public int getBasicAttack() {
 		return attack;
 	}
@@ -333,6 +365,7 @@ public class Mob extends AbstractGameElement implements IMob{
 	 * gets attack plus weapon attack bonus
 	 * @return
 	 */
+	@JsonIgnore
 	public int getFullAttack(){
 		return attack + getWeaponBonus();
 	}
@@ -340,6 +373,7 @@ public class Mob extends AbstractGameElement implements IMob{
 	 * returns the weapon bonus or 0 if no weapon equipped
 	 * @return
 	 */
+	@JsonIgnore
 	public int getWeaponBonus(){
 		return weapon == null? 0: weapon.getAttack();
 	}
@@ -347,6 +381,7 @@ public class Mob extends AbstractGameElement implements IMob{
 	 * Returns the armour bonus or 0 if no armour equipped
 	 * @return
 	 */
+	@JsonIgnore
 	public int getArmourBonus(){
 		return armour == null? 0: armour.getDefense();
 	}
@@ -354,6 +389,7 @@ public class Mob extends AbstractGameElement implements IMob{
 	 * gets defense plus any bonus
 	 * @return
 	 */
+	@JsonIgnore
 	public int getFullDefense(){
 		return defense + getArmourBonus();
 	}
@@ -399,9 +435,11 @@ public class Mob extends AbstractGameElement implements IMob{
 	public int inventorySize() {
 		return inventory.size();
 	}
+	@JsonIgnore
 	public boolean isDead(){
 		return  getHealth() <= 0;
 	}
+	@JsonIgnore
 	public boolean isAlive(){
 		return !isDead();
 	}
@@ -414,9 +452,11 @@ public class Mob extends AbstractGameElement implements IMob{
 		weapon = null;
 		return re;
 	}
+	@JsonIgnore
 	public String getStandardArmourKey(){
 		return armour == null? null: armour.getStandardName();
 	}
+	@JsonIgnore
 	public boolean isKeyforArmour(String key){
 		return isKeyForItem(key, armour);
 	}
@@ -430,9 +470,11 @@ public class Mob extends AbstractGameElement implements IMob{
 		}
 		return false;
 	}
+	@JsonIgnore
 	public boolean isKeyForWeapon(String key){
 		return isKeyForItem(key, weapon);
 	}
+	@JsonIgnore
 	public String getStandardWeaponKey(){
 		return weapon == null? null: weapon.getStandardName();
 	}

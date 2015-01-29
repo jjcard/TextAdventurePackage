@@ -9,6 +9,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -71,6 +72,53 @@ public class ItemTest {
 		assertEquals(item, in);
 		assertEquals(55, in.getCost());
 		assertEquals(name, in.getStandardName());
+	}
+	@Test
+	public void armourJsonTest() throws JsonParseException, JsonMappingException, IOException{
+		int cost = 54;
+		String name = "chainmail";
+		int def = 100;
+		boolean hidden = false;
+		Armour armour = new Armour.ArmourBuilder().standardName(name)
+				.cost(cost).defense(def).hidden(hidden).build();
+		
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ObjectMapper m = new ObjectMapper();
+		m.writeValue(out, armour);
+		
+		Armour in = m.readValue(new ByteArrayInputStream(out.toByteArray()), Armour.class);
+		
+		assertEquals(armour, in);
+		assertEquals(cost, in.getCost());
+		assertEquals(name, in.getStandardName());
+		assertEquals(def, in.getDefense());
+		assertEquals(hidden, in.isHidden());
+	}
+	
+	@Test
+	public void weaponJsonTest() throws JsonParseException, JsonMappingException, IOException{
+		int cost = 54;
+		String name = "sword";
+		int attack = 100;
+		boolean hidden = false;
+		int critChance = 50;
+		int dur = 10;
+		Weapon weapon = new Weapon.WeaponBuilder().standardName(name)
+				.cost(cost).attack(attack).critChance(critChance).durability(dur).hidden(hidden).build();
+		
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ObjectMapper m = new ObjectMapper();
+		m.writeValue(out, weapon);
+		
+		Weapon in = m.readValue(new ByteArrayInputStream(out.toByteArray()), Weapon.class);
+		
+		assertEquals(weapon, in);
+		assertEquals(cost, in.getCost());
+		assertEquals(name, in.getStandardName());
+		assertEquals(attack, in.getAttack());
+		assertEquals(hidden, in.isHidden());
+		assertEquals(critChance, in.getCritChance());
+		assertEquals(dur, in.getDurability());
 	}
 
 }

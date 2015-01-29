@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import jjcard.textGames.game.IWeapon;
 
-@JsonDeserialize(builder = Weapon.WeaponBuilder.class)
+@JsonDeserialize(builder = Weapon.Builder.class)
 public class Weapon extends Item implements IWeapon{
 	@JsonProperty("att")
 	private int attack;
@@ -14,74 +14,74 @@ public class Weapon extends Item implements IWeapon{
 	@JsonProperty("dur")
 	private int durability;
 	
-	public static class WeaponBuilder extends ItemBuilder{
+	public static class Builder extends Item.Builder{
 		private int attack;
 		private int critChance; //out of 100
 		private int durability;
 		
-		public WeaponBuilder(){
+		public Builder(){
 			super();
 			use(ItemUse.Weapon);
 			
 		}
-		public WeaponBuilder(Weapon w){
+		public Builder(Weapon w){
 			super(w);
 			this.attack = w.attack;
 			this.critChance = w.critChance;
 			this.durability = w.durability;	
 		}
-		public WeaponBuilder(AbstractGameElement g){
+		public Builder(AbstractGameElement g){
 			super(g);
 			use(ItemUse.Weapon);
 		}
-		public WeaponBuilder cost(int cost){
+		public Builder cost(int cost){
 			super.cost(cost);
 			return this;
 		}
 		@JsonProperty("att")
-		public WeaponBuilder attack(int attack){
+		public Builder attack(int attack){
 			this.attack = attack;
 			return this;
 		}
 		@JsonProperty("crit")
-		public WeaponBuilder critChance (int critChance){
+		public Builder critChance (int critChance){
 			this.critChance = critChance;
 			return this;
 		}
 		@JsonProperty("dur")
-		public WeaponBuilder durability(int durability){
+		public Builder durability(int durability){
 			this.durability = durability;
 			return this;
 		}
-		public WeaponBuilder info(String info){
+		public Builder info(String info){
 			super.info(info);
 			return this;
 		}
-		public WeaponBuilder level(int level){
+		public Builder level(int level){
 			super.level(level);
 			return this;
 		}
-		public WeaponBuilder hidden(boolean hidden){
+		public Builder hidden(boolean hidden){
 			super.hidden(hidden);
 			return this;
 		}
-		public WeaponBuilder movable(boolean movable){
+		public Builder movable(boolean movable){
 			super.movable(movable);
 			return this;
 		}
-		public WeaponBuilder use(ItemUse use){
+		public Builder use(ItemUse use){
 			super.use(use);
 			return this;
 		}
-		public WeaponBuilder standardName(String name){
+		public Builder standardName(String name){
 			super.standardName(name);
 			return this;
 		}
-		public WeaponBuilder roomDescription(String roomDescrip){
+		public Builder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
 		}
-		public WeaponBuilder validateFields(boolean validateFields){
+		public Builder validateFields(boolean validateFields){
 			super.validateFields(validateFields);
 			return this;
 		}
@@ -89,7 +89,7 @@ public class Weapon extends Item implements IWeapon{
 			return new Weapon(this);
 		}
 	}
-	protected Weapon(WeaponBuilder b){
+	protected Weapon(Builder b){
 		super(b);
 		setAttack(b.attack);
 		setCritChance(b.critChance);

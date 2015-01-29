@@ -140,7 +140,7 @@ public class Location implements ILocation {
 	 * @param room
 	 */
 	public IExit addExit(String dir, ILocation room){
-		Exit exit = new Exit.ExitBuilder().standardName(dir).location(room).build();
+		Exit exit = new Exit.Builder().standardName(dir).location(room).build();
 		return MAP_UTIL.addItemToMap(exits, exit);
 	}
 	

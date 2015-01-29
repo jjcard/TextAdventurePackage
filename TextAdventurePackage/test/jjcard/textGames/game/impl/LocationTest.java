@@ -20,14 +20,14 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class LocationTest {
-	private Mob mob = new Mob.MobBuilder().standardName("Gelatinous Cube").build();//.altNames(new String[] {"The bane"}).description("Run").build();
+	private Mob mob = new Mob.Builder().standardName("Gelatinous Cube").build();//.altNames(new String[] {"The bane"}).description("Run").build();
 	private Location hallway = new Location("Hallway", "It's a hallway. What more do you want.");
 	private Location room = new Location("A room", "no not THE room");
-	private Item item = new Item.ItemBuilder().standardName("vendor trash").info("doesn't do anything").build();//.altNames(new String[] {"worthless"}).build();
+	private Item item = new Item.Builder().standardName("vendor trash").info("doesn't do anything").build();//.altNames(new String[] {"worthless"}).build();
 	@Before
 	public void setUp() throws Exception {
-		mob = new Mob.MobBuilder().standardName("Gelatinous Cube").build();//.altNames(new String[] {"The bane"}).description("Run").build();
-		item = new Item.ItemBuilder().standardName("vendor trash").info("doesn't do anything").build();//.altNames(new String[] {"worthless"}).build();
+		mob = new Mob.Builder().standardName("Gelatinous Cube").build();//.altNames(new String[] {"The bane"}).description("Run").build();
+		item = new Item.Builder().standardName("vendor trash").info("doesn't do anything").build();//.altNames(new String[] {"worthless"}).build();
 		hallway.addExit(Exit.NORTH.getWithLocation(room));
 		room.addExit(Exit.SOUTH_BUILD.location(hallway).build());
 		hallway.addItem(item);
@@ -70,9 +70,9 @@ public class LocationTest {
 		String name = "fjksdafjlsd";
 		String descrip = "a white walled testing facility";
 		Map<String, IItem> inventory = new HashMap<>();
-		inventory.put("hello", new Item.ItemBuilder().standardName("potato").build());
+		inventory.put("hello", new Item.Builder().standardName("potato").build());
 		Map<String, IMob> mobs = new HashMap<>();
-		mobs.put("turret", new Mob.MobBuilder().hostile(true).standardName("FrakenTurret").build());
+		mobs.put("turret", new Mob.Builder().hostile(true).standardName("FrakenTurret").build());
 		Location loc = new Location(name, descrip, inventory, mobs);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ObjectMapper m = new ObjectMapper();

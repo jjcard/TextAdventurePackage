@@ -58,7 +58,7 @@ public class ExitTest {
 		String name = "fsafsd";
 		String locName = "loc1";
 		Location loc = new Location(locName);
-		Exit exit = new Exit.ExitBuilder().standardName(name).location(loc).build();
+		Exit exit = new Exit.Builder().standardName(name).location(loc).build();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ObjectMapper m = new ObjectMapper();
 		m.writeValue(out, exit);

@@ -23,30 +23,30 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 	private Map<String,IExit> exits;
 	
 	
-	public static class GameElementLocationBuilder extends GameElementBuilder{
+	public static class Builder extends AbstractGameElement.Builder{
 		
 		private Map<String,IItem> inventory = new HashMap<String,IItem>();
 		private Map<String,IMob> roomMob = new HashMap<String,IMob>();
 		private Map<String,IExit> exits = new HashMap<String,IExit>();
 		
-		public GameElementLocationBuilder(){
+		public Builder(){
 			super();
 		}
-		public GameElementLocationBuilder(AbstractGameElement element){
+		public Builder(AbstractGameElement element){
 			super(element);
 		}
-		public GameElementLocationBuilder standardName(String name){
+		public Builder standardName(String name){
 			super.standardName(name);
 			return this;
 		}
 		/**
 		 * the room description and also the description
 		 */
-		public GameElementLocationBuilder roomDescription(String roomDescrip){
+		public Builder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
 		}
-		public GameElementLocationBuilder exits(Map<String,IExit> exits){
+		public Builder exits(Map<String,IExit> exits){
 			if (exits == null){
 				this.exits = new HashMap<String,IExit>();
 			} else {
@@ -54,12 +54,12 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 			}
 			return this;
 		}
-		public GameElementLocationBuilder addExit(IExit exit){
+		public Builder addExit(IExit exit){
 //			this.exits.put(exit);
 			MAP_UTIL.addItemToMap(exits, exit);
 			return this;
 		}
-		public GameElementLocationBuilder roomMobs(Map<String,IMob> roomMobs){
+		public Builder roomMobs(Map<String,IMob> roomMobs){
 			if (roomMobs == null){
 				this.roomMob = new HashMap<String,IMob>();
 			} else {
@@ -67,11 +67,11 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 			}	
 			return this;
 		}
-		public GameElementLocationBuilder addMob(IMob mob){
+		public Builder addMob(IMob mob){
 			MAP_UTIL.addItemToMap(roomMob,mob);
 			return this;
 		}
-		public GameElementLocationBuilder inventory(Map<String,IItem> inventory){
+		public Builder inventory(Map<String,IItem> inventory){
 			if (inventory == null){
 				this.inventory = new HashMap<String,IItem>();
 			} else {
@@ -79,7 +79,7 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 			}
 			return this;
 		}
-		public GameElementLocationBuilder addItem(IItem item){
+		public Builder addItem(IItem item){
 			MAP_UTIL.addItemToMap(inventory,item);
 			return this;
 		}
@@ -87,7 +87,7 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 			return new GameElementLocation(this);
 		}
 	}
-	protected GameElementLocation(GameElementLocationBuilder builder) {
+	protected GameElementLocation(Builder builder) {
 		super(builder);
 		this.roomMob = builder.roomMob;
 		this.exits = builder.exits;
@@ -169,7 +169,7 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 	 * @return 
 	 */
 	public IExit addExit(String dir, ILocation room){
-		Exit exit = new Exit.ExitBuilder().standardName(dir).location(room).build();
+		Exit exit = new Exit.Builder().standardName(dir).location(room).build();
 		return MAP_UTIL.addItemToMap(exits, exit);
 	}
 	

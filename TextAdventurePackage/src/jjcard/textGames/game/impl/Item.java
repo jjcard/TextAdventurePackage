@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.util.ObjectsUtil;
-@JsonDeserialize(builder = Item.ItemBuilder.class)
+@JsonDeserialize(builder = Item.Builder.class)
 public class Item extends AbstractGameElement implements IItem{
 	@JsonProperty("cost")
 	private int cost;
@@ -22,7 +22,7 @@ public class Item extends AbstractGameElement implements IItem{
 	
 	
 	
-	public static class ItemBuilder extends GameElementBuilder{
+	public static class Builder extends AbstractGameElement.Builder{
 		private int cost;
 		private String info;
 		private int level;
@@ -30,10 +30,10 @@ public class Item extends AbstractGameElement implements IItem{
 		private boolean movable = true;
 		private ItemUse use = ItemUse.Item;
 		
-		public ItemBuilder(){
+		public Builder(){
 			super();
 		}
-		public ItemBuilder(Item i){
+		public Builder(Item i){
 			  super(i);
 			  cost = i.cost;
 			  info = i.info;
@@ -42,48 +42,48 @@ public class Item extends AbstractGameElement implements IItem{
 			  movable = i.movable;
 			  use = i.use;
 		}
-		public ItemBuilder(AbstractGameElement e){
+		public Builder(AbstractGameElement e){
 			super(e);
 		}
 		@JsonProperty("cost")
-		public ItemBuilder cost(int cost){
+		public Builder cost(int cost){
 			this.cost = cost;
 			return this;
 		}
 		@JsonProperty("info")
-		public ItemBuilder info(String info){
+		public Builder info(String info){
 			this.info = info;
 			return this;
 		}
 		@JsonProperty("lvl")
-		public ItemBuilder level(int level){
+		public Builder level(int level){
 			this.level = level;
 			return this;
 		}
 		@JsonProperty("hid")
-		public ItemBuilder hidden(boolean hidden){
+		public Builder hidden(boolean hidden){
 			this.hidden = hidden;
 			return this;
 		}
 		@JsonProperty("mov")
-		public ItemBuilder movable(boolean movable){
+		public Builder movable(boolean movable){
 			this.movable = movable;
 			return this;
 		}
 		@JsonProperty("use")
-		public ItemBuilder use(ItemUse use){
+		public Builder use(ItemUse use){
 			this.use = use;
 			return this;
 		}
-		public ItemBuilder standardName(String name){
+		public Builder standardName(String name){
 			super.standardName(name);
 			return this;
 		}
-		public ItemBuilder roomDescription(String roomDescrip){
+		public Builder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
 		}
-		public ItemBuilder validateFields(boolean validateFields){
+		public Builder validateFields(boolean validateFields){
 			super.validateFields(validateFields);
 			return this;
 		}
@@ -92,7 +92,7 @@ public class Item extends AbstractGameElement implements IItem{
 		}
 	}
 	
-	protected Item(ItemBuilder b){
+	protected Item(Builder b){
 		  super(b);
 		  setCost(b.cost);
 		  setInfo(b.info);

@@ -22,7 +22,7 @@ import jjcard.textGames.game.util.MapUtil;
  * @author jjcard
  *
  */
-@JsonDeserialize(builder = Mob.MobBuilder.class)
+@JsonDeserialize(builder = Mob.Builder.class)
 public class Mob extends AbstractGameElement implements IMob{
 	public static final int DEFAULT_HEALTH = 10;
 	@JsonProperty("descrip")
@@ -52,7 +52,7 @@ public class Mob extends AbstractGameElement implements IMob{
 	@JsonIgnore
 	private static final MapUtil MAP_UTIL = MapUtil.getInstance();
 	
-	public static class MobBuilder extends GameElementBuilder{
+	public static class Builder extends AbstractGameElement.Builder{
 		private String description;
 		private int maxHealth;
 		private int curHealth;
@@ -66,10 +66,10 @@ public class Mob extends AbstractGameElement implements IMob{
 		private IWeapon weapon;
 		private boolean checkHealth = true;
 		
-		public MobBuilder(){
+		public Builder(){
 			super();
 		}
-		public MobBuilder(Mob b){
+		public Builder(Mob b){
 			super(b);
 			  this.description = b.description;
 			  this.maxHealth = b.maxHealth;
@@ -86,7 +86,7 @@ public class Mob extends AbstractGameElement implements IMob{
 			  this.armour = b.armour;
 			  this.weapon = b.weapon;
 		}
-		public MobBuilder(AbstractGameElement g){
+		public Builder(AbstractGameElement g){
 			super(g);
 		}
 		/**
@@ -96,32 +96,32 @@ public class Mob extends AbstractGameElement implements IMob{
 		 * @return
 		 */
 		@JsonProperty("chHealth")
-		public MobBuilder checkHealth(boolean checkHealth){
+		public Builder checkHealth(boolean checkHealth){
 			this.checkHealth = checkHealth;
 			return this;
 		}
 		@JsonProperty("maxHealth")
-		public MobBuilder maxHealth(int maxHealth){
+		public Builder maxHealth(int maxHealth){
 			this.maxHealth = maxHealth;
 			return this;
 		}
 		@JsonProperty("health")
-		public MobBuilder health(int curHealth){
+		public Builder health(int curHealth){
 			this.curHealth = curHealth;
 			return this;
 		}
 		@JsonProperty("descrip")
-		public MobBuilder description(String description){
+		public Builder description(String description){
 			this.description = description;
 			return this;
 		}
 		@JsonProperty("money")
-		public MobBuilder money(int money){
+		public Builder money(int money){
 			this.money = money;
 			return this;
 		}
 		@JsonProperty("inven")
-		public MobBuilder inventory(Map<String, IItem> inventory){
+		public Builder inventory(Map<String, IItem> inventory){
 			if (inventory == null){
 				this.inventory = new HashMap<String, IItem>();
 			} else {
@@ -130,27 +130,27 @@ public class Mob extends AbstractGameElement implements IMob{
 			
 			return this;
 		}
-		public MobBuilder addItem(IItem item){
+		public Builder addItem(IItem item){
 			this.inventory.put(item.getStandardName(), item);
 			return this;
 		}
 		@JsonProperty("def")
-		public MobBuilder defense(int defense){
+		public Builder defense(int defense){
 			this.defense = defense;
 			return this;
 		}
 		@JsonProperty("att")
-		public MobBuilder attack(int attack){
+		public Builder attack(int attack){
 			this.attack = attack;
 			return this;
 		}
 		@JsonProperty("hostile")
-		public MobBuilder hostile(boolean hostile){
+		public Builder hostile(boolean hostile){
 			this.hostile = hostile;
 			return this;
 		}
 		@JsonProperty("statuses")
-		public MobBuilder statusList(List<IStatus> statusList){
+		public Builder statusList(List<IStatus> statusList){
 			if (statusList == null){
 				this.statusList = new LinkedList<IStatus>();
 			} else {
@@ -160,28 +160,28 @@ public class Mob extends AbstractGameElement implements IMob{
 			return this;
 		}
 		@JsonProperty("armr")
-		public MobBuilder armour(IArmour armour){
+		public Builder armour(IArmour armour){
 			this.armour = armour;
 			return this;
 		}
 		@JsonProperty("weapon")
-		public MobBuilder weapon(IWeapon weapon){
+		public Builder weapon(IWeapon weapon){
 			this.weapon = weapon;
 			return this;
 		}
-		public MobBuilder addStatus(IStatus status){
+		public Builder addStatus(IStatus status){
 			statusList.add(status);
 			return this;
 		}
-		public MobBuilder standardName(String name){
+		public Builder standardName(String name){
 			super.standardName(name);
 			return this;
 		}
-		public MobBuilder roomDescription(String roomDescrip){
+		public Builder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
 		}
-		public MobBuilder validateFields(boolean validateFields){
+		public Builder validateFields(boolean validateFields){
 			super.validateFields(validateFields);
 			return this;
 		}
@@ -190,7 +190,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		}
 	}
 	
-	protected Mob( MobBuilder b){
+	protected Mob( Builder b){
 		  super(b);
 		  description = b.description;
 		  if (b.maxHealth > 0){

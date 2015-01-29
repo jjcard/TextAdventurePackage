@@ -6,64 +6,64 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jjcard.textGames.game.IArmour;
 
 
-@JsonDeserialize(builder = Armour.ArmourBuilder.class)
+@JsonDeserialize(builder = Armour.Builder.class)
 public class Armour extends Item implements IArmour {
 	@JsonProperty("def")
 	private int defense;
 	
-	public static class ArmourBuilder extends ItemBuilder{
+	public static class Builder extends Item.Builder{
 		private int defense;
 		
-		public ArmourBuilder(){
+		public Builder(){
 			super();
 			use(ItemUse.Armour);
 		}
-		public ArmourBuilder(Armour armour){
+		public Builder(Armour armour){
 			super(armour);
 			this.defense = armour.defense;
 		}
-		public ArmourBuilder(AbstractGameElement element){
+		public Builder(AbstractGameElement element){
 			super(element);
 			use(ItemUse.Armour);
 		}
-		public ArmourBuilder cost(int cost){
+		public Builder cost(int cost){
 			super.cost(cost);
 			return this;
 		}
 		@JsonProperty("def")
-		public ArmourBuilder defense(int defense){
+		public Builder defense(int defense){
 			this.defense = defense;
 			return this;
 		}
-		public ArmourBuilder info(String info){
+		public Builder info(String info){
 			super.info(info);
 			return this;
 		}
-		public ArmourBuilder level(int level){
+		public Builder level(int level){
 			super.level(level);
 			return this;
 		}
-		public ArmourBuilder hidden(boolean hidden){
+		public Builder hidden(boolean hidden){
 			super.hidden(hidden);
 			return this;
 		}
-		public ArmourBuilder movable(boolean movable){
+		public Builder movable(boolean movable){
 			super.movable(movable);
 			return this;
 		}
-		public ArmourBuilder use(ItemUse use){
+		public Builder use(ItemUse use){
 			super.use(use);
 			return this;
 		}
-		public ArmourBuilder standardName(String name){
+		public Builder standardName(String name){
 			super.standardName(name);
 			return this;
 		}
-		public ArmourBuilder roomDescription(String roomDescrip){
+		public Builder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
 		}
-		public ArmourBuilder validateFields(boolean validateFields){
+		public Builder validateFields(boolean validateFields){
 			super.validateFields(validateFields);
 			return this;
 		}
@@ -71,7 +71,7 @@ public class Armour extends Item implements IArmour {
 			return new Armour(this);
 		}
 	}
-	protected Armour(ArmourBuilder builder){
+	protected Armour(Builder builder){
 		super(builder);
 		setDefense(builder.defense);
 	}

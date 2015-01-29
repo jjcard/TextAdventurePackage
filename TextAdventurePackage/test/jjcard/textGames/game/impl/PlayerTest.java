@@ -31,10 +31,10 @@ public class PlayerTest {
 		
 		int xp = 45000;
 		int lvl = 10;
-		Weapon weapon = new Weapon.WeaponBuilder().standardName(weaponName)
+		Weapon weapon = new Weapon.Builder().standardName(weaponName)
 				.cost(cost).attack(weaponAttack).critChance(critChance).durability(dur).hidden(hidden).build();
 		
-		Player player = new Player.PlayerBuilder().standardName(name).attack(attack).defense(def).hostile(hostile).xp(xp).level(lvl).weapon(weapon).build();
+		Player player = new Player.Builder().standardName(name).attack(attack).defense(def).hostile(hostile).xp(xp).level(lvl).weapon(weapon).build();
 		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ObjectMapper m = new ObjectMapper();

@@ -73,7 +73,7 @@ public class WorldTest {
 		assertEquals(ReturnCom.ATTACK_MOB, rc);
 		assertEquals(mob.getHealth(), 6);
 		assertTrue(mob.getStatusList().isEmpty());
-		Item coin = new Item.ItemBuilder().standardName("coin").info("a single golden coin").build();
+		Item coin = new Item.Builder().standardName("coin").info("a single golden coin").build();
 		mob.addItem( coin);
 		
 		assertTrue(mob.containsItem("coin"));
@@ -90,7 +90,7 @@ public class WorldTest {
 	}
 	@Test
 	public void EquipWorldTest(){
-		Armour wool = new Armour.ArmourBuilder().standardName("wool").info("its itchness might be a defense").level(0).defense(4).build();
+		Armour wool = new Armour.Builder().standardName("wool").info("its itchness might be a defense").level(0).defense(4).build();
 		player.addItem( wool);
 		ITextTokenStream<BasicTextTokenType> ck = world.parseInput("equip wool");
 		assertEquals(ck.getVerb().getType(), BasicTextTokenType.EQUIP);
@@ -101,7 +101,7 @@ public class WorldTest {
 		assertEquals(8 + 4, player.getFullDefense() );
 	
 		
-		Weapon weapon = new Weapon.WeaponBuilder().standardName("shank").info("it can also be used as a verb").attack(3).build();
+		Weapon weapon = new Weapon.Builder().standardName("shank").info("it can also be used as a verb").attack(3).build();
 		player.addItem(weapon);
 		ck = world.parseInput("equip shank");
 		assertEquals( BasicTextTokenType.EQUIP, ck.getVerb().getType());
@@ -163,10 +163,10 @@ public class WorldTest {
 	@Before
 	public void setUp(){
 		
-		 player = new Player.PlayerBuilder().standardName("jjcard").maxHealth(50).health(50).defense(8).attack(5).build();
+		 player = new Player.Builder().standardName("jjcard").maxHealth(50).health(50).defense(8).attack(5).build();
 		 local = new Location("entry room", "A barren room.");
 		 
-		 Item item = new Item.ItemBuilder().standardName("item").build();
+		 Item item = new Item.Builder().standardName("item").build();
 		 local.addItem(item);
 		 hallway = new Location("hallway","a long hallway with one torch.");
 		local.addExit("NORTH", hallway);
@@ -175,7 +175,7 @@ public class WorldTest {
 		 world.setTextParser(getParser());
 		 
 		 
-		 mob = new Mob.MobBuilder().standardName("Goblin").health(10).defense(1).attack(4).build();
+		 mob = new Mob.Builder().standardName("Goblin").health(10).defense(1).attack(4).build();
 		mob.setDescription("You can tell its a goblin because it's green and broccoli usually doesn't try to kill you");
 		
 	}

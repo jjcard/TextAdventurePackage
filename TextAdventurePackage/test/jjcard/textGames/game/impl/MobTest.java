@@ -28,10 +28,10 @@ public class MobTest {
 		boolean hidden = false;
 		int critChance = 50;
 		int dur = 10;
-		Weapon weapon = new Weapon.WeaponBuilder().standardName(weaponName)
+		Weapon weapon = new Weapon.Builder().standardName(weaponName)
 				.cost(cost).attack(weaponAttack).critChance(critChance).durability(dur).hidden(hidden).build();
 		
-		Mob mob = new Mob.MobBuilder().standardName(name).attack(attack).defense(def).hostile(hostile).weapon(weapon).build();
+		Mob mob = new Mob.Builder().standardName(name).attack(attack).defense(def).hostile(hostile).weapon(weapon).build();
 		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ObjectMapper m = new ObjectMapper();

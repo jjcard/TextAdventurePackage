@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *
  */
 
-@JsonDeserialize(builder = AbstractGameElement.GameElementBuilder.class)
+@JsonDeserialize(builder = AbstractGameElement.Builder.class)
 public abstract class AbstractGameElement implements IGameElement{
 	@JsonProperty("roomDescrip")
 	private String roomDescription;
@@ -31,26 +31,26 @@ public abstract class AbstractGameElement implements IGameElement{
 	 * @author jjcard
 	 *
 	 */
-	public static class GameElementBuilder{
+	public static class Builder{
 		private String standardName;
 		private String roomDescription;
 		private boolean validateFields = true;
 		
 		
-		public GameElementBuilder(){
+		public Builder(){
 			
 		}
-		public GameElementBuilder(AbstractGameElement g){
+		public Builder(AbstractGameElement g){
 			this.standardName = g.standardName;
 			this.roomDescription = g.roomDescription;
 		}
 		@JsonProperty("name")
-		public GameElementBuilder standardName(String name){
+		public Builder standardName(String name){
 			this.standardName = name;
 			return  this;
 		}
 		@JsonProperty("roomDescrip")
-		public GameElementBuilder roomDescription(String roomDescription){
+		public Builder roomDescription(String roomDescription){
 			this.roomDescription = roomDescription;
 			return this;
 		}
@@ -60,13 +60,13 @@ public abstract class AbstractGameElement implements IGameElement{
 		 * @return
 		 */
 		@JsonProperty("valFields")
-		public GameElementBuilder validateFields(boolean validateFields){
+		public Builder validateFields(boolean validateFields){
 			this.validateFields = validateFields;
 			return this;
 		}
 	}
 	
-	protected AbstractGameElement(GameElementBuilder b){
+	protected AbstractGameElement(Builder b){
 		this.standardName = b.standardName;
 		this.roomDescription = b.roomDescription;
 		this.validateFields = b.validateFields;

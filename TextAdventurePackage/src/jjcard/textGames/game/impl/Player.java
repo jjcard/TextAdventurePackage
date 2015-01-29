@@ -12,104 +12,104 @@ import jjcard.textGames.game.IStatus;
 import jjcard.textGames.game.IWeapon;
 import jjcard.textGames.game.leveling.HasLeveling;
 
-@JsonDeserialize(builder = Player.PlayerBuilder.class)
+@JsonDeserialize(builder = Player.Builder.class)
 public class Player extends Mob implements HasLeveling{
 	@JsonProperty("lvl")
 	private int level;
 	@JsonProperty("xp")
 	private int xp;
 	
-	public static class PlayerBuilder extends MobBuilder{
+	public static class Builder extends Mob.Builder{
 		private int level;
 		private int xp;
 		
-		public PlayerBuilder(){
+		public Builder(){
 			super();
 		}
-		public PlayerBuilder(Player p){
+		public Builder(Player p){
 			super(p);
 			this.xp = p.xp;
 			this.level = p.level;
 		}
-		public PlayerBuilder(AbstractGameElement g){
+		public Builder(AbstractGameElement g){
 			super(g);
 		}
-		public PlayerBuilder standardName(String name){
+		public Builder standardName(String name){
 			super.standardName(name);
 			return this;
 		}
 		@JsonProperty("lvl")
-		public PlayerBuilder level(int level){
+		public Builder level(int level){
 			this.level = level;
 			return this;
 		}
 		@JsonProperty("xp")
-		public PlayerBuilder xp(int xp){
+		public Builder xp(int xp){
 			this.xp = xp;
 			return this;
 		}
-		public PlayerBuilder checkHealth(boolean checkHealth){
+		public Builder checkHealth(boolean checkHealth){
 			super.checkHealth(checkHealth);
 			return this;
 		}
-		public PlayerBuilder roomDescription(String roomDescrip){
+		public Builder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
 		}
-		public PlayerBuilder maxHealth(int maxHealth){
+		public Builder maxHealth(int maxHealth){
 			super.maxHealth(maxHealth);
 			return this;
 		}
-		public PlayerBuilder health(int curHealth){
+		public Builder health(int curHealth){
 			super.health(curHealth);
 			return this;
 		}
-		public PlayerBuilder description(String description){
+		public Builder description(String description){
 			super.description(description);
 			return this;
 		}
-		public PlayerBuilder money(int money){
+		public Builder money(int money){
 			super.money(money);
 			return this;
 		}
-		public PlayerBuilder inventory(Map<String, IItem> inventory){
+		public Builder inventory(Map<String, IItem> inventory){
 			super.inventory(inventory);
 			return this;
 		}
-		public PlayerBuilder addItem(IItem item){
+		public Builder addItem(IItem item){
 			super.addItem(item);
 			return this;
 		}
-		public PlayerBuilder defense(int defense){
+		public Builder defense(int defense){
 			super.defense(defense);
 			return this;
 		}
-		public PlayerBuilder attack(int attack){
+		public Builder attack(int attack){
 			super.attack(attack);
 			return this;
 		}
-		public PlayerBuilder hostile(boolean hostile){
+		public Builder hostile(boolean hostile){
 			super.hostile(hostile);
 			return this;
 		}
-		public PlayerBuilder statusList(List<IStatus> statusList){
+		public Builder statusList(List<IStatus> statusList){
 			super.statusList(statusList);
 			
 			return this;
 		}
-		public PlayerBuilder armour(IArmour armour){
+		public Builder armour(IArmour armour){
 			super.armour(armour);
 			return this;
 		}
-		public PlayerBuilder weapon(IWeapon weapon){
+		public Builder weapon(IWeapon weapon){
 			super.weapon(weapon);
 			return this;
 		}
-		public PlayerBuilder addStatus(IStatus status){
+		public Builder addStatus(IStatus status){
 			super.addStatus(status);
 			return this;
 		}
-		public PlayerBuilder validateFields(boolean validateFields){
+		public Builder validateFields(boolean validateFields){
 			super.validateFields(validateFields);
 			return this;
 		}
@@ -119,7 +119,7 @@ public class Player extends Mob implements HasLeveling{
 	}
 	
 	
-	private Player(PlayerBuilder b){
+	private Player(Builder b){
 		super(b);
 		setXp(b.xp);
 		setLevel(b.level);

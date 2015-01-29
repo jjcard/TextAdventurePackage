@@ -12,20 +12,20 @@ import jjcard.textGames.game.util.ObjectsUtil;
  * @author jjcard
  *
  */
-@JsonDeserialize(builder = Exit.ExitBuilder.class)
+@JsonDeserialize(builder = Exit.Builder.class)
 public class Exit extends AbstractGameElement implements IExit {
 
 	
-	public static final ExitBuilder NORTH_BUILD = new Exit.ExitBuilder().standardName("NORTH");
-	public static final ExitBuilder SOUTH_BUILD = new Exit.ExitBuilder().standardName("SOUTH");
-	public static final ExitBuilder EAST_BUILD = new Exit.ExitBuilder().standardName("EAST");
-	public static final ExitBuilder WEST_BUILD = new Exit.ExitBuilder().standardName("WEST");
-	public static final ExitBuilder NORTHEAST_BUILD = new Exit.ExitBuilder().standardName("NORTHEAST");
-	public static final ExitBuilder NORTHWEST_BUILD = new Exit.ExitBuilder().standardName("NORTHWEST");
-	public static final ExitBuilder SOUTHEAST_BUILD = new Exit.ExitBuilder().standardName("SOUTHEAST");
-	public static final ExitBuilder SOUTHWEST_BUILD = new Exit.ExitBuilder().standardName("SOUTHWEST");
-	public static final ExitBuilder UP_BUILD = new Exit.ExitBuilder().standardName("UP");
-	public static final ExitBuilder DOWN_BUILD = new Exit.ExitBuilder().standardName("DOWN");
+	public static final Builder NORTH_BUILD = new Exit.Builder().standardName("NORTH");
+	public static final Builder SOUTH_BUILD = new Exit.Builder().standardName("SOUTH");
+	public static final Builder EAST_BUILD = new Exit.Builder().standardName("EAST");
+	public static final Builder WEST_BUILD = new Exit.Builder().standardName("WEST");
+	public static final Builder NORTHEAST_BUILD = new Exit.Builder().standardName("NORTHEAST");
+	public static final Builder NORTHWEST_BUILD = new Exit.Builder().standardName("NORTHWEST");
+	public static final Builder SOUTHEAST_BUILD = new Exit.Builder().standardName("SOUTHEAST");
+	public static final Builder SOUTHWEST_BUILD = new Exit.Builder().standardName("SOUTHWEST");
+	public static final Builder UP_BUILD = new Exit.Builder().standardName("UP");
+	public static final Builder DOWN_BUILD = new Exit.Builder().standardName("DOWN");
 	
 	
 	public static final Exit NORTH = NORTH_BUILD.build();
@@ -58,30 +58,30 @@ public class Exit extends AbstractGameElement implements IExit {
 	@JsonProperty("loc")
 	private final ILocation location;
 
-	public static class ExitBuilder extends GameElementBuilder{
+	public static class Builder extends AbstractGameElement.Builder{
 		private ILocation location;
 		
 		
-		public ExitBuilder(){
+		public Builder(){
 			super();
 		}
-		public ExitBuilder(Exit exit){
+		public Builder(Exit exit){
 			super(exit);
 			this.location = exit.location;
 		}
-		public ExitBuilder(AbstractGameElement element){
+		public Builder(AbstractGameElement element){
 			super(element);
 		}
-		public ExitBuilder standardName(String name){
+		public Builder standardName(String name){
 			super.standardName(name);
 			return this;
 		}
-		public ExitBuilder roomDescription(String roomDescrip){
+		public Builder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
 		}
 		@JsonProperty("loc")
-		public ExitBuilder location(ILocation location){
+		public Builder location(ILocation location){
 			this.location = location;
 			return this;
 		}
@@ -92,7 +92,7 @@ public class Exit extends AbstractGameElement implements IExit {
 		
 	}
 	
-	protected Exit(ExitBuilder builder){
+	protected Exit(Builder builder){
 		super(builder);
 		this.location = builder.location;
 	}
@@ -109,7 +109,7 @@ public class Exit extends AbstractGameElement implements IExit {
 	 * @return copy of Exit with location
 	 */
 	public Exit getWithLocation(ILocation location){
-		return new ExitBuilder(this).location(location).build();
+		return new Builder(this).location(location).build();
 	}
 	public boolean equals(Object object){
 		if (object == this){

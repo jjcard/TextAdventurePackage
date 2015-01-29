@@ -1,6 +1,8 @@
 package jjcard.textGames.game.util;
 
  import static jjcard.textGames.game.util.ObjectsUtil.checkArg;
+
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
@@ -37,6 +39,14 @@ public final class MapUtil {
 	 */
 	public void setSetUppercase(boolean setUppercase){
 		this.setUppercase = setUppercase;
+	}
+	/**
+	 * If the map is null, returns new HashMap, otherwise returns the map
+	 * @param map
+	 * @return the given map or a new instance if map was null
+	 */
+	public <J, K> Map<J, K> getMapOrNew(Map<J, K> map){
+		return (map == null)? new HashMap<J, K>() : map; 
 	}
 	/**
 	 * Sets the Locale that is used to change the case of the String keys.

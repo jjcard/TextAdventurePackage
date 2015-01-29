@@ -55,7 +55,6 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 			return this;
 		}
 		public Builder addExit(IExit exit){
-//			this.exits.put(exit);
 			MAP_UTIL.addItemToMap(exits, exit);
 			return this;
 		}
@@ -94,7 +93,6 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		this.inventory = builder.inventory;
 	}
 
-
 	/**
 	 * Gets the name aka the StandardName
 	 */
@@ -114,7 +112,6 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 	@Override
 	public void setDescription(String descrip) {
 		setRoomDescription(descrip);
-
 	}
 
 	public Map<String,IItem> getInventory(){

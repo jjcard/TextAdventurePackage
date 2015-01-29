@@ -95,27 +95,15 @@ public class Location implements ILocation {
 	}
 	@JsonProperty("inventory")
 	public void setInventory(Map<String, IItem> inventoryNew){
-		if (inventoryNew == null){
-			inventory = new HashMap<String, IItem>();
-		} else {
-			inventory = inventoryNew;
-		}
+		inventory = MAP_UTIL.getMapOrNew(inventoryNew);
 	}
 	@JsonProperty("mobs")
 	public void setMobs(Map<String, IMob> roomMobNew){
-		if (roomMobNew == null){
-			this.roomMob = new HashMap<String, IMob>();
-		} else {
-			this.roomMob = roomMobNew;
-		}
+		this.roomMob = MAP_UTIL.getMapOrNew(roomMobNew);
 	}
 	@JsonProperty("exits")
 	public void setExits(Map<String, IExit> exits){
-		if (exits == null){
-			this.exits = new HashMap<String, IExit>();
-		} else {
-			this.exits = exits;
-		}
+		this.exits = MAP_UTIL.getMapOrNew(exits);
 	}
 	public IItem removeItem(String key){
 		return MAP_UTIL.removeItemFromMap(inventory, key);

@@ -5,6 +5,9 @@ import static jjcard.textGames.game.util.ObjectsUtil.notEqual;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jjcard.textGames.game.IExit;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.ILocation;
@@ -18,16 +21,18 @@ import jjcard.textGames.game.util.MapUtil;
 
 
 public class Location implements ILocation {
+	@JsonIgnore
 	private static final MapUtil MAP_UTIL = MapUtil.getInstance();
 	private static final char SPACE = ' ';
+	@JsonProperty("name")
 	private final String name;
+	@JsonProperty("descrip")
 	private String description;
-	
-//	private IGameElementMap<IItem> inventory;
-//	private IGameElementMap<IMob> roomMob;
-//	private IGameElementMap<IExit> exits;
+	@JsonProperty("inventory")
 	private Map<String, IItem >inventory;
+	@JsonProperty("mobs")
 	private Map<String, IMob> roomMob;
+	@JsonProperty("exits")
 	private Map<String, IExit> exits;
 	
 	public Location(){
@@ -37,7 +42,7 @@ public class Location implements ILocation {
 		roomMob = new HashMap<String, IMob>();
 		exits = new HashMap<String, IExit>();
 	}
-	public Location(String name){
+	public Location(@JsonProperty("name") String name){
 		this.name = name;
 		description = "";
 		inventory = new HashMap<String, IItem>();
@@ -65,24 +70,30 @@ public class Location implements ILocation {
 		setMobs(mobs);
 		exits = new HashMap<String, IExit>();
 	}
+	@JsonProperty("name")
 	public String getName(){
 		return name;
 	}
+	@JsonProperty("descrip")
 	public String getDescription(){
 		return description;
 	}
+	@JsonProperty("inventory")
 	public Map<String, IItem> getInventory(){
 		return inventory;
 	}
+	@JsonProperty("mobs")
 	public  Map<String, IMob> getMobs() {
 		return roomMob;
 	}
+	@JsonProperty("exits")
 	public Map<String, IExit> getExits() {
 		return exits;
 	}
 	public IItem addItem(IItem add){
 		return MAP_UTIL.addItemToMap(inventory, add);
 	}
+	@JsonProperty("inventory")
 	public void setInventory(Map<String, IItem> inventoryNew){
 		if (inventoryNew == null){
 			inventory = new HashMap<String, IItem>();
@@ -90,11 +101,20 @@ public class Location implements ILocation {
 			inventory = inventoryNew;
 		}
 	}
+	@JsonProperty("mobs")
 	public void setMobs(Map<String, IMob> roomMobNew){
 		if (roomMobNew == null){
 			this.roomMob = new HashMap<String, IMob>();
 		} else {
 			this.roomMob = roomMobNew;
+		}
+	}
+	@JsonProperty("exits")
+	public void setExits(Map<String, IExit> exits){
+		if (exits == null){
+			this.exits = new HashMap<String, IExit>();
+		} else {
+			this.exits = exits;
 		}
 	}
 	public IItem removeItem(String key){
@@ -141,6 +161,7 @@ public class Location implements ILocation {
 	 * @param dir
 	 * @return
 	 */
+	@JsonIgnore
 	public ILocation getExitLocation(String dir){
 		IExit exit = getExit(dir);
 		if (exit != null){
@@ -149,20 +170,22 @@ public class Location implements ILocation {
 			return null;
 		}
 	}
+	@JsonIgnore
 	public IExit getExit(String dir){
 		return MAP_UTIL.getItemFromMap(exits, dir);
 	}
+	@JsonIgnore
 	public IMob getMob(String key){
 		return MAP_UTIL.getItemFromMap(roomMob,key);
 	}
+	@JsonIgnore
 	public IItem getItem(String key){
 		return MAP_UTIL.getItemFromMap(inventory, key);
 	}
 	public boolean containsExit(String dir){
 		return MAP_UTIL.containsKey(exits, dir);
 	}
-
-
+	@JsonProperty("descrip")
 	public void setDescription(String descrip){
 		description = descrip;
 	}
@@ -173,9 +196,11 @@ public class Location implements ILocation {
 		}
 		return compare;
 	}
+	@JsonIgnore
 	public String getExitsDescriptions(){
 		return MAP_UTIL.getKeysAsString(exits);
 	}
+	@JsonIgnore
 	public String getInventoryDescriptions(){
 		
 		StringBuilder re = new StringBuilder();
@@ -186,6 +211,7 @@ public class Location implements ILocation {
 		}
 		return re.toString();
 	}
+	@JsonIgnore
 	public String getMobDescriptions(){
 		StringBuilder re = new StringBuilder();
 		for(IMob m: roomMob.values()){

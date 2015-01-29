@@ -501,6 +501,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		return MAP_UTIL.getKeysAsString(inventory);
 		
 	}
+	@JsonIgnore
 	public IArmour setArmour(String a){
 		IItem ar = getItem(a);
 		if (ar != null && ar instanceof IArmour){
@@ -508,6 +509,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		}
 		return null;
 	}
+	@JsonIgnore
 	public IWeapon setWeapon(String a){
 		IItem ar = getItem(a);
 		if (ar != null && ar instanceof Weapon){

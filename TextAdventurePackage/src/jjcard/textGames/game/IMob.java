@@ -3,6 +3,8 @@ package jjcard.textGames.game;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public interface IMob extends IGameElement{
 
 	public String getDescription();
@@ -33,12 +35,14 @@ public interface IMob extends IGameElement{
 	 * @param a
 	 * @return
 	 */
+	@JsonIgnore
 	public IWeapon setWeapon(String weaponName);
 	/**
 	 * Sets the armour to armour in the inventory with given name
 	 * @param a
 	 * @return
 	 */
+	@JsonIgnore
 	public IArmour setArmour(String armourName);
 	
 	public String inventoryToString();

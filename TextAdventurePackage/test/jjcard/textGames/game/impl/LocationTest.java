@@ -1,13 +1,23 @@
 package jjcard.textGames.game.impl;
 
-import static org.junit.Assert.*;
-import jjcard.textGames.game.impl.Exit;
-import jjcard.textGames.game.impl.Item;
-import jjcard.textGames.game.impl.Location;
-import jjcard.textGames.game.impl.Mob;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import jjcard.textGames.game.IItem;
+import jjcard.textGames.game.IMob;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class LocationTest {
 	private Mob mob = new Mob.MobBuilder().standardName("Gelatinous Cube").build();//.altNames(new String[] {"The bane"}).description("Run").build();
@@ -54,6 +64,30 @@ public class LocationTest {
 //		assertEquals(hallway.getItem("woRthLeSs"), item);
 		
 		assertNull(hallway.getItem("worthless trash"));
+	}
+	@Test
+	public void jsonTest() throws JsonParseException, JsonMappingException, IOException{
+		String name = "fjksdafjlsd";
+		String descrip = "a white walled testing facility";
+		Map<String, IItem> inventory = new HashMap<>();
+		inventory.put("hello", new Item.ItemBuilder().standardName("potato").build());
+		Map<String, IMob> mobs = new HashMap<>();
+		mobs.put("turret", new Mob.MobBuilder().hostile(true).standardName("FrakenTurret").build());
+		Location loc = new Location(name, descrip, inventory, mobs);
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ObjectMapper m = new ObjectMapper();
+		m.writeValue(out, loc);
+		
+		Location in = m.readValue(new ByteArrayInputStream(out.toByteArray()), Location.class);
+		
+		assertEquals(loc, in);
+		assertEquals(name, in.getName());
+		assertEquals(descrip, in.getDescription());
+		assertEquals(mobs, in.getMobs());
+		assertEquals(inventory, in.getInventory());
+		
+		
+		
 	}
 
 }

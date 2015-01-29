@@ -291,4 +291,15 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		}
 	}
 
+
+	@Override
+	public void setExits(Map<String, IExit> exits) {
+		if (exits == null){
+			this.exits = new HashMap<String, IExit>();
+		} else {
+			this.exits = exits;
+		}
+		
+	}
+
 }

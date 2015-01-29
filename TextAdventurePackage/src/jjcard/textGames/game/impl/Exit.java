@@ -1,5 +1,8 @@
 package jjcard.textGames.game.impl;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import jjcard.textGames.game.IExit;
 import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.util.ObjectsUtil;
@@ -9,6 +12,7 @@ import jjcard.textGames.game.util.ObjectsUtil;
  * @author jjcard
  *
  */
+@JsonDeserialize(builder = Exit.ExitBuilder.class)
 public class Exit extends AbstractGameElement implements IExit {
 
 	
@@ -50,6 +54,8 @@ public class Exit extends AbstractGameElement implements IExit {
 	 * List that includes all static default Exits
 	 */
 	public static final Exit[] defaultValues = new Exit[]{NORTH, SOUTH, EAST, WEST, NORTHWEST, NORTHEAST, SOUTHEAST, SOUTHEAST, UP, DOWN};
+	
+	@JsonProperty("loc")
 	private final ILocation location;
 
 	public static class ExitBuilder extends GameElementBuilder{
@@ -74,6 +80,7 @@ public class Exit extends AbstractGameElement implements IExit {
 			super.roomDescription(roomDescrip);
 			return this;
 		}
+		@JsonProperty("loc")
 		public ExitBuilder location(ILocation location){
 			this.location = location;
 			return this;

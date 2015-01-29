@@ -3,15 +3,20 @@ package jjcard.textGames.game.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import jjcard.textGames.game.IArmour;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.IStatus;
 import jjcard.textGames.game.IWeapon;
 import jjcard.textGames.game.leveling.HasLeveling;
 
-
+@JsonDeserialize(builder = Player.PlayerBuilder.class)
 public class Player extends Mob implements HasLeveling{
+	@JsonProperty("lvl")
 	private int level;
+	@JsonProperty("xp")
 	private int xp;
 	
 	public static class PlayerBuilder extends MobBuilder{
@@ -33,10 +38,12 @@ public class Player extends Mob implements HasLeveling{
 			super.standardName(name);
 			return this;
 		}
+		@JsonProperty("lvl")
 		public PlayerBuilder level(int level){
 			this.level = level;
 			return this;
 		}
+		@JsonProperty("xp")
 		public PlayerBuilder xp(int xp){
 			this.xp = xp;
 			return this;

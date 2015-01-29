@@ -2,10 +2,14 @@ package jjcard.textGames.game;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+
 /**
  * An ILocation contains a collection of IItems, IMobs, and IExits and methods to use them.
  *
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = As.PROPERTY, property = "@class")
 public interface ILocation extends Comparable<ILocation>{
 
 	/**
@@ -21,6 +25,7 @@ public interface ILocation extends Comparable<ILocation>{
 	public IItem addItem(IItem add);
 	public void setInventory(Map<String, IItem> inventory);
 	public void setMobs(Map<String, IMob> mobs);
+	public void setExits(Map<String, IExit> exits);
 	public IItem removeItem(String key);
 	public boolean containsItem(String key);
 	public IMob addMob(IMob mob);

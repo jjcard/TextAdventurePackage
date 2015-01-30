@@ -2,7 +2,10 @@ package jjcard.textGames.game.parser;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = As.PROPERTY, property = "@class")
 public interface ITextTokenStream<T extends ITextTokenType> {
 	
 	/**

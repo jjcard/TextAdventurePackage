@@ -3,16 +3,20 @@ package jjcard.textGames.game.parser.impl;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jjcard.textGames.game.parser.ITextTokenType;
 
 public class MappedTextDefinition<T extends ITextTokenType> extends AbstractTextDefinition<T> {
-
+	@JsonProperty("map")
 	private Map<String, String> standerizedMap;
 	public MappedTextDefinition(T type){
 		super(type);
 		this.standerizedMap = new TreeMap<>();
 	}
-	public MappedTextDefinition(T type, Map<String, String> standarizedMap ) {
+	@JsonCreator
+	public MappedTextDefinition(@JsonProperty("type")T type, @JsonProperty("map") Map<String, String> standarizedMap ) {
 		super(type);
 		this.standerizedMap = standarizedMap;
 	}
@@ -31,6 +35,16 @@ public class MappedTextDefinition<T extends ITextTokenType> extends AbstractText
 			returnVal = token;
 		}
 		return returnVal;
+		
+	}
+	public boolean equals(Object o){
+		if (super.equals(o)){
+			if (o instanceof MappedTextDefinition<?>) {
+				return this.standerizedMap
+						.equals(((MappedTextDefinition<?>) o).standerizedMap);
+			}
+		}
+		return false;
 		
 	}
 

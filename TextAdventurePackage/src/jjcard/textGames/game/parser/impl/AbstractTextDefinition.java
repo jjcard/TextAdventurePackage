@@ -1,13 +1,15 @@
 package jjcard.textGames.game.parser.impl;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jjcard.textGames.game.parser.ITextDefinition;
 import jjcard.textGames.game.parser.ITextTokenType;
 
 public abstract class AbstractTextDefinition<T extends ITextTokenType> implements ITextDefinition<T>{
-	
+	@JsonProperty("type")
 	private final T type;
 	
-	public AbstractTextDefinition(T type){
+	public AbstractTextDefinition(@JsonProperty("type")T type){
 		if (type == null){
 			throw new NullPointerException("type");
 		}
@@ -25,6 +27,16 @@ public abstract class AbstractTextDefinition<T extends ITextTokenType> implement
 	
 	public String toString(){
 		return getClass().getSimpleName() + "=" + type;
+	}
+	public boolean equals(Object o){
+		if (o == this){
+			return true;
+		}
+		if (o instanceof AbstractTextDefinition<?>){
+			AbstractTextDefinition<?> other = (AbstractTextDefinition<?>) o;
+			return type.equals(other.type);
+		}
+		return false;
 	}
 	
 	

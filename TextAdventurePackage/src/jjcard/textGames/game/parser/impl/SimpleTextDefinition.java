@@ -1,5 +1,8 @@
 package jjcard.textGames.game.parser.impl;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jjcard.textGames.game.parser.ITextTokenType;
 /**
  * A simple pass-through version of TextDefinition, where there is no standardization.
@@ -7,8 +10,8 @@ import jjcard.textGames.game.parser.ITextTokenType;
  * @param <T>
  */
 public class SimpleTextDefinition<T extends ITextTokenType> extends AbstractTextDefinition<T> {
-
-	public SimpleTextDefinition(T type) {
+	@JsonCreator
+	public SimpleTextDefinition(@JsonProperty("type")T type) {
 		super(type);
 	}
 

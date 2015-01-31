@@ -47,5 +47,12 @@ public class MappedTextDefinition<T extends ITextTokenType> extends AbstractText
 		return false;
 		
 	}
+	
+	public static <T extends ITextTokenType> MappedTextDefinition<T> getInstance(T type){
+		return new MappedTextDefinition<T>(type);
+	}
+	public static <T extends ITextTokenType> MappedTextDefinition<T> getInstance(T type, Map<String, String> map){
+		return new MappedTextDefinition<T>(type, map);
+	}
 
 }

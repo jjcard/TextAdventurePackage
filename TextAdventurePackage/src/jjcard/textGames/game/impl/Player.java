@@ -177,13 +177,4 @@ public class Player extends Mob implements HasLeveling{
 		}
 
 	}
-
-
-
-
-
-
-
-	
-	
 }

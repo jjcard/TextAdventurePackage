@@ -267,11 +267,11 @@ public class Mob extends AbstractGameElement implements IMob{
 		return statusList.remove(s);
 	}
 
-	public void setDescription(String newDes){
-		description = newDes;
+	public void setDescription(String description){
+		this.description = description;
 	}
 	public void changeMaxHealth(int change){
-		setMaxHealth(maxHealth + change);
+		setMaxHealth(this.maxHealth + change);
 	}
 	/**
 	 * Sets the max Health to the given value.
@@ -292,7 +292,7 @@ public class Mob extends AbstractGameElement implements IMob{
 
 	}
 	public void changeHealth(int change){
-		setHealth(curHealth + change);
+		setHealth(this.curHealth + change);
  
 	}
 	public void setHealth(int health){
@@ -312,31 +312,25 @@ public class Mob extends AbstractGameElement implements IMob{
 
 	}
 	public void changeMoney(int change){
-		money += change;
-		if (doValidateFields() && money < 0){
-			money = 0;
-		}
+		setMoney(this.money + change);
 	}
-	public void setMoney(int moneyN){
-		money = moneyN;
-		if (doValidateFields() && money < 0){
-			money = 0;
+	public void setMoney(int money){
+		this.money = money;
+		if (doValidateFields() && this.money < 0){
+			this.money = 0;
 		}
 	}
 	public void changeDefense(int change){
-		defense += change;
-		if (doValidateFields() && defense < 0){
-			defense = 0;
-		}
+		setDefense(this.defense + change);
 	}
-	public void setDefense(int defenseN){
-		defense = defenseN;
+	public void setDefense(int defense){
+		this.defense = defense;
+		if (doValidateFields() && this.defense < 0){
+			this.defense = 0;
+		}
 	}
 	public void changeAttack(int change){
-		attack += change;
-		if (doValidateFields() && attack < 0){
-			attack = 0;
-		}
+		setAttack(this.attack + change);
 	}
 	/**
 	 * Sets armour with given armourKey and returns previous armour
@@ -358,8 +352,11 @@ public class Mob extends AbstractGameElement implements IMob{
 		weapon = w;
 		return re;
 	}
-	public void setAttack(int attackN){
-		attack = attackN;
+	public void setAttack(int attack){
+		this.attack = attack;
+		if (doValidateFields() && this.attack < 0){
+			this.attack = 0;
+		}
 	}
 	/**
 	 * gets attack plus weapon attack bonus
@@ -414,9 +411,12 @@ public class Mob extends AbstractGameElement implements IMob{
 	public IItem removeItem(String key){
 		return MAP_UTIL.removeItemFromMap(inventory, key);
 	}
+	public void setInventory(Map<String, IItem> inventoryNew){
+		inventory = MAP_UTIL.getMapOrNew(inventoryNew);
+	}
 	public Map<String, IItem> removeInventory(){
 		Map<String, IItem> returnIn = inventory;
-		inventory = null;
+		inventory = new HashMap<>();
 		return returnIn;
 	}
 	/**

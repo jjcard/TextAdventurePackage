@@ -17,8 +17,7 @@ import jjcard.textGames.game.parser.ITextTokenType;
  */
 public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, ITextDefinition<T>>implements ITextDictionary<T>{
 
-//	private static final Pattern pairPattern = Pattern.compile("=");
-//	public static final String COMMENT_INDICATOR = "#";
+
 	/**
 	 * 
 	 */

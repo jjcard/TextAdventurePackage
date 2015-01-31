@@ -49,16 +49,16 @@ public class Location implements ILocation {
 		roomMob =  new HashMap<String, IMob>();
 		exits = new HashMap<String, IExit>();
 	}
-	public Location(String name, String descripN){
+	public Location(String name, String description){
 		this.name = name;
-		description = descripN;
+		this.description = description;
 		inventory = new HashMap<String, IItem>();
 		roomMob =  new HashMap<String, IMob>();
 		exits = new HashMap<String, IExit>();
 	}
-	public Location(String name, String descripN, Map<String, IItem> invenN){
+	public Location(String name, String description, Map<String, IItem> invenN){
 		this.name = name;
-		description = descripN;
+		this.description = description;
 		setInventory(invenN);
 		roomMob =  new HashMap<String, IMob>();
 		exits = new HashMap<String, IExit>();

@@ -42,7 +42,7 @@ public class PlayerTest {
 		
 		Player in = m.readValue(new ByteArrayInputStream(out.toByteArray()), Player.class);
 		assertEquals(player, in);
-		assertEquals(name, in.getStandardName());
+		assertEquals(name, in.getName());
 		assertEquals(weapon, in.getWeapon());
 		assertEquals(hostile, in.isHostile());
 		assertEquals(xp, in.getXp());

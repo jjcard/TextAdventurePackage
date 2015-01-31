@@ -17,7 +17,7 @@ public interface IGameElement {
 	 * Returns the standard name for the element.
 	 * @return
 	 */
-	public String getStandardName();
+	public String getName();
 	/**
 	 * Returns a description of the element for if it is in a room.
 	 * @return

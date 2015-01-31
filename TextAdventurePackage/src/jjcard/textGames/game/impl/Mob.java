@@ -131,7 +131,7 @@ public class Mob extends AbstractGameElement implements IMob{
 			return this;
 		}
 		public Builder addItem(IItem item){
-			this.inventory.put(item.getStandardName(), item);
+			this.inventory.put(item.getName(), item);
 			return this;
 		}
 		@JsonProperty("def")
@@ -444,7 +444,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		return !isDead();
 	}
 	public String toString() {
-		return getStandardName();
+		return getName();
 	}
 
 	public IWeapon removeWeapon() {
@@ -454,7 +454,7 @@ public class Mob extends AbstractGameElement implements IMob{
 	}
 	@JsonIgnore
 	public String getStandardArmourKey(){
-		return armour == null? null: armour.getStandardName();
+		return armour == null? null: armour.getName();
 	}
 	@JsonIgnore
 	public boolean isKeyforArmour(String key){
@@ -465,7 +465,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		if (item == null){
 			return false;
 		}
-		if (key.equalsIgnoreCase(item.getStandardName())){
+		if (key.equalsIgnoreCase(item.getName())){
 			return true;
 		}
 		return false;
@@ -476,7 +476,7 @@ public class Mob extends AbstractGameElement implements IMob{
 	}
 	@JsonIgnore
 	public String getStandardWeaponKey(){
-		return weapon == null? null: weapon.getStandardName();
+		return weapon == null? null: weapon.getName();
 	}
 	public boolean equals(Object o){
 		
@@ -486,7 +486,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		if (o instanceof Mob){
 			Mob m = (Mob) o;
 			
-			if (ObjectsUtil.notEqual(this.getStandardName(), m.getStandardName())){
+			if (ObjectsUtil.notEqual(this.getName(), m.getName())){
 				return false;
 			}
 			if (ObjectsUtil.notEqual(this.description, m.description)){

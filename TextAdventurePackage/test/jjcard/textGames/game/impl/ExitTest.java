@@ -67,7 +67,7 @@ public class ExitTest {
 		
 		assertEquals(exit, in);
 		assertEquals(loc, in.getLocation());
-		assertEquals(name, in.getStandardName());
+		assertEquals(name, in.getName());
 	}
 
 }

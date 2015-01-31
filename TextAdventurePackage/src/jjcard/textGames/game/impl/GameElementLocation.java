@@ -93,13 +93,6 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		this.inventory = builder.inventory;
 	}
 
-	/**
-	 * Gets the name aka the StandardName
-	 */
-	@Override
-	public String getName() {
-		return getStandardName();
-	}
 
 	/**
 	 * Gets the description aka the room description.

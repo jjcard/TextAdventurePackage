@@ -18,7 +18,7 @@ public class ItemTest {
 	@Test
 	public void Itemtest() {
 		Item item = new Item.Builder().standardName("basic item").info("it shows off the true potential of an item...which isn't much").build();
-		assertEquals("basic item", item.getStandardName());
+		assertEquals("basic item", item.getName());
 		assertEquals("it shows off the true potential of an item...which isn't much", item.getInfo());
 		
 		item.setHidden(true);
@@ -43,7 +43,7 @@ public class ItemTest {
 	@Test
 	public void WeaponTest(){
 		Weapon weapon = new Weapon.Builder().standardName("sword").info("pointy end").attack(2).build();
-		assertEquals(weapon.getStandardName(), "sword");
+		assertEquals(weapon.getName(), "sword");
 		assertEquals(weapon.getInfo(), "pointy end");
 		assertEquals(weapon.getAttack(), 2);
 		
@@ -71,7 +71,7 @@ public class ItemTest {
 		
 		assertEquals(item, in);
 		assertEquals(55, in.getCost());
-		assertEquals(name, in.getStandardName());
+		assertEquals(name, in.getName());
 	}
 	@Test
 	public void armourJsonTest() throws JsonParseException, JsonMappingException, IOException{
@@ -90,7 +90,7 @@ public class ItemTest {
 		
 		assertEquals(armour, in);
 		assertEquals(cost, in.getCost());
-		assertEquals(name, in.getStandardName());
+		assertEquals(name, in.getName());
 		assertEquals(def, in.getDefense());
 		assertEquals(hidden, in.isHidden());
 	}
@@ -114,7 +114,7 @@ public class ItemTest {
 		
 		assertEquals(weapon, in);
 		assertEquals(cost, in.getCost());
-		assertEquals(name, in.getStandardName());
+		assertEquals(name, in.getName());
 		assertEquals(attack, in.getAttack());
 		assertEquals(hidden, in.isHidden());
 		assertEquals(critChance, in.getCritChance());

@@ -57,7 +57,7 @@ public final class MapUtil {
 		this.locale = locale;
 	}
 	public <K extends IGameElement> K addItemToMap(Map<String, K> map, K item){
-		K previous = map.put(getUppercase(item.getStandardName()), item);
+		K previous = map.put(getUppercase(item.getName()), item);
 		return previous;
 	}
 	public boolean containsKey(Map<String, ?> map, String key){
@@ -75,7 +75,7 @@ public final class MapUtil {
 		if (item == null){
 			return false;
 		}
-		if (key.equalsIgnoreCase(item.getStandardName())){
+		if (key.equalsIgnoreCase(item.getName())){
 			return true;
 		}
 		return false;

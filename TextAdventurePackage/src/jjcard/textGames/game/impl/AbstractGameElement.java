@@ -71,7 +71,7 @@ public abstract class AbstractGameElement implements IGameElement{
 		this.roomDescription = b.roomDescription;
 		this.validateFields = b.validateFields;
 	}
-	public final String getStandardName(){
+	public final String getName(){
 		return standardName;
 	}
 	public String getRoomDescription() {
@@ -88,7 +88,7 @@ public abstract class AbstractGameElement implements IGameElement{
 	 * Returns the Standard name of the GameElement
 	 */
 	public String toString(){
-		return getStandardName();
+		return getName();
 	}
 	public boolean equals(Object object){
 		if (object == this){

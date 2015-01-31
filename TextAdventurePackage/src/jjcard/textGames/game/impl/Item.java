@@ -163,7 +163,7 @@ public class Item extends AbstractGameElement implements IItem{
 		}
 		if (o instanceof Item){
 			Item m = (Item) o;
-			if (ObjectsUtil.notEqual(getStandardName(), m.getStandardName())){
+			if (ObjectsUtil.notEqual(getName(), m.getName())){
 				return false;
 			}
 			if (ObjectsUtil.notEqual(info, m.info)){

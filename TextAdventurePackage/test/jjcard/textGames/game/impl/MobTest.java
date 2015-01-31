@@ -39,7 +39,7 @@ public class MobTest {
 		
 		Mob in = m.readValue(new ByteArrayInputStream(out.toByteArray()), Mob.class);
 		assertEquals(mob, in);
-		assertEquals(name, in.getStandardName());
+		assertEquals(name, in.getName());
 		assertEquals(weapon, in.getWeapon());
 		assertEquals(hostile, in.isHostile());
 

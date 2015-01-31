@@ -41,8 +41,8 @@ public class ShopItem<T extends IItem> implements IShopItem{
 		return amount;
 	}
 	@Override
-	public String getStandardName() {
-		return item.getStandardName();
+	public String getName() {
+		return item.getName();
 	}
 	@Override
 	public boolean isInfinite() {

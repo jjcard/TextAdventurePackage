@@ -85,7 +85,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 	 * @param value
 	 */
 	public void put(IGameElement element, ITextDefinition<T> value){
-		put(element.getStandardName(), value);
+		put(element.getName(), value);
 		
 	}
 	@Override

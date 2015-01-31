@@ -30,13 +30,15 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 		} else {
 			String[] words = splitText(input);
 			handleStartOfWordParsing(builder, words);
+			/**
+			 * The current index in the list
+			 */
+			int index = 0;
 			for (String word : words) {
-				ITextDefinition<T> def = getDefinition(word);
+				TextToken<T> token = getTextToken(word, words, index);
 				
-				if (def != null) {
-					T type = def.getType();
+				if (token != null) {
 					// has a type defined in the dictionary
-					TextToken<T> token = new TextToken<T>(word, def.getStandardToken(word), type);
 					if (token.isObject()) {
 						if (withObjectIndicator) {
 							builder = handleWithObject(builder, token);
@@ -55,6 +57,8 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 
 					}
 				}
+				
+				index++;
 			}
 			
 			handleEndOfWordParsing(builder, words);
@@ -64,6 +68,11 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 		return builder.build();
 	}
 
+	protected TextToken<T> createTextToken(String word, ITextDefinition<T> def){
+		T type = def.getType();
+		// has a type defined in the dictionary
+		return new TextToken<T>(word, def.getStandardToken(word), type);
+	}
 	/**
 	 * Called if the parsing of all the words, if got to that point.
 	 * @param builder
@@ -123,12 +132,14 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	protected abstract TextTokenStreamBuilder<T> handleWordIndicator(
 			TextTokenStreamBuilder<T> builder, String word, K indicator);
 
-	/**
-	 * Called to get the Type of a word. Can return null.
-	 * @param word
-	 * @return
-	 */
-	protected abstract ITextDefinition<T> getDefinition(String word);
+/**
+ * Called to get the Type of a word. Can return null.
+ * @param word
+ * @param words
+ * @param index
+ * @return
+ */
+	protected abstract TextToken<T> getTextToken(String word, String[] words, int index);
 
 	/**
 	 * Called 

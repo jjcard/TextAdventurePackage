@@ -175,8 +175,16 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		}
 		return builder;
 	}
-	@Override
-	protected ITextDefinition<T> getDefinition(String word) {
+	protected TextToken<T> getTextToken(String word, String[] words, int index){
+		
+		
+		ITextDefinition<T> def = getDefinition(word, words, index);
+		if (def != null){
+			return createTextToken(word, def);
+		}
+		return null;
+	}
+	protected ITextDefinition<T> getDefinition(String word, String[] words, int index) {
 		//TODO something else here
 		ITextDefinition<T> def =  dictionary.get(word);
 		if (def == null){

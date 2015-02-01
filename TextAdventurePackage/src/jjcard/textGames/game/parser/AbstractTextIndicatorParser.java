@@ -23,17 +23,18 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 		
 
 		TextTokenStreamBuilder<T> builder = new TextTokenStreamBuilder<T>();
-
-		K indicator = getIndicator(input);
+		String[] words = splitText(input);
+		int index = -1;
+		K indicator = getIndicator(input, words, index);
 		if (indicator != null && indicator.isWholeSentenceIndicator()) {
 			builder = handleWholeSentenceIndicator(indicator, input, builder);
 		} else {
-			String[] words = splitText(input);
+			
 			handleStartOfWordParsing(builder, words);
 			/**
 			 * The current index in the list
 			 */
-			int index = 0;
+			index = 0;
 			for (String word : words) {
 				TextToken<T> token = getTextToken(word, words, index);
 				
@@ -51,7 +52,7 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 					}
 				} else {
 					// not a dictionary word.
-					indicator = getIndicator(word);
+					indicator = getIndicator(word, words, index);
 					if (indicator != null && indicator.isWordIndicator()) {
 						builder = handleWordIndicator(builder, word, indicator);
 
@@ -152,11 +153,11 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 			TextTokenStreamBuilder<T> builder);
 
 	/**
-	 * Called to get the Indicator for the given input. Can return null.
+	 * Called to get the Indicator for the given input. Can return null. Index is negative if it is for the whole sentence
 	 * @param input
 	 * @return
 	 */
-	protected abstract K getIndicator(String input);
+	protected abstract K getIndicator(String input, String[] words, int index);
 
 	/**
 	 * Called to split the input to the individual parsing words

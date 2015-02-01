@@ -195,7 +195,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	}
 
 	@Override
-	protected TextIndicator getIndicator(String input) {
+	protected TextIndicator getIndicator(String input, String[] words, int index) {
 		TextIndicator indicator = indicatorMap == null? null: indicatorMap.get(input);
 		if (indicator == null){
 			//check against patterns

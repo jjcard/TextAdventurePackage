@@ -1,5 +1,7 @@
 package jjcard.textGames.game.parser;
 
+import jjcard.textGames.game.util.ObjectsUtil;
+
 /**
  * A Class for containing the parsed Token.
  *
@@ -74,5 +76,8 @@ public class TextToken<T extends ITextTokenType> implements ITextTokenType{
 		} else {
 			return false;
 		}
+	}
+	public int hashCode(){
+		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, token, standardToken, type);
 	}
 }

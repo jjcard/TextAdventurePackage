@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import jjcard.textGames.game.util.ObjectsUtil;
+
 /**
  * Class to hold a list of Patterns and Values and, for a given String, returns
  * the Value for the Pattern the String matches.
@@ -96,5 +98,8 @@ public class PatternList<S> {
 		} else {
 			return false;
 		}
+	}
+	public int hashCode(){
+		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, patternList);
 	}
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jjcard.textGames.game.parser.ITextDefinition;
 import jjcard.textGames.game.parser.ITextTokenType;
+import jjcard.textGames.game.util.ObjectsUtil;
 
 public abstract class AbstractTextDefinition<T extends ITextTokenType> implements ITextDefinition<T>{
 	@JsonProperty("type")
@@ -37,6 +38,9 @@ public abstract class AbstractTextDefinition<T extends ITextTokenType> implement
 			return type.equals(other.type);
 		}
 		return false;
+	}
+	public int hashCode(){
+		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, type);
 	}
 	
 	

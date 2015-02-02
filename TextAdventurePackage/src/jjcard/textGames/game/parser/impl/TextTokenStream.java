@@ -7,6 +7,7 @@ import jjcard.textGames.game.parser.ITextTokenStream;
 import jjcard.textGames.game.parser.ITextTokenType;
 import jjcard.textGames.game.parser.TextParserError;
 import jjcard.textGames.game.parser.TextToken;
+import jjcard.textGames.game.util.ObjectsUtil;
 import static jjcard.textGames.game.util.ObjectsUtil.notEqual;
 
 /**
@@ -287,6 +288,9 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		} else {
 			return false;
 		}
+	}
+	public int hashCode(){
+		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, verb, objects, withObject, errors);
 	}
 
 }

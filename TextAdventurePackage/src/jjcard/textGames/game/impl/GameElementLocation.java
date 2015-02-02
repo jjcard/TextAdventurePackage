@@ -10,6 +10,7 @@ import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.IMob;
 import jjcard.textGames.game.util.MapUtil;
+import jjcard.textGames.game.util.ObjectsUtil;
 /**
  * An Implementation of ILocation that is also a GameElement and follows the builder pattern.
  *
@@ -259,13 +260,11 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		if (o == this){
 			return true;
 		}
+		if (!super.equals(o)){
+			return false;
+		}
 		if (o instanceof GameElementLocation){
 			GameElementLocation l = (GameElementLocation) o;
-			
-			if (!super.equals(l)){
-				return false;
-			}
-
 			if (notEqual(inventory, l.inventory)){
 				return false;
 			}
@@ -279,6 +278,9 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		} else {
 			return false;
 		}
+	}
+	public int hashCode(){
+		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, inventory, roomMob, exits);
 	}
 
 

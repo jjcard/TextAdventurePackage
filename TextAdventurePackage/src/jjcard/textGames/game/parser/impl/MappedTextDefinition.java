@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jjcard.textGames.game.parser.ITextTokenType;
+import jjcard.textGames.game.util.ObjectsUtil;
 
 public class MappedTextDefinition<T extends ITextTokenType> extends AbstractTextDefinition<T> {
 	@JsonProperty("map")
@@ -47,7 +48,9 @@ public class MappedTextDefinition<T extends ITextTokenType> extends AbstractText
 		return false;
 		
 	}
-	
+	public int hashCode(){
+		return ObjectsUtil.getHashWithStart(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, standerizedMap);
+	}
 	public static <T extends ITextTokenType> MappedTextDefinition<T> getInstance(T type){
 		return new MappedTextDefinition<T>(type);
 	}

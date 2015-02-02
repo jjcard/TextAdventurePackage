@@ -85,7 +85,7 @@ public abstract class AbstractGameElement implements IGameElement{
 		return this.validateFields;
 	}
 	/**
-	 * Returns the Standard name of the GameElement
+	 * Returns the name of the GameElement
 	 */
 	public String toString(){
 		return getName();

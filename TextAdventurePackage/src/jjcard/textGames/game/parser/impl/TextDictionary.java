@@ -64,7 +64,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 		}
 	}
 	/**
-	 * For the given IGameElements, adds the standard name for the element to the map plus any alternate names.
+	 * For the given IGameElements, adds the standard name for the element to the map.
 	 * @param element
 	 * @param value
 	 */

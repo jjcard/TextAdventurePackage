@@ -10,7 +10,7 @@ import jjcard.textGames.game.parser.ITextTokenType;
 
 public class MappedTextDefinition<T extends ITextTokenType> extends AbstractTextDefinition<T> {
 	@JsonProperty("map")
-	private Map<String, String> standerizedMap;
+	private final Map<String, String> standerizedMap;
 	public MappedTextDefinition(T type){
 		super(type);
 		this.standerizedMap = new TreeMap<>();

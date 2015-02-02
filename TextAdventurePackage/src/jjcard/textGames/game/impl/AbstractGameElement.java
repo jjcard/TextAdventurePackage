@@ -36,13 +36,15 @@ public abstract class AbstractGameElement implements IGameElement{
 		private String roomDescription;
 		private boolean validateFields = true;
 		
-		
+		/**
+		 * Creates a new builder for a AbstractGameElement
+		 */
 		public Builder(){
-			
+			//default empty constructer
 		}
-		public Builder(AbstractGameElement g){
-			this.standardName = g.standardName;
-			this.roomDescription = g.roomDescription;
+		public Builder(AbstractGameElement element){
+			this.standardName = element.standardName;
+			this.roomDescription = element.roomDescription;
 		}
 		@JsonProperty("name")
 		public Builder standardName(String name){
@@ -66,10 +68,10 @@ public abstract class AbstractGameElement implements IGameElement{
 		}
 	}
 	
-	protected AbstractGameElement(Builder b){
-		this.standardName = b.standardName;
-		this.roomDescription = b.roomDescription;
-		this.validateFields = b.validateFields;
+	protected AbstractGameElement(Builder builder){
+		this.standardName = builder.standardName;
+		this.roomDescription = builder.roomDescription;
+		this.validateFields = builder.validateFields;
 	}
 	public final String getName(){
 		return standardName;
@@ -96,11 +98,11 @@ public abstract class AbstractGameElement implements IGameElement{
 		}
 		
 		if (object instanceof AbstractGameElement){
-			final AbstractGameElement e = (AbstractGameElement) object;
-			if (ObjectsUtil.notEqual(standardName, e.standardName)){
+			final AbstractGameElement element = (AbstractGameElement) object;
+			if (ObjectsUtil.notEqual(standardName, element.standardName)){
 				return false;
 			}
-			if (ObjectsUtil.notEqual(roomDescription, e.roomDescription)){
+			if (ObjectsUtil.notEqual(roomDescription, element.roomDescription)){
 				return false;
 			}
 			

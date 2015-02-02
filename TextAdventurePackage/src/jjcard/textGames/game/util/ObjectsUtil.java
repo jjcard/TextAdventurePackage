@@ -9,7 +9,7 @@ import java.util.Arrays;
  */
 public final class ObjectsUtil {
 
-	
+	public static final int DEFAULT_PRIME = 31;
 	private ObjectsUtil(){
 		super();
 	}
@@ -29,9 +29,9 @@ public final class ObjectsUtil {
 	}
 	
 	public static int getHash(final int prime, Object...objects){
-		return getHash(1, prime, objects);
+		return getHashWithStart(1, prime, objects);
 	}
-	public static int getHash(int startingHash, final int prime, Object...objects){
+	public static int getHashWithStart(int startingHash, final int prime, Object...objects){
 		int hash = startingHash;
 		
 		if (objects != null){
@@ -42,17 +42,6 @@ public final class ObjectsUtil {
 					hash = hash * prime + (o == null? 0: o.hashCode());
 				}
 				
-			}
-		}
-		
-		return hash;
-	}
-	public static int getHash(final int prime, Object[] ...objectArrays){
-		int hash = 1;
-		
-		if (objectArrays != null){
-			for (Object o: objectArrays){
-				hash = hash * prime + (o == null? 0: Arrays.hashCode((Object[])o));
 			}
 		}
 		

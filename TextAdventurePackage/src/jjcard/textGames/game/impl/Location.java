@@ -13,6 +13,7 @@ import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.IMob;
 import jjcard.textGames.game.util.MapUtil;
+import jjcard.textGames.game.util.ObjectsUtil;
 
 /**
  * @author jjcard
@@ -240,6 +241,9 @@ public class Location implements ILocation {
 			if (notEqual(name, l.name)){
 				return false;
 			}
+			if (notEqual(description, l.description)){
+				return false;
+			}
 			if (notEqual(inventory, l.inventory)){
 				return false;
 			}
@@ -253,5 +257,8 @@ public class Location implements ILocation {
 		} else {
 			return false;
 		}
+	}
+	public int hashCode(){
+		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, name, description, inventory, roomMob, exits);
 	}
 }

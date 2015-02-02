@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import jjcard.textGames.game.IArmour;
+import jjcard.textGames.game.util.ObjectsUtil;
 
 
 @JsonDeserialize(builder = Armour.Builder.class)
@@ -86,5 +87,26 @@ public class Armour extends Item implements IArmour {
 	}
 	public void changeDefense(int change){
 		setDefense(defense + change);
+	}
+	public boolean equals(Object o){
+		if (o == this){
+			return true;
+		}
+		if (!super.equals(o)){
+			return false;
+		}
+		if (o instanceof Armour){
+			Armour other = (Armour) o;
+			if (defense != other.defense){
+				return false;
+			}
+			
+			return true;
+		}
+		return false;
+	}
+	public int hashCode(){
+		return ObjectsUtil.getHashWithStart(super.hashCode(),
+				ObjectsUtil.DEFAULT_PRIME, defense);
 	}
 }

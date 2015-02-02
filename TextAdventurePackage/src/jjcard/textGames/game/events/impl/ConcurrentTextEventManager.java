@@ -10,21 +10,21 @@ import jjcard.textGames.game.events.ITextEventManager;
  *A version of ITextEventManager that uses a synchronized getInstance and has a CuncurrentHashMap as its underlying holder of ITextEventListeners.
  *
  */
-public class ConcurrentTextEventmanager implements ITextEventManager {
+public final class ConcurrentTextEventManager implements ITextEventManager {
 
-	private static ConcurrentTextEventmanager instance = null;
+	private static ConcurrentTextEventManager instance = null;
 	private final Map<Class<? extends ITextEvent>, ITextEventListener> listenerMap;
 	
-	private ConcurrentTextEventmanager(){
+	private ConcurrentTextEventManager(){
 		listenerMap = new ConcurrentHashMap<Class<? extends ITextEvent>, ITextEventListener>();
 	}
 	/**
 	 * Returns the instance of the TextEventmanager
 	 * @return
 	 */
-	public static synchronized ConcurrentTextEventmanager getInstance(){
+	public static synchronized ConcurrentTextEventManager getInstance(){
 		if (instance == null){
-			instance = new ConcurrentTextEventmanager();
+			instance = new ConcurrentTextEventManager();
 		}
 		return instance;
 	}

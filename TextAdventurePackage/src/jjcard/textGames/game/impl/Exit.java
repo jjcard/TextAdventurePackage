@@ -45,15 +45,15 @@ public class Exit extends AbstractGameElement implements IExit {
 	/**
 	 * List that includes North, South, East, And West
 	 */
-	public static final Exit[] simpleValues = new Exit[]{NORTH, SOUTH, EAST, WEST};
+	public static final Exit[] SIMPLE_VALUES = new Exit[]{NORTH, SOUTH, EAST, WEST};
 	/**
 	 * List that contains all compass directions; NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST
 	 */
-	public static final Exit[] compassValues = new Exit[]{NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST};
+	public static final Exit[] COMPASS_VALUES = new Exit[]{NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST};
 	/**
 	 * List that includes all static default Exits
 	 */
-	public static final Exit[] defaultValues = new Exit[]{NORTH, SOUTH, EAST, WEST, NORTHWEST, NORTHEAST, SOUTHEAST, SOUTHEAST, UP, DOWN};
+	public static final Exit[] DEFAULT_VALUES = new Exit[]{NORTH, SOUTH, EAST, WEST, NORTHWEST, NORTHEAST, SOUTHEAST, SOUTHEAST, UP, DOWN};
 	
 	@JsonProperty("loc")
 	private final ILocation location;
@@ -127,6 +127,10 @@ public class Exit extends AbstractGameElement implements IExit {
 		} else {
 			return false;
 		}
+	}
+	public int hashCode(){
+		final int prime = 23;		
+		return ObjectsUtil.getHash(super.hashCode(), prime, location);
 	}
 	
 	

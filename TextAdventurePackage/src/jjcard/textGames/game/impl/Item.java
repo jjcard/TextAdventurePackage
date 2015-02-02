@@ -33,17 +33,17 @@ public class Item extends AbstractGameElement implements IItem{
 		public Builder(){
 			super();
 		}
-		public Builder(Item i){
-			  super(i);
-			  cost = i.cost;
-			  info = i.info;
-			  level = i.level;
-			  hidden = i.hidden;
-			  movable = i.movable;
-			  use = i.use;
+		public Builder(Item item){
+			  super(item);
+			  cost = item.cost;
+			  info = item.info;
+			  level = item.level;
+			  hidden = item.hidden;
+			  movable = item.movable;
+			  use = item.use;
 		}
-		public Builder(AbstractGameElement e){
-			super(e);
+		public Builder(AbstractGameElement element){
+			super(element);
 		}
 		@JsonProperty("cost")
 		public Builder cost(int cost){
@@ -92,14 +92,14 @@ public class Item extends AbstractGameElement implements IItem{
 		}
 	}
 	
-	protected Item(Builder b){
-		  super(b);
-		  setCost(b.cost);
-		  setInfo(b.info);
-		  setLevel(b.level);
-		  setHidden(b.hidden);
-		  setMovable(b.movable);
-		  setUse(b.use);
+	protected Item(Builder builder){
+		  super(builder);
+		  setCost(builder.cost);
+		  setInfo(builder.info);
+		  setLevel(builder.level);
+		  setHidden(builder.hidden);
+		  setMovable(builder.movable);
+		  setUse(builder.use);
 	}
 	public int getCost() {
 		return cost;
@@ -166,12 +166,31 @@ public class Item extends AbstractGameElement implements IItem{
 			if (ObjectsUtil.notEqual(getName(), m.getName())){
 				return false;
 			}
+			if (ObjectsUtil.notEqual(getRoomDescription(), m.getRoomDescription())){
+				return false;
+			}
 			if (ObjectsUtil.notEqual(info, m.info)){
+				return false;
+			}
+			if (cost != m.cost){
+				return false;
+			}
+			if (level != m.level){
+				return false;
+			}
+			if (hidden != m.hidden){
+				return false;
+			}
+			if (movable != m.movable){
 				return false;
 			}
 			return this.use.equals(m.getUse());
 		} else {
 			return false;
 		}
+	}
+	
+	public int hashCode(){
+		return ObjectsUtil.getHashWithStart(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, info, cost, level, hidden, movable, use);
 	}
 }

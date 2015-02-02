@@ -5,7 +5,7 @@ import jjcard.textGames.game.shop.IShopItem;
 
 public class ShopItem<T extends IItem> implements IShopItem{
 	
-	private T item;
+	private final T item;
 	private int amount;
 	private int price;
 	

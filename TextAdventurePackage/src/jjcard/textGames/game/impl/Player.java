@@ -11,6 +11,7 @@ import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.IStatus;
 import jjcard.textGames.game.IWeapon;
 import jjcard.textGames.game.leveling.HasLeveling;
+import jjcard.textGames.game.util.ObjectsUtil;
 
 @JsonDeserialize(builder = Player.Builder.class)
 public class Player extends Mob implements HasLeveling{
@@ -176,5 +177,9 @@ public class Player extends Mob implements HasLeveling{
 			return false;
 		}
 
+	}
+	public int hashCode(){
+		return ObjectsUtil.getHashWithStart(super.hashCode(),
+				ObjectsUtil.DEFAULT_PRIME, xp, level);
 	}
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import jjcard.textGames.game.IWeapon;
+import jjcard.textGames.game.util.ObjectsUtil;
 
 @JsonDeserialize(builder = Weapon.Builder.class)
 public class Weapon extends Item implements IWeapon{
@@ -132,5 +133,32 @@ public class Weapon extends Item implements IWeapon{
 			}			
 		}
 
+	}
+	public boolean equals(Object o){
+		if (o == this){
+			return true;
+		}
+		if (!super.equals(o)){
+			return false;
+		}
+		if (o instanceof Weapon){
+			Weapon other = (Weapon) o;
+			if (attack != other.attack){
+				return false;
+			}
+			if (critChance != other.critChance){
+				return false;
+			}
+			if (durability != other.durability){
+				return false;
+			}
+			
+			return true;
+		}
+		return false;
+	}
+	public int hashCode(){
+		return ObjectsUtil.getHashWithStart(super.hashCode(),
+				ObjectsUtil.DEFAULT_PRIME, attack, critChance, durability);
 	}
 }

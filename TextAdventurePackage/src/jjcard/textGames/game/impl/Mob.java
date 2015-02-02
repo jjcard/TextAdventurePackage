@@ -489,13 +489,55 @@ public class Mob extends AbstractGameElement implements IMob{
 			if (ObjectsUtil.notEqual(this.getName(), m.getName())){
 				return false;
 			}
+			if (ObjectsUtil.notEqual(getRoomDescription(), m.getRoomDescription())){
+				return false;
+			}
 			if (ObjectsUtil.notEqual(this.description, m.description)){
+				return false;
+			}
+			if (attack != m.attack){
+				return false;
+			}
+			if (defense != m.defense){
+				return false;
+			}
+			if (curHealth != m.curHealth){
+				return false;
+			}
+			if (maxHealth != m.maxHealth){
+				return false;
+			}
+			if (money != m.money){
+				return false;
+			}
+			if (hostile != m.hostile){
+				return false;
+			}
+			if (ObjectsUtil.notEqual(this.inventory, m.inventory)){
+				return false;
+			}
+			if (ObjectsUtil.notEqual(this.armour, m.armour)){
+				return false;
+			}
+			if (ObjectsUtil.notEqual(this.weapon, m.weapon)){
+				return false;
+			}
+			if (ObjectsUtil.notEqual(this.statusList, m.statusList)){
+				return false;
+			}
+			if (checkHealth != m.checkHealth){
 				return false;
 			}
 			return true;
 		} else {
 			return false;
 		}
+	}
+	public int hashCode(){
+		return ObjectsUtil.getHashWithStart(super.hashCode(),
+				ObjectsUtil.DEFAULT_PRIME, description, attack, defense,
+				curHealth, maxHealth, money, hostile, inventory, armour,
+				weapon, statusList, checkHealth);
 	}
 	public String inventoryToString(){
 		return MAP_UTIL.getKeysAsString(inventory);

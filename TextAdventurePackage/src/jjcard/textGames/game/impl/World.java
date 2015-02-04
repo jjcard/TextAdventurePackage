@@ -105,7 +105,7 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		return current.showRoom();
 	}
 
-	public ReturnCom equipItem(String i) {
+	public ReturnCom equipItem(String i, TextToken<BasicTextTokenType> object) {
 		IItem toE = player.getItem(i);
 
 		if (toE == null) {
@@ -130,7 +130,7 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		return ReturnCom.EQUIPPED_NOT_FOUND;
 	}
 
-	public ReturnCom unequipItem(String key) {
+	public ReturnCom unequipItem(String key, TextToken<BasicTextTokenType> object) {
 		if (key.equalsIgnoreCase("armour") || key.equalsIgnoreCase("armour")
 				|| player.isKeyforArmour(key)) {
 			IArmour it = player.removeArmour();
@@ -205,12 +205,12 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		return parser.parseText(input);
 	}
 
-	public ReturnCom lookAt(String key) {
-		if (key.equals("room")) {
+	public ReturnCom lookAt(String key, TextToken<BasicTextTokenType> object) {
+		if (object.getType().equals(BasicTextTokenType.ROOM)) {
 			output.println(showCurrentRoom());
 			return ReturnCom.LOOK_ROOM;
 		}
-		if (key.equals("player")) {
+		if (object.getType().equals(BasicTextTokenType.PLAYER)) {
 			output.println(player.getDescription());
 			return ReturnCom.LOOK_PLAYER;
 		}
@@ -231,8 +231,10 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		return ReturnCom.INFO_NOT_FOUND;
 	}
 
-	public ReturnCom info(String key) {
-		if (key.equalsIgnoreCase("inventory")) {
+	public ReturnCom info(String key, TextToken<BasicTextTokenType> token) {
+		
+		switch (token.getType()){
+		case INVENTORY:
 			if (player.getInventory().isEmpty()) {
 				output.println("You have nothing in your inventory");
 				return ReturnCom.INFO_INVENTORY;
@@ -240,24 +242,22 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 				output.println(player.inventoryToString());
 				return ReturnCom.INFO_INVENTORY_EMPTY;
 			}
-
-		}
-		if (key.equalsIgnoreCase("health")) {
-			output.println(player.getHealth());
-			return ReturnCom.INFO_HEALTH;
-		}
-		if (key.equalsIgnoreCase("max health")) {
-			output.println(player.getMaxHealth());
-			return ReturnCom.INFO_MAX_HEALTH;
-		}
-		if (key.equalsIgnoreCase("money")) {
+		case MONEY:
 			output.println(player.getMoney());
 			return ReturnCom.INFO_MONEY;
+		case HEALTH:
+			output.println(player.getHealth());
+			return ReturnCom.INFO_HEALTH;
+		case MAX_HEALTH:
+			output.println(player.getMaxHealth());
+			return ReturnCom.INFO_MAX_HEALTH;
+		default:
+			return ReturnCom.INFO_NOT_FOUND;
 		}
-		return ReturnCom.INFO_NOT_FOUND;
+		
 	}
 
-	public ReturnCom dropItem(String key) {
+	public ReturnCom dropItem(String key, TextToken<BasicTextTokenType> object) {
 		if (player.containsItem(key)) {
 			IItem drop = player.removeItem(key);
 			current.addItem(drop);
@@ -274,7 +274,7 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		return current.containsMob(key);
 	}
 
-	public ReturnCom movePlayer(String key) {
+	public ReturnCom movePlayer(String key, TextToken<BasicTextTokenType> object) {
 		if (goDirection(key)) {
 			output.println(current.showRoom());
 			return ReturnCom.MOVED_DIRECTION;
@@ -284,7 +284,7 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		return ReturnCom.MOVED_NOT_FOUND;
 	}
 
-	public ReturnCom getItemFromRoom(String key) {
+	public ReturnCom getItemFromRoom(String key, TextToken<BasicTextTokenType> object) {
 		if (current.containsItem(key)) {
 			if (playerGetItem(key)) {
 				output.println(key + " was added to your inventory");
@@ -302,7 +302,7 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		}
 	}
 
-	public ReturnCom lootAllMob(String key) {
+	public ReturnCom lootAllMob(String key, TextToken<BasicTextTokenType> object) {
 		if (current.containsMob(key)) {
 			IMob lootM = current.getMob(key);
 			if (lootM.isDead()) {
@@ -320,7 +320,7 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		return ReturnCom.LOOT_MOB_NOT_FOUND;
 	}
 
-	public ReturnCom attackMob(String key) {
+	public ReturnCom attackMob(String key, TextToken<BasicTextTokenType> object) {
 		if (current.containsMob(key)) {
 			IMob mob = current.getMob(key);
 			mob.attackMob(player.getFullAttack());
@@ -344,23 +344,23 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		if (token != null) {
 			switch (stream.getVerb().getType()) {
 			case ATTACK:
-				return attackMob(token);
+				return attackMob(token, object);
 			case LOOK:
-				return lookAt(token);
+				return lookAt(token, object);
 			case MOVE:
-				return movePlayer(token);
+				return movePlayer(token, object);
 			case GET:
-				return getItemFromRoom(token);
+				return getItemFromRoom(token, object);
 			case LOOT:
-				return lootAllMob(token);
+				return lootAllMob(token, object);
 			case DROP:
-				return dropItem(token);
+				return dropItem(token, object);
 			case EQUIP:
-				return equipItem(token);
+				return equipItem(token, object);
 			case UNEQUIP:
-				return unequipItem(token);
+				return unequipItem(token, object);
 			case INFO:
-				return info(token);
+				return info(token, object);
 			default:
 				// return ReturnCom.COMMAND_NOT_FOUND;
 				break;
@@ -369,9 +369,9 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 			// For objects that can also be used to infer their verbs
 			switch (object.getType()) {
 			case DIRECTION:
-				return movePlayer(token);
+				return movePlayer(token, object);
 			case INVENTORY:
-				return info(token);
+				return info(token, object);
 			default:
 				return ReturnCom.COMMAND_NOT_FOUND;
 			}
@@ -380,20 +380,6 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 			return ReturnCom.COMMAND_NOT_FOUND;
 		}
 
-		// TODO Auto-generated method stub
-		/*
-		 * String key = comkey.getKey(); switch(comkey.getCommand()){ case
-		 * ATTACK: return attackMob(key); case LOOK: return lookAt(key);
-		 * 
-		 * case MOVE: return movePlayer(key); case GET: return
-		 * getItemFromRoom(key); case LOOT_ALL: return lootAllMob(key); case
-		 * DROP: return dropItem(key); case EQUIP: return equipItem(key); case
-		 * UNEQUIP: return unequipItem(key); default: return
-		 * ReturnCom.COMMAND_NOT_FOUND;
-		 * 
-		 * 
-		 * }
-		 */
 	}
 
 }

@@ -235,8 +235,10 @@ public class Location implements ILocation {
 		if (!roomMob.isEmpty()){
 			re.append(SPACE).append(getMobDescriptions());
 		}
-		if (!exits.isEmpty()){
-			re.append(" The obvious exits are " + getExitsDescriptions());
+		String exitDescrips;
+		if (!exits.isEmpty() && !(exitDescrips = getExitsDescriptions()).isEmpty()){
+			 
+			re.append(" The obvious exits are " + exitDescrips);
 		}
 		return re.toString();
 	}

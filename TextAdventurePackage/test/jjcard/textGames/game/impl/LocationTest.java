@@ -75,6 +75,14 @@ public class LocationTest {
 		assertTrue(exitsDescrip.contains("NORTH"));
 		assertFalse(exitsDescrip.contains("DOWN"));
 		assertFalse(exitsDescrip.endsWith(", "));
+		
+		
+		Exit secretExit2 = new Exit.Builder().hidden(true).location(hallway).standardName("UP").build();
+		s.addExit(secretExit2);
+		String roomDescrip = s.showRoom();
+		//no non-hidden exits, should not show
+		assertFalse(roomDescrip.contains(" The obvious exits are "));
+		assertEquals(1, s.getExits().size());
 	}
 	
 	@Test

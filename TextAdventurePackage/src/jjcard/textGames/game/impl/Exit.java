@@ -1,11 +1,11 @@
 package jjcard.textGames.game.impl;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 import jjcard.textGames.game.IExit;
 import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.util.ObjectsUtil;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * Class to hold an exit pertaining to a specific ILocation
@@ -57,10 +57,13 @@ public class Exit extends AbstractGameElement implements IExit {
 	
 	@JsonProperty("loc")
 	private final ILocation location;
+	
+	@JsonProperty("hid")
+	private boolean hidden = false;
 
 	public static class Builder extends AbstractGameElement.Builder{
 		private ILocation location;
-		
+		private boolean hidden = false;
 		
 		public Builder(){
 			super();
@@ -85,6 +88,11 @@ public class Exit extends AbstractGameElement implements IExit {
 			this.location = location;
 			return this;
 		}
+		@JsonProperty("hid")
+		public Builder hidden(boolean hidden){
+			this.hidden = hidden;
+			return this;
+		}
 		public Exit build(){
 			return new Exit(this);
 		}
@@ -95,6 +103,7 @@ public class Exit extends AbstractGameElement implements IExit {
 	protected Exit(Builder builder){
 		super(builder);
 		this.location = builder.location;
+		this.hidden = builder.hidden;
 	}
 	/**
 	 * Gets the Location
@@ -111,6 +120,13 @@ public class Exit extends AbstractGameElement implements IExit {
 	public Exit getWithLocation(ILocation location){
 		return new Builder(this).location(location).build();
 	}
+	public boolean isHidden(){
+		return hidden;
+	}
+	public void setHidden(boolean hidden){
+		this.hidden = hidden;
+	}
+	
 	public boolean equals(Object object){
 		if (object == this){
 			return true;
@@ -120,7 +136,11 @@ public class Exit extends AbstractGameElement implements IExit {
 			if (!super.equals(object)){
 				return false;
 			}
-			if (ObjectsUtil.notEqual(location, ((Exit) object).location)){
+			Exit e = (Exit) object;
+			if (ObjectsUtil.notEqual(location, e.location)){
+				return false;
+			}
+			if (hidden != e.hidden){
 				return false;
 			}
 			return true;
@@ -130,7 +150,7 @@ public class Exit extends AbstractGameElement implements IExit {
 	}
 	public int hashCode(){
 		final int prime = 23;		
-		return ObjectsUtil.getHash(super.hashCode(), prime, location);
+		return ObjectsUtil.getHash(super.hashCode(), prime, location, hidden);
 	}
 	
 	

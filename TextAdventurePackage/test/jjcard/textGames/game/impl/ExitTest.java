@@ -1,6 +1,7 @@
 package jjcard.textGames.game.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -58,7 +59,7 @@ public class ExitTest {
 		String name = "fsafsd";
 		String locName = "loc1";
 		Location loc = new Location(locName);
-		Exit exit = new Exit.Builder().standardName(name).location(loc).build();
+		Exit exit = new Exit.Builder().standardName(name).location(loc).hidden(true).build();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ObjectMapper m = new ObjectMapper();
 		m.writeValue(out, exit);
@@ -68,6 +69,7 @@ public class ExitTest {
 		assertEquals(exit, in);
 		assertEquals(loc, in.getLocation());
 		assertEquals(name, in.getName());
+		assertTrue(in.isHidden());
 	}
 
 }

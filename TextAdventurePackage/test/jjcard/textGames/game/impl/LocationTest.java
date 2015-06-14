@@ -1,7 +1,9 @@
 package jjcard.textGames.game.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -55,6 +57,24 @@ public class LocationTest {
 		
 		assertNull(hallway.getMob("bane cube"));
 		
+	}
+	@Test
+	public void getExitsDescriptionsTest(){
+		Location l = new Location("Testing Room 1", "The first testing room");
+		Location p = new Location("Testing room a", "The primary testing room");
+		hallway.addExit("NORTHISH", l);
+		hallway.addExit("SOUTHERNLY", p);
+		
+		Location s = new Location("Secret Tunnel", "SECRET TUNNEL! SECRET TUNNEL!");
+		Exit secretExit = new Exit.Builder().hidden(true).location(s).standardName("DOWN").build();
+		hallway.addExit(secretExit);
+		
+		String exitsDescrip = hallway.getExitsDescriptions();
+		assertTrue(exitsDescrip.contains("NORTHISH"));
+		assertTrue(exitsDescrip.contains("SOUTHERNLY"));
+		assertTrue(exitsDescrip.contains("NORTH"));
+		assertFalse(exitsDescrip.contains("DOWN"));
+		assertFalse(exitsDescrip.endsWith(", "));
 	}
 	
 	@Test

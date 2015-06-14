@@ -7,4 +7,9 @@ package jjcard.textGames.game;
 public interface IExit extends IGameElement {
 
 	public ILocation getLocation();
+	
+	
+	public boolean isHidden();
+	
+	public void setHidden(boolean hidden);
 }

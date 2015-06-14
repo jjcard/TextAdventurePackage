@@ -138,8 +138,8 @@ public class Item extends AbstractGameElement implements IItem{
 			level = 0;
 		}
 	}
-	public void setHidden(boolean change){
-		hidden = change;
+	public void setHidden(boolean hidden){
+		this.hidden = hidden;
 	}
 	/**
 	 * returns true if item is movable and not hidden

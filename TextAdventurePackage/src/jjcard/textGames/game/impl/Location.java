@@ -187,7 +187,17 @@ public class Location implements ILocation {
 	}
 	@JsonIgnore
 	public String getExitsDescriptions(){
-		return MAP_UTIL.getKeysAsString(exits);
+		StringBuilder re = new StringBuilder();
+		for (IExit e: exits.values()){
+			if (!e.isHidden()){
+				re.append(e.getName()).append(", ");
+			}
+		}
+		if (re.length() > 0){
+			return re.substring(0, re.length() -2);
+		} else {
+			return "";
+		}
 	}
 	@JsonIgnore
 	public String getInventoryDescriptions(){

@@ -218,32 +218,16 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		return MAP_UTIL.getKeysAsString(exits);
 	}
 	public String getInventoryDescriptions(){
-		
-//		StringBuilder re = new StringBuilder();
-//		for(IItem i: inventory.values()){
-//			if (!i.isHidden() && i.getRoomDescription() != null){
-//				re.append(SPACE).append(i.getRoomDescription());
-//			}
-//		}
-//		return re.toString();
 		return DescriptionUtil.getConceableDescriptions(inventory, true);
 	}
 	public String getMobDescriptions(){
-		StringBuilder re = new StringBuilder();
-		for(IMob m: roomMob.values()){
-			if (m.getRoomDescription() != null){
-				re.append(m.getRoomDescription());
-			}
-			
-		}
-		return re.toString();
+		return DescriptionUtil.getGameElementDescriptions(roomMob);
 	}
 	/**
 	 * 
 	 * @return room description, description of items and mobs in room, and exits. 
 	 */
 	public String showRoom(){
-		
 		StringBuilder re = new StringBuilder(getRoomDescription());
 		
 		if (!inventory.isEmpty()){

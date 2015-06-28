@@ -4,8 +4,6 @@ import jjcard.textGames.game.impl.ItemUse;
 
 public interface IItem extends ConcealableGameElement{
 	
-	public boolean isHidden();
-	
 	public boolean isMovable();
 	
 	public ItemUse getUse();

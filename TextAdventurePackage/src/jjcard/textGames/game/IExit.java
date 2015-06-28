@@ -8,8 +8,5 @@ public interface IExit extends ConcealableGameElement {
 
 	public ILocation getLocation();
 	
-	
-	public boolean isHidden();
-	
 	public void setHidden(boolean hidden);
 }

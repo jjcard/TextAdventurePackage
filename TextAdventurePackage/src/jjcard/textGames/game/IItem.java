@@ -2,7 +2,7 @@ package jjcard.textGames.game;
 
 import jjcard.textGames.game.impl.ItemUse;
 
-public interface IItem extends IGameElement{
+public interface IItem extends ConcealableGameElement{
 	
 	public boolean isHidden();
 	

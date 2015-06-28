@@ -4,7 +4,7 @@ package jjcard.textGames.game;
  * It then uses that to return an ILocation.
  *
  */
-public interface IExit extends IGameElement {
+public interface IExit extends ConcealableGameElement {
 
 	public ILocation getLocation();
 	

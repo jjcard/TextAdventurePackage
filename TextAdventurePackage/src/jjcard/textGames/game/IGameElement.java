@@ -23,4 +23,6 @@ public interface IGameElement {
 	 * @return the room description
 	 */
 	public String getRoomDescription();
+	
+	
 }

@@ -9,6 +9,7 @@ import jjcard.textGames.game.IExit;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.IMob;
+import jjcard.textGames.game.util.DescriptionUtil;
 import jjcard.textGames.game.util.MapUtil;
 import jjcard.textGames.game.util.ObjectsUtil;
 /**
@@ -218,13 +219,14 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 	}
 	public String getInventoryDescriptions(){
 		
-		StringBuilder re = new StringBuilder();
-		for(IItem i: inventory.values()){
-			if (!i.isHidden() && i.getRoomDescription() != null){
-				re.append(SPACE).append(i.getRoomDescription());
-			}
-		}
-		return re.toString();
+//		StringBuilder re = new StringBuilder();
+//		for(IItem i: inventory.values()){
+//			if (!i.isHidden() && i.getRoomDescription() != null){
+//				re.append(SPACE).append(i.getRoomDescription());
+//			}
+//		}
+//		return re.toString();
+		return DescriptionUtil.getConceableDescriptions(inventory, true);
 	}
 	public String getMobDescriptions(){
 		StringBuilder re = new StringBuilder();

@@ -23,6 +23,7 @@ import jjcard.textGames.game.util.ObjectsUtil;
 
 
 public class Location implements ILocation {
+	private static final String EXIT_START = "The obvious exits are";
 	@JsonIgnore
 	private static final MapUtil MAP_UTIL = MapUtil.getInstance();
 	private static final char SPACE = ' ';
@@ -188,41 +189,15 @@ public class Location implements ILocation {
 	}
 	@JsonIgnore
 	public String getExitsDescriptions(){
-//		StringBuilder re = new StringBuilder();
-//		for (IExit e: exits.values()){
-//			if (!e.isHidden()){
-//				re.append(e.getName()).append(", ");
-//			}
-//		}
-//		if (re.length() > 0){
-//			return re.substring(0, re.length() -2);
-//		} else {
-//			return "";
-//		}
 		return DescriptionUtil.getConcealableNames(exits, true);
 	}
 	@JsonIgnore
 	public String getInventoryDescriptions(){
-		
-//		StringBuilder re = new StringBuilder();
-//		for(IItem i: inventory.values()){
-//			if (!i.isHidden() && i.getRoomDescription() != null){
-//				re.append(SPACE).append(i.getRoomDescription());
-//			}
-//		}
-//		return re.toString();
 		return DescriptionUtil.getConceableDescriptions(inventory, true);
 	}
 	@JsonIgnore
 	public String getMobDescriptions(){
-		StringBuilder re = new StringBuilder();
-		for(IMob m: roomMob.values()){
-			if (m.getRoomDescription() != null){
-				re.append(m.getRoomDescription());
-			}
-			
-		}
-		return re.toString();
+		return DescriptionUtil.getGameElementDescriptions(roomMob);
 	}
 	/**
 	 * 
@@ -241,7 +216,7 @@ public class Location implements ILocation {
 		String exitDescrips;
 		if (!exits.isEmpty() && !(exitDescrips = getExitsDescriptions()).isEmpty()){
 			 
-			re.append(" The obvious exits are " + exitDescrips);
+			re.append(EXIT_START).append(SPACE).append(exitDescrips);
 		}
 		return re.toString();
 	}

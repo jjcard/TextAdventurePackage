@@ -59,10 +59,10 @@ public final class DescriptionUtil {
 		return re.toString();
 	}
 	
-	public static String getGameElementDescriptions(Map<String,IGameElement> elements){
+	public static <I extends IGameElement> String getGameElementDescriptions(Map<String,I> elements){
 		return getGameElementDescriptions(elements.values());
 	}
-	public static String getGameElementDescriptions(Collection<IGameElement> elements){
+	public static <I extends IGameElement> String  getGameElementDescriptions(Collection<I> elements){
 		StringBuilder re = new StringBuilder();
 		for(IGameElement m: elements){
 			if (m.getRoomDescription() != null){

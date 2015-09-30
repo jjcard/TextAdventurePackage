@@ -17,10 +17,10 @@ public interface ITextDictionary<T extends ITextTokenType> extends Map<String, I
 	
 	public void putAll(Collection<String> keys, ITextDefinition<T> value);
 	
-	/**
-	 * If this is true, Dictionary should automatically set casing on words to lowercase when using
-	 * put or get.
-	 * @param doAutomaticCasing
-	 */
-	public void setAutomaticCasing(boolean doAutomaticCasing);
+//	/**
+//	 * If this is true, Dictionary should automatically set casing on words to lowercase when using
+//	 * put or get.
+//	 * @param doAutomaticCasing
+//	 */
+//	public void setAutomaticCasing(boolean doAutomaticCasing);
 }

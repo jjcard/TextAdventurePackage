@@ -17,21 +17,33 @@ import jjcard.textGames.game.parser.ITextTokenType;
  */
 public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, ITextDefinition<T>>implements ITextDictionary<T>{
 
-
+	private static final boolean DEFAULT_AUTOMATIC_CASING = true;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -108288250545705909L;
-	private boolean automaticCasing = true;
+	private final boolean automaticCasing;
 
 	public TextDictionary(){
+		this(DEFAULT_AUTOMATIC_CASING);
+	}
+	public TextDictionary(boolean automaticCasing){
 		super();
+		this.automaticCasing = automaticCasing;
 	}
 	public TextDictionary(Map<String, ? extends ITextDefinition<T>> map){
+		this(map, DEFAULT_AUTOMATIC_CASING);
+	}
+	public TextDictionary(Map<String, ? extends ITextDefinition<T>> map, boolean automaticCasing){
 		super(map);
+		this.automaticCasing = automaticCasing;
 	}
 	public TextDictionary(SortedMap<String, ? extends ITextDefinition<T>> map){
+		this(map, DEFAULT_AUTOMATIC_CASING);
+	}
+	public TextDictionary(SortedMap<String, ? extends ITextDefinition<T>> map, boolean automaticCasing){
 		super(map);
+		this.automaticCasing = automaticCasing;
 	}
 	/**
 	 * Uses the default values to do an initial load to the Dictionary
@@ -39,6 +51,14 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 	 */
 	@SafeVarargs
 	public TextDictionary(ITextDefinition<T>...values){
+		this(DEFAULT_AUTOMATIC_CASING, values);
+	}
+	/**
+	 * Uses the default values to do an initial load to the Dictionary
+	 * @param values
+	 */
+	@SafeVarargs
+	public TextDictionary( boolean automaticCasing, ITextDefinition<T>...values){
 		super();
 		if (values != null){
 			for (ITextDefinition<T> value: values){
@@ -48,10 +68,14 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 				
 			}
 		}
-	}
-	
+		this.automaticCasing = automaticCasing;
+	}	
 	@SafeVarargs
 	public TextDictionary(T...values){
+		this(DEFAULT_AUTOMATIC_CASING, values);
+	}
+	@SafeVarargs
+	public TextDictionary(boolean automaticCasing, T...values){
 		super();
 		if (values != null){
 			for (T value: values){
@@ -62,6 +86,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 				
 			}
 		}
+		this.automaticCasing = automaticCasing;
 	}
 	/**
 	 * For the given IGameElements, adds the standard name for the element to the map.
@@ -117,11 +142,6 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 	}
 	public ITextDefinition<T> get(Object key){
 		return super.get(automaticCasing? key.toString().toLowerCase(): key);
-	}
-	@Override
-	public void setAutomaticCasing(boolean doAutomaticCasing) {
-		automaticCasing = doAutomaticCasing;
-		
 	}
 	
 	

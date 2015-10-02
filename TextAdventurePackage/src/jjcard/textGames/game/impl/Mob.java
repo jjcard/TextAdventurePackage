@@ -554,7 +554,7 @@ public class Mob extends AbstractGameElement implements IMob{
 	@JsonIgnore
 	public IWeapon setWeapon(String a){
 		IItem ar = getItem(a);
-		if (ar != null && ar instanceof Weapon){
+		if (ar instanceof Weapon){
 			return setWeapon( (Weapon) ar);
 		}
 		return null;

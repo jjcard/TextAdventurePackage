@@ -131,7 +131,7 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 	}
 
 	public ReturnCom unequipItem(String key, TextToken<BasicTextTokenType> object) {
-		if (key.equalsIgnoreCase("armour") || key.equalsIgnoreCase("armour")
+		if (key.equalsIgnoreCase("armour") || key.equalsIgnoreCase("armor")
 				|| player.isKeyforArmour(key)) {
 			IArmour it = player.removeArmour();
 			if (it != null) {

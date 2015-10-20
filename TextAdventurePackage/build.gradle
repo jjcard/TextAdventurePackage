@@ -7,12 +7,7 @@ apply plugin: "findbugs"
 sourceCompatibility = 1.7
 version = '0.4.SNAPSHOT'
 
-repositories {
-	mavenCentral()
-}
-dependencies {
-	testCompile 'junit:junit:4.11'
-}
+
 jar {
 	manifest.attributes provider: 'gradle'
 }
@@ -62,7 +57,7 @@ configurations {
 }
 
 task wrapper(type: Wrapper){
-	gradleVersion = '2.7'
+	gradleVersion = '2.8'
 }
 pmd {
 	ruleSets = ["java-basic", "java-naming", "java-braces", "java-design", "java-unnecessary"]
@@ -85,4 +80,6 @@ dependencies {
 	compile ([group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.5.0"],
 			 [group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.5.0"],
 			 [group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.5.0"])
+			 
+	testCompile 'junit:junit:4.11'
 }

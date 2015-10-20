@@ -77,9 +77,9 @@ repositories {
 	mavenCentral()
 }
 dependencies {
-	compile ([group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.5.0"],
-			 [group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.5.0"],
-			 [group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.5.0"])
+	compile ([group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.6.1"],
+			 [group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.6.1"],
+			 [group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.6.1"])
 			 
 	testCompile 'junit:junit:4.11'
 }

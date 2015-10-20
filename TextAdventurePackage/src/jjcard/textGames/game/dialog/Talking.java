@@ -1,4 +1,4 @@
-package jjcard.textGames.game.talk;
+package jjcard.textGames.game.dialog;
 
 import jjcard.textGames.game.parser.ITextTokenStream;
 import jjcard.textGames.game.parser.ITextTokenType;

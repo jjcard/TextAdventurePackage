@@ -1,13 +1,19 @@
 package jjcard.textGames.game.dialog;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = As.PROPERTY, property = "@class")
 public abstract class DialogResponse {
 
-	private DialogTree next = null;
+	@JsonProperty("next")
+	private IDialogTree next = null;
 	
 	public boolean hasNextDialogTree(){
 		return next != null;
 	}
-	public DialogTree getNextDialogTree(){
+	public IDialogTree getNextDialogTree(){
 		return next;
 	}
 }

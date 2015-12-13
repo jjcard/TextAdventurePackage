@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import jjcard.textGames.game.parser.AbstractTextIndicatorParser;
 import jjcard.textGames.game.parser.ITextDefinition;
@@ -25,11 +26,15 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	private final PatternList<ITextDefinition<T>> textTokenPatterns;
 	private final PatternList<TextIndicator> textIndicatorPatterns;
 	/**
-	 * The characters that are wanted to be split by
+	 * Default characters that are wanted to be split by
 	 */
-	private static final String DELIMINATORS = " ,.";
+	private static final String DEFAULT_DELIMINATORS = " ,.";
 	//split pattern based on StackOverflow post by Bart Kiers
-	public static final Pattern SPLIT_PATTERN = Pattern.compile("["+ DELIMINATORS +"]+(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+	/**
+	 * Pattern to split characters using the default deliminators
+	 */
+	public static final Pattern DEFAULT_SPLIT_PATTERN = compileSplitPattern(DEFAULT_DELIMINATORS);
+	private final Pattern SPLIT_PATTERN;
 	private static final int DEFAULT_OBJECT_LIMIT = 10;
 	private int objectLimit = DEFAULT_OBJECT_LIMIT;
 	
@@ -40,16 +45,41 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	private TextToken<T> withObject;
 	private boolean checkingObjects;
 		
-	
-	
-	public BasicTextParser() {
-		textIndicatorPatterns = new PatternList<>();
-		textTokenPatterns = new PatternList<>();
+	/**
+	 * Creates a BasicTextParser with the given deliminators. Deliminators are a String of characters, which each individual one should could as a deliminator.
+	 * Warning: Puts the given deliminators into a Regex Pattern, any characters that are used in the Java Regular Expression should be escaped properly. 
+	 * @param deliminators
+	 * @throws PatternSyntaxException
+	 */
+	public BasicTextParser(String deliminators) throws PatternSyntaxException {
+		this.textIndicatorPatterns = new PatternList<>();
+		this.textTokenPatterns = new PatternList<>();
 		this.dictionary = new TextDictionary<T>();
+		this.SPLIT_PATTERN = compileSplitPattern(deliminators);
+	}
+	/**
+	 * Creates a BasicTextParser with the given deliminators. Deliminators are a String of characters, which each individual one should could as a deliminator.
+	 * Warning: Puts the given deliminators into a Regex Pattern, any characters that are used in the Java Regular Expression should be escaped properly. 
+	 * @param dictionary
+	 * @param deliminators
+	 * @throws PatternSyntaxException
+	 */
+	public BasicTextParser(ITextDictionary<T> dictionary, String deliminators) throws PatternSyntaxException{
+		this(deliminators);
+		this.dictionary = dictionary;
+	}	
+	public BasicTextParser() {
+		this.textIndicatorPatterns = new PatternList<>();
+		this.textTokenPatterns = new PatternList<>();
+		this.dictionary = new TextDictionary<T>();
+		this.SPLIT_PATTERN = DEFAULT_SPLIT_PATTERN;
 	}
 	public BasicTextParser(ITextDictionary<T> dictionary){
 		this();
 		this.dictionary = dictionary;
+	}
+	private static Pattern compileSplitPattern(String deliminators) throws PatternSyntaxException {
+		return Pattern.compile("["+ deliminators +"]+(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 	}
 	@Override
 	protected String[] splitText(String text) {

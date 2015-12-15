@@ -3,6 +3,9 @@ package jjcard.textGames.game.parser.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+
+import java.util.Arrays;
+
 import jjcard.textGames.game.parser.ITextDefinition;
 import jjcard.textGames.game.parser.ITextDictionary;
 
@@ -47,6 +50,36 @@ public class BasicTextParserTest {
 		String[] result2 = BasicTextParser.DEFAULT_SPLIT_PATTERN.split(text2);
 		
 		Assert.assertArrayEquals(text2Expected, result2);
+	}
+	@Test
+	public void testSplitPattern2(){
+		String text1 = "Sally sells Sea Shells by the sea shore.";
+		String[] text1Expected = new String[]{"Sally", "sells", "Sea", "Shells", "by", "the", "sea", "shore"};
+		String text2 = "And then I said \" Poker? I hardly knew her!\"";
+		String[] text2Expected = new String[]{"And", "then", "I", "said", "\" Poker? I hardly knew her!\""};
+		
+		String[] result1 = new BasicTextParser<>(BasicTextParser.getDeliminators(" ", ",", ".")).splitText(text1);
+		
+		Assert.assertArrayEquals(text1Expected, result1);
+		
+		String[] result2 =  new BasicTextParser<>(BasicTextParser.getDeliminators(" ", ",", ".")).splitText(text2);
+		
+		Assert.assertArrayEquals(text2Expected, result2);
+	}
+	@Test
+	public void testSplitPattern3(){
+		String text1 = "Sally sells Sea Shells by the sea shore.";
+		String[] text1Expected = new String[]{"Sally", "sells", "Sea", "Shells", "by", "the", "sea", "shore"};
+		String text2 = "And then I said 'Poker? I hardly knew her!'";
+		String[] text2Expected = new String[]{"And", "then", "I", "said", "'Poker", "I",  "hardly",  "knew", "her", "'"};
+		
+		String[] result1 = new BasicTextParser<>(BasicTextParser.getDeliminators(" ", ",", ".", "!", "?")).splitText(text1);
+		
+		Assert.assertArrayEquals(text1Expected, result1);
+		
+		String[] result2 =  new BasicTextParser<>(BasicTextParser.getDeliminators(" ", ",", ".", "!", "?")).splitText(text2);
+		
+		Assert.assertArrayEquals(Arrays.toString(result2), text2Expected, result2);
 	}
 	@Test
 	public void testParsing1(){

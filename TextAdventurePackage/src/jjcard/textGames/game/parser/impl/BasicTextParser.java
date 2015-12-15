@@ -78,7 +78,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		this();
 		this.dictionary = dictionary;
 	}
-	private static Pattern compileSplitPattern(String deliminators) throws PatternSyntaxException {
+	public static Pattern compileSplitPattern(String deliminators) throws PatternSyntaxException {
 		return Pattern.compile("["+ deliminators +"]+(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 	}
 	@Override
@@ -94,6 +94,18 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	protected void handleItIndicator(TextTokenStreamBuilder<T> builder, String s) {
 		// TODO Auto-generated method stub
 		
+	}
+	/**
+	 * Get a Deliminator String, with each argument escaped to be literal.
+	 * @param args
+	 * @return
+	 */
+	public static String getDeliminators (String... deliminators){
+		StringBuilder b = new StringBuilder();
+		for (String delim: deliminators){
+			b.append(Pattern.quote(delim));
+		}
+		return b.toString();
 	}
 	/**
 	 * creates a Pattern matching the given String and Adds the pattern to the list matching to the given AbstractTextDefinition.

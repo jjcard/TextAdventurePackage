@@ -359,7 +359,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		}
 	}
 	/**
-	 * gets attack plus weapon attack bonus
+	 * gets attack plus any bonuses
 	 * @return
 	 */
 	@JsonIgnore
@@ -404,10 +404,9 @@ public class Mob extends AbstractGameElement implements IMob{
 		armour = null;
 		return re;
 	}
-	public void addAllItems(Map<String, IItem> addMap){
+	public void addAllItems(Map<String, IItem> addMap) {
 		inventory.putAll(addMap);
-		
-		}
+	}
 	public IItem removeItem(String key){
 		return MAP_UTIL.removeItemFromMap(inventory, key);
 	}
@@ -446,14 +445,13 @@ public class Mob extends AbstractGameElement implements IMob{
 	public String toString() {
 		return getName();
 	}
-
 	public IWeapon removeWeapon() {
 		IWeapon re = weapon;
 		weapon = null;
 		return re;
 	}
 	@JsonIgnore
-	public String getStandardArmourKey(){
+	public String getArmourKey(){
 		return armour == null? null: armour.getName();
 	}
 	@JsonIgnore
@@ -461,7 +459,6 @@ public class Mob extends AbstractGameElement implements IMob{
 		return isKeyForItem(key, armour);
 	}
 	private boolean isKeyForItem(String key, IGameElement item){
-
 		if (item == null){
 			return false;
 		}
@@ -475,7 +472,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		return isKeyForItem(key, weapon);
 	}
 	@JsonIgnore
-	public String getStandardWeaponKey(){
+	public String getWeaponKey(){
 		return weapon == null? null: weapon.getName();
 	}
 	public boolean equals(Object o){

@@ -254,7 +254,6 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		default:
 			return ReturnCom.INFO_NOT_FOUND;
 		}
-		
 	}
 
 	public ReturnCom dropItem(String key, TextToken<BasicTextTokenType> object) {
@@ -270,7 +269,6 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 	}
 
 	public boolean roomContainsMob(String key) {
-
 		return current.containsMob(key);
 	}
 
@@ -362,7 +360,6 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 			case INFO:
 				return info(token, object);
 			default:
-				// return ReturnCom.COMMAND_NOT_FOUND;
 				break;
 			}
 

@@ -21,7 +21,25 @@ public class WorldTest {
 	Location hallway;
 	Mob mob;
 	ITextParser<BasicTextTokenType> parser;
-
+	@Before
+	public void setUp(){
+		
+		 player = new Player.Builder().standardName("jjcard").maxHealth(50).health(50).defense(8).attack(5).build();
+		 local = new Location("entry room", "A barren room.");
+		 
+		 Item item = new Item.Builder().standardName("item").build();
+		 local.addItem(item);
+		 hallway = new Location("hallway","a long hallway with one torch.");
+		local.addExit("NORTH", hallway);
+		hallway.addExit(Exit.SOUTH.getWithLocation(local));
+		 world = new World(local, player);
+		 world.setTextParser(getParser());
+		 
+		 
+		mob = new Mob.Builder().standardName("Goblin").health(10).defense(1).attack(4).build();
+		mob.setDescription("You can tell it's a goblin because it's green and broccoli usually doesn't try to kill you.");
+		
+	}
 	@Test
 	public void MovingTest() {
 		assertEquals(player, world.getPlayer());
@@ -41,7 +59,7 @@ public class WorldTest {
 	}
 	@Test
 	public void MobsWorldTest(){
-		local.addMob( mob);
+		local.addMob(mob);
 		assertEquals(world.getCurrent().getMob("goblin"), mob);
 		ITextTokenStream<BasicTextTokenType> ck = world.parseInput("Look goblin");
 		assertEquals(ck.getVerb().getType(), BasicTextTokenType.LOOK);
@@ -133,10 +151,6 @@ public class WorldTest {
 		assertEquals(rc, ReturnCom.UNEQUIPPED_ARMOUR);
 		assertTrue(player.containsItem("wool"));
 		assertEquals(player.getFullDefense(), 8);
-		
-		
-		
-		
 	}
 	@Test
 	public void ItemWorldTest(){
@@ -160,25 +174,6 @@ public class WorldTest {
 		assertTrue(world.getCurrent().containsItem("item"));
 	}
 
-	@Before
-	public void setUp(){
-		
-		 player = new Player.Builder().standardName("jjcard").maxHealth(50).health(50).defense(8).attack(5).build();
-		 local = new Location("entry room", "A barren room.");
-		 
-		 Item item = new Item.Builder().standardName("item").build();
-		 local.addItem(item);
-		 hallway = new Location("hallway","a long hallway with one torch.");
-		local.addExit("NORTH", hallway);
-		hallway.addExit(Exit.SOUTH.getWithLocation(local));
-		 world = new World(local, player);
-		 world.setTextParser(getParser());
-		 
-		 
-		 mob = new Mob.Builder().standardName("Goblin").health(10).defense(1).attack(4).build();
-		mob.setDescription("You can tell its a goblin because it's green and broccoli usually doesn't try to kill you");
-		
-	}
 	private ITextParser<BasicTextTokenType> getParser(){
 		if (parser == null){
 			parser = new BasicTextParser<BasicTextTokenType>();
@@ -191,9 +186,6 @@ public class WorldTest {
 			parser.setTextDictionary(dictionary);
 			//TODO make this less tedious..			
 		}
-
-		
 		return parser;
 	}
-
 }

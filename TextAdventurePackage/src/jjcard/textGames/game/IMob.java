@@ -60,25 +60,29 @@ public interface IMob extends IGameElement{
 	public boolean isDead();
 	
 	public boolean containsItem(String key);
-	/**
-	 * attack this mob for this amount of damage minus any defenses of the Mob. 
-	 * Returns new health
-	 * @param attack
-	 * @return
-	 */
-	public int attackMob(int damage);
-	
+//	/**
+//	 * attack this mob for this amount of damage minus any defenses of the Mob. 
+//	 * Returns new health
+//	 * @param attack
+//	 * @return
+//	 */
+//	public int attackMob(int damage);
+	public void setHealth(int health);
 	public IItem removeItem(String key);
 	
 	public IArmour removeArmour();
 	
 	public IItem addItem(IItem add);
 	/**
-	 * gets attack plus any attack bonuses
+	 * gets attack plus any attack bonus
 	 * @return
 	 */
 	public int getFullAttack();
-	
+	/**
+	 *  gets defense plus any bonus
+	 * @return
+	 */
+	public int getFullDefense();
 	public IWeapon setWeapon(IWeapon weapon);
 	public IArmour setArmour( IArmour armour);
 	public void addIStatus(IStatus status);

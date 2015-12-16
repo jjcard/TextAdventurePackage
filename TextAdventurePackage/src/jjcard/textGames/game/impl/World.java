@@ -8,6 +8,8 @@ import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.IMob;
 import jjcard.textGames.game.IWeapon;
 import jjcard.textGames.game.IWorld;
+import jjcard.textGames.game.battle.BasicBattleSystem;
+import jjcard.textGames.game.battle.IBattleSystem;
 import jjcard.textGames.game.parser.ITextParser;
 import jjcard.textGames.game.parser.ITextTokenStream;
 import jjcard.textGames.game.parser.TextToken;
@@ -24,6 +26,7 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 	private Player player;
 	private PrintStream output = System.out;
 	private ITextParser<BasicTextTokenType> parser;
+	private IBattleSystem battleSystem = new BasicBattleSystem();
 
 	public World() {
 		current = new Location();
@@ -45,7 +48,12 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 	public ITextParser<BasicTextTokenType> getTextParser() {
 		return parser;
 	}
-
+	public IBattleSystem getBattleSystem(){
+		return battleSystem;
+	}
+	public void setBattleSystem(IBattleSystem battleSystem){
+		this.battleSystem = battleSystem;
+	}
 	public Player getPlayer() {
 		return player;
 	}
@@ -321,9 +329,9 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 	public ReturnCom attackMob(String key, TextToken<BasicTextTokenType> object) {
 		if (current.containsMob(key)) {
 			IMob mob = current.getMob(key);
-			mob.attackMob(player.getFullAttack());
+			int damageDealt = battleSystem.attackMob(player, mob);
 			String re = " you have attacked " + key + " for "
-					+ player.getFullAttack() + " damage.\n";
+					+ damageDealt + " damage.\n";
 			if (mob.isDead()) {
 				output.println(re + " You have slain " + key + "!");
 				return ReturnCom.ATTACK_MOB_KILLED;

@@ -418,16 +418,6 @@ public class Mob extends AbstractGameElement implements IMob{
 		inventory = new HashMap<>();
 		return returnIn;
 	}
-	/**
-	 * attack this mob for this amount of damage minus the mobs defense. 
-	 * Returns new health
-	 * @param attack
-	 * @return
-	 */
-	public int attackMob(int damage){
-		changeHealth(-(damage - defense) );
-		return curHealth;
-	}
 	public boolean containsItem(String key){
 		return MAP_UTIL.containsKey(inventory, key);
 	}

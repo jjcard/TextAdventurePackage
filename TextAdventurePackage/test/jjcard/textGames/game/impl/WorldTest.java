@@ -110,7 +110,7 @@ public class WorldTest {
 		rc = world.executeCommands(ck);
 		assertEquals( ReturnCom.EQUIPPED_WEAPON, rc);
 		assertEquals(player.getFullAttack(), 8);
-		assertEquals(player.getStandardWeaponKey(), "shank");
+		assertEquals(player.getWeaponKey(), "shank");
 		
 		
 		ck = world.parseInput("unequip shank");
@@ -121,7 +121,7 @@ public class WorldTest {
 		assertEquals(rc, ReturnCom.UNEQUIPPED_WEAPON);
 		assertNull(player.getWeapon());
 		assertTrue(player.containsItem("shank"));
-		assertNull(player.getStandardWeaponKey());
+		assertNull(player.getWeaponKey());
 		assertEquals(player.getFullAttack(), 5);
 		
 		ck = world.parseInput("UnEquiP wool");

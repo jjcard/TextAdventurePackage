@@ -46,10 +46,10 @@ public interface IMob extends IGameElement{
 	public IArmour setArmour(String armourName);
 	
 	public String inventoryToString();
-	public String getStandardWeaponKey();
+	public String getWeaponKey();
 	public boolean isKeyForWeapon(String key);
 	public boolean isKeyforArmour(String key);
-	public String getStandardArmourKey();
+	public String getArmourKey();
 	
 	/**
 	 * Removes the weapon and returns the result

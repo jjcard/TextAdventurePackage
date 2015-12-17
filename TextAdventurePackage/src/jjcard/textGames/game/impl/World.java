@@ -8,8 +8,8 @@ import jjcard.textGames.game.ILocation;
 import jjcard.textGames.game.IMob;
 import jjcard.textGames.game.IWeapon;
 import jjcard.textGames.game.IWorld;
-import jjcard.textGames.game.battle.BasicBattleSystem;
 import jjcard.textGames.game.battle.IBattleSystem;
+import jjcard.textGames.game.battle.impl.BasicBattleSystem;
 import jjcard.textGames.game.parser.ITextParser;
 import jjcard.textGames.game.parser.ITextTokenStream;
 import jjcard.textGames.game.parser.TextToken;
@@ -92,7 +92,6 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 
 	public IItem roomGetItem(String key) {
 		return current.getItem(key);
-
 	}
 
 	public boolean roomContainsItem(String key) {
@@ -106,7 +105,6 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 			return true;
 		}
 		return false;
-
 	}
 
 	public String showCurrentRoom() {
@@ -175,16 +173,12 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		if (add != null) {
 			// add old armour back to inventory
 			player.addItem(add);
-
 		}
-
 	}
 
 	/**
 	 * equips given weapon to player. adds old weapon back to inventory.
 	 * 
-	 * @param key
-	 *            for weaponN
 	 * @param weaponN
 	 */
 	public void setPlayerWeapon(IWeapon weaponN) {
@@ -192,7 +186,6 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		if (add != null) {
 			// add old weapon to inventory
 			player.addItem(add);
-
 		}
 	}
 
@@ -229,7 +222,6 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom> {
 		if (roomContainsMob(key)) {
 			output.println(current.getMob(key).getDescription());
 			return ReturnCom.LOOK_MOB;
-
 		}
 		if (player.containsItem(key)) {
 			output.println(player.getItem(key).getInfo());

@@ -1,6 +1,7 @@
-package jjcard.textGames.game.battle;
+package jjcard.textGames.game.battle.impl;
 
 import jjcard.textGames.game.IMob;
+import jjcard.textGames.game.battle.IBattleSystem;
 
 public class BasicBattleSystem implements IBattleSystem {
 

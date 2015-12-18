@@ -60,13 +60,6 @@ public interface IMob extends IGameElement{
 	public boolean isDead();
 	
 	public boolean containsItem(String key);
-//	/**
-//	 * attack this mob for this amount of damage minus any defenses of the Mob. 
-//	 * Returns new health
-//	 * @param attack
-//	 * @return
-//	 */
-//	public int attackMob(int damage);
 	public void setHealth(int health);
 	public IItem removeItem(String key);
 	

@@ -4,7 +4,11 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
-
+/**
+ * Interface for containing TextTokens returned from the parser.
+ *
+ * @param <T> extends ITextTokenType
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = As.PROPERTY, property = "@class")
 public interface ITextTokenStream<T extends ITextTokenType> {
 	

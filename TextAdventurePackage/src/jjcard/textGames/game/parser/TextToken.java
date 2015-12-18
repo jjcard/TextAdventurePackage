@@ -12,11 +12,7 @@ public class TextToken<T extends ITextTokenType> implements ITextTokenType{
 	private final String standardToken;
 	
 	private final T type;
-//	public TextToken(String token, T type){
-//		this.token = token;
-//		this.type = type;
-//		this.standardToken = token;
-//	}
+
 	public TextToken(String token, String standardToken, T type){
 		if (token == null){
 			throw new NullPointerException("token");

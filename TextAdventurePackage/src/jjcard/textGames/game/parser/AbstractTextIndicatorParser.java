@@ -6,8 +6,8 @@ import jjcard.textGames.game.parser.impl.TextTokenStream.TextTokenStreamBuilder;
 /**
  * An abstract class that that be extended to handle some of the basic parts of parsing using ITextIndicators.
  *
- * @param <T>
- * @param <K>
+ * @param <T> extends ITextTokenType
+ * @param <K> extends ITextIndicator
  */
 public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K extends ITextIndicator>
 		implements ITextParser<T> {
@@ -22,6 +22,9 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 
 		TextTokenStreamBuilder<T> builder = new TextTokenStreamBuilder<T>();
 		String[] words = splitText(input);
+		/**
+		 * The current index in the list
+		 */
 		int index = -1;
 		K indicator = getIndicator(input, words, index);
 		if (indicator != null && indicator.isWholeSentenceIndicator()) {
@@ -29,9 +32,7 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 		} else {
 			
 			handleStartOfWordParsing(builder, words);
-			/**
-			 * The current index in the list
-			 */
+
 			index = 0;
 			for (String word : words) {
 				TextToken<T> token = getTextToken(word, words, index);
@@ -53,7 +54,6 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 					indicator = getIndicator(word, words, index);
 					if (indicator != null && indicator.isWordIndicator()) {
 						builder = handleWordIndicator(builder, word, indicator);
-
 					}
 				}
 				
@@ -77,16 +77,14 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	 * @param builder
 	 * @param words
 	 */
-	protected abstract void handleEndOfWordParsing(TextTokenStreamBuilder<T> builder,
-			String[] words);
+	protected abstract void handleEndOfWordParsing(TextTokenStreamBuilder<T> builder, String[] words);
 
 	/**
 	 * If parsing word by word, calls this before starting
 	 * @param builder
 	 * @param words
 	 */
-	protected abstract void handleStartOfWordParsing(TextTokenStreamBuilder<T> builder,
-			String[] words);
+	protected abstract void handleStartOfWordParsing(TextTokenStreamBuilder<T> builder, String[] words);
 
 	/**
 	 * Method called when parsing of input ends. Tears down anything that is a per-parse variable.
@@ -98,16 +96,15 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	 * Called when a verb is found when parsing
 	 * @param builder
 	 * @param token
-	 * @return
+	 * @return builder
 	 */
-	protected abstract TextTokenStreamBuilder<T> handleVerb(TextTokenStreamBuilder<T> builder,
-			TextToken<T> token);
+	protected abstract TextTokenStreamBuilder<T> handleVerb(TextTokenStreamBuilder<T> builder, TextToken<T> token);
 
 	/**
 	 * Called when a object is found when parsing
 	 * @param builder
 	 * @param token
-	 * @return
+	 * @return builder
 	 */
 	protected abstract TextTokenStreamBuilder<T> handleObject(TextTokenStreamBuilder<T> builder,
 			TextToken<T> token);
@@ -116,7 +113,7 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	 * Called when a withObjects is found when parsing
 	 * @param builder
 	 * @param token
-	 * @return
+	 * @return builder
 	 */
 	protected abstract TextTokenStreamBuilder<T> handleWithObject(TextTokenStreamBuilder<T> builder,
 			TextToken<T> token);
@@ -126,17 +123,17 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	 * @param builder
 	 * @param word
 	 * @param indicator
-	 * @return
+	 * @return builder
 	 */
 	protected abstract TextTokenStreamBuilder<T> handleWordIndicator(
 			TextTokenStreamBuilder<T> builder, String word, K indicator);
 
 /**
  * Called to get the Type of a word. Can return null.
- * @param word
- * @param words
- * @param index
- * @return
+ * @param word the current word
+ * @param words the parsed words
+ * @param index the current word's index. -1 signifies the whole sentence
+ * @return the TextToken
  */
 	protected abstract TextToken<T> getTextToken(String word, String[] words, int index);
 
@@ -145,22 +142,24 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	 * @param indicator
 	 * @param input
 	 * @param builder
-	 * @return
+	 * @return builder
 	 */
 	protected abstract TextTokenStreamBuilder<T> handleWholeSentenceIndicator(K indicator, String input,
 			TextTokenStreamBuilder<T> builder);
 
 	/**
-	 * Called to get the Indicator for the given input. Can return null. Index is negative if it is for the whole sentence
+	 * Called to get the Indicator for the given input. Can return null.
 	 * @param input
-	 * @return
+	 * @param words the parsed words
+	 * @param index of current word. -1 signifies the whole sentence
+	 * @return the Indicator
 	 */
 	protected abstract K getIndicator(String input, String[] words, int index);
 
 	/**
 	 * Called to split the input to the individual parsing words
-	 * @param input
-	 * @return
+	 * @param input the input String
+	 * @return the parsed array of strings
 	 */
 	protected abstract String[] splitText(String input);
 

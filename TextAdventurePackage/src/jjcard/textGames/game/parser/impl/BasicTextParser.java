@@ -218,8 +218,6 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		return builder;
 	}
 	protected TextToken<T> getTextToken(String word, String[] words, int index){
-		
-		
 		ITextDefinition<T> def = getDefinition(word, words, index);
 		if (def != null){
 			return createTextToken(word, def);

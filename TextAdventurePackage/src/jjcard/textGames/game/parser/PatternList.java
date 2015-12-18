@@ -3,6 +3,7 @@ package jjcard.textGames.game.parser;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import jjcard.textGames.game.util.ObjectsUtil;
 
@@ -39,8 +40,9 @@ public class PatternList<S> {
 	 * Compiles the given string into a pattern and adds it.
 	 * @param s
 	 * @param value
+	 * @throws PatternSyntaxException
 	 */
-	public void add(String s, S value) {
+	public void add(String s, S value) throws PatternSyntaxException {
 		add(Pattern.compile(s), value);
 	}
 

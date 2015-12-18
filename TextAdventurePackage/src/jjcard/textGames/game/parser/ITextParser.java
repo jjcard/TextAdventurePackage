@@ -3,7 +3,7 @@ package jjcard.textGames.game.parser;
 
 /**
  * 
- * Interface TextParsers should use.
+ * Interface for parsing Text into tokens.
  *
  * @param <T>
  */

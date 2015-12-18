@@ -20,8 +20,6 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	public TextTokenStream<T> parseText(String input) {
 		startParsing(input);
 
-		
-
 		TextTokenStreamBuilder<T> builder = new TextTokenStreamBuilder<T>();
 		String[] words = splitText(input);
 		int index = -1;

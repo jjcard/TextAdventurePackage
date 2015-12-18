@@ -86,14 +86,11 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		return SPLIT_PATTERN.split(text);
 	}
 
-	protected void handleRepeatIndicator(TextTokenStreamBuilder<T> builder,
-			String s) {
+	protected void handleRepeatIndicator(TextTokenStreamBuilder<T> builder, String s) {
 		// TODO Auto-generated method stub
-		
 	}
 	protected void handleItIndicator(TextTokenStreamBuilder<T> builder, String s) {
 		// TODO Auto-generated method stub
-		
 	}
 	/**
 	 * Get a Deliminator String, with each argument escaped to be literal.
@@ -180,6 +177,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 			builder.addError(TextParserError.TOO_MANY_VERBS);
 		} else {
 			verb = token;
+			builder = builder.verb(verb);
 		}
 		return builder;
 	}
@@ -187,6 +185,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	protected TextTokenStreamBuilder<T> handleObject(TextTokenStreamBuilder<T> builder,
 			TextToken<T> token) {
 		objects.add(token);
+		builder = builder.addObject(token);
 		if (checkingObjects && objects.size() > objectLimit){
 			builder.addError(TextParserError.TOO_MANY_OBJECTS);
 		}
@@ -199,6 +198,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 			builder.addError(TextParserError.TOO_MANY_WITH_OBJECTS);
 		} else {
 			withObject = token;
+			builder = builder.withObject(withObject);
 		}
 		return builder;
 	}
@@ -265,7 +265,6 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	@Override
 	protected void handleEndOfWordParsing(TextTokenStreamBuilder<T> builder,
 			String[] words) {
-		builder.objects(objects).verb(verb).withObject(withObject);
 	}
 	@Override
 	protected void handleStartOfWordParsing(TextTokenStreamBuilder<T> builder,

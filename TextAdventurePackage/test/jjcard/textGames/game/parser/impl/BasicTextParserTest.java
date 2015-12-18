@@ -102,6 +102,10 @@ public class BasicTextParserTest {
 		assertEquals("brEaD", stream.getFirstObject().getToken());
 		assertEquals(BasicTextTokenType.ITEM, stream.getFirstObject().getType());
 		assertEquals(1, stream.getObjects().size());
+		assertEquals(2, stream.getOrderedStream().size());
+		System.out.println(stream.getOrderedStream());
+		assertEquals("Go", stream.getOrderedStream().get(0).getToken());
+		assertEquals("brEaD", stream.getOrderedStream().get(1).getToken());
 	}
 	@Test
 	public void testPatternParsing(){
@@ -124,6 +128,8 @@ public class BasicTextParserTest {
 		assertNotNull(stream.getVerb());
 		assertEquals("say", stream.getVerb().getToken());
 		assertEquals(BasicTextTokenType.TALK, stream.getVerb().getType());
+		assertEquals("say", stream.getOrderedStream().get(0).getToken());
+		assertEquals( "\"I really hope this works\"", stream.getOrderedStream().get(1).getToken());
 		
 	}
 	@Test

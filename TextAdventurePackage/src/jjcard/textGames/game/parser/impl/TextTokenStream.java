@@ -25,6 +25,8 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	private final TextToken<T> withObject;
 
 	private final List<TextParserError> errors;
+	
+	private final List<TextToken<T>> stream;
 
 	public static class TextTokenStreamBuilder<T extends ITextTokenType> {
 
@@ -32,6 +34,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		private TextToken<T> verb;
 		private TextToken<T> withObject;
 		private List<TextParserError> errors = new LinkedList<TextParserError>();
+		private List<TextToken<T>> stream = new LinkedList<TextToken<T>>();
 		private boolean validateInput = true;
 
 		public TextTokenStreamBuilder() {
@@ -56,10 +59,11 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 * Sets the verb to the TextToken given.
 		 * 
 		 * @param verb
-		 * @return
+		 * @return this
 		 */
 		public TextTokenStreamBuilder<T> verb(TextToken<T> verb) {
 			this.verb = verb;
+			stream.add(verb);
 			return this;
 		}
 
@@ -67,10 +71,11 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 * Sets the withObject to the TextToken given.
 		 * 
 		 * @param withObject
-		 * @return
+		 * @return this
 		 */
 		public TextTokenStreamBuilder<T> withObject(TextToken<T> withObject) {
 			this.withObject = withObject;
+			stream.add(withObject);
 			return this;
 		}
 
@@ -78,18 +83,24 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 * Sets the object list to the one given. If null, creates a new list.
 		 * 
 		 * @param objects
-		 * @return
+		 * @return this
 		 */
 		public TextTokenStreamBuilder<T> objects(List<TextToken<T>> objects) {
 			if (objects == null) {
 				objects = new LinkedList<TextToken<T>>();
 			}
 			this.objects = objects;
+			stream.addAll(objects);
 			return this;
 		}
-
+		/**
+		 * 
+		 * @param object
+		 * @return this
+		 */
 		public TextTokenStreamBuilder<T> addObject(TextToken<T> object) {
 			objects.add(object);
+			stream.add(object);
 			return this;
 		}
 
@@ -97,11 +108,12 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 * Adds the given list of objects to the end of the object list
 		 * 
 		 * @param objects
-		 * @return
+		 * @return this
 		 */
 		public TextTokenStreamBuilder<T> addObjects(List<TextToken<T>> objects) {
 			if (objects != null) {
 				this.objects.addAll(objects);
+				stream.addAll(objects);
 			}
 			return this;
 		}
@@ -118,7 +130,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 * Adds error to builder only if error not already exists in the list.
 		 * 
 		 * @param error
-		 * @return
+		 * @return this
 		 */
 		public TextTokenStreamBuilder<T> addError(TextParserError error) {
 			if (!this.errors.contains(error)) {
@@ -132,7 +144,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 * automatically. It is true by default
 		 * 
 		 * @param validateInput
-		 * @return
+		 * @return this
 		 */
 		public TextTokenStreamBuilder<T> validateInput(boolean validateInput) {
 			this.validateInput = validateInput;
@@ -146,18 +158,19 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 */
 		public TextTokenStream<T> build() {
 			return new TextTokenStream<>(verb, objects, withObject, errors,
-					validateInput);
+					validateInput, stream);
 		}
 	}
 
 	private TextTokenStream(TextToken<T> verb, List<TextToken<T>> objects,
 			TextToken<T> withObject, List<TextParserError> errors,
-			boolean validateInput) {
+			boolean validateInput, List<TextToken<T>> stream) {
 
 		this.objects = objects;
 		this.verb = verb;
 		this.withObject = withObject;
 		this.errors = errors;
+		this.stream = stream;
 
 		if (validateInput) {
 			validateInput();
@@ -191,7 +204,13 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	public List<TextToken<T>> getObjects() {
 		return objects;
 	}
-
+	/**
+	 * Get a List of the TextTokens in order they were parsed
+	 * @return
+	 */
+	public List<TextToken<T>> getOrderedStream(){
+		return stream;
+	}
 	/**
 	 * Returns the verb TextToken
 	 * 

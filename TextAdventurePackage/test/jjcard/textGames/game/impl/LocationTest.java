@@ -2,6 +2,7 @@ package jjcard.textGames.game.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import jjcard.textGames.game.IExit;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.IMob;
 
@@ -22,14 +24,16 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class LocationTest {
-	private Mob mob = new Mob.Builder().standardName("Gelatinous Cube").build();//.altNames(new String[] {"The bane"}).description("Run").build();
-	private Location hallway = new Location("Hallway", "It's a hallway. What more do you want.");
-	private Location room = new Location("A room", "no not THE room");
-	private Item item = new Item.Builder().standardName("vendor trash").info("doesn't do anything").build();//.altNames(new String[] {"worthless"}).build();
+	private Mob mob;
+	private Location hallway; 
+	private Location room;
+	private Item item;
 	@Before
 	public void setUp() throws Exception {
-		mob = new Mob.Builder().standardName("Gelatinous Cube").build();//.altNames(new String[] {"The bane"}).description("Run").build();
-		item = new Item.Builder().standardName("vendor trash").info("doesn't do anything").build();//.altNames(new String[] {"worthless"}).build();
+		mob = new Mob.Builder().standardName("Gelatinous Cube").build();
+		hallway = new Location("Hallway", "It's a hallway. What more do you want.");
+		item = new Item.Builder().standardName("vendor trash").info("doesn't do anything").build();
+		room = new Location("A room", "no not THE room");
 		hallway.addExit(Exit.NORTH.getWithLocation(room));
 		room.addExit(Exit.SOUTH_BUILD.location(hallway).build());
 		hallway.addItem(item);
@@ -43,17 +47,14 @@ public class LocationTest {
 		
 		assertEquals(room.getExitLocation("South"), hallway);
 //		assertEquals(room.getExitLocation("S"), hallway);
-		
-		
 		assertNull(room.getExitLocation("go North") );
 	}
 	
 	@Test
-	public void mobTest(){
+	public void getMobTest(){
 		assertEquals(hallway.getMob("Gelatinous Cube"), mob);
 //		assertEquals(hallway.getMob("The bane"), mob);
 //		assertEquals(hallway.getMob("ThE baNe"), mob);
-		
 		
 		assertNull(hallway.getMob("bane cube"));
 		
@@ -113,9 +114,22 @@ public class LocationTest {
 		assertEquals(descrip, in.getDescription());
 		assertEquals(mobs, in.getMobs());
 		assertEquals(inventory, in.getInventory());
-		
-		
-		
+	}
+	@Test
+	public void removeExitTest(){
+		assertFalse(room.getExits().isEmpty());
+		IExit exit = room.removeExit("South");
+		assertNotNull(exit);
+		assertEquals(hallway, exit.getLocation());
+		assertTrue(room.getExits().isEmpty());
+	}
+	@Test
+	public void removeMobTest(){
+		assertFalse(hallway.getMobs().isEmpty());
+		IMob actMob = hallway.removeMob("Gelatinous Cube");
+		assertNotNull(actMob);
+		assertEquals(mob, actMob);
+		assertTrue(hallway.getMobs().isEmpty());
 	}
 
 }

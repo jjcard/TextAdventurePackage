@@ -1,6 +1,7 @@
 package jjcard.textGames.game.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
@@ -11,7 +12,6 @@ import jjcard.textGames.game.impl.Exit;
 import jjcard.textGames.game.impl.Location;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -20,12 +20,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ExitTest {
 
-	@Before
-	public void setUp() throws Exception {
-	}
-
 	@Test
-	public void test() {
+	public void getWithTest() {
 		Location l = new Location();
 		
 		Exit Left = Exit.SOUTH.getWithLocation(l);
@@ -38,6 +34,22 @@ public class ExitTest {
 		
 		Assert.assertNull(Left2.getLocation());
 		
+	}
+	@Test
+	public void equalsTest(){
+		Exit first = new Exit.Builder().standardName("North").build();
+		
+		Exit snd = new Exit.Builder().standardName("North").build();
+		
+		assertEquals(first, snd);
+		
+		assertEquals(first.hashCode(), snd.hashCode());
+		Location l = new Location();
+		Exit thrd = new Exit.Builder(first).location(l).build();
+		
+		
+		assertFalse(first.equals(thrd));
+		assertFalse(first.hashCode() == thrd.hashCode());
 	}
 	@Test
 	public void builderStaticTest(){

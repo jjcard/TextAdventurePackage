@@ -1,9 +1,11 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'pmd'
-apply plugin: "findbugs"
+apply plugin: 'findbugs'
+apply plugin: 'jacoco'
 
 
+targetCompatibility = 1.7
 sourceCompatibility = 1.7
 version = '0.4.SNAPSHOT'
 
@@ -71,6 +73,14 @@ tasks.withType(FindBugs) {
 	reports {
 		xml.enabled = false
 		html.enabled = true
+	}
+ }
+ jacocoTestReport {
+	reports {
+		xml.enabled false
+		csv.enabled false
+		html.enabled true
+		html.destination "${buildDir}/reports/jacoco"
 	}
  }
 repositories {

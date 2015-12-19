@@ -13,7 +13,7 @@ import jjcard.textGames.game.parser.ITextTokenType;
 import jjcard.textGames.game.parser.PatternList;
 import jjcard.textGames.game.parser.TextParserError;
 import jjcard.textGames.game.parser.TextToken;
-import jjcard.textGames.game.parser.impl.TextTokenStream.TextTokenStreamBuilder;
+import jjcard.textGames.game.parser.impl.TextTokenStream.Builder;
 /**
  * Basic text parser class.
  *
@@ -86,10 +86,10 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		return SPLIT_PATTERN.split(text);
 	}
 
-	protected void handleRepeatIndicator(TextTokenStreamBuilder<T> builder, String s) {
+	protected void handleRepeatIndicator(Builder<T> builder, String s) {
 		// TODO Auto-generated method stub
 	}
-	protected void handleItIndicator(TextTokenStreamBuilder<T> builder, String s) {
+	protected void handleItIndicator(Builder<T> builder, String s) {
 		// TODO Auto-generated method stub
 	}
 	/**
@@ -166,11 +166,11 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		return indicatorMap;
 	}
 	@Override
-	protected void endParsing(TextTokenStreamBuilder<T> builder) {
+	protected void endParsing(Builder<T> builder) {
 		previousStream = builder.build();
 	}
 	@Override
-	protected TextTokenStreamBuilder<T> handleVerb(TextTokenStreamBuilder<T> builder,
+	protected Builder<T> handleVerb(Builder<T> builder,
 			TextToken<T> token) {
 		if (verb != null){
 			//already has verb
@@ -182,7 +182,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		return builder;
 	}
 	@Override
-	protected TextTokenStreamBuilder<T> handleObject(TextTokenStreamBuilder<T> builder,
+	protected Builder<T> handleObject(Builder<T> builder,
 			TextToken<T> token) {
 		objects.add(token);
 		builder = builder.addObject(token);
@@ -192,7 +192,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		return builder;
 	}
 	@Override
-	protected TextTokenStreamBuilder<T> handleWithObject(TextTokenStreamBuilder<T> builder,
+	protected Builder<T> handleWithObject(Builder<T> builder,
 			TextToken<T> token) {
 		if (withObject != null){
 			builder.addError(TextParserError.TOO_MANY_WITH_OBJECTS);
@@ -203,7 +203,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		return builder;
 	}
 	@Override
-	protected TextTokenStreamBuilder<T> handleWordIndicator(TextTokenStreamBuilder<T> builder,
+	protected Builder<T> handleWordIndicator(Builder<T> builder,
 			String word, TextIndicator indicator) {
 		switch (indicator) {
 		case WITH_INDICATOR:
@@ -249,23 +249,23 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		//nothing to see here folks
 	}
 	@Override
-	protected TextTokenStreamBuilder<T> handleWholeSentenceIndicator(
+	protected Builder<T> handleWholeSentenceIndicator(
 			TextIndicator indicator, String input,
-			TextTokenStreamBuilder<T> builder) {
+			Builder<T> builder) {
 		switch (indicator) {
 		case REPEAT_INDICATOR:
-			return new TextTokenStreamBuilder<>(previousStream);
+			return new Builder<>(previousStream);
 		default:
 			break;
 		}
 		return builder;
 	}
 	@Override
-	protected void handleEndOfWordParsing(TextTokenStreamBuilder<T> builder,
+	protected void handleEndOfWordParsing(Builder<T> builder,
 			String[] words) {
 	}
 	@Override
-	protected void handleStartOfWordParsing(TextTokenStreamBuilder<T> builder,
+	protected void handleStartOfWordParsing(Builder<T> builder,
 			String[] words) {
 		checkingObjects = objectLimit > 0;
 		objects = new LinkedList<TextToken<T>>();

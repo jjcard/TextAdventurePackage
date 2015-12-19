@@ -1,7 +1,7 @@
 package jjcard.textGames.game.parser;
 
 import jjcard.textGames.game.parser.impl.TextTokenStream;
-import jjcard.textGames.game.parser.impl.TextTokenStream.TextTokenStreamBuilder;
+import jjcard.textGames.game.parser.impl.TextTokenStream.Builder;
 
 /**
  * An abstract class that that be extended to handle some of the basic parts of parsing using ITextIndicators.
@@ -20,7 +20,7 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	public TextTokenStream<T> parseText(String input) {
 		startParsing(input);
 
-		TextTokenStreamBuilder<T> builder = new TextTokenStreamBuilder<T>();
+		Builder<T> builder = new Builder<T>();
 		String[] words = splitText(input);
 		/**
 		 * The current index in the list
@@ -77,20 +77,20 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	 * @param builder
 	 * @param words
 	 */
-	protected abstract void handleEndOfWordParsing(TextTokenStreamBuilder<T> builder, String[] words);
+	protected abstract void handleEndOfWordParsing(Builder<T> builder, String[] words);
 
 	/**
 	 * If parsing word by word, calls this before starting
 	 * @param builder
 	 * @param words
 	 */
-	protected abstract void handleStartOfWordParsing(TextTokenStreamBuilder<T> builder, String[] words);
+	protected abstract void handleStartOfWordParsing(Builder<T> builder, String[] words);
 
 	/**
 	 * Method called when parsing of input ends. Tears down anything that is a per-parse variable.
 	 * @param builder
 	 */
-	protected abstract void endParsing(TextTokenStreamBuilder<T> builder);
+	protected abstract void endParsing(Builder<T> builder);
 
 	/**
 	 * Called when a verb is found when parsing
@@ -98,7 +98,7 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	 * @param token
 	 * @return builder
 	 */
-	protected abstract TextTokenStreamBuilder<T> handleVerb(TextTokenStreamBuilder<T> builder, TextToken<T> token);
+	protected abstract Builder<T> handleVerb(Builder<T> builder, TextToken<T> token);
 
 	/**
 	 * Called when a object is found when parsing
@@ -106,7 +106,7 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	 * @param token
 	 * @return builder
 	 */
-	protected abstract TextTokenStreamBuilder<T> handleObject(TextTokenStreamBuilder<T> builder,
+	protected abstract Builder<T> handleObject(Builder<T> builder,
 			TextToken<T> token);
 
 	/**
@@ -115,7 +115,7 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	 * @param token
 	 * @return builder
 	 */
-	protected abstract TextTokenStreamBuilder<T> handleWithObject(TextTokenStreamBuilder<T> builder,
+	protected abstract Builder<T> handleWithObject(Builder<T> builder,
 			TextToken<T> token);
 
 	/**
@@ -125,8 +125,8 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	 * @param indicator
 	 * @return builder
 	 */
-	protected abstract TextTokenStreamBuilder<T> handleWordIndicator(
-			TextTokenStreamBuilder<T> builder, String word, K indicator);
+	protected abstract Builder<T> handleWordIndicator(
+			Builder<T> builder, String word, K indicator);
 
 /**
  * Called to get the Type of a word. Can return null.
@@ -144,8 +144,8 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	 * @param builder
 	 * @return builder
 	 */
-	protected abstract TextTokenStreamBuilder<T> handleWholeSentenceIndicator(K indicator, String input,
-			TextTokenStreamBuilder<T> builder);
+	protected abstract Builder<T> handleWholeSentenceIndicator(K indicator, String input,
+			Builder<T> builder);
 
 	/**
 	 * Called to get the Indicator for the given input. Can return null.

@@ -28,7 +28,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	
 	private final List<TextToken<T>> stream;
 
-	public static class TextTokenStreamBuilder<T extends ITextTokenType> {
+	public static class Builder<T extends ITextTokenType> {
 
 		private List<TextToken<T>> objects = new LinkedList<TextToken<T>>();
 		private TextToken<T> verb;
@@ -37,7 +37,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		private List<TextToken<T>> stream = new LinkedList<TextToken<T>>();
 		private boolean validateInput = true;
 
-		public TextTokenStreamBuilder() {
+		public Builder() {
 			super();
 		}
 
@@ -47,7 +47,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 * 
 		 * @param stream
 		 */
-		public TextTokenStreamBuilder(TextTokenStream<T> stream) {
+		public Builder(TextTokenStream<T> stream) {
 			this.objects = stream.objects == null ? this.objects
 					: stream.objects;
 			this.verb = stream.verb;
@@ -61,7 +61,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 * @param verb
 		 * @return this
 		 */
-		public TextTokenStreamBuilder<T> verb(TextToken<T> verb) {
+		public Builder<T> verb(TextToken<T> verb) {
 			this.verb = verb;
 			stream.add(verb);
 			return this;
@@ -73,7 +73,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 * @param withObject
 		 * @return this
 		 */
-		public TextTokenStreamBuilder<T> withObject(TextToken<T> withObject) {
+		public Builder<T> withObject(TextToken<T> withObject) {
 			this.withObject = withObject;
 			stream.add(withObject);
 			return this;
@@ -85,7 +85,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 * @param objects
 		 * @return this
 		 */
-		public TextTokenStreamBuilder<T> objects(List<TextToken<T>> objects) {
+		public Builder<T> objects(List<TextToken<T>> objects) {
 			if (objects == null) {
 				objects = new LinkedList<TextToken<T>>();
 			}
@@ -98,7 +98,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 * @param object
 		 * @return this
 		 */
-		public TextTokenStreamBuilder<T> addObject(TextToken<T> object) {
+		public Builder<T> addObject(TextToken<T> object) {
 			objects.add(object);
 			stream.add(object);
 			return this;
@@ -110,7 +110,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 * @param objects
 		 * @return this
 		 */
-		public TextTokenStreamBuilder<T> addObjects(List<TextToken<T>> objects) {
+		public Builder<T> addObjects(List<TextToken<T>> objects) {
 			if (objects != null) {
 				this.objects.addAll(objects);
 				stream.addAll(objects);
@@ -118,7 +118,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 			return this;
 		}
 
-		public TextTokenStreamBuilder<T> errors(List<TextParserError> errors) {
+		public Builder<T> errors(List<TextParserError> errors) {
 			if (errors == null) {
 				errors = new LinkedList<TextParserError>();
 			}
@@ -132,7 +132,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 * @param error
 		 * @return this
 		 */
-		public TextTokenStreamBuilder<T> addError(TextParserError error) {
+		public Builder<T> addError(TextParserError error) {
 			if (!this.errors.contains(error)) {
 				this.errors.add(error);
 			}
@@ -146,7 +146,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 * @param validateInput
 		 * @return this
 		 */
-		public TextTokenStreamBuilder<T> validateInput(boolean validateInput) {
+		public Builder<T> validateInput(boolean validateInput) {
 			this.validateInput = validateInput;
 			return this;
 		}

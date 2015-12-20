@@ -11,12 +11,12 @@ public enum TextIndicator implements ITextIndicator{
 	 */
 	WITH_INDICATOR(false, true), 
 	/**
-	 * Indicator meaning an previous object
+	 * Indicator meaning to use the previous object
 	 */
+	IT_INDICATOR(false, true), 
 	/**
 	 * Indicator meaning to repeat the previous command
 	 */
-	IT_INDICATOR(false, true), 
 	REPEAT_INDICATOR(true, false);
 	
 	private final boolean isWholeSentence;

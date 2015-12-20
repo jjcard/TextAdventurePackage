@@ -85,17 +85,27 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	protected String[] splitText(String text) {
 		return SPLIT_PATTERN.split(text);
 	}
-
-	protected void handleRepeatIndicator(Builder<T> builder, String s) {
-		// TODO Auto-generated method stub
+	/**
+	 * Called when the {@link TextIndicator.REPEAT_INDICATOR} is found. Returns the Previous TextTokenStream.
+	 * @param builder
+	 * @param input
+	 * @return builder
+	 */
+	protected Builder<T> handleRepeatIndicator(Builder<T> builder, String input) {
+		return new Builder<>(previousStream); 
 	}
-	protected void handleItIndicator(Builder<T> builder, String s) {
-		// TODO Auto-generated method stub
+	/**
+	 * Called when the {@link TextIndicator.IT_INDICATOR} is found. calls {@link #handleObject(Builder, TextToken)} with the first object token from the previous Stream.
+	 * @param builder
+	 * @param input
+	 */
+	protected void handleItIndicator(Builder<T> builder, String input) {
+		handleObject(builder, previousStream.getFirstObject());
 	}
 	/**
 	 * Get a Deliminator String, with each argument escaped to be literal.
 	 * @param args
-	 * @return
+	 * @return the Deliminator String
 	 */
 	public static String getDeliminators (String... deliminators){
 		StringBuilder b = new StringBuilder();
@@ -253,8 +263,8 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 			TextIndicator indicator, String input,
 			Builder<T> builder) {
 		switch (indicator) {
-		case REPEAT_INDICATOR:
-			return new Builder<>(previousStream);
+		case REPEAT_INDICATOR://TODO
+			return handleRepeatIndicator(builder, input);
 		default:
 			break;
 		}

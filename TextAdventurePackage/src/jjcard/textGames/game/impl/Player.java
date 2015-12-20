@@ -119,7 +119,6 @@ public class Player extends Mob implements HasLeveling{
 		}
 	}
 	
-	
 	private Player(Builder b){
 		super(b);
 		setXp(b.xp);

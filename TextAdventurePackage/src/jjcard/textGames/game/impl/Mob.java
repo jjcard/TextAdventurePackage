@@ -24,7 +24,6 @@ import jjcard.textGames.game.util.MapUtil;
  */
 @JsonDeserialize(builder = Mob.Builder.class)
 public class Mob extends AbstractGameElement implements IMob{
-	public static final int DEFAULT_HEALTH = 10;
 	@JsonProperty("descrip")
 	private String description;
 	@JsonProperty("maxHealth")
@@ -74,9 +73,6 @@ public class Mob extends AbstractGameElement implements IMob{
 			  this.description = b.description;
 			  this.maxHealth = b.maxHealth;
 			  this.curHealth = b.curHealth;
-			  if (maxHealth <= 0){
-				  this. maxHealth = curHealth;
-			  }
 			  this.money = b.money;
 			  this.inventory = b.inventory;
 			  this.defense = b.defense;
@@ -101,6 +97,11 @@ public class Mob extends AbstractGameElement implements IMob{
 			return this;
 		}
 		@JsonProperty("maxHealth")
+		/**
+		 * The Maximum health of the mob. If not set during build time, defaults to value of health.
+		 * @param maxHealth
+		 * @return this
+		 */
 		public Builder maxHealth(int maxHealth){
 			this.maxHealth = maxHealth;
 			return this;
@@ -145,6 +146,11 @@ public class Mob extends AbstractGameElement implements IMob{
 			return this;
 		}
 		@JsonProperty("hostile")
+		/**
+		 * boolean flag for weather the mob is hostile. Default is true.
+		 * @param hostile
+		 * @return this
+		 */
 		public Builder hostile(boolean hostile){
 			this.hostile = hostile;
 			return this;
@@ -194,10 +200,9 @@ public class Mob extends AbstractGameElement implements IMob{
 		  super(b);
 		  description = b.description;
 		  if (b.maxHealth > 0){
-			  //valid max health
 			setMaxHealth(b.maxHealth);  
 		  } else {
-			  setMaxHealth(b.curHealth);
+			 setMaxHealth(b.curHealth);
 		  }
 		  
 		  setHealth(b.curHealth);
@@ -393,7 +398,7 @@ public class Mob extends AbstractGameElement implements IMob{
 	public void setHostile(boolean hostile){
 		this.hostile = hostile;
 	}
-	public void setIStatusList(LinkedList<IStatus> s){
+	public void setStatusList(List<IStatus> s){
 		statusList = s;
 	}
 	public IItem addItem(IItem add){

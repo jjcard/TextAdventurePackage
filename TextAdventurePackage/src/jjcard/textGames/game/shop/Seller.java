@@ -7,7 +7,6 @@ import jjcard.textGames.game.IMob;
 import jjcard.textGames.game.util.Experimental;
 /**
  * 
- * Experimental: Subject to Change
  *
  */
 @Experimental

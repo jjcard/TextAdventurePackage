@@ -2,7 +2,8 @@ package jjcard.textGames.game.battle.impl;
 
 import jjcard.textGames.game.IMob;
 import jjcard.textGames.game.battle.IBattleSystem;
-
+import jjcard.textGames.game.util.Experimental;
+@Experimental
 public class BasicBattleSystem implements IBattleSystem {
 
 	@Override

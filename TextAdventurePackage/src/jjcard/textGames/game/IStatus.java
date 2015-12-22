@@ -3,7 +3,6 @@ package jjcard.textGames.game;
 import jjcard.textGames.game.util.Experimental;
 
 /**
- * Experimental: Subject to Change
  *
  */
 @Experimental

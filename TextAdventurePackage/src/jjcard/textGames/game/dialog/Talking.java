@@ -5,7 +5,6 @@ import jjcard.textGames.game.parser.ITextTokenType;
 import jjcard.textGames.game.util.Experimental;
 /**
  * 
- * Experimental: Subject to Change
  * @param <T>
  */
 @Experimental

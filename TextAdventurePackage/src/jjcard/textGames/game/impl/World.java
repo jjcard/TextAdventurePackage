@@ -31,13 +31,29 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom, Player> {
 	public World() {
 		current = new Location();
 	}
-
-	public World(ILocation newCur) {
-		current = newCur;
+	/**
+	 * 
+	 * @param current the current location.
+	 * @throws NullPointerException if the <code>current</code> argument is <code>null</code>
+	 */
+	public World(ILocation current) throws NullPointerException {
+		if (current == null){
+			throw new NullPointerException("current");
+		}
+		this.current = current;
 	}
+	/**
+	 * 
+	 * @param current the current location. Must be non-null
+	 * @param playerN
+	 * @throws NullPointerException if the <code>current</code> argument is <code>null</code>
+	 */
+	public World(ILocation current, Player playerN) throws NullPointerException{
+		if (current == null){
+			throw new NullPointerException("current");
+		}
+		this.current = current;
 
-	public World(ILocation newCur, Player playerN) {
-		current = newCur;
 		player = playerN;
 	}
 
@@ -77,9 +93,15 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom, Player> {
 	public void setPlayer(Player playerN) {
 		player = playerN;
 	}
-
-	public void setCurrent(ILocation locationN) {
-		current = locationN;
+	/**
+	 * Sets the current location. Must be non-null.
+	 * @throws NullPointerException if the <code>current</code> argument is <code>null</code>
+	 */
+	public void setCurrent(ILocation current) throws NullPointerException{
+		if (current == null){
+			throw new NullPointerException("current");
+		}
+		this.current = current;
 	}
 
 	public boolean goDirection(String dir) {

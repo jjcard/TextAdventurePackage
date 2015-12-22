@@ -362,29 +362,30 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom, Player> {
 		TextToken<BasicTextTokenType> object = stream.getFirstObject();
 		String token = object == null ? null : object.getToken();
 		if (token != null) {
-			switch (stream.getVerb().getType()) {
-			case ATTACK:
-				return attackMob(token, object);
-			case LOOK:
-				return lookAt(token, object);
-			case MOVE:
-				return movePlayer(token, object);
-			case GET:
-				return getItemFromRoom(token, object);
-			case LOOT:
-				return lootAllMob(token, object);
-			case DROP:
-				return dropItem(token, object);
-			case EQUIP:
-				return equipItem(token, object);
-			case UNEQUIP:
-				return unequipItem(token, object);
-			case INFO:
-				return info(token, object);
-			default:
-				break;
+			if (stream.getVerb() != null){
+				switch (stream.getVerb().getType()) {
+				case ATTACK:
+					return attackMob(token, object);
+				case LOOK:
+					return lookAt(token, object);
+				case MOVE:
+					return movePlayer(token, object);
+				case GET:
+					return getItemFromRoom(token, object);
+				case LOOT:
+					return lootAllMob(token, object);
+				case DROP:
+					return dropItem(token, object);
+				case EQUIP:
+					return equipItem(token, object);
+				case UNEQUIP:
+					return unequipItem(token, object);
+				case INFO:
+					return info(token, object);
+				default:
+					return ReturnCom.COMMAND_NOT_FOUND;
+				}				
 			}
-
 			// For objects that can also be used to infer their verbs
 			switch (object.getType()) {
 			case DIRECTION:

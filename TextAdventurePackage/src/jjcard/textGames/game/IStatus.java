@@ -1,9 +1,12 @@
 package jjcard.textGames.game;
 
+import jjcard.textGames.game.util.Experimental;
+
 /**
- * Semi-Experimental: Subject to Change
+ * Experimental: Subject to Change
  *
  */
+@Experimental
 public interface IStatus {
 	
 	

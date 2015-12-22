@@ -1,10 +1,12 @@
 package jjcard.textGames.game.shop;
 
 import jjcard.textGames.game.IGameElement;
+import jjcard.textGames.game.util.Experimental;
 /**
  * Interface for displaying items that can be bought from seller.
  * Experimental: Subject to Change
  */
+@Experimental
 public interface IShopItem extends IGameElement{
 	
 	/**

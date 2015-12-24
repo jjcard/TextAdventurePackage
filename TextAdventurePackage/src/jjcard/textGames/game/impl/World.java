@@ -259,10 +259,10 @@ public class World implements IWorld<BasicTextTokenType, ReturnCom, Player> {
 		case INVENTORY:
 			if (player.getInventory().isEmpty()) {
 				output.println("You have nothing in your inventory");
-				return ReturnCom.INFO_INVENTORY;
+				return ReturnCom.INFO_INVENTORY_EMPTY;
 			} else {
 				output.println(player.inventoryToString());
-				return ReturnCom.INFO_INVENTORY_EMPTY;
+				return ReturnCom.INFO_INVENTORY;
 			}
 		case MONEY:
 			output.println(player.getMoney());

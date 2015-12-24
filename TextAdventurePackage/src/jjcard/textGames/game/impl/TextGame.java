@@ -17,6 +17,7 @@ public abstract class TextGame<T extends ITextTokenType, P extends IMob> {
 	protected ITextParser<T> parser;
 	
 	public void play(){
+		setUp();
 		while (!isGameOver()){
 			String input = getInput();
 			ITextTokenStream<T> stream = parseInput(input);

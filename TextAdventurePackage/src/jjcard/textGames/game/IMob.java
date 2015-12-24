@@ -66,6 +66,7 @@ public interface IMob extends IGameElement{
 	public IArmour removeArmour();
 	
 	public IItem addItem(IItem add);
+	public void addAllItems(Map<String, IItem> items);
 	/**
 	 * gets attack plus any attack bonus
 	 * @return

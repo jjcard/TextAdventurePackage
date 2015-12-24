@@ -13,7 +13,10 @@ import jjcard.textGames.game.parser.ITextTokenType;
 public abstract class TextGame<T extends ITextTokenType, P extends IMob> {
 
 	protected P player;
-	protected boolean gameOver;
+	/**
+	 * Game over flag
+	 */
+	protected boolean gameOver = false;
 	protected ITextParser<T> parser;
 	
 	public void play(){
@@ -21,7 +24,8 @@ public abstract class TextGame<T extends ITextTokenType, P extends IMob> {
 		while (!isGameOver()){
 			String input = getInput();
 			ITextTokenStream<T> stream = parseInput(input);
-			execumeCommands(stream);
+			executeCommands(stream);
+			gameUpdate();
 		}
 	}
 	/**
@@ -35,12 +39,20 @@ public abstract class TextGame<T extends ITextTokenType, P extends IMob> {
 	protected ITextTokenStream<T> parseInput(String input){
 		return parser.parseText(input);
 	}
-	protected abstract void execumeCommands(ITextTokenStream<T> stream);
+	/**
+	 * Execute the given command
+	 * @param stream
+	 */
+	protected abstract void executeCommands(ITextTokenStream<T> stream);
 	/**
 	 * Returns true if there is a condition where the gameloop should exit. Returns if player.isDead() or gameOver flag set.
-	 * @return 
+	 * @return true if game over
 	 */
 	public boolean isGameOver(){
 		return player.isDead() || gameOver;
 	}
+	/**
+	 * Called after {@link #executeCommands(ITextTokenStream)} in game loop.
+	 */
+	protected abstract void gameUpdate();
 }

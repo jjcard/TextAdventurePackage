@@ -59,7 +59,7 @@ configurations {
 }
 
 task wrapper(type: Wrapper){
-	gradleVersion = '2.9'
+	gradleVersion = '2.10'
 }
 pmd {
 	ruleSets = ["java-basic", "java-naming", "java-braces", "java-design", "java-unnecessary"]
@@ -87,9 +87,9 @@ repositories {
 	mavenCentral()
 }
 dependencies {
-	compile ([group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.6.1"],
-			 [group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.6.1"],
-			 [group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.6.1"])
+	compile ([group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.6.4"],
+			 [group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.6.4"],
+			 [group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.6.4"])
 			 
-	testCompile 'junit:junit:4.11'
+	testCompile 'junit:junit:4.2'
 }

@@ -220,7 +220,10 @@ public class Location implements ILocation {
 		}
 		return re.toString();
 	}
-	
+	/**
+	 * Checks that the name and description are equals. uses {@link ObjectsUtil#equalKeys(Map, Map)}
+	 * to check if the inventory, roomMobs, and exits are equal.
+	 */
 	public boolean equals(Object o){
 		if (o == this){
 			return true;
@@ -234,10 +237,13 @@ public class Location implements ILocation {
 			if (notEqual(description, l.description)){
 				return false;
 			}
-			if (notEqual(inventory, l.inventory)){
+			if (ObjectsUtil.notEqualKeys(inventory, l.inventory)){
 				return false;
 			}
-			if (notEqual(roomMob, l.roomMob)){
+			if (ObjectsUtil.notEqualKeys(roomMob, l.roomMob)){
+				return false;
+			}
+			if (ObjectsUtil.notEqualKeys(exits, l.exits)){
 				return false;
 			}
 			return true;
@@ -245,7 +251,12 @@ public class Location implements ILocation {
 			return false;
 		}
 	}
+
 	public int hashCode(){
-		return ObjectsUtil.getHash( ObjectsUtil.DEFAULT_PRIME, name, description, inventory, roomMob);
+		int start = 1;
+		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getkeysHash(exits);
+		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getkeysHash(inventory);
+		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getkeysHash(roomMob);
+		return ObjectsUtil.getHashWithStart(start, ObjectsUtil.DEFAULT_PRIME, name, description);
 	}
 }

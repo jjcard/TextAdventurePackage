@@ -54,7 +54,24 @@ public final class ObjectsUtil {
 		}
 		return a.size() == b.size();
 	}
-	
+	public static <K> boolean notEqualKeys(Map<String, K> a, Map<String, K> b){
+		return !equalKeys(a, b);
+	}
+	/**
+	 * If both maps are non-null, checks if the key set on each is the same
+	 * @param a
+	 * @param b
+	 * @return true if key sets of maps are the same
+	 */
+	public static <K> boolean equalKeys(Map<String, K> a, Map<String, K> b){
+		if (a == b){
+			return true;
+		}
+		if (a == null|| b == null){
+			return false;
+		}
+		return a.keySet().equals(b.keySet());
+	}
 	public static int getHash(final int prime, Object...objects){
 		return getHashWithStart(1, prime, objects);
 	}
@@ -73,6 +90,13 @@ public final class ObjectsUtil {
 		}
 		
 		return hash;
+	}
+	public static int getkeysHash(Map<String, ?> a){
+		if (a == null){
+			return 0;
+		}
+		return a.keySet().hashCode();
+		
 	}
 	/**
 	 * throws exception if the argument is null with the given string as detail 

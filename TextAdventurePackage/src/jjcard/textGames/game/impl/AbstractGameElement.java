@@ -112,7 +112,6 @@ public abstract class AbstractGameElement implements IGameElement{
 		}
 	}
 	public int hashCode(){
-		final int prime = 23;		
-		return ObjectsUtil.getHash(prime, standardName, roomDescription);
+		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, standardName, roomDescription);
 	}
 }

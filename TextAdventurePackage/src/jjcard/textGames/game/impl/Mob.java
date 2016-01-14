@@ -505,7 +505,7 @@ public class Mob extends AbstractGameElement implements IMob{
 			if (hostile != m.hostile){
 				return false;
 			}
-			if (ObjectsUtil.notEqual(this.inventory, m.inventory)){
+			if (ObjectsUtil.notEqualKeys(this.inventory, m.inventory)){
 				return false;
 			}
 			if (ObjectsUtil.notEqual(this.armour, m.armour)){
@@ -526,9 +526,11 @@ public class Mob extends AbstractGameElement implements IMob{
 		}
 	}
 	public int hashCode(){
-		return ObjectsUtil.getHashWithStart(super.hashCode(),
+		int start = super.hashCode();
+		start = start * ObjectsUtil.DEFAULT_PRIME + ObjectsUtil.getkeysHash(inventory);
+		return ObjectsUtil.getHashWithStart(start,
 				ObjectsUtil.DEFAULT_PRIME, description, attack, defense,
-				curHealth, maxHealth, money, hostile, inventory, armour,
+				curHealth, maxHealth, money, hostile, armour,
 				weapon, statusList, checkHealth);
 	}
 	public String inventoryToString(){

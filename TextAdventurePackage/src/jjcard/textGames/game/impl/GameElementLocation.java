@@ -257,16 +257,13 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 			if (notEqual(roomMob, l.roomMob)){
 				return false;
 			}
-			if (notEqual(exits, l.exits)){
-				return false;
-			}
 			return true;
 		} else {
 			return false;
 		}
 	}
 	public int hashCode(){
-		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, inventory, roomMob, exits);
+		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, inventory, roomMob);
 	}
 
 

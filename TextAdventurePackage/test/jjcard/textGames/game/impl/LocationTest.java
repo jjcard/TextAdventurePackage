@@ -39,7 +39,24 @@ public class LocationTest {
 		hallway.addItem(item);
 		hallway.addMob(mob);
 	}
-
+	@Test
+	public void equalsTest(){
+		assertFalse(hallway.equals(null));
+		assertFalse(hallway.equals("hallway"));
+		assertTrue(hallway.equals(hallway));
+		
+		assertFalse(hallway.equals(room));
+		Location blank = new Location();
+		Location room = new Location("A room", "no not THE room");
+		Location room2 = new Location("A room", "no not THE room");
+		
+		assertTrue(room.equals(room2));
+		assertTrue(room2.equals(room));
+		assertFalse(room2.equals(blank));
+		
+//		room.addItem(item);
+		
+	}
 	@Test
 	public void getDirectionTest() {
 		assertEquals(hallway.getExitLocation("North"), room);

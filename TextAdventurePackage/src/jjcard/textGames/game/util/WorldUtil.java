@@ -14,7 +14,7 @@ import jjcard.textGames.game.parser.impl.BasicTextTokenType;
  * basic world Util that contains locations and player and operations for commands
  * 
  * @author jjcard
- * 
+ *  @param <P> the player class
  */
 public class WorldUtil<P extends IMob>{
 	private ILocation current;
@@ -297,7 +297,6 @@ public class WorldUtil<P extends IMob>{
 		if (current.containsItem(key)) {
 			if (playerGetItem(key)) {
 				current.removeItem(key);
-
 				return ReturnStatus.SUCCESS;
 			} else {
 				return ReturnStatus.FAILURE;
@@ -307,13 +306,16 @@ public class WorldUtil<P extends IMob>{
 			return ReturnStatus.NOT_FOUND;
 		}
 	}
-
+	/**
+	 * Gets the Mob from the current room, checks if it is head, and adds all it's items to the player.
+	 * @param key
+	 * @return SUCCESS if added, FAILURE if mob is still alive, and NOT_FOUND if no mob found
+	 */
 	public ReturnStatus lootAllMob(String key) {
 		if (current.containsMob(key)) {
 			IMob lootM = current.getMob(key);
 			if (lootM.isDead()) {
-				player.addAllItems(current.getMob(key).getInventory());
-				current.getMob(key).removeInventory();
+				player.addAllItems(lootM.removeInventory());
 				return ReturnStatus.SUCCESS;
 			} else {
 				return ReturnStatus.FAILURE;
@@ -325,7 +327,7 @@ public class WorldUtil<P extends IMob>{
 	/**
 	 * Returns number of damage done to mob, or -1 if mob not found
 	 * @param key
-	 * @return
+	 * @return amount of damage done to mob, -1 if mob not found
 	 */
 	public int attackMob(String key) {
 		if (current.containsMob(key)) {

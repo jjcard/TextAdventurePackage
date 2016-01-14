@@ -240,17 +240,12 @@ public class Location implements ILocation {
 			if (notEqual(roomMob, l.roomMob)){
 				return false;
 			}
-			if (ObjectsUtil.notEqualsSize(exits, l.exits)){
-				return false;
-			}
 			return true;
 		} else {
 			return false;
 		}
 	}
 	public int hashCode(){
-		int start = 1;
-		start = start * ObjectsUtil.DEFAULT_PRIME  + exits.size();
-		return ObjectsUtil.getHashWithStart(start, ObjectsUtil.DEFAULT_PRIME, name, description, inventory, roomMob);
+		return ObjectsUtil.getHash( ObjectsUtil.DEFAULT_PRIME, name, description, inventory, roomMob);
 	}
 }

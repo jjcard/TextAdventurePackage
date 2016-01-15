@@ -131,7 +131,7 @@ public class Location implements ILocation {
 	 * @param room
 	 */
 	public IExit addExit(String dir, ILocation room){
-		Exit exit = new Exit.Builder().standardName(dir).location(room).build();
+		Exit exit = new Exit.Builder().name(dir).location(room).build();
 		return MAP_UTIL.addItemToMap(exits, exit);
 	}
 	
@@ -222,7 +222,7 @@ public class Location implements ILocation {
 	}
 	/**
 	 * Checks that the name and description are equals. uses {@link ObjectsUtil#equalKeys(Map, Map)}
-	 * to check if the inventory, roomMobs, and exits are equal.
+	 * when it checks if the inventory, mobs, and exits are equal.
 	 */
 	public boolean equals(Object o){
 		if (o == this){
@@ -251,7 +251,10 @@ public class Location implements ILocation {
 			return false;
 		}
 	}
-
+	/**
+	 * Gets the hash code of values in Location, using {@link ObjectsUtil#getkeysHash(Map)}
+	 * for getting hash of exits, inventory, and mobs
+	 */
 	public int hashCode(){
 		int start = 1;
 		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getkeysHash(exits);

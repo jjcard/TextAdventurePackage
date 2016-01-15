@@ -37,9 +37,9 @@ public class ExitTest {
 	}
 	@Test
 	public void equalsTest(){
-		Exit first = new Exit.Builder().standardName("North").build();
+		Exit first = new Exit.Builder().name("North").build();
 		
-		Exit snd = new Exit.Builder().standardName("North").build();
+		Exit snd = new Exit.Builder().name("North").build();
 		
 		assertEquals(first, snd);
 		
@@ -71,7 +71,7 @@ public class ExitTest {
 		String name = "fsafsd";
 		String locName = "loc1";
 		Location loc = new Location(locName);
-		Exit exit = new Exit.Builder().standardName(name).location(loc).hidden(true).build();
+		Exit exit = new Exit.Builder().name(name).location(loc).hidden(true).build();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ObjectMapper m = new ObjectMapper();
 		m.writeValue(out, exit);

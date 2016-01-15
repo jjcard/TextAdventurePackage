@@ -56,8 +56,8 @@ public class Armour extends Item implements IArmour {
 			super.use(use);
 			return this;
 		}
-		public Builder standardName(String name){
-			super.standardName(name);
+		public Builder name(String name){
+			super.name(name);
 			return this;
 		}
 		public Builder roomDescription(String roomDescrip){

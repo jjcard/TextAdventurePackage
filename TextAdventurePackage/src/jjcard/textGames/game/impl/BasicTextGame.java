@@ -75,7 +75,7 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 	@Override
 	protected void executeCommands(ITextTokenStream<BasicTextTokenType> stream) {
 		TextToken<BasicTextTokenType> object = stream.getFirstObject();
-		String token = object == null ? null : object.getToken();
+		String token = object == null ? null : object.getStandardToken();
 		if (token != null) {
 			if (stream.getVerb() != null){
 				switch (stream.getVerb().getType()) {
@@ -150,7 +150,7 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 	}
 
 	private void lookAt(String token, TextToken<BasicTextTokenType> object) {
-		String info = worldUtil.lookAt(token, object);
+		String info = worldUtil.lookAt(object);
 		if (info == null){
 			output.println("You don't see anything like that");
 		} else {

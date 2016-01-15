@@ -14,20 +14,20 @@ import jjcard.textGames.game.util.ObjectsUtil;
 public class SingleTextDefinition<T extends ITextTokenType> extends AbstractTextDefinition<T> {
 
 	@JsonProperty("standard")
-	private final String standardName;
+	private final String name;
 	@JsonCreator
-	public SingleTextDefinition(@JsonProperty("type")T type, @JsonProperty("standard")String standardName) {
+	public SingleTextDefinition(@JsonProperty("type")T type, @JsonProperty("standard")String name) {
 		super(type);
-		this.standardName = standardName;
+		this.name = name;
 	}
 
 	@Override
 	public String getStandardToken(String token) {
-		return standardName;
+		return name;
 	}
 	
-	public static <T extends ITextTokenType> SingleTextDefinition<T> getInstance(T type, String standardName){
-		return new SingleTextDefinition<T>(type, standardName);
+	public static <T extends ITextTokenType> SingleTextDefinition<T> getInstance(T type, String name){
+		return new SingleTextDefinition<T>(type, name);
 	}
 	
 	public boolean equals(Object o){
@@ -39,12 +39,12 @@ public class SingleTextDefinition<T extends ITextTokenType> extends AbstractText
 		}
 		if (o instanceof SingleTextDefinition<?>){
 			SingleTextDefinition<?> other = (SingleTextDefinition<?>) o;
-			return ObjectsUtil.equals(standardName, other.standardName);
+			return ObjectsUtil.equals(name, other.name);
 		}
 		return false;
 	}
 	public int hashCode(){
-		return ObjectsUtil.getHashWithStart(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, standardName);
+		return ObjectsUtil.getHashWithStart(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, name);
 	}
 
 }

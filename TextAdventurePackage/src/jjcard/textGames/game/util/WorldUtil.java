@@ -59,9 +59,9 @@ public class WorldUtil<P extends IMob>{
 		return current;
 	}
 
-	public String getCurrentExitsDescrip() {
-		return current.getExitsDescriptions();
-	}
+//	public String getCurrentExitsDescrip() {
+//		return current.getExitsDescriptions();
+//	}
 	/**
 	 * Sets the player.
 	 * @param player
@@ -83,19 +83,31 @@ public class WorldUtil<P extends IMob>{
 		}
 		this.current = current;
 	}
-
-	public boolean goDirection(String dir) {
-		if (current.containsExit(dir)) {
-			current = current.getExitLocation(dir);
+	/**
+	 * Sets the current location to the location from the exit with given key
+	 * @param key
+	 * @return if current contains exit and current changed
+	 */
+	public boolean goDirection(String key) {
+		if (current.containsExit(key)) {
+			current = current.getExitLocation(key);
 			return true;
 		}
 		return false;
 	}
-
+	/**
+	 * Gets item with given key from current room
+	 * @param key
+	 * @return
+	 */
 	public IItem roomGetItem(String key) {
 		return current.getItem(key);
 	}
-
+	/**
+	 * Checks to see if the current room contains item with given key
+	 * @param key
+	 * @return
+	 */
 	public boolean roomContainsItem(String key) {
 		return current.containsItem(key);
 	}
@@ -235,8 +247,15 @@ public class WorldUtil<P extends IMob>{
 	public boolean currentContainsExit(String dir) {
 		return current.containsExit(dir);
 	}
-
-	public String lookAt(String key, TextToken<BasicTextTokenType> object) {
+	/**
+	 * Gets the description String depending on key and TokenType.
+	 * First checks if TokenType is ROOM or PLAYER, then checks if
+	 * room's item, room's mob, or player's inventory contain standard token, in that order. 
+	 * @param object
+	 * @return description or info matching object
+	 */
+	public String lookAt(TextToken<BasicTextTokenType> object) {
+		String key = object.getStandardToken();
 		if (object.getType().equals(BasicTextTokenType.ROOM)) {
 			return showCurrentRoom();
 		}

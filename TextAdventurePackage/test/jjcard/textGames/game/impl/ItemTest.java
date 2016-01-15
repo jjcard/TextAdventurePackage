@@ -17,7 +17,7 @@ public class ItemTest {
 
 	@Test
 	public void Itemtest() {
-		Item item = new Item.Builder().standardName("basic item").info("it shows off the true potential of an item...which isn't much").build();
+		Item item = new Item.Builder().name("basic item").info("it shows off the true potential of an item...which isn't much").build();
 		assertEquals("basic item", item.getName());
 		assertEquals("it shows off the true potential of an item...which isn't much", item.getInfo());
 		
@@ -42,7 +42,7 @@ public class ItemTest {
 	}
 	@Test
 	public void WeaponTest(){
-		Weapon weapon = new Weapon.Builder().standardName("sword").info("pointy end").attack(2).build();
+		Weapon weapon = new Weapon.Builder().name("sword").info("pointy end").attack(2).build();
 		assertEquals(weapon.getName(), "sword");
 		assertEquals(weapon.getInfo(), "pointy end");
 		assertEquals(weapon.getAttack(), 2);
@@ -62,7 +62,7 @@ public class ItemTest {
 	public void jsonTest() throws JsonGenerationException, JsonMappingException, IOException{
 		int cost = 55;
 		String name = "fsafsd";
-		Item item = new Item.Builder().standardName(name).cost(cost).build();
+		Item item = new Item.Builder().name(name).cost(cost).build();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ObjectMapper m = new ObjectMapper();
 		m.writeValue(out, item);
@@ -79,7 +79,7 @@ public class ItemTest {
 		String name = "chainmail";
 		int def = 100;
 		boolean hidden = false;
-		Armour armour = new Armour.Builder().standardName(name)
+		Armour armour = new Armour.Builder().name(name)
 				.cost(cost).defense(def).hidden(hidden).build();
 		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -103,7 +103,7 @@ public class ItemTest {
 		boolean hidden = false;
 		int critChance = 50;
 		int dur = 10;
-		Weapon weapon = new Weapon.Builder().standardName(name)
+		Weapon weapon = new Weapon.Builder().name(name)
 				.cost(cost).attack(attack).critChance(critChance).durability(dur).hidden(hidden).build();
 		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();

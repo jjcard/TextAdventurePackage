@@ -17,7 +17,7 @@ public abstract class AbstractGameElement implements IGameElement{
 	@JsonProperty("roomDescrip")
 	private String roomDescription;
 	@JsonProperty("name")
-	private final String standardName;
+	private final String name;
 	@JsonProperty("valFields")
 	protected boolean validateFields = true;
 	
@@ -32,7 +32,7 @@ public abstract class AbstractGameElement implements IGameElement{
 	 *
 	 */
 	public static class Builder{
-		private String standardName;
+		private String name;
 		private String roomDescription;
 		private boolean validateFields = true;
 		
@@ -43,12 +43,12 @@ public abstract class AbstractGameElement implements IGameElement{
 			//default empty constructer
 		}
 		public Builder(AbstractGameElement element){
-			this.standardName = element.standardName;
+			this.name = element.name;
 			this.roomDescription = element.roomDescription;
 		}
 		@JsonProperty("name")
-		public Builder standardName(String name){
-			this.standardName = name;
+		public Builder name(String name){
+			this.name = name;
 			return  this;
 		}
 		@JsonProperty("roomDescrip")
@@ -69,12 +69,12 @@ public abstract class AbstractGameElement implements IGameElement{
 	}
 	
 	protected AbstractGameElement(Builder builder){
-		this.standardName = builder.standardName;
+		this.name = builder.name;
 		this.roomDescription = builder.roomDescription;
 		this.validateFields = builder.validateFields;
 	}
 	public final String getName(){
-		return standardName;
+		return name;
 	}
 	public String getRoomDescription() {
 		return roomDescription;
@@ -99,7 +99,7 @@ public abstract class AbstractGameElement implements IGameElement{
 		
 		if (object instanceof AbstractGameElement){
 			final AbstractGameElement element = (AbstractGameElement) object;
-			if (ObjectsUtil.notEqual(standardName, element.standardName)){
+			if (ObjectsUtil.notEqual(name, element.name)){
 				return false;
 			}
 			if (ObjectsUtil.notEqual(roomDescription, element.roomDescription)){
@@ -112,6 +112,6 @@ public abstract class AbstractGameElement implements IGameElement{
 		}
 	}
 	public int hashCode(){
-		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, standardName, roomDescription);
+		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, name, roomDescription);
 	}
 }

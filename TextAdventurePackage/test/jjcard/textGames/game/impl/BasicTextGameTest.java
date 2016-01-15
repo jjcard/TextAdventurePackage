@@ -22,10 +22,10 @@ public class BasicTextGameTest {
 	@Before
 	public void setUp(){
 		
-		 player = new Player.Builder().standardName("jjcard").maxHealth(50).health(50).defense(8).attack(5).build();
+		 player = new Player.Builder().name("jjcard").maxHealth(50).health(50).defense(8).attack(5).build();
 		 local = new Location("entry room", "A barren room.");
 		 
-		 Item item = new Item.Builder().standardName("item").build();
+		 Item item = new Item.Builder().name("item").build();
 		 local.addItem(item);
 		 hallway = new Location("hallway","a long hallway with one torch.");
 		local.addExit("NORTH", hallway);
@@ -34,7 +34,7 @@ public class BasicTextGameTest {
 		game.setTextParser(getParser());
 		 
 		 
-		mob = new Mob.Builder().standardName("Goblin").health(10).defense(1).attack(4).build();
+		mob = new Mob.Builder().name("Goblin").health(10).defense(1).attack(4).build();
 		mob.setDescription("You can tell it's a goblin because it's green and broccoli usually doesn't try to kill you.");
 		
 	}
@@ -89,7 +89,7 @@ public class BasicTextGameTest {
 //		assertEquals(ReturnCom.ATTACK_MOB, rc);
 		assertEquals(mob.getHealth(), 6);
 		assertTrue(mob.getStatusList().isEmpty());
-		Item coin = new Item.Builder().standardName("coin").info("a single golden coin").build();
+		Item coin = new Item.Builder().name("coin").info("a single golden coin").build();
 		mob.addItem( coin);
 		
 		assertTrue(mob.containsItem("coin"));
@@ -106,7 +106,7 @@ public class BasicTextGameTest {
 	}
 	@Test
 	public void EquipWorldTest(){
-		Armour wool = new Armour.Builder().standardName("wool").info("its itchness might be a defense").level(0).defense(4).build();
+		Armour wool = new Armour.Builder().name("wool").info("its itchness might be a defense").level(0).defense(4).build();
 		player.addItem( wool);
 		ITextTokenStream<BasicTextTokenType> ck = game.parseInput("equip wool");
 		assertEquals(ck.getVerb().getType(), BasicTextTokenType.EQUIP);
@@ -117,7 +117,7 @@ public class BasicTextGameTest {
 		assertEquals(8 + 4, player.getFullDefense() );
 	
 		
-		Weapon weapon = new Weapon.Builder().standardName("shank").info("it can also be used as a verb").attack(3).build();
+		Weapon weapon = new Weapon.Builder().name("shank").info("it can also be used as a verb").attack(3).build();
 		player.addItem(weapon);
 		ck = game.parseInput("equip shank");
 		assertEquals( BasicTextTokenType.EQUIP, ck.getVerb().getType());

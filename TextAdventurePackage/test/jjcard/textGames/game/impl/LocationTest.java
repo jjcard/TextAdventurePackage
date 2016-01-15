@@ -30,9 +30,9 @@ public class LocationTest {
 	private Item item;
 	@Before
 	public void setUp() throws Exception {
-		mob = new Mob.Builder().standardName("Gelatinous Cube").build();
+		mob = new Mob.Builder().name("Gelatinous Cube").build();
 		hallway = new Location("Hallway", "It's a hallway. What more do you want.");
-		item = new Item.Builder().standardName("vendor trash").info("doesn't do anything").build();
+		item = new Item.Builder().name("vendor trash").info("doesn't do anything").build();
 		room = new Location("A room", "no not THE room");
 		hallway.addExit(Exit.NORTH.getWithLocation(room));
 		room.addExit(Exit.SOUTH_BUILD.location(hallway).build());
@@ -40,22 +40,54 @@ public class LocationTest {
 		hallway.addMob(mob);
 	}
 	@Test
-	public void equalsTest(){
+	public void equalsAndHashcodeTest(){
 		assertFalse(hallway.equals(null));
 		assertFalse(hallway.equals("hallway"));
 		assertTrue(hallway.equals(hallway));
+		assertEquals(hallway.hashCode(), hallway.hashCode());
 		
 		assertFalse(hallway.equals(room));
+		assertFalse(hallway.hashCode() == room.hashCode());
 		Location blank = new Location();
 		Location room = new Location("A room", "no not THE room");
 		Location room2 = new Location("A room", "no not THE room");
 		
 		assertTrue(room.equals(room2));
+		assertEquals(room.hashCode(), room2.hashCode());
 		assertTrue(room2.equals(room));
 		assertFalse(room2.equals(blank));
+		assertFalse(room.hashCode() == blank.hashCode());
 		
-//		room.addItem(item);
+		room.addItem(item);
+		assertFalse(room.equals(room2));
+		assertFalse(room2.equals(room));
+		assertFalse(room.hashCode() == room2.hashCode());
 		
+		room2.addItem(item);
+		assertTrue(room.equals(room2));
+		assertEquals(room.hashCode(), room2.hashCode());
+		assertTrue(room2.equals(room));
+		
+		room.addMob(mob);
+		assertFalse(room.equals(room2));
+		assertFalse(room2.equals(room));
+		assertFalse(room.hashCode() == room2.hashCode());
+		
+		room2.addMob(mob);
+		assertTrue(room.equals(room2));
+		assertEquals(room.hashCode(), room2.hashCode());
+		assertTrue(room2.equals(room));
+		
+		
+		room.addExit(Exit.NORTH.getWithLocation(hallway));
+		assertFalse(room.equals(room2));
+		assertFalse(room2.equals(room));
+		assertFalse(room.hashCode() == room2.hashCode());
+		
+		room2.addExit(Exit.NORTH.getWithLocation(hallway));
+		assertTrue(room.equals(room2));
+		assertEquals(room.hashCode(), room2.hashCode());
+		assertTrue(room2.equals(room));
 	}
 	@Test
 	public void getDirectionTest() {
@@ -84,7 +116,7 @@ public class LocationTest {
 		hallway.addExit("SOUTHERNLY", p);
 		
 		Location s = new Location("Secret Tunnel", "SECRET TUNNEL! SECRET TUNNEL!");
-		Exit secretExit = new Exit.Builder().hidden(true).location(s).standardName("DOWN").build();
+		Exit secretExit = new Exit.Builder().hidden(true).location(s).name("DOWN").build();
 		hallway.addExit(secretExit);
 		
 		String exitsDescrip = hallway.getExitsDescriptions();
@@ -95,7 +127,7 @@ public class LocationTest {
 		assertFalse(exitsDescrip.endsWith(", "));
 		
 		
-		Exit secretExit2 = new Exit.Builder().hidden(true).location(hallway).standardName("UP").build();
+		Exit secretExit2 = new Exit.Builder().hidden(true).location(hallway).name("UP").build();
 		s.addExit(secretExit2);
 		String roomDescrip = s.showRoom();
 		//no non-hidden exits, should not show
@@ -116,9 +148,9 @@ public class LocationTest {
 		String name = "fjksdafjlsd";
 		String descrip = "a white walled testing facility";
 		Map<String, IItem> inventory = new HashMap<>();
-		inventory.put("hello", new Item.Builder().standardName("potato").build());
+		inventory.put("hello", new Item.Builder().name("potato").build());
 		Map<String, IMob> mobs = new HashMap<>();
-		mobs.put("turret", new Mob.Builder().hostile(true).standardName("FrakenTurret").build());
+		mobs.put("turret", new Mob.Builder().hostile(true).name("FrakenTurret").build());
 		Location loc = new Location(name, descrip, inventory, mobs);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ObjectMapper m = new ObjectMapper();

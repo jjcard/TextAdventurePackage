@@ -35,8 +35,8 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		public Builder(AbstractGameElement element){
 			super(element);
 		}
-		public Builder standardName(String name){
-			super.standardName(name);
+		public Builder name(String name){
+			super.name(name);
 			return this;
 		}
 		/**
@@ -159,7 +159,7 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 	 * @return 
 	 */
 	public IExit addExit(String dir, ILocation room){
-		Exit exit = new Exit.Builder().standardName(dir).location(room).build();
+		Exit exit = new Exit.Builder().name(dir).location(room).build();
 		return MAP_UTIL.addItemToMap(exits, exit);
 	}
 	

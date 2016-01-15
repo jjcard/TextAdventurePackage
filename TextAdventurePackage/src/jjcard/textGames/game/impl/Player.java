@@ -35,8 +35,8 @@ public class Player extends Mob implements HasLeveling{
 		public Builder(AbstractGameElement g){
 			super(g);
 		}
-		public Builder standardName(String name){
-			super.standardName(name);
+		public Builder name(String name){
+			super.name(name);
 			return this;
 		}
 		@JsonProperty("lvl")

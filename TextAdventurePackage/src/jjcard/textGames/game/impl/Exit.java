@@ -16,16 +16,16 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 public class Exit extends AbstractGameElement implements IExit {
 
 	
-	public static final Builder NORTH_BUILD = new Exit.Builder().standardName("NORTH");
-	public static final Builder SOUTH_BUILD = new Exit.Builder().standardName("SOUTH");
-	public static final Builder EAST_BUILD = new Exit.Builder().standardName("EAST");
-	public static final Builder WEST_BUILD = new Exit.Builder().standardName("WEST");
-	public static final Builder NORTHEAST_BUILD = new Exit.Builder().standardName("NORTHEAST");
-	public static final Builder NORTHWEST_BUILD = new Exit.Builder().standardName("NORTHWEST");
-	public static final Builder SOUTHEAST_BUILD = new Exit.Builder().standardName("SOUTHEAST");
-	public static final Builder SOUTHWEST_BUILD = new Exit.Builder().standardName("SOUTHWEST");
-	public static final Builder UP_BUILD = new Exit.Builder().standardName("UP");
-	public static final Builder DOWN_BUILD = new Exit.Builder().standardName("DOWN");
+	public static final Builder NORTH_BUILD = new Exit.Builder().name("NORTH");
+	public static final Builder SOUTH_BUILD = new Exit.Builder().name("SOUTH");
+	public static final Builder EAST_BUILD = new Exit.Builder().name("EAST");
+	public static final Builder WEST_BUILD = new Exit.Builder().name("WEST");
+	public static final Builder NORTHEAST_BUILD = new Exit.Builder().name("NORTHEAST");
+	public static final Builder NORTHWEST_BUILD = new Exit.Builder().name("NORTHWEST");
+	public static final Builder SOUTHEAST_BUILD = new Exit.Builder().name("SOUTHEAST");
+	public static final Builder SOUTHWEST_BUILD = new Exit.Builder().name("SOUTHWEST");
+	public static final Builder UP_BUILD = new Exit.Builder().name("UP");
+	public static final Builder DOWN_BUILD = new Exit.Builder().name("DOWN");
 	
 	
 	public static final Exit NORTH = NORTH_BUILD.build();
@@ -75,8 +75,8 @@ public class Exit extends AbstractGameElement implements IExit {
 		public Builder(AbstractGameElement element){
 			super(element);
 		}
-		public Builder standardName(String name){
-			super.standardName(name);
+		public Builder name(String name){
+			super.name(name);
 			return this;
 		}
 		public Builder roomDescription(String roomDescrip){

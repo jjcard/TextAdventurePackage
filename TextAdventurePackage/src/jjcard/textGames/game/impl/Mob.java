@@ -179,8 +179,8 @@ public class Mob extends AbstractGameElement implements IMob{
 			statusList.add(status);
 			return this;
 		}
-		public Builder standardName(String name){
-			super.standardName(name);
+		public Builder name(String name){
+			super.name(name);
 			return this;
 		}
 		public Builder roomDescription(String roomDescrip){
@@ -476,14 +476,11 @@ public class Mob extends AbstractGameElement implements IMob{
 			return true;
 		}
 		if (o instanceof Mob){
+			if (!super.equals(o)){
+				return false;
+			}
 			Mob m = (Mob) o;
-			
-			if (ObjectsUtil.notEqual(this.getName(), m.getName())){
-				return false;
-			}
-			if (ObjectsUtil.notEqual(getRoomDescription(), m.getRoomDescription())){
-				return false;
-			}
+
 			if (ObjectsUtil.notEqual(this.description, m.description)){
 				return false;
 			}
@@ -517,9 +514,6 @@ public class Mob extends AbstractGameElement implements IMob{
 			if (ObjectsUtil.notEqual(this.statusList, m.statusList)){
 				return false;
 			}
-			if (checkHealth != m.checkHealth){
-				return false;
-			}
 			return true;
 		} else {
 			return false;
@@ -531,26 +525,10 @@ public class Mob extends AbstractGameElement implements IMob{
 		return ObjectsUtil.getHashWithStart(start,
 				ObjectsUtil.DEFAULT_PRIME, description, attack, defense,
 				curHealth, maxHealth, money, hostile, armour,
-				weapon, statusList, checkHealth);
+				weapon, statusList);
 	}
 	public String inventoryToString(){
 		return MAP_UTIL.getKeysAsString(inventory);
 		
-	}
-	@JsonIgnore
-	public IArmour setArmour(String a){
-		IItem ar = getItem(a);
-		if (ar != null && ar instanceof IArmour){
-			return setArmour((IArmour) ar);
-		}
-		return null;
-	}
-	@JsonIgnore
-	public IWeapon setWeapon(String a){
-		IItem ar = getItem(a);
-		if (ar instanceof Weapon){
-			return setWeapon( (Weapon) ar);
-		}
-		return null;
 	}
 }

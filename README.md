@@ -8,8 +8,8 @@ Includes interfaces and basic implimentation classes for:
   - Mob
   - Player
   - Exit
-  - World
   - Item
   - Weapon
   - Armour
   - Text Parser
+  - Game Loop

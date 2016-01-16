@@ -2,6 +2,7 @@ package jjcard.textGames.game;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 
@@ -57,8 +58,11 @@ public interface ILocation extends Comparable<ILocation>{
 	 * Gets the description for the exits.
 	 * @return
 	 */
+	@JsonIgnore
 	public String getExitsDescriptions();
+	@JsonIgnore
 	public String getInventoryDescriptions();
+	@JsonIgnore
 	public String getMobDescriptions();
 	
 }

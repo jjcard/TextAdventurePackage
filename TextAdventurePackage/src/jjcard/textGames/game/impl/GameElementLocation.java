@@ -3,6 +3,10 @@ package jjcard.textGames.game.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import jjcard.textGames.game.IExit;
 import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.ILocation;
@@ -14,12 +18,16 @@ import jjcard.textGames.game.util.ObjectsUtil;
  * An Implementation of ILocation that is also a GameElement and follows the builder pattern.
  *
  */
+@JsonDeserialize(builder = GameElementLocation.Builder.class)
 public class GameElementLocation extends AbstractGameElement implements ILocation {
 	private static final MapUtil MAP_UTIL = MapUtil.getInstance();
 	private static final char SPACE = ' ';
 	private static final String EXIT_START = "The obvious exits are";
+	@JsonProperty("inventory")
 	private Map<String,IItem> inventory;
+	@JsonProperty("mobs")
 	private Map<String,IMob> roomMob;
+	@JsonProperty("exits")
 	private Map<String,IExit> exits;
 	
 	
@@ -46,6 +54,7 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 			super.roomDescription(roomDescrip);
 			return this;
 		}
+		@JsonProperty("exits")
 		public Builder exits(Map<String,IExit> exits){
 			if (exits == null){
 				this.exits = new HashMap<String,IExit>();
@@ -58,7 +67,8 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 			MAP_UTIL.addItemToMap(exits, exit);
 			return this;
 		}
-		public Builder roomMobs(Map<String,IMob> roomMobs){
+		@JsonProperty("mobs")
+		public Builder mobs(Map<String,IMob> roomMobs){
 			if (roomMobs == null){
 				this.roomMob = new HashMap<String,IMob>();
 			} else {
@@ -70,6 +80,7 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 			MAP_UTIL.addItemToMap(roomMob,mob);
 			return this;
 		}
+		@JsonProperty("inventory")
 		public Builder inventory(Map<String,IItem> inventory){
 			if (inventory == null){
 				this.inventory = new HashMap<String,IItem>();
@@ -97,11 +108,12 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 	/**
 	 * Gets the description aka the room description.
 	 */
+	@JsonIgnore
 	@Override
 	public String getDescription() {
 		return getRoomDescription();
 	}
-
+	@JsonIgnore
 	@Override
 	public void setDescription(String descrip) {
 		setRoomDescription(descrip);
@@ -213,7 +225,7 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		return compare;
 	}
 	public String getExitsDescriptions(){
-		return MAP_UTIL.getKeysAsString(exits);
+		return DescriptionUtil.getConcealableNames(exits, true);
 	}
 	public String getInventoryDescriptions(){
 		return DescriptionUtil.getConceableDescriptions(inventory, true);
@@ -234,8 +246,9 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		if (!roomMob.isEmpty()){
 			re.append(SPACE).append(getMobDescriptions());
 		}
-		if (!exits.isEmpty()){
-			re.append(SPACE).append(EXIT_START).append(SPACE).append(getExitsDescriptions());
+		String exitDescrips;
+		if (!exits.isEmpty() && !(exitDescrips = getExitsDescriptions()).isEmpty()){
+			re.append(SPACE).append(EXIT_START).append(SPACE).append(exitDescrips);
 		}
 		return re.toString();
 	}

@@ -187,15 +187,12 @@ public class Location implements ILocation {
 		}
 		return compare;
 	}
-	@JsonIgnore
 	public String getExitsDescriptions(){
 		return DescriptionUtil.getConcealableNames(exits, true);
 	}
-	@JsonIgnore
 	public String getInventoryDescriptions(){
 		return DescriptionUtil.getConceableDescriptions(inventory, true);
 	}
-	@JsonIgnore
 	public String getMobDescriptions(){
 		return DescriptionUtil.getGameElementDescriptions(roomMob);
 	}

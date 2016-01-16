@@ -145,12 +145,12 @@ public class Mob extends AbstractGameElement implements IMob{
 			this.attack = attack;
 			return this;
 		}
-		@JsonProperty("hostile")
 		/**
 		 * boolean flag for weather the mob is hostile. Default is true.
 		 * @param hostile
 		 * @return this
 		 */
+		@JsonProperty("hostile")
 		public Builder hostile(boolean hostile){
 			this.hostile = hostile;
 			return this;

@@ -43,13 +43,21 @@ public class WorldUtil<P extends IMob>{
 	}
 	/**
 	 * Returns the battle System for {@link #attackMob(String, TextToken)}
-	 * @return
+	 * @return battleSystem
 	 */
 	public IBattleSystem getBattleSystem(){
 		return battleSystem;
 	}
+	/**
+	 * Sets to the given battleSystem, or a BasicBattleSystem if null passed in
+	 * @param battleSystem
+	 */
 	public void setBattleSystem(IBattleSystem battleSystem){
-		this.battleSystem = battleSystem;
+		if (battleSystem == null){
+			battleSystem = new BasicBattleSystem();
+		} else {
+			this.battleSystem = battleSystem;
+		}
 	}
 	public P getPlayer() {
 		return player;
@@ -153,20 +161,26 @@ public class WorldUtil<P extends IMob>{
 	 * and removing the equiped armour from inventory
 	 * @param key
 	 */
-	public void equipArmour(String key){
-		IArmour armour = (IArmour) player.getItem(key);
+	public boolean equipArmour(String key){
+		IArmour armour = (IArmour) player.removeItem(key);
+		if (armour == null){
+			return false;
+		}
 		setPlayerArmour( armour);
-		player.removeItem(key);
+		return true;
 	}
 	/**
 	 * Equips weapon for key to player, calling {@link #setPlayerWeapon(IWeapon)}
 	 * and removing the equiped weapon from inventory
 	 * @param key
 	 */
-	public void equipWeapon(String key){
-		IWeapon weapon = (IWeapon) player.getItem(key);
+	public boolean equipWeapon(String key){
+		IWeapon weapon = (IWeapon) player.removeItem(key);
+		if (weapon == null){
+			return false;
+		}
 		setPlayerWeapon( weapon);
-		player.removeItem(key);
+		return true;
 	}
 //	public ReturnCom unequipItem(String key) {
 //		if (key.equalsIgnoreCase("armour") || key.equalsIgnoreCase("armor")

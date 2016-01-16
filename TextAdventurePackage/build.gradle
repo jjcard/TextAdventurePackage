@@ -75,7 +75,7 @@ tasks.withType(FindBugs) {
 		html.enabled = true
 	}
  }
- jacocoTestReport {
+ jacocoTestReport {//run with gradlew test jacocoTestReport
 	reports {
 		xml.enabled false
 		csv.enabled false
@@ -91,5 +91,5 @@ dependencies {
 			 [group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.6.4"],
 			 [group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.6.4"])
 			 
-	testCompile 'junit:junit:4.2'
+	testCompile 'junit:junit:4.12'
 }

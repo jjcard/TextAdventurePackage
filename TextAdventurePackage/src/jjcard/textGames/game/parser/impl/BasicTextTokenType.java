@@ -19,12 +19,12 @@ public enum BasicTextTokenType implements ITextTokenType {
 	private final String[] defaultWords;
 	private final int length;
 	
-	BasicTextTokenType(boolean isObject, String...defaultWords){
+	private BasicTextTokenType(boolean isObject, String...defaultWords){
 		this.isObject = isObject;
 		this.defaultWords = defaultWords;
 		this.length = defaultWords.length;
 	}
-	BasicTextTokenType(){
+	private BasicTextTokenType(){
 		this(true);
 	}
 	

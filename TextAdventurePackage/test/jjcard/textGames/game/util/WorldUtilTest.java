@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-
+import static jjcard.textGames.game.util.WorldUtil.ReturnStatus.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -70,12 +70,12 @@ public class WorldUtilTest {
 		
 		assertFalse(util.getPlayer().getInventory().isEmpty());
 		
-		assertFalse(util.equipArmour("A misspelled preference"));
+		assertEquals(NOT_FOUND, util.equipArmour("A misspelled preference"));
 		
 		assertNull(util.getPlayer().getArmour());
 		assertTrue(util.getPlayer().containsItem(armourName));
 		
-		assertTrue(util.equipArmour(armourName));
+		assertEquals(SUCCESS, util.equipArmour(armourName));
 		assertNotNull(util.getPlayer().getArmour());
 		assertEquals(armour, util.getPlayer().getArmour());
 		assertFalse(util.getPlayer().containsItem(armourName));
@@ -86,7 +86,7 @@ public class WorldUtilTest {
 				.roomDescription("If you are always testing, then you have nothing to worry about").defense(19).build();
 		util.getPlayer().addItem(armour2);
 		
-		assertTrue(util.equipArmour("continuous integration"));
+		assertEquals(SUCCESS, util.equipArmour("continuous integration"));
 		assertNotNull(util.getPlayer().getArmour());
 		assertEquals(armour2, util.getPlayer().getArmour());
 		assertTrue(util.getPlayer().containsItem(armourName));
@@ -103,12 +103,12 @@ public class WorldUtilTest {
 		
 		assertFalse(util.getPlayer().getInventory().isEmpty());
 		
-		assertFalse(util.equipWeapon("Coding while tired"));
+		assertEquals(NOT_FOUND, util.equipWeapon("Coding while tired"));
 		
 		assertNull(util.getPlayer().getWeapon());
 		assertTrue(util.getPlayer().containsItem(weaponName));
 		
-		assertTrue(util.equipWeapon(weaponName));
+		assertEquals(SUCCESS, util.equipWeapon(weaponName));
 		assertNotNull(util.getPlayer().getWeapon());
 		assertEquals(weapon, util.getPlayer().getWeapon());
 		assertFalse(util.getPlayer().containsItem(weaponName));
@@ -119,7 +119,7 @@ public class WorldUtilTest {
 				.roomDescription("If you are always deploying, bugs will barely matter").attack(19).build();
 		util.getPlayer().addItem(weapon2);
 		
-		assertTrue(util.equipWeapon("continuous integration"));
+		assertEquals(SUCCESS, util.equipWeapon("continuous integration"));
 		assertNotNull(util.getPlayer().getWeapon());
 		assertEquals(weapon2, util.getPlayer().getWeapon());
 		assertTrue(util.getPlayer().containsItem(weaponName));

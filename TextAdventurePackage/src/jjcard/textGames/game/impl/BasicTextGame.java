@@ -106,6 +106,9 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 				case INFO:
 					 info(token, object);
 					 break;
+				case QUIT:
+					quitGame();
+					break;
 				default:
 					return;
 				}				
@@ -126,6 +129,12 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 			return;
 		}
 		
+	}
+	/**
+	 * Sets gameOver to true
+	 */
+	protected void quitGame() {
+		gameOver = true;
 	}
 
 	private void equipItem(String token, TextToken<BasicTextTokenType> object) {
@@ -149,7 +158,7 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 		
 	}
 
-	private void lookAt(String token, TextToken<BasicTextTokenType> object) {
+	protected void lookAt(String token, TextToken<BasicTextTokenType> object) {
 		String info = worldUtil.lookAt(object);
 		if (info == null){
 			output.println("You don't see anything like that");
@@ -159,7 +168,7 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 		
 	}
 
-	private void getItemFromRoom(String token, TextToken<BasicTextTokenType> object) {
+	protected void getItemFromRoom(String token, TextToken<BasicTextTokenType> object) {
 		ReturnStatus re = worldUtil.getItemFromRoom(token);
 		
 		if (ReturnStatus.SUCCESS.equals(re)){
@@ -172,7 +181,7 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 		
 	}
 
-	private void unequipItem(String token, TextToken<BasicTextTokenType> object) {
+	protected void unequipItem(String token, TextToken<BasicTextTokenType> object) {
 		if (token.equalsIgnoreCase("armour") || token.equalsIgnoreCase("armor")
 				|| player.isKeyforArmour(token)) {
 			if (worldUtil.unequipArmour()){
@@ -192,7 +201,7 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 		
 	}
 
-	private void info(String token, TextToken<BasicTextTokenType> object) {
+	protected void info(String token, TextToken<BasicTextTokenType> object) {
 		switch (object.getType()){
 		case INVENTORY:
 			if (player.getInventory().isEmpty()) {
@@ -229,7 +238,7 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 		
 	}
 
-	private void lootAllMob(String token, TextToken<BasicTextTokenType> object) {
+	protected void lootAllMob(String token, TextToken<BasicTextTokenType> object) {
 		ReturnStatus re = worldUtil.lootAllMob(token);
 		if (ReturnStatus.SUCCESS.equals(re)){
 			output.println(token + "'s items added");
@@ -240,7 +249,7 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 		}
 	}
 
-	private void attackMob(String token, TextToken<BasicTextTokenType> object) {
+	protected void attackMob(String token, TextToken<BasicTextTokenType> object) {
 		int damageDone = worldUtil.attackMob(token);
 		if (damageDone != -1){
 			
@@ -257,10 +266,18 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 		
 	}
 
-
+	public boolean isGameOver(){
+		return super.isGameOver() || player.isDead();
+	}
 	@Override
 	protected void gameUpdate() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void endCleanUp() {
+		output.print("Goodbye");
 		
 	}
 

@@ -20,14 +20,29 @@ public class WorldUtil<P extends IMob>{
 	private ILocation current;
 	private P player;
 	private IBattleSystem battleSystem = new BasicBattleSystem();
-	
+	/**
+	 * Generic enum response used in place of a boolean.
+	 * If just success/failure wanted, call {@link #isSuccess()} on the ReturnStatus.
+	 *
+	 */
 	public static enum ReturnStatus{
-		SUCCESS, FAILURE, NOT_FOUND
+		SUCCESS(true), FAILURE(false), NOT_FOUND(false);
+		private final boolean success;
+		private ReturnStatus(boolean success){
+			this.success = success;
+		}
+		/**
+		 * call when simple boolean response is needed.
+		 * @return true if is {@link #SUCCESS}, false otherwise
+		 */
+		public boolean isSuccess(){
+			return success;
+		}
 	}
 	/**
 	 * 
 	 * @param current the current location. Must be non-null
-	 * @param player
+	 * @param player. Must be non-null
 	 * @throws NullPointerException if the <code>current</code> argument or <code>player</code> argument is <code>null</code>
 	 */
 	public WorldUtil(ILocation current, P player) throws NullPointerException{
@@ -158,29 +173,40 @@ public class WorldUtil<P extends IMob>{
 //	}
 	/**
 	 * Equips armour for key to player, calling {@link #setPlayerArmour(IArmour)}
-	 * and removing the equiped armour from inventory
+	 * and removing the equipped armour from inventory
 	 * @param key
+	 * @return SUCCESS if player contains item of that armour, NOT_FOUND if player does not,
+	 * and FAILURE if item is not a armour
 	 */
-	public boolean equipArmour(String key){
-		IArmour armour = (IArmour) player.removeItem(key);
-		if (armour == null){
-			return false;
+	public ReturnStatus equipArmour(String key){
+		IItem item =  player.removeItem(key);
+		if (item == null){
+			return ReturnStatus.NOT_FOUND;
+		} else if (!(item instanceof IArmour)){
+			return ReturnStatus.FAILURE;
 		}
+		IArmour armour = (IArmour) item;
 		setPlayerArmour( armour);
-		return true;
+		return ReturnStatus.SUCCESS;
 	}
 	/**
 	 * Equips weapon for key to player, calling {@link #setPlayerWeapon(IWeapon)}
-	 * and removing the equiped weapon from inventory
+	 * and removing the equipped weapon from inventory
 	 * @param key
+	 * @return SUCCESS if player contains item of that weapon, NOT_FOUND if player does not,
+	 * and FAILURE if item is not a weapon
 	 */
-	public boolean equipWeapon(String key){
-		IWeapon weapon = (IWeapon) player.removeItem(key);
-		if (weapon == null){
-			return false;
+	public ReturnStatus equipWeapon(String key){
+		IItem item =  player.removeItem(key);
+		if (item == null){
+			return ReturnStatus.NOT_FOUND;
+		} else if (!(item instanceof IWeapon)){
+			return ReturnStatus.FAILURE;
 		}
+		
+		IWeapon weapon = (IWeapon) item;
 		setPlayerWeapon( weapon);
-		return true;
+		return ReturnStatus.SUCCESS;
 	}
 //	public ReturnCom unequipItem(String key) {
 //		if (key.equalsIgnoreCase("armour") || key.equalsIgnoreCase("armor")

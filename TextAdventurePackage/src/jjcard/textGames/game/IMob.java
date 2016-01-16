@@ -3,6 +3,8 @@ package jjcard.textGames.game;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public interface IMob extends IGameElement{
 
 	public String getDescription();
@@ -30,9 +32,11 @@ public interface IMob extends IGameElement{
 	public boolean removeStatus(IStatus status);
 	
 	public String inventoryToString();
+	@JsonIgnore
 	public String getWeaponKey();
 	public boolean isKeyForWeapon(String key);
 	public boolean isKeyforArmour(String key);
+	@JsonIgnore
 	public String getArmourKey();
 	
 	/**
@@ -40,7 +44,7 @@ public interface IMob extends IGameElement{
 	 * @return
 	 */
 	public IWeapon removeWeapon();
-	
+	@JsonIgnore
 	public boolean isDead();
 	
 	public boolean containsItem(String key);
@@ -55,11 +59,13 @@ public interface IMob extends IGameElement{
 	 * gets attack plus any attack bonus
 	 * @return
 	 */
+	@JsonIgnore
 	public int getFullAttack();
 	/**
 	 *  gets defense plus any bonus
 	 * @return
 	 */
+	@JsonIgnore
 	public int getFullDefense();
 	public IWeapon setWeapon(IWeapon weapon);
 	public IArmour setArmour( IArmour armour);

@@ -367,7 +367,7 @@ public class Mob extends AbstractGameElement implements IMob{
 	 * gets attack plus any bonuses
 	 * @return
 	 */
-	@JsonIgnore
+	
 	public int getFullAttack(){
 		return attack + getWeaponBonus();
 	}
@@ -391,7 +391,6 @@ public class Mob extends AbstractGameElement implements IMob{
 	 * gets defense plus any bonus
 	 * @return
 	 */
-	@JsonIgnore
 	public int getFullDefense(){
 		return defense + getArmourBonus();
 	}
@@ -445,7 +444,6 @@ public class Mob extends AbstractGameElement implements IMob{
 		weapon = null;
 		return re;
 	}
-	@JsonIgnore
 	public String getArmourKey(){
 		return armour == null? null: armour.getName();
 	}
@@ -466,7 +464,6 @@ public class Mob extends AbstractGameElement implements IMob{
 	public boolean isKeyForWeapon(String key){
 		return isKeyForItem(key, weapon);
 	}
-	@JsonIgnore
 	public String getWeaponKey(){
 		return weapon == null? null: weapon.getName();
 	}

@@ -5,12 +5,17 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+
+
 import static jjcard.textGames.game.util.WorldUtil.ReturnStatus.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.impl.Armour;
+import jjcard.textGames.game.impl.Item;
 import jjcard.textGames.game.impl.Location;
+import jjcard.textGames.game.impl.Mob;
 import jjcard.textGames.game.impl.Player;
 import jjcard.textGames.game.impl.Weapon;
 
@@ -92,6 +97,15 @@ public class WorldUtilTest {
 		assertTrue(util.getPlayer().containsItem(armourName));
 		assertFalse(util.getPlayer().getInventory().isEmpty());
 		assertTrue(util.getPlayer().containsItem(armourName));
+		
+		//equipping non-armour to armour slot
+		String weaponName = "The Rubber duck";
+		Weapon weapon = new Weapon.Builder().name(weaponName)
+				.roomDescription("Does a surprising amount of work").attack(44).build();
+		util.getPlayer().addItem(weapon);
+		
+		assertEquals(FAILURE, util.equipArmour(weaponName));
+		assertTrue(util.getPlayer().containsItem(weaponName));
 	}
 	@Test
 	public void equipWeaponTest(){
@@ -125,6 +139,16 @@ public class WorldUtilTest {
 		assertTrue(util.getPlayer().containsItem(weaponName));
 		assertFalse(util.getPlayer().getInventory().isEmpty());
 		assertTrue(util.getPlayer().containsItem(weaponName));
+		
+		
+		//equipping a non-weapon
+		String armourName = "QA Confidence Armour";
+		Armour armour = new Armour.Builder().name(armourName)
+				.roomDescription("The protection of adequate test coverage").defense(44).build();
+		util.getPlayer().addItem(armour);
+		
+		assertEquals(FAILURE, util.equipWeapon(armourName));
+		assertTrue(util.getPlayer().containsItem(armourName));
 	}
 	@Test
 	public void unequipWeaponTest(){
@@ -155,5 +179,32 @@ public class WorldUtilTest {
 		assertTrue(util.unequipArmour());
 		assertFalse(util.getPlayer().getInventory().isEmpty());
 		assertTrue(util.getPlayer().containsItem(armourName));
+	}
+	@Test
+	public void lootAllMobTest(){
+		IItem item = new Item.Builder().name("Oil Can").build();
+		Mob mob = new Mob.Builder().name("Mecha-Goblin")
+				.description("It never wondered at all, just made itself Awesome").validateFields(false).addItem(item).health(10)
+				.build();
+		
+		util.getCurrent().addMob(mob);
+		assertTrue(mob.isAlive());
+		assertFalse(mob.isHidden());
+		assertTrue(mob.containsItem("Oil Can"));
+		assertFalse(util.getPlayer().containsItem("Oil Can"));
+		
+		assertEquals(NOT_FOUND, util.lootAllMob("Ghost of Christmas past"));
+		assertFalse(mob.getInventory().isEmpty());
+		
+		//still alive
+		assertEquals(FAILURE, util.lootAllMob("Mecha-Goblin"));
+		assertFalse(mob.getInventory().isEmpty());
+		
+		//He's dead jim
+		mob.setHealth(0);
+		assertFalse(mob.isAlive());
+		assertEquals(SUCCESS, util.lootAllMob("Mecha-Goblin"));
+		assertTrue(mob.getInventory().isEmpty());
+		assertTrue(util.getPlayer().containsItem("Oil Can"));
 	}
 }

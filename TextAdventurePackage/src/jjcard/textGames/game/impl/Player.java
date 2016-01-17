@@ -114,6 +114,10 @@ public class Player extends Mob implements HasLeveling{
 			super.validateFields(validateFields);
 			return this;
 		}
+		public Builder hidden(boolean hidden){
+			super.hidden(hidden);
+			return this;
+		}
 		public Player build(){
 			return new Player(this);
 		}

@@ -179,7 +179,7 @@ public class WorldUtil<P extends IMob>{
 	 * and FAILURE if item is not a armour
 	 */
 	public ReturnStatus equipArmour(String key){
-		IItem item =  player.removeItem(key);
+		IItem item =  player.getItem(key);
 		if (item == null){
 			return ReturnStatus.NOT_FOUND;
 		} else if (!(item instanceof IArmour)){
@@ -187,6 +187,7 @@ public class WorldUtil<P extends IMob>{
 		}
 		IArmour armour = (IArmour) item;
 		setPlayerArmour( armour);
+		player.removeItem(key);
 		return ReturnStatus.SUCCESS;
 	}
 	/**
@@ -197,7 +198,7 @@ public class WorldUtil<P extends IMob>{
 	 * and FAILURE if item is not a weapon
 	 */
 	public ReturnStatus equipWeapon(String key){
-		IItem item =  player.removeItem(key);
+		IItem item =  player.getItem(key);
 		if (item == null){
 			return ReturnStatus.NOT_FOUND;
 		} else if (!(item instanceof IWeapon)){
@@ -206,6 +207,7 @@ public class WorldUtil<P extends IMob>{
 		
 		IWeapon weapon = (IWeapon) item;
 		setPlayerWeapon( weapon);
+		player.removeItem(key);
 		return ReturnStatus.SUCCESS;
 	}
 //	public ReturnCom unequipItem(String key) {
@@ -360,7 +362,6 @@ public class WorldUtil<P extends IMob>{
 			} else {
 				return ReturnStatus.FAILURE;
 			}
-
 		} else {
 			return ReturnStatus.NOT_FOUND;
 		}
@@ -379,7 +380,6 @@ public class WorldUtil<P extends IMob>{
 			} else {
 				return ReturnStatus.FAILURE;
 			}
-
 		}
 		return ReturnStatus.NOT_FOUND;
 	}

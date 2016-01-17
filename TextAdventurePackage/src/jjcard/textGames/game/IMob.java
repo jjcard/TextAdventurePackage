@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public interface IMob extends IGameElement{
+public interface IMob extends ConcealableGameElement{
 
 	public String getDescription();
 	public int getMaxHealth();

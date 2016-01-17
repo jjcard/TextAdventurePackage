@@ -14,8 +14,8 @@ import jjcard.textGames.game.IItem;
 import jjcard.textGames.game.IMob;
 import jjcard.textGames.game.IStatus;
 import jjcard.textGames.game.IWeapon;
-import jjcard.textGames.game.util.ObjectsUtil;
 import jjcard.textGames.game.util.MapUtil;
+import jjcard.textGames.game.util.ObjectsUtil;
 
 /**
  * a class to represent creatures and people.
@@ -48,6 +48,8 @@ public class Mob extends AbstractGameElement implements IMob{
 	private IWeapon weapon;
 	@JsonProperty("chHealth")
 	private final boolean checkHealth;
+	@JsonProperty("hid")
+	private boolean hidden = false;
 	@JsonIgnore
 	private static final MapUtil MAP_UTIL = MapUtil.getInstance();
 	
@@ -64,6 +66,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		private IArmour armour;
 		private IWeapon weapon;
 		private boolean checkHealth = true;
+		private boolean hidden = false;
 		
 		public Builder(){
 			super();
@@ -96,12 +99,12 @@ public class Mob extends AbstractGameElement implements IMob{
 			this.checkHealth = checkHealth;
 			return this;
 		}
-		@JsonProperty("maxHealth")
 		/**
 		 * The Maximum health of the mob. If not set during build time, defaults to value of health.
 		 * @param maxHealth
 		 * @return this
 		 */
+		@JsonProperty("maxHealth")
 		public Builder maxHealth(int maxHealth){
 			this.maxHealth = maxHealth;
 			return this;
@@ -132,7 +135,8 @@ public class Mob extends AbstractGameElement implements IMob{
 			return this;
 		}
 		public Builder addItem(IItem item){
-			this.inventory.put(item.getName(), item);
+//			this.inventory.put(item.getName(), item);
+			MAP_UTIL.addItemToMap(inventory, item);
 			return this;
 		}
 		@JsonProperty("def")
@@ -143,6 +147,11 @@ public class Mob extends AbstractGameElement implements IMob{
 		@JsonProperty("att")
 		public Builder attack(int attack){
 			this.attack = attack;
+			return this;
+		}
+		@JsonProperty("hid")
+		public Builder hidden(boolean hidden){
+			this.hidden = hidden;
 			return this;
 		}
 		/**
@@ -215,6 +224,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		  armour = b.armour;
 		  weapon = b.weapon;
 		  checkHealth = b.checkHealth;
+		  hidden = b.hidden;
 	}
 
 	public String getDescription() {
@@ -527,5 +537,11 @@ public class Mob extends AbstractGameElement implements IMob{
 	public String inventoryToString(){
 		return MAP_UTIL.getKeysAsString(inventory);
 		
+	}
+	public boolean isHidden(){
+		return hidden;
+	}
+	public void setHidden(boolean hidden){
+		this.hidden = hidden;
 	}
 }

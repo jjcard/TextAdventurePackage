@@ -18,6 +18,7 @@ import jjcard.textGames.game.impl.Location;
 import jjcard.textGames.game.impl.Mob;
 import jjcard.textGames.game.impl.Player;
 import jjcard.textGames.game.impl.Weapon;
+import jjcard.textGames.game.util.WorldUtil.ReturnStatus;
 
 public class WorldUtilTest {
 	Location location;
@@ -206,5 +207,11 @@ public class WorldUtilTest {
 		assertEquals(SUCCESS, util.lootAllMob("Mecha-Goblin"));
 		assertTrue(mob.getInventory().isEmpty());
 		assertTrue(util.getPlayer().containsItem("Oil Can"));
+	}
+	@Test
+	public void returnStatusTest(){
+		assertTrue(ReturnStatus.SUCCESS.isSuccess());
+		assertFalse(ReturnStatus.NOT_FOUND.isSuccess());
+		assertFalse(ReturnStatus.FAILURE.isSuccess());
 	}
 }

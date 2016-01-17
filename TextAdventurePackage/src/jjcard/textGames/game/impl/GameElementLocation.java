@@ -21,8 +21,6 @@ import jjcard.textGames.game.util.ObjectsUtil;
 @JsonDeserialize(builder = GameElementLocation.Builder.class)
 public class GameElementLocation extends AbstractGameElement implements ILocation {
 	private static final MapUtil MAP_UTIL = MapUtil.getInstance();
-	private static final char SPACE = ' ';
-	private static final String EXIT_START = "The obvious exits are";
 	@JsonProperty("inventory")
 	private Map<String,IItem> inventory;
 	@JsonProperty("mobs")
@@ -231,26 +229,14 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		return DescriptionUtil.getConceableDescriptions(inventory, true);
 	}
 	public String getMobDescriptions(){
-		return DescriptionUtil.getGameElementDescriptions(roomMob);
+		return DescriptionUtil.getConceableDescriptions(roomMob, true);
 	}
 	/**
 	 * 
 	 * @return room description, description of items and mobs in room, and exits. 
 	 */
 	public String showRoom(){
-		StringBuilder re = new StringBuilder(getRoomDescription());
-		
-		if (!inventory.isEmpty()){
-			re.append(SPACE).append(getInventoryDescriptions());
-		}
-		if (!roomMob.isEmpty()){
-			re.append(SPACE).append(getMobDescriptions());
-		}
-		String exitDescrips;
-		if (!exits.isEmpty() && !(exitDescrips = getExitsDescriptions()).isEmpty()){
-			re.append(SPACE).append(EXIT_START).append(SPACE).append(exitDescrips);
-		}
-		return re.toString();
+		return DescriptionUtil.showRoom(this);
 	}
 	/**
 	 * Checks that the name and description are equals. uses {@link ObjectsUtil#equalKeys(Map, Map)}

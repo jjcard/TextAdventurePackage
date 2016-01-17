@@ -55,13 +55,21 @@ public interface ILocation extends Comparable<ILocation>{
 	 */
 	public String showRoom();
 	/**
-	 * Gets the description for the exits.
+	 * Gets the description for the exits. Must be non-null
 	 * @return
 	 */
 	@JsonIgnore
 	public String getExitsDescriptions();
+	/**
+	 * Gets the description for each item in the inventory. Must be non-null
+	 * @return
+	 */
 	@JsonIgnore
 	public String getInventoryDescriptions();
+	/**
+	 * Gets the description for each mob. Must be non-null
+	 * @return
+	 */
 	@JsonIgnore
 	public String getMobDescriptions();
 	

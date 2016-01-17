@@ -7,9 +7,11 @@ import java.util.Map;
 
 import jjcard.textGames.game.ConcealableGameElement;
 import jjcard.textGames.game.IGameElement;
+import jjcard.textGames.game.ILocation;
 
 public final class DescriptionUtil {
-	private static final char SPACE = ' ';
+	public static final char SPACE = ' ';
+	public static final String DEFAULT_EXIT_START = "The obvious exits are ";
 	private DescriptionUtil(){
 		super(); //all static methods
 	}
@@ -71,6 +73,29 @@ public final class DescriptionUtil {
 			
 		}
 		return re.toString();
+	}
+	public static String showRoom(final ILocation l, final String exitStart){
+		StringBuilder re = new StringBuilder(l.getDescription());
+		String curDescrip;
+		if (!l.getInventory().isEmpty()&& !(curDescrip = l.getInventoryDescriptions()).isEmpty()){
+			re.append(SPACE).append(curDescrip);
+		}
+		if (!l.getMobs().isEmpty()&& !(curDescrip = l.getMobDescriptions()).isEmpty()){
+			re.append(SPACE).append(curDescrip);
+		}
+//		String exitDescrips;
+		if (!l.getExits().isEmpty() && !(curDescrip = l.getExitsDescriptions()).isEmpty()){
+			re.append(SPACE).append(exitStart).append(curDescrip);
+		}
+		return re.toString();
+	}
+	/**
+	 * Calls {@link #showRoom(ILocation, String)} with {@link #DEFAULT_EXIT_START}
+	 * @param l
+	 * @return
+	 */
+	public static String showRoom(final ILocation l){
+		return showRoom(l, DEFAULT_EXIT_START);
 	}
 
 }

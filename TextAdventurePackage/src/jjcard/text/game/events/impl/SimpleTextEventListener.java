@@ -66,7 +66,7 @@ public class SimpleTextEventListener implements ITextEventListener {
 			bfr.close();
 			
 		} else {
-			throw new IOException("String File cannot be found");
+			throw new IOException("String File not found");
 		}
 	}
 	private String formatString(String value, String keyReplace){

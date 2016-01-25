@@ -16,16 +16,18 @@ public final class DescriptionUtil {
 		super(); //all static methods
 	}
 	
-	public static <I extends ConcealableGameElement> String getConcealableNames(Map<String, I> exits, boolean excludeHidden){
-		return getConcealableNames(exits.values(), excludeHidden);
+	public static <I extends ConcealableGameElement> String getConcealableNames(Map<?, I> elements, boolean excludeHidden){
+		return getConcealableNames(elements == null? null: elements.values(), excludeHidden);
 	}
-	public static <I extends ConcealableGameElement> String getConcealableNames(Collection<I> exits, boolean excludeHidden){
+	public static <I extends ConcealableGameElement> String getConcealableNames(Collection<I> elements, boolean excludeHidden){
 		boolean includeHidden = !excludeHidden;
 		StringBuilder re = new StringBuilder();
-		for (ConcealableGameElement e: exits){
-			if (includeHidden || !e.isHidden()){
-				re.append(e.getName()).append(", ");
-			}
+		if (elements != null && !elements.isEmpty()){
+			for (ConcealableGameElement e: elements){
+				if (includeHidden || !e.isHidden()){
+					re.append(e.getName()).append(", ");
+				}
+			}			
 		}
 		if (re.length() > 0){
 			return re.substring(0, re.length() -2);
@@ -33,22 +35,23 @@ public final class DescriptionUtil {
 			return "";
 		}
 	}
-	public static <I extends ConcealableGameElement> List<String> getConcealableNamesList(Map<String, I> exits, boolean excludeHidden){
-		return getConcealableNamesList( exits.values(), excludeHidden);
+	public static <I extends ConcealableGameElement> List<String> getConcealableNamesList(Map<?, I> elements, boolean excludeHidden){
+		return getConcealableNamesList(elements == null? null: elements.values(), excludeHidden);
 	}
-	public static <I extends ConcealableGameElement> List<String> getConcealableNamesList(Collection<I> exits, boolean excludeHidden){
+	public static <I extends ConcealableGameElement> List<String> getConcealableNamesList(Collection<I> elements, boolean excludeHidden){
 		boolean includeHidden = !excludeHidden;
 		List<String> descrips = new LinkedList<String>();
-		for (ConcealableGameElement e: exits){
-			if (includeHidden || !e.isHidden()){
-				descrips.add(e.getName());
-			}
+		if (elements != null){
+			for (ConcealableGameElement e: elements){
+				if (includeHidden || !e.isHidden()){
+					descrips.add(e.getName());
+				}
+			}			
 		}
 		return descrips;
 	}
-	public static <I extends ConcealableGameElement> String getConceableDescriptions(Map<String,I> inventory, boolean excludeHidden){
-		return getConceableDescriptions(inventory.values(), excludeHidden);
-		
+	public static <I extends ConcealableGameElement> String getConceableDescriptions(Map<?,I> inventory, boolean excludeHidden){
+		return getConceableDescriptions(inventory == null? null: inventory.values(), excludeHidden);
 	}
 	public static <I extends ConcealableGameElement> String getConceableDescriptions(Collection<I> inventory, boolean excludeHidden){
 		boolean includeHidden = !excludeHidden;
@@ -83,7 +86,6 @@ public final class DescriptionUtil {
 		if (!l.getMobs().isEmpty()&& !(curDescrip = l.getMobDescriptions()).isEmpty()){
 			re.append(SPACE).append(curDescrip);
 		}
-//		String exitDescrips;
 		if (!l.getExits().isEmpty() && !(curDescrip = l.getExitsDescriptions()).isEmpty()){
 			re.append(SPACE).append(exitStart).append(curDescrip);
 		}

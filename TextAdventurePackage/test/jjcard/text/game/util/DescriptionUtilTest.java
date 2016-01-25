@@ -1,80 +1,262 @@
 package jjcard.text.game.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.junit.Test;
 
+import jjcard.text.game.ConcealableGameElement;
 import jjcard.text.game.IItem;
 import jjcard.text.game.IMob;
 import jjcard.text.game.impl.Exit;
 import jjcard.text.game.impl.Item;
 import jjcard.text.game.impl.Location;
 import jjcard.text.game.impl.Mob;
-import jjcard.text.game.util.DescriptionUtil;
 
 public class DescriptionUtilTest {
 
 	@Test
 	public void showRoomExitsTest() {
 		Location hallway = new Location("Hallway", "It's a hallway. What more do you want.");
-		
+
 		Location s = new Location("Secret Tunnel", "SECRET TUNNEL! SECRET TUNNEL!");
 		Exit secretExit = new Exit.Builder().hidden(true).location(s).name("DOWN").build();
 		hallway.addExit(secretExit);
-		
+
 		Exit secretExit2 = new Exit.Builder().hidden(true).location(hallway).name("UP").build();
 		s.addExit(secretExit2);
 		String roomDescrip = DescriptionUtil.showRoom(s);
-		//no non-hidden exits, should not show
+		// no non-hidden exits, should not show
 		assertFalse(roomDescrip, roomDescrip.contains(DescriptionUtil.DEFAULT_EXIT_START));
-		 roomDescrip = DescriptionUtil.showRoom(hallway);
+		roomDescrip = DescriptionUtil.showRoom(hallway);
 		assertFalse(roomDescrip, roomDescrip.contains(DescriptionUtil.DEFAULT_EXIT_START));
 		assertEquals(1, s.getExits().size());
-		
-		
-		//non-hidden with hidden exits
-		
+
+		// non-hidden with hidden exits
+
 		Location l = new Location("Testing Room 1", "The first testing room");
 		Location p = new Location("Testing room a", "The primary testing room");
 		hallway.addExit("NORTHISH", l);
 		hallway.addExit("SOUTHERNLY", p);
-		
-		 roomDescrip = DescriptionUtil.showRoom(hallway);
-		 assertTrue(roomDescrip, roomDescrip.contains(DescriptionUtil.DEFAULT_EXIT_START));
-		 assertTrue(roomDescrip, roomDescrip.contains("NORTHISH"));
-		 assertTrue(roomDescrip, roomDescrip.contains("SOUTHERNLY"));
-		 assertFalse(roomDescrip, roomDescrip.contains("DOWN"));
+
+		roomDescrip = DescriptionUtil.showRoom(hallway);
+		assertTrue(roomDescrip, roomDescrip.contains(DescriptionUtil.DEFAULT_EXIT_START));
+		assertTrue(roomDescrip, roomDescrip.contains("NORTHISH"));
+		assertTrue(roomDescrip, roomDescrip.contains("SOUTHERNLY"));
+		assertFalse(roomDescrip, roomDescrip.contains("DOWN"));
 	}
+
 	@Test
-	public void showRoomMobTest(){
-		IMob mob = new Mob.Builder().name("Mecha-Goblin").hidden(true).description("It never wondered at all, just made itself Awesome").roomDescription("A globin, It's chrome body shines in the torchlight, not the most stealthy then. ").validateFields(false)
-				.build();
-//		imob = mob;
-		IMob mob2 = new Mob.Builder().name("Flower").validateFields(false).roomDescription("A giant stands, at least partially, in the room. It's kind of hard to miss.")
+	public void showRoomMobTest() {
+		IMob mob = new Mob.Builder().name("Mecha-Goblin").hidden(true)
+				.description("It never wondered at all, just made itself Awesome")
+				.roomDescription("A globin, It's chrome body shines in the torchlight, not the most stealthy then. ")
+				.validateFields(false).build();
+		IMob mob2 = new Mob.Builder().name("Flower").validateFields(false)
+				.roomDescription("A giant stands, at least partially, in the room. It's kind of hard to miss.")
 				.description("A giant, able to crush mountains....he got his name when he was smaller.").build();
-		
+
 		Location hallway = new Location("Hallway", "It's a hallway. What more do you want.");
 		hallway.addMob(mob);
 		hallway.addMob(mob2);
-		
+
 		String roomDescrip = DescriptionUtil.showRoom(hallway);
-		assertFalse(roomDescrip, roomDescrip.contains("A globin, It's chrome body shines in the torchlight, not the most stealthy then. "));
-		assertTrue(roomDescrip, roomDescrip.contains("A giant stands, at least partially, in the room. It's kind of hard to miss."));
-		
+		assertFalse(roomDescrip, roomDescrip
+				.contains("A globin, It's chrome body shines in the torchlight, not the most stealthy then. "));
+		assertTrue(roomDescrip,
+				roomDescrip.contains("A giant stands, at least partially, in the room. It's kind of hard to miss."));
+
 	}
+
 	@Test
-	public void showRoomItemsTest(){
-		Item item = new Item.Builder().name("basic item").info("it shows off the true potential of an item...which isn't much").roomDescription("an item on the floor, it's purpose...none.").build();
-		IItem item2 = new Item.Builder().name("Even smaller item").roomDescription("Now free from the basic item, it still does nothing").hidden(true).build();
-		
+	public void showRoomItemsTest() {
+		Item item = new Item.Builder().name("basic item")
+				.info("it shows off the true potential of an item...which isn't much")
+				.roomDescription("an item on the floor, it's purpose...none.").build();
+		IItem item2 = new Item.Builder().name("Even smaller item")
+				.roomDescription("Now free from the basic item, it still does nothing").hidden(true).build();
+
 		Location hallway = new Location("Hallway", "It's a hallway. What more do you want.");
 		hallway.addItem(item);
 		hallway.addItem(item2);
-		
+
 		String roomDescrip = DescriptionUtil.showRoom(hallway);
-		
+
 		assertFalse(roomDescrip, roomDescrip.contains(item2.getRoomDescription()));
 		assertTrue(roomDescrip, roomDescrip.contains(item.getRoomDescription()));
 	}
-
+	@Test
+	public void getConcealableNamesCollectionTest(){
+		List<ConcealableGameElement> elements = null;//null check
+		String result = DescriptionUtil.getConcealableNames(elements, true);
+		assertTrue(result.isEmpty());
+		result = DescriptionUtil.getConcealableNames(elements, false);
+		assertTrue(result.isEmpty());
+		
+		elements = new LinkedList<ConcealableGameElement>();//empty
+		result = DescriptionUtil.getConcealableNames(elements, true);
+		assertTrue(result.isEmpty());
+		result = DescriptionUtil.getConcealableNames(elements, false);
+		assertTrue(result.isEmpty());
+		
+		elements.add(new Item.Builder().hidden(false).name("TestItem1").build());
+		result = DescriptionUtil.getConcealableNames(elements, true);
+		assertFalse(result.isEmpty());
+		assertEquals("TestItem1", result);
+		result = DescriptionUtil.getConcealableNames(elements, false);
+		assertFalse(result.isEmpty());
+		assertEquals("TestItem1", result);
+		
+		elements.clear();
+		elements.add(new Item.Builder().hidden(true).name("TestItem2").build());
+		result = DescriptionUtil.getConcealableNames(elements, true);
+		assertTrue(result.isEmpty());
+		result = DescriptionUtil.getConcealableNames(elements, false);
+		assertFalse(result.isEmpty());
+		assertEquals("TestItem2", result);
+		
+		
+		elements.add(new Item.Builder().hidden(false).name("TestItem1").build());
+		result = DescriptionUtil.getConcealableNames(elements, true);
+		assertFalse(result.isEmpty());
+		assertEquals("TestItem1", result);
+		result = DescriptionUtil.getConcealableNames(elements, false);
+		assertFalse(result.isEmpty());
+		assertEquals("TestItem2, TestItem1", result);
+	}
+	@Test
+	public void getConcealableNamesMapTest(){
+		Map<String, ConcealableGameElement> elements = null;//null check
+		String result = DescriptionUtil.getConcealableNames(elements, true);
+		assertTrue(result.isEmpty());
+		result = DescriptionUtil.getConcealableNames(elements, false);
+		assertTrue(result.isEmpty());
+		
+		elements = new TreeMap<String, ConcealableGameElement>();//empty
+		result = DescriptionUtil.getConcealableNames(elements, true);
+		assertTrue(result.isEmpty());
+		result = DescriptionUtil.getConcealableNames(elements, false);
+		assertTrue(result.isEmpty());
+		
+		elements.put("TestItem1", new Item.Builder().hidden(false).name("TestItem1").build());
+		result = DescriptionUtil.getConcealableNames(elements, true);
+		assertFalse(result.isEmpty());
+		assertEquals("TestItem1", result);
+		result = DescriptionUtil.getConcealableNames(elements, false);
+		assertFalse(result.isEmpty());
+		assertEquals("TestItem1", result);
+		
+		elements.clear();
+		elements.put("TestItem2", new Item.Builder().hidden(true).name("TestItem2").build());
+		result = DescriptionUtil.getConcealableNames(elements, true);
+		assertTrue(result.isEmpty());
+		result = DescriptionUtil.getConcealableNames(elements, false);
+		assertFalse(result.isEmpty());
+		assertEquals("TestItem2", result);
+		
+		
+		elements.put("TestItem1", new Item.Builder().hidden(false).name("TestItem1").build());
+		result = DescriptionUtil.getConcealableNames(elements, true);
+		assertFalse(result.isEmpty());
+		assertEquals("TestItem1", result);
+		result = DescriptionUtil.getConcealableNames(elements, false);
+		assertFalse(result.isEmpty());
+		assertEquals("TestItem1, TestItem2", result);
+	}
+	@Test
+	public void getConcealableNamesListCollectionTest(){
+		List<ConcealableGameElement> elements = null;//null check
+		List<String> result = DescriptionUtil.getConcealableNamesList(elements, true);
+		assertTrue(result.isEmpty());
+		result = DescriptionUtil.getConcealableNamesList(elements, false);
+		assertTrue(result.isEmpty());
+		
+		elements = new LinkedList<ConcealableGameElement>();//empty
+		result = DescriptionUtil.getConcealableNamesList(elements, true);
+		assertTrue(result.isEmpty());
+		result = DescriptionUtil.getConcealableNamesList(elements, false);
+		assertTrue(result.isEmpty());
+		
+		elements.add(new Item.Builder().hidden(false).name("TestItem1").build());
+		result = DescriptionUtil.getConcealableNamesList(elements, true);
+		assertFalse(result.isEmpty());
+		assertEquals(1, result.size());
+		assertEquals("TestItem1", result.get(0));
+		result = DescriptionUtil.getConcealableNamesList(elements, false);
+		assertFalse(result.isEmpty());
+		assertEquals(1, result.size());
+		assertEquals("TestItem1", result.get(0));
+		
+		elements.clear();
+		elements.add(new Item.Builder().hidden(true).name("TestItem2").build());
+		result = DescriptionUtil.getConcealableNamesList(elements, true);
+		assertTrue(result.isEmpty());
+		result = DescriptionUtil.getConcealableNamesList(elements, false);
+		assertFalse(result.isEmpty());
+		assertEquals(1, result.size());
+		assertEquals("TestItem2", result.get(0));
+		
+		
+		elements.add(new Item.Builder().hidden(false).name("TestItem1").build());
+		result = DescriptionUtil.getConcealableNamesList(elements, true);
+		assertFalse(result.isEmpty());
+		assertEquals(1, result.size());
+		assertEquals("TestItem1", result.get(0));
+		result = DescriptionUtil.getConcealableNamesList(elements, false);
+		assertFalse(result.isEmpty());
+		assertEquals(2, result.size());
+		assertEquals("TestItem2", result.get(0));
+		assertEquals("TestItem1", result.get(1));
+	}
+	@Test
+	public void getConcealableNamesListMapTest(){
+		Map<String, ConcealableGameElement> elements = null;//null check
+		List<String> result = DescriptionUtil.getConcealableNamesList(elements, true);
+		assertTrue(result.isEmpty());
+		result = DescriptionUtil.getConcealableNamesList(elements, false);
+		assertTrue(result.isEmpty());
+		
+		elements = new TreeMap<String, ConcealableGameElement>();//empty
+		result = DescriptionUtil.getConcealableNamesList(elements, true);
+		assertTrue(result.isEmpty());
+		result = DescriptionUtil.getConcealableNamesList(elements, false);
+		assertTrue(result.isEmpty());
+		
+		elements.put("TestItem1", new Item.Builder().hidden(false).name("TestItem1").build());
+		result = DescriptionUtil.getConcealableNamesList(elements, true);
+		assertFalse(result.isEmpty());
+		assertEquals(1, result.size());
+		assertEquals("TestItem1", result.get(0));
+		result = DescriptionUtil.getConcealableNamesList(elements, false);
+		assertFalse(result.isEmpty());
+		assertEquals(1, result.size());
+		assertEquals("TestItem1", result.get(0));
+		
+		elements.clear();
+		elements.put("TestItem2", new Item.Builder().hidden(true).name("TestItem2").build());
+		result = DescriptionUtil.getConcealableNamesList(elements, true);
+		assertTrue(result.isEmpty());
+		result = DescriptionUtil.getConcealableNamesList(elements, false);
+		assertFalse(result.isEmpty());
+		assertEquals(1, result.size());
+		assertEquals("TestItem2", result.get(0));
+		
+		
+		elements.put("TestItem1", new Item.Builder().hidden(false).name("TestItem1").build());
+		result = DescriptionUtil.getConcealableNamesList(elements, true);
+		assertFalse(result.isEmpty());
+		assertEquals(1, result.size());
+		assertEquals("TestItem1", result.get(0));
+		result = DescriptionUtil.getConcealableNamesList(elements, false);
+		assertFalse(result.isEmpty());
+		assertEquals(2, result.size());
+		assertEquals("TestItem1", result.get(0));
+		assertEquals("TestItem2", result.get(1));
+	}
 }

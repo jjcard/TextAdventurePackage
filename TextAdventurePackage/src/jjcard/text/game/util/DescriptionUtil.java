@@ -57,23 +57,31 @@ public final class DescriptionUtil {
 		boolean includeHidden = !excludeHidden;
 		StringBuilder re = new StringBuilder();
 		for(ConcealableGameElement i: inventory){
-			if (includeHidden || (!i.isHidden() && i.getRoomDescription() != null)){
+			if (includeHidden || !i.isHidden() ){
 				re.append(SPACE).append(i.getRoomDescription());
 			}
 		}
 		return re.toString();
 	}
 	
-	public static <I extends IGameElement> String getGameElementDescriptions(Map<String,I> elements){
-		return getGameElementDescriptions(elements.values());
+	public static <I extends IGameElement> String getGameElementDescriptions(Map<?,I> elements){
+		return getGameElementDescriptions(elements == null? null: elements.values());
 	}
 	public static <I extends IGameElement> String  getGameElementDescriptions(Collection<I> elements){
 		StringBuilder re = new StringBuilder();
-		for(IGameElement m: elements){
-			if (m.getRoomDescription() != null){
-				re.append(SPACE).append(m.getRoomDescription());
+		if (elements != null) {
+			boolean first = true;
+			for (IGameElement m : elements) {
+				if (m.getRoomDescription() != null) {
+					if (first){
+						re.append(m.getRoomDescription());
+						first = false;
+					} else {
+						re.append(", ").append(m.getRoomDescription());
+					}
+				}
+
 			}
-			
 		}
 		return re.toString();
 	}

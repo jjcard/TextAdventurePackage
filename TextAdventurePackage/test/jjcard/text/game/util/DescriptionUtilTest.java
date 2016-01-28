@@ -259,4 +259,45 @@ public class DescriptionUtilTest {
 		assertEquals("TestItem1", result.get(0));
 		assertEquals("TestItem2", result.get(1));
 	}
+	@Test
+	public void getGameElementDescriptionsCollectionTest(){
+		List<ConcealableGameElement> elements = null;//null check
+		String result = DescriptionUtil.getGameElementDescriptions(elements);
+		assertTrue(result.isEmpty());
+		
+		elements = new LinkedList<ConcealableGameElement>();//empty
+		result = DescriptionUtil.getGameElementDescriptions(elements);
+		assertTrue(result.isEmpty());
+		
+		elements.add(new Item.Builder().hidden(false).name("TestItem1").roomDescription("TestItem1Descrip1").build());
+		result = DescriptionUtil.getGameElementDescriptions(elements);
+		assertFalse(result.isEmpty());
+		assertEquals("TestItem1Descrip1", result);
+		
+		elements.add(new Item.Builder().hidden(true).name("TestItem2").roomDescription("TestItem1Descrip2").build());
+		result = DescriptionUtil.getGameElementDescriptions(elements);
+		assertFalse(result.isEmpty());
+		assertEquals("TestItem1Descrip1, TestItem1Descrip2", result);
+	}
+	@Test
+	public void getGameElementDescriptionsMapTest(){
+		Map<String, ConcealableGameElement> elements = null;//null check
+		String result = DescriptionUtil.getGameElementDescriptions(elements);
+		assertTrue(result.isEmpty());
+		
+		elements = new TreeMap<String, ConcealableGameElement>();//empty
+		result = DescriptionUtil.getGameElementDescriptions(elements);
+		assertTrue(result.isEmpty());
+		
+		IItem item = new Item.Builder().hidden(false).name("TestItem1").roomDescription("TestItem1Descrip1").build();
+		elements.put(item.getName(), item);
+		result = DescriptionUtil.getGameElementDescriptions(elements);
+		assertFalse(result.isEmpty());
+		assertEquals("TestItem1Descrip1", result);
+		IItem item2 = new Item.Builder().hidden(true).name("TestItem2").roomDescription("TestItem1Descrip2").build();
+		elements.put(item2.getName(), item2);
+		result = DescriptionUtil.getGameElementDescriptions(elements);
+		assertFalse(result.isEmpty());
+		assertEquals("TestItem1Descrip1, TestItem1Descrip2", result);
+	}
 }

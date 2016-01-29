@@ -3,10 +3,9 @@ package jjcard.text.game.util;
  import static jjcard.text.game.util.ObjectsUtil.checkArg;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 import jjcard.text.game.IGameElement;
 /**
@@ -89,26 +88,14 @@ public final class MapUtil {
 	public String getKeysAsString(Map<String, ?> map){
 		String keys = map.keySet().toString();
 		return keys.toString().substring(1, keys.length() -1);
-		
 	}
 	
-	public String getKeysAsString(Map<String, ?> map, final String delimiter){
-		Set<String> keySet = map.keySet();
-		if (!keySet.isEmpty()){
-			
-			Iterator<String> keyIter = keySet.iterator();
-			String key = keyIter.next();
-			StringBuilder keysB = new StringBuilder(key);
-			while (keyIter.hasNext()){
-				keysB.append(delimiter).append(keyIter.next());				
-			}
-			
-			return keysB.toString();			
+	public String getKeysAsString(Map<String, ?> map, final String delimiter) {
+		if (map != null && !map.isEmpty()) {
+			return map.keySet().stream().collect(Collectors.joining(delimiter));
 		} else {
 			return "";
 		}
-
-		
 	}
 
 }

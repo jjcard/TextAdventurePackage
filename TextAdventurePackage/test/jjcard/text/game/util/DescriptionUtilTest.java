@@ -300,11 +300,7 @@ public class DescriptionUtilTest {
 		assertFalse(result.isEmpty());
 		assertEquals("TestItem1Descrip1, TestItem1Descrip2", result);
 	}
-	
-	
-	
-	
-	//descrip
+
 	@Test
 	public void getConcealableDescriptionCollectionTest(){
 		List<ConcealableGameElement> elements = null;//null check

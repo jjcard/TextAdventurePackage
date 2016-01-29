@@ -44,7 +44,7 @@ public final class MapUtil {
 	 * @param map
 	 * @return the given map or a new instance if map was null
 	 */
-	public <J, K> Map<J, K> getMapOrNew(Map<J, K> map){
+	public static <J, K> Map<J, K> getMapOrNew(Map<J, K> map){
 		return (map == null)? new HashMap<J, K>() : map; 
 	}
 	/**
@@ -68,7 +68,7 @@ public final class MapUtil {
 		return map.remove(getUppercase(key));
 	}
 	
-	public boolean isKeyForItem(String key, IGameElement item){
+	public static boolean isKeyForItem(String key, IGameElement item){
 
 		if (item == null){
 			return false;
@@ -85,12 +85,12 @@ public final class MapUtil {
 		return s;
 		
 	}
-	public String getKeysAsString(Map<String, ?> map){
+	public static String getKeysAsString(Map<String, ?> map){
 		String keys = map.keySet().toString();
 		return keys.toString().substring(1, keys.length() -1);
 	}
 	
-	public String getKeysAsString(Map<String, ?> map, final String delimiter) {
+	public static String getKeysAsString(Map<String, ?> map, final String delimiter) {
 		if (map != null && !map.isEmpty()) {
 			return map.keySet().stream().collect(Collectors.joining(delimiter));
 		} else {

@@ -425,7 +425,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		return MAP_UTIL.removeItemFromMap(inventory, key);
 	}
 	public void setInventory(Map<String, IItem> inventoryNew){
-		inventory = MAP_UTIL.getMapOrNew(inventoryNew);
+		inventory = MapUtil.getMapOrNew(inventoryNew);
 	}
 	public Map<String, IItem> removeInventory(){
 		Map<String, IItem> returnIn = inventory;
@@ -535,7 +535,7 @@ public class Mob extends AbstractGameElement implements IMob{
 				weapon, statusList);
 	}
 	public String inventoryToString(){
-		return MAP_UTIL.getKeysAsString(inventory);
+		return MapUtil.getKeysAsString(inventory);
 		
 	}
 	public boolean isHidden(){

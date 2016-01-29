@@ -15,25 +15,24 @@ public class MapUtilTest {
 	@Test
 	public void getKeysAsStringCharTest() {
 		Map<String, Object> map = null;
-		MapUtil util = MapUtil.getInstance();
-		String actual = util.getKeysAsString(map, ".");
+		String actual = MapUtil.getKeysAsString(map, ".");
 		assertNotNull(actual);
 		assertTrue(actual.isEmpty());
 		
 		map = new TreeMap<String, Object>();
-		actual = util.getKeysAsString(map, ".");
+		actual = MapUtil.getKeysAsString(map, ".");
 		assertNotNull(actual);
 		assertTrue(actual.isEmpty());
 		
 		
 		map.put("Key1", "value1");
-		actual = util.getKeysAsString(map, ".");
+		actual = MapUtil.getKeysAsString(map, ".");
 		assertNotNull(actual);
 		assertFalse(actual.isEmpty());
 		assertEquals(actual, "Key1");
 		
 		map.put("Key2", "value2");
-		actual = util.getKeysAsString(map, ".");
+		actual = MapUtil.getKeysAsString(map, ".");
 		assertNotNull(actual);
 		assertFalse(actual.isEmpty());
 		assertEquals(actual, "Key1.Key2");

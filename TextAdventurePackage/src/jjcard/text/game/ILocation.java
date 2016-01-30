@@ -46,6 +46,7 @@ public interface ILocation extends Comparable<ILocation>{
 	 * @return
 	 */
 	public ILocation getExitLocation(String dir);
+	public IExit getExit(String dir);
 	public IMob getMob(String key);
 	public IItem getItem(String key);
 	public boolean containsExit(String dir);

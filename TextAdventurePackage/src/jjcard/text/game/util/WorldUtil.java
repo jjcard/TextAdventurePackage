@@ -292,18 +292,27 @@ public class WorldUtil<P extends IMob>{
 	/**
 	 * Gets the description String depending on key and TokenType.
 	 * First checks if TokenType is ROOM or PLAYER, then checks if
-	 * room's item, room's mob, or player's inventory contain standard token, in that order. 
+	 * room's item, room's mob, player's inventory, or room's exits contain standard token, in that order. 
 	 * @param object
 	 * @return description or info matching object
 	 */
 	public String lookAt(TextToken<BasicTextTokenType> object) {
-		String key = object.getStandardToken();
+		
 		if (object.getType().equals(BasicTextTokenType.ROOM)) {
 			return showCurrentRoom();
 		}
 		if (object.getType().equals(BasicTextTokenType.PLAYER)) {
 			return player.getDescription();
 		}
+		return lookAt(object.getStandardToken());
+	}
+	/**
+	 * Gets the description String depending on key.
+	 * Checks if room's item, room's mob, player's inventory or exits contain key, in that order. 
+	 * @param key
+	 * @return description or info matching object
+	 */
+	public String lookAt(String key){
 		if (roomContainsItem(key)) {
 			return current.getItem(key).getInfo();
 		}
@@ -313,9 +322,11 @@ public class WorldUtil<P extends IMob>{
 		if (player.containsItem(key)) {
 			return player.getItem(key).getInfo();
 		}
+		if (currentContainsExit(key)){
+			return  current.getExit(key).getDescription();
+		}
 		return null;
 	}
-
 //	public String info(String key, TextToken<BasicTextTokenType> token) {
 //		
 //		switch (token.getType()){

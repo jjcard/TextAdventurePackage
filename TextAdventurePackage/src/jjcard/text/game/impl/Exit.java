@@ -1,5 +1,6 @@
 package jjcard.text.game.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -151,6 +152,13 @@ public class Exit extends AbstractGameElement implements IExit {
 	public int hashCode(){
 		final int prime = 23;		
 		return ObjectsUtil.getHash(super.hashCode(), prime, location, hidden);
+	}
+	/**
+	 * Returns the Room Description if set, or else the name of the Exit
+	 */
+	@JsonIgnore
+	public String getDescription(){
+		return getRoomDescription() != null? getRoomDescription(): getName();
 	}
 	
 	

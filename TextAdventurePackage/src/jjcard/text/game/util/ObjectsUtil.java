@@ -78,14 +78,11 @@ public final class ObjectsUtil {
 	public static int getHashWithStart(int startingHash, final int prime, Object...objects){
 		int hash = startingHash;
 		
-		if (objects != null){
-			for (Object o: objects){
-				if (o instanceof Object[]){
-					hash = hash * prime + Arrays.hashCode((Object[])o);
-				} else {
-					hash = hash * prime + (o == null? 0: o.hashCode());
-				}
-				
+		for (Object o : objects) {
+			if (o instanceof Object[]) {
+				hash = hash * prime + Arrays.hashCode((Object[]) o);
+			} else {
+				hash = hash * prime + (o == null ? 0 : o.hashCode());
 			}
 		}
 		

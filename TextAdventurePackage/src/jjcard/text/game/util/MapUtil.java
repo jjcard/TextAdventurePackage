@@ -78,12 +78,10 @@ public final class MapUtil {
 		}
 		return false;
 	}
-	private String getUppercase(String s){
-		if (setUppercase){
-			return s.toUpperCase(locale);
-		}
-		return s;
-		
+
+	private String getUppercase(String s) {
+		return setUppercase ? s.toUpperCase(locale) : s;
+
 	}
 	public static String getKeysAsString(Map<String, ?> map){
 		String keys = map.keySet().toString();

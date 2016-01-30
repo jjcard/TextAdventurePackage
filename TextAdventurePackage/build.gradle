@@ -5,7 +5,8 @@ apply plugin: 'findbugs'
 apply plugin: 'jacoco'
 
 
-
+targetCompatibility = JavaVersion.VERSION_1_8 
+sourceCompatibility = JavaVersion.VERSION_1_8
 jar {
 	manifest.attributes provider: 'gradle'
 }

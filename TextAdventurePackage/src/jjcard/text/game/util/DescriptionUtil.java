@@ -53,7 +53,7 @@ public final class DescriptionUtil {
 	 * @see #getConcealableStream(Collection, boolean)
 	 */
 	public static <I extends ConcealableGameElement> String getConcealableNames(Collection<I> elements, boolean excludeHidden){
-		return getConcealableStream(elements, excludeHidden).map(e -> e.getName()).collect(Collectors.joining(COMMA_DELIMINATOR));
+		return getConcealableStream(elements, excludeHidden).map(I::getName).collect(Collectors.joining(COMMA_DELIMINATOR));
 	}
 	/**
 	 * Returns List of element names, filtering out hidden elements if <code>excludeHidden</code> is true
@@ -73,7 +73,7 @@ public final class DescriptionUtil {
 	 * @see #getConcealableStream(Collection, boolean)
 	 */
 	public static <I extends ConcealableGameElement> List<String> getConcealableNamesList(Collection<I> elements, boolean excludeHidden){
-		return getConcealableStream(elements, excludeHidden).map(e -> e.getName()).collect(Collectors.toList());
+		return getConcealableStream(elements, excludeHidden).map(I::getName).collect(Collectors.toList());
 	}
 	/**
 	 * Returns comma separated String of element room descriptions, filtering out hidden elements if <code>excludeHidden</code> is true
@@ -93,7 +93,7 @@ public final class DescriptionUtil {
 	 * @see #getConcealableStream(Collection, boolean)
 	 */
 	public static <I extends ConcealableGameElement> String getConceableDescriptions(Collection<I> elements, boolean excludeHidden){
-		return getConcealableStream(elements, excludeHidden).map(e -> e.getRoomDescription()).collect(Collectors.joining(COMMA_DELIMINATOR));
+		return getConcealableStream(elements, excludeHidden).map(I::getRoomDescription).collect(Collectors.joining(COMMA_DELIMINATOR));
 	}
 	/**
 	 * Return comma separated String of element room descriptions.
@@ -112,7 +112,7 @@ public final class DescriptionUtil {
 		if (elements == null){
 			return EMPTY;
 		}
-		return elements.stream().map(e -> e.getRoomDescription()).collect(Collectors.joining(COMMA_DELIMINATOR));
+		return elements.stream().map(I::getRoomDescription).collect(Collectors.joining(COMMA_DELIMINATOR));
 	}
 	/**
 	 * Returns String containing the description of the <code>location</code> along with it's Inventory, Mob, and Exits Description if they are non-empty.

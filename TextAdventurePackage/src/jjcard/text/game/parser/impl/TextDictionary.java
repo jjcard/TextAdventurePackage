@@ -1,6 +1,9 @@
 package jjcard.text.game.parser.impl;
 
+import static jjcard.text.game.util.ObjectsUtil.checkArg;
+
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -23,6 +26,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 	 */
 	private static final long serialVersionUID = -108288250545705909L;
 	private final boolean automaticCasing;
+	private Locale locale = Locale.getDefault(); 
 
 	public TextDictionary(){
 		this(DEFAULT_AUTOMATIC_CASING);
@@ -60,6 +64,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 	@SafeVarargs
 	public TextDictionary( boolean automaticCasing, ITextDefinition<T>...values){
 		super();
+		this.automaticCasing = automaticCasing;
 		if (values != null){
 			for (ITextDefinition<T> value: values){
 				if (value.getType().defaultWords() != null){
@@ -68,7 +73,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 				
 			}
 		}
-		this.automaticCasing = automaticCasing;
+		
 	}	
 	@SafeVarargs
 	public TextDictionary(T...values){
@@ -77,6 +82,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 	@SafeVarargs
 	public TextDictionary(boolean automaticCasing, T...values){
 		super();
+		this.automaticCasing = automaticCasing;
 		if (values != null){
 			for (T value: values){
 				if (value.defaultWords() != null){
@@ -86,7 +92,15 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 				
 			}
 		}
-		this.automaticCasing = automaticCasing;
+		
+	}
+	/**
+	 * Sets the Locale that is used to change the case of the String keys.
+	 * @param locale
+	 */
+	public void setLocale(Locale locale){
+		checkArg(locale, "locale");
+		this.locale = locale;
 	}
 	/**
 	 * For the given IGameElements, adds the standard name for the element to the map.
@@ -138,10 +152,10 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 		putAll(def, keys);
 	}
 	public ITextDefinition<T> put(String key, ITextDefinition<T> value){
-		return super.put(automaticCasing? key.toLowerCase():key, value);
+		return super.put(automaticCasing? key.toUpperCase(locale):key, value);
 	}
 	public ITextDefinition<T> get(Object key){
-		return super.get(automaticCasing? key.toString().toLowerCase(): key);
+		return super.get(automaticCasing? key.toString().toUpperCase(locale): key);
 	}
 	
 	

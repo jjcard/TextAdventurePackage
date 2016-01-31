@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 
 /**
- * a interface with some basic elements needed for most elements in the game.
- * the name is used to to refer
- * the the object in the game. The names should not be able to changed after creation time, as that can have
+ * An interface with some basic operations needed for most elements in the game.
+ * The name is used to to refer the the object in the game, usually as a key in a map. 
+ * The name should not be able to changed after creation time, as that can have
  * unknown effects on classes that refer to the IGameElement by that name.
  * @author jjcard
  *
@@ -19,10 +19,15 @@ public interface IGameElement {
 	 */
 	public String getName();
 	/**
-	 * Returns a description of the element for if it is in a room.
+	 * Returns a description of the element when the entire room is looked at.
 	 * @return the room description
 	 */
 	public String getRoomDescription();
+	/**
+	 * Returns a description of the element when viewed individually. 
+	 * @return
+	 */
+	public String getViewDescription();
 	
 	
 }

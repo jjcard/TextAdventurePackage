@@ -1,6 +1,7 @@
 package jjcard.text.game.util;
 
 import jjcard.text.game.IArmour;
+import jjcard.text.game.IGameElement;
 import jjcard.text.game.IItem;
 import jjcard.text.game.ILocation;
 import jjcard.text.game.IMob;
@@ -286,15 +287,15 @@ public class WorldUtil<P extends IMob>{
 		}
 	}
 
-	public boolean currentContainsExit(String dir) {
+	public boolean roomContainsExit(String dir) {
 		return current.containsExit(dir);
 	}
 	/**
-	 * Gets the description String depending on key and TokenType.
+	 * Gets the view description String depending on key and TokenType.
 	 * First checks if TokenType is ROOM or PLAYER, then checks if
 	 * room's item, room's mob, player's inventory, or room's exits contain standard token, in that order. 
 	 * @param object
-	 * @return description or info matching object
+	 * @return view description of matching object
 	 */
 	public String lookAt(TextToken<BasicTextTokenType> object) {
 		
@@ -302,28 +303,38 @@ public class WorldUtil<P extends IMob>{
 			return showCurrentRoom();
 		}
 		if (object.getType().equals(BasicTextTokenType.PLAYER)) {
-			return player.getDescription();
+			return player.getViewDescription();
 		}
 		return lookAt(object.getStandardToken());
 	}
 	/**
-	 * Gets the description String depending on key.
+	 * Gets the view description String depending on key.
 	 * Checks if room's item, room's mob, player's inventory or exits contain key, in that order. 
 	 * @param key
-	 * @return description or info matching object
+	 * @return view description of matching object
 	 */
 	public String lookAt(String key){
+		IGameElement element = getLookedAtElement(key);
+		return element == null? null: element.getViewDescription();
+	}
+	/**
+	 * Checks if room's item, room's mob, player's inventory or exits contain key, in that order and returns appropriate IGameElement.
+	 * Returns null if not found.
+	 * @param key
+	 * @return IGameElement for matching object
+	 */
+	public IGameElement getLookedAtElement(String key){
 		if (roomContainsItem(key)) {
-			return current.getItem(key).getInfo();
+			return current.getItem(key);
 		}
 		if (roomContainsMob(key)) {
-			return current.getMob(key).getDescription();
+			return current.getMob(key);
 		}
 		if (player.containsItem(key)) {
-			return player.getItem(key).getInfo();
+			return player.getItem(key);
 		}
-		if (currentContainsExit(key)){
-			return  current.getExit(key).getDescription();
+		if (roomContainsExit(key)){
+			return  current.getExit(key);
 		}
 		return null;
 	}

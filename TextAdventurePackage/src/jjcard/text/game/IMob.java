@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public interface IMob extends ConcealableGameElement{
 
-	public String getDescription();
 	public int getMaxHealth();
 	public int getHealth();
 	public int getMoney();

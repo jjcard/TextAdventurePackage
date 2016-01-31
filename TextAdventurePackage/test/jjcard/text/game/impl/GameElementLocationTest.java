@@ -34,7 +34,7 @@ public class GameElementLocationTest {
 	public void setUp() throws Exception {
 		mob = new Mob.Builder().name("Gelatinous Cube").build();
 		hallway = new GameElementLocation.Builder().name("Hallway").roomDescription("It's a hallway. What more do you want.").build();
-		item = new Item.Builder().name("vendor trash").info("doesn't do anything").build();
+		item = new Item.Builder().name("vendor trash").viewDescription("doesn't do anything").build();
 		room = new GameElementLocation.Builder().name("A room").roomDescription( "no not THE room").build();
 		hallway.addExit(Exit.NORTH.getWithLocation(room));
 		room.addExit(Exit.SOUTH_BUILD.location(hallway).build());

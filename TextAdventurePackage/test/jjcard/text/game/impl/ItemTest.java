@@ -22,9 +22,9 @@ public class ItemTest {
 
 	@Test
 	public void Itemtest() {
-		Item item = new Item.Builder().name("basic item").info("it shows off the true potential of an item...which isn't much").build();
+		Item item = new Item.Builder().name("basic item").viewDescription("it shows off the true potential of an item...which isn't much").build();
 		assertEquals("basic item", item.getName());
-		assertEquals("it shows off the true potential of an item...which isn't much", item.getInfo());
+		assertEquals("it shows off the true potential of an item...which isn't much", item.getViewDescription());
 		
 		item.setHidden(true);
 		item.setMovable(false);
@@ -47,9 +47,9 @@ public class ItemTest {
 	}
 	@Test
 	public void WeaponTest(){
-		Weapon weapon = new Weapon.Builder().name("sword").info("pointy end").attack(2).build();
+		Weapon weapon = new Weapon.Builder().name("sword").viewDescription("pointy end").attack(2).build();
 		assertEquals(weapon.getName(), "sword");
-		assertEquals(weapon.getInfo(), "pointy end");
+		assertEquals(weapon.getViewDescription(), "pointy end");
 		assertEquals(weapon.getAttack(), 2);
 		
 		weapon.setCost(3);

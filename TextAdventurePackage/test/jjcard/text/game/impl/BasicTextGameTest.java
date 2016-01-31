@@ -43,7 +43,7 @@ public class BasicTextGameTest {
 		 
 		 
 		mob = new Mob.Builder().name("Goblin").health(10).defense(1).attack(4).build();
-		mob.setDescription("You can tell it's a goblin because it's green and broccoli usually doesn't try to kill you.");
+		mob.setViewDescription("You can tell it's a goblin because it's green and broccoli usually doesn't try to kill you.");
 		
 	}
 	@Test
@@ -97,7 +97,7 @@ public class BasicTextGameTest {
 //		assertEquals(ReturnCom.ATTACK_MOB, rc);
 		assertEquals(mob.getHealth(), 6);
 		assertTrue(mob.getStatusList().isEmpty());
-		Item coin = new Item.Builder().name("coin").info("a single golden coin").build();
+		Item coin = new Item.Builder().name("coin").viewDescription("a single golden coin").build();
 		mob.addItem( coin);
 		
 		assertTrue(mob.containsItem("coin"));
@@ -114,7 +114,7 @@ public class BasicTextGameTest {
 	}
 	@Test
 	public void EquipWorldTest(){
-		Armour wool = new Armour.Builder().name("wool").info("its itchness might be a defense").level(0).defense(4).build();
+		Armour wool = new Armour.Builder().name("wool").viewDescription("its itchness might be a defense").level(0).defense(4).build();
 		player.addItem( wool);
 		ITextTokenStream<BasicTextTokenType> ck = game.parseInput("equip wool");
 		assertEquals(ck.getVerb().getType(), BasicTextTokenType.EQUIP);
@@ -125,7 +125,7 @@ public class BasicTextGameTest {
 		assertEquals(8 + 4, player.getFullDefense() );
 	
 		
-		Weapon weapon = new Weapon.Builder().name("shank").info("it can also be used as a verb").attack(3).build();
+		Weapon weapon = new Weapon.Builder().name("shank").viewDescription("it can also be used as a verb").attack(3).build();
 		player.addItem(weapon);
 		ck = game.parseInput("equip shank");
 		assertEquals( BasicTextTokenType.EQUIP, ck.getVerb().getType());

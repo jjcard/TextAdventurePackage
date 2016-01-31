@@ -18,6 +18,8 @@ public abstract class AbstractGameElement implements IGameElement{
 	private String roomDescription;
 	@JsonProperty("name")
 	private final String name;
+	@JsonProperty("viewDescrip")
+	private String viewDescription;
 	@JsonProperty("valFields")
 	protected boolean validateFields = true;
 	
@@ -34,6 +36,7 @@ public abstract class AbstractGameElement implements IGameElement{
 	public static class Builder{
 		private String name;
 		private String roomDescription;
+		private String viewDescription;
 		private boolean validateFields = true;
 		
 		/**
@@ -66,12 +69,18 @@ public abstract class AbstractGameElement implements IGameElement{
 			this.validateFields = validateFields;
 			return this;
 		}
+		@JsonProperty("viewDescrip")
+		public Builder viewDescription(String viewDescription){
+			this.viewDescription = viewDescription;
+			return this;
+		}
 	}
 	
 	protected AbstractGameElement(Builder builder){
 		this.name = builder.name;
 		this.roomDescription = builder.roomDescription;
 		this.validateFields = builder.validateFields;
+		this.viewDescription = builder.viewDescription;
 	}
 	public final String getName(){
 		return name;
@@ -82,7 +91,12 @@ public abstract class AbstractGameElement implements IGameElement{
 	public void setRoomDescription(String roomDescription) {
 		this.roomDescription = roomDescription;
 	}
-
+	public String getViewDescription(){
+		return viewDescription;
+	}
+	public void setViewDescription(String viewDescription){
+		this.viewDescription = viewDescription;
+	}
 	public boolean doValidateFields(){
 		return this.validateFields;
 	}
@@ -105,13 +119,15 @@ public abstract class AbstractGameElement implements IGameElement{
 			if (ObjectsUtil.notEqual(roomDescription, element.roomDescription)){
 				return false;
 			}
-			
+			if (ObjectsUtil.notEqual(viewDescription, element.viewDescription)){
+				return false;
+			}
 			return true;
 		} else {
 			return false;
 		}
 	}
 	public int hashCode(){
-		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, name, roomDescription);
+		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, name, roomDescription, viewDescription);
 	}
 }

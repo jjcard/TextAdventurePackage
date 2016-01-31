@@ -185,7 +185,7 @@ public class WorldUtilTest {
 	public void lootAllMobTest(){
 		IItem item = new Item.Builder().name("Oil Can").build();
 		Mob mob = new Mob.Builder().name("Mecha-Goblin")
-				.description("It never wondered at all, just made itself Awesome").validateFields(false).addItem(item).health(10)
+				.viewDescription("It never wondered at all, just made itself Awesome").validateFields(false).addItem(item).health(10)
 				.build();
 		
 		util.getCurrent().addMob(mob);

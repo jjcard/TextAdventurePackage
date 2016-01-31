@@ -22,7 +22,6 @@ public interface IItem extends ConcealableGameElement{
 	
 	public int getCost();
 	
-	public String getInfo();
 	
 	public int getLevel();
 	

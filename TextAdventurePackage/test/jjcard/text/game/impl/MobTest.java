@@ -28,11 +28,11 @@ public class MobTest {
 	
 	@Before
 	public void setUp(){
-		mob = new Mob.Builder().name("Mecha-Goblin").description("It never wondered at all, just made itself Awesome").validateFields(false)
+		mob = new Mob.Builder().name("Mecha-Goblin").viewDescription("It never wondered at all, just made itself Awesome").validateFields(false)
 				.build();
 //		imob = mob;
 		mob2 = new Mob.Builder().name("Flower").validateFields(false)
-				.description("A giant, able to crush mountains....he got his name when he was smaller.").build();
+				.viewDescription("A giant, able to crush mountains....he got his name when he was smaller.").build();
 		
 		int cost = 54;
 		String weaponName = "sword";
@@ -63,7 +63,7 @@ public class MobTest {
 	@Test
 	public void equalsANdHashCodeTest2(){
 		Mob mob2 = new Mob.Builder().validateFields(false).name("Mecha-Goblin")
-				.description("It never wondered at all, just made itself Awesome").build();
+				.viewDescription("It never wondered at all, just made itself Awesome").build();
 
 		
 		assertTrue(mob.equals(mob2));
@@ -98,8 +98,8 @@ public class MobTest {
 		mobsEqual(mob, mob2);
 		
 		
-		Item item = new Item.Builder().name("vendor trash").info("doesn't do anything").build();
-		Item item2 = new Item.Builder().name("vendor trash: the sequel").info("doesn't do anything").build();
+		Item item = new Item.Builder().name("vendor trash").viewDescription("doesn't do anything").build();
+		Item item2 = new Item.Builder().name("vendor trash: the sequel").viewDescription("doesn't do anything").build();
 		//items, one set, different
 		mob.addItem(item);
 		mobsNotEqual(mob, mob2);

@@ -55,12 +55,12 @@ public class DescriptionUtilTest {
 	@Test
 	public void showRoomMobTest() {
 		IMob mob = new Mob.Builder().name("Mecha-Goblin").hidden(true)
-				.description("It never wondered at all, just made itself Awesome")
+				.viewDescription("It never wondered at all, just made itself Awesome")
 				.roomDescription("A globin, It's chrome body shines in the torchlight, not the most stealthy then. ")
 				.validateFields(false).build();
 		IMob mob2 = new Mob.Builder().name("Flower").validateFields(false)
 				.roomDescription("A giant stands, at least partially, in the room. It's kind of hard to miss.")
-				.description("A giant, able to crush mountains....he got his name when he was smaller.").build();
+				.viewDescription("A giant, able to crush mountains....he got his name when he was smaller.").build();
 
 		Location hallway = new Location("Hallway", "It's a hallway. What more do you want.");
 		hallway.addMob(mob);
@@ -77,7 +77,7 @@ public class DescriptionUtilTest {
 	@Test
 	public void showRoomItemsTest() {
 		Item item = new Item.Builder().name("basic item")
-				.info("it shows off the true potential of an item...which isn't much")
+				.viewDescription("it shows off the true potential of an item...which isn't much")
 				.roomDescription("an item on the floor, it's purpose...none.").build();
 		IItem item2 = new Item.Builder().name("Even smaller item")
 				.roomDescription("Now free from the basic item, it still does nothing").hidden(true).build();
@@ -262,120 +262,120 @@ public class DescriptionUtilTest {
 	@Test
 	public void getGameElementDescriptionsCollectionTest(){
 		List<ConcealableGameElement> elements = null;//null check
-		String result = DescriptionUtil.getGameElementDescriptions(elements);
+		String result = DescriptionUtil.getGameElementRoomDescriptions(elements);
 		assertTrue(result.isEmpty());
 		
 		elements = new LinkedList<ConcealableGameElement>();//empty
-		result = DescriptionUtil.getGameElementDescriptions(elements);
+		result = DescriptionUtil.getGameElementRoomDescriptions(elements);
 		assertTrue(result.isEmpty());
 		
 		elements.add(new Item.Builder().hidden(false).name("TestItem1").roomDescription("TestItem1Descrip1").build());
-		result = DescriptionUtil.getGameElementDescriptions(elements);
+		result = DescriptionUtil.getGameElementRoomDescriptions(elements);
 		assertFalse(result.isEmpty());
 		assertEquals("TestItem1Descrip1", result);
 		
 		elements.add(new Item.Builder().hidden(true).name("TestItem2").roomDescription("TestItem1Descrip2").build());
-		result = DescriptionUtil.getGameElementDescriptions(elements);
+		result = DescriptionUtil.getGameElementRoomDescriptions(elements);
 		assertFalse(result.isEmpty());
 		assertEquals("TestItem1Descrip1, TestItem1Descrip2", result);
 	}
 	@Test
-	public void getGameElementDescriptionsMapTest(){
+	public void getGameElementRoomDescriptionsMapTest(){
 		Map<String, ConcealableGameElement> elements = null;//null check
-		String result = DescriptionUtil.getGameElementDescriptions(elements);
+		String result = DescriptionUtil.getGameElementRoomDescriptions(elements);
 		assertTrue(result.isEmpty());
 		
 		elements = new TreeMap<String, ConcealableGameElement>();//empty
-		result = DescriptionUtil.getGameElementDescriptions(elements);
+		result = DescriptionUtil.getGameElementRoomDescriptions(elements);
 		assertTrue(result.isEmpty());
 		
 		IItem item = new Item.Builder().hidden(false).name("TestItem1").roomDescription("TestItem1Descrip1").build();
 		elements.put(item.getName(), item);
-		result = DescriptionUtil.getGameElementDescriptions(elements);
+		result = DescriptionUtil.getGameElementRoomDescriptions(elements);
 		assertFalse(result.isEmpty());
 		assertEquals("TestItem1Descrip1", result);
 		IItem item2 = new Item.Builder().hidden(true).name("TestItem2").roomDescription("TestItem1Descrip2").build();
 		elements.put(item2.getName(), item2);
-		result = DescriptionUtil.getGameElementDescriptions(elements);
+		result = DescriptionUtil.getGameElementRoomDescriptions(elements);
 		assertFalse(result.isEmpty());
 		assertEquals("TestItem1Descrip1, TestItem1Descrip2", result);
 	}
 
 	@Test
-	public void getConcealableDescriptionCollectionTest(){
+	public void getConcealableRoomDescriptionCollectionTest(){
 		List<ConcealableGameElement> elements = null;//null check
-		String result = DescriptionUtil.getConceableDescriptions(elements, true);
+		String result = DescriptionUtil.getConceableRoomDescriptions(elements, true);
 		assertTrue(result.isEmpty());
-		result = DescriptionUtil.getConceableDescriptions(elements, false);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, false);
 		assertTrue(result.isEmpty());
 		
 		elements = new LinkedList<ConcealableGameElement>();//empty
-		result = DescriptionUtil.getConceableDescriptions(elements, true);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, true);
 		assertTrue(result.isEmpty());
-		result = DescriptionUtil.getConceableDescriptions(elements, false);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, false);
 		assertTrue(result.isEmpty());
 		
 		elements.add(new Item.Builder().hidden(false).name("TestItem1").roomDescription("TestDescrip1").build());
-		result = DescriptionUtil.getConceableDescriptions(elements, true);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, true);
 		assertFalse(result.isEmpty());
 		assertEquals("TestDescrip1", result);
-		result = DescriptionUtil.getConceableDescriptions(elements, false);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, false);
 		assertFalse(result.isEmpty());
 		assertEquals("TestDescrip1", result);
 		
 		elements.clear();
 		elements.add(new Item.Builder().hidden(true).name("TestItem2").roomDescription("TestDescrip2").build());
-		result = DescriptionUtil.getConceableDescriptions(elements, true);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, true);
 		assertTrue(result.isEmpty());
-		result = DescriptionUtil.getConceableDescriptions(elements, false);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, false);
 		assertFalse(result.isEmpty());
 		assertEquals("TestDescrip2", result);
 		
 		
 		elements.add(new Item.Builder().hidden(false).name("TestItem1").roomDescription("TestDescrip1").build());
-		result = DescriptionUtil.getConceableDescriptions(elements, true);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, true);
 		assertFalse(result.isEmpty());
 		assertEquals("TestDescrip1", result);
-		result = DescriptionUtil.getConceableDescriptions(elements, false);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, false);
 		assertFalse(result.isEmpty());
 		assertEquals("TestDescrip2, TestDescrip1", result);
 	}
 	@Test
 	public void getConcealableDescriptionMapTest(){
 		Map<String, ConcealableGameElement> elements = null;//null check
-		String result = DescriptionUtil.getConceableDescriptions(elements, true);
+		String result = DescriptionUtil.getConceableRoomDescriptions(elements, true);
 		assertTrue(result.isEmpty());
-		result = DescriptionUtil.getConceableDescriptions(elements, false);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, false);
 		assertTrue(result.isEmpty());
 		
 		elements = new TreeMap<String, ConcealableGameElement>();//empty
-		result = DescriptionUtil.getConceableDescriptions(elements, true);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, true);
 		assertTrue(result.isEmpty());
-		result = DescriptionUtil.getConceableDescriptions(elements, false);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, false);
 		assertTrue(result.isEmpty());
 		
 		elements.put("TestItem1", new Item.Builder().hidden(false).name("TestItem1").roomDescription("TestDescrip1").build());
-		result = DescriptionUtil.getConceableDescriptions(elements, true);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, true);
 		assertFalse(result.isEmpty());
 		assertEquals("TestDescrip1", result);
-		result = DescriptionUtil.getConceableDescriptions(elements, false);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, false);
 		assertFalse(result.isEmpty());
 		assertEquals("TestDescrip1", result);
 		
 		elements.clear();
 		elements.put("TestItem2", new Item.Builder().hidden(true).name("TestItem2").roomDescription("TestDescrip2").build());
-		result = DescriptionUtil.getConceableDescriptions(elements, true);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, true);
 		assertTrue(result.isEmpty());
-		result = DescriptionUtil.getConceableDescriptions(elements, false);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, false);
 		assertFalse(result.isEmpty());
 		assertEquals("TestDescrip2", result);
 		
 		
 		elements.put("TestItem1", new Item.Builder().hidden(false).name("TestItem1").roomDescription("TestDescrip1").build());
-		result = DescriptionUtil.getConceableDescriptions(elements, true);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, true);
 		assertFalse(result.isEmpty());
 		assertEquals("TestDescrip1", result);
-		result = DescriptionUtil.getConceableDescriptions(elements, false);
+		result = DescriptionUtil.getConceableRoomDescriptions(elements, false);
 		assertFalse(result.isEmpty());
 		assertEquals("TestDescrip1, TestDescrip2", result);
 	}

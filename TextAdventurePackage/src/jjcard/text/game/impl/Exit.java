@@ -150,14 +150,13 @@ public class Exit extends AbstractGameElement implements IExit {
 		}
 	}
 	public int hashCode(){
-		final int prime = 23;		
-		return ObjectsUtil.getHash(super.hashCode(), prime, location, hidden);
+		return ObjectsUtil.getHash(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, location, hidden);
 	}
 	/**
 	 * Returns the Room Description if set, or else the name of the Exit
 	 */
 	@JsonIgnore
-	public String getDescription(){
+	public String getDescription(){//TODO
 		return getRoomDescription() != null? getRoomDescription(): getName();
 	}
 	

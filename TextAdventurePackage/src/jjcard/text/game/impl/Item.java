@@ -9,8 +9,6 @@ import jjcard.text.game.util.ObjectsUtil;
 public class Item extends AbstractGameElement implements IItem{
 	@JsonProperty("cost")
 	private int cost;
-	@JsonProperty("info")
-	private String info;
 	@JsonProperty("lvl")
 	private int level;
 	@JsonProperty("hid")
@@ -24,7 +22,6 @@ public class Item extends AbstractGameElement implements IItem{
 	
 	public static class Builder extends AbstractGameElement.Builder{
 		private int cost;
-		private String info;
 		private int level;
 		private boolean hidden = false;
 		private boolean movable = true;
@@ -36,7 +33,6 @@ public class Item extends AbstractGameElement implements IItem{
 		public Builder(Item item){
 			  super(item);
 			  cost = item.cost;
-			  info = item.info;
 			  level = item.level;
 			  hidden = item.hidden;
 			  movable = item.movable;
@@ -48,11 +44,6 @@ public class Item extends AbstractGameElement implements IItem{
 		@JsonProperty("cost")
 		public Builder cost(int cost){
 			this.cost = cost;
-			return this;
-		}
-		@JsonProperty("info")
-		public Builder info(String info){
-			this.info = info;
 			return this;
 		}
 		@JsonProperty("lvl")
@@ -83,6 +74,10 @@ public class Item extends AbstractGameElement implements IItem{
 			super.roomDescription(roomDescrip);
 			return this;
 		}
+		public Builder viewDescription(String viewDescription){
+			super.viewDescription(viewDescription);
+			return this;
+		}
 		public Builder validateFields(boolean validateFields){
 			super.validateFields(validateFields);
 			return this;
@@ -95,7 +90,6 @@ public class Item extends AbstractGameElement implements IItem{
 	protected Item(Builder builder){
 		  super(builder);
 		  setCost(builder.cost);
-		  setInfo(builder.info);
 		  setLevel(builder.level);
 		  setHidden(builder.hidden);
 		  setMovable(builder.movable);
@@ -103,9 +97,6 @@ public class Item extends AbstractGameElement implements IItem{
 	}
 	public int getCost() {
 		return cost;
-	}
-	public String getInfo() {
-		return info;
 	}
 	public int getLevel(){
 		return level;
@@ -125,9 +116,6 @@ public class Item extends AbstractGameElement implements IItem{
 	}
 	public void changeCost(int change){
 		setCost(cost + change);
-	}
-	public void setInfo(String change) {
-		info = change;
 	}
 	public void changeLevel(int change){
 		setLevel(level + change);
@@ -163,13 +151,7 @@ public class Item extends AbstractGameElement implements IItem{
 		}
 		if (o instanceof Item){
 			Item m = (Item) o;
-			if (ObjectsUtil.notEqual(getName(), m.getName())){
-				return false;
-			}
-			if (ObjectsUtil.notEqual(getRoomDescription(), m.getRoomDescription())){
-				return false;
-			}
-			if (ObjectsUtil.notEqual(info, m.info)){
+			if (!super.equals(o)){
 				return false;
 			}
 			if (cost != m.cost){
@@ -191,6 +173,6 @@ public class Item extends AbstractGameElement implements IItem{
 	}
 	
 	public int hashCode(){
-		return ObjectsUtil.getHashWithStart(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, info, cost, level, hidden, movable, use);
+		return ObjectsUtil.getHashWithStart(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, cost, level, hidden, movable, use);
 	}
 }

@@ -52,6 +52,10 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 			super.roomDescription(roomDescrip);
 			return this;
 		}
+		public Builder viewDescription(String viewDescription){
+			super.viewDescription(viewDescription);
+			return this;
+		}
 		@JsonProperty("exits")
 		public Builder exits(Map<String,IExit> exits){
 			if (exits == null){
@@ -226,10 +230,10 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		return DescriptionUtil.getConcealableNames(exits, true);
 	}
 	public String getInventoryDescriptions(){
-		return DescriptionUtil.getConceableDescriptions(inventory, true);
+		return DescriptionUtil.getConceableRoomDescriptions(inventory, true);
 	}
 	public String getMobDescriptions(){
-		return DescriptionUtil.getConceableDescriptions(roomMob, true);
+		return DescriptionUtil.getConceableRoomDescriptions(roomMob, true);
 	}
 	/**
 	 * 

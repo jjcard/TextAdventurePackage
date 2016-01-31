@@ -189,10 +189,10 @@ public class Location implements ILocation {
 		return DescriptionUtil.getConcealableNames(exits, true);
 	}
 	public String getInventoryDescriptions(){
-		return DescriptionUtil.getConceableDescriptions(inventory, true);
+		return DescriptionUtil.getConceableRoomDescriptions(inventory, true);
 	}
 	public String getMobDescriptions(){
-		return DescriptionUtil.getConceableDescriptions(roomMob, true);
+		return DescriptionUtil.getConceableRoomDescriptions(roomMob, true);
 	}
 	/**
 	 * 

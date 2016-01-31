@@ -8,7 +8,7 @@ public class ShopItem<T extends IItem> implements IShopItem{
 	private final T item;
 	private final int amount;
 	private int price;
-	private final String description;
+	private final String viewDescription;
 	
 	
 	public ShopItem(T item, int price){
@@ -20,7 +20,7 @@ public class ShopItem<T extends IItem> implements IShopItem{
 			throw new IllegalArgumentException("price must be zero or greater");
 		}
 		amount = -1;
-		this.description = null;
+		this.viewDescription = null;
 	}
 	public ShopItem(T item, int price, int amount){
 		this.item = item;
@@ -34,9 +34,9 @@ public class ShopItem<T extends IItem> implements IShopItem{
 			throw new IllegalArgumentException("price must be zero or greater");
 		}
 		this.amount = amount;
-		this.description = null;
+		this.viewDescription = null;
 	}
-	public ShopItem(T item, int price, int amount, String description){
+	public ShopItem(T item, int price, int amount, String viewDescription){
 		this.item = item;
 		if (item == null){
 			throw new NullPointerException();
@@ -48,7 +48,7 @@ public class ShopItem<T extends IItem> implements IShopItem{
 			throw new IllegalArgumentException("price must be zero or greater");
 		}
 		this.amount = amount;
-		this.description = description;
+		this.viewDescription = viewDescription;
 	}
 	public IItem getItem(){
 		return item;
@@ -67,10 +67,13 @@ public class ShopItem<T extends IItem> implements IShopItem{
 	}
 	@Override
 	public String getRoomDescription() {
-		if (description != null){
-			return description;
-		}
 		return item.getRoomDescription();
+	}
+	public String getViewDescription(){
+		if (viewDescription != null){
+			return  viewDescription;
+		}
+		return item.getViewDescription();
 	}
 	@Override
 	public int getPrice(){

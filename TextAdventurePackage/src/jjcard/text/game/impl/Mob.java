@@ -24,8 +24,6 @@ import jjcard.text.game.util.ObjectsUtil;
  */
 @JsonDeserialize(builder = Mob.Builder.class)
 public class Mob extends AbstractGameElement implements IMob{
-	@JsonProperty("descrip")
-	private String description;
 	@JsonProperty("maxHealth")
 	private int maxHealth;
 	@JsonProperty("health")
@@ -54,7 +52,6 @@ public class Mob extends AbstractGameElement implements IMob{
 	private static final MapUtil MAP_UTIL = MapUtil.getInstance();
 	
 	public static class Builder extends AbstractGameElement.Builder{
-		private String description;
 		private int maxHealth;
 		private int curHealth;
 		private int money = 0;
@@ -73,7 +70,6 @@ public class Mob extends AbstractGameElement implements IMob{
 		}
 		public Builder(Mob b){
 			super(b);
-			  this.description = b.description;
 			  this.maxHealth = b.maxHealth;
 			  this.curHealth = b.curHealth;
 			  this.money = b.money;
@@ -114,11 +110,6 @@ public class Mob extends AbstractGameElement implements IMob{
 			this.curHealth = curHealth;
 			return this;
 		}
-		@JsonProperty("descrip")
-		public Builder description(String description){
-			this.description = description;
-			return this;
-		}
 		@JsonProperty("money")
 		public Builder money(int money){
 			this.money = money;
@@ -135,7 +126,6 @@ public class Mob extends AbstractGameElement implements IMob{
 			return this;
 		}
 		public Builder addItem(IItem item){
-//			this.inventory.put(item.getName(), item);
 			MAP_UTIL.addItemToMap(inventory, item);
 			return this;
 		}
@@ -196,6 +186,10 @@ public class Mob extends AbstractGameElement implements IMob{
 			super.roomDescription(roomDescrip);
 			return this;
 		}
+		public Builder viewDescription(String viewDescription){
+			super.viewDescription(viewDescription);
+			return this;
+		}
 		public Builder validateFields(boolean validateFields){
 			super.validateFields(validateFields);
 			return this;
@@ -207,7 +201,6 @@ public class Mob extends AbstractGameElement implements IMob{
 	
 	protected Mob( Builder b){
 		  super(b);
-		  description = b.description;
 		  if (b.maxHealth > 0){
 			setMaxHealth(b.maxHealth);  
 		  } else {
@@ -225,10 +218,6 @@ public class Mob extends AbstractGameElement implements IMob{
 		  weapon = b.weapon;
 		  checkHealth = b.checkHealth;
 		  hidden = b.hidden;
-	}
-
-	public String getDescription() {
-		return description;
 	}
 	public int getMaxHealth() {
 		return maxHealth;
@@ -282,9 +271,6 @@ public class Mob extends AbstractGameElement implements IMob{
 		return statusList.remove(s);
 	}
 
-	public void setDescription(String description){
-		this.description = description;
-	}
 	public void changeMaxHealth(int change){
 		setMaxHealth(this.maxHealth + change);
 	}
@@ -488,9 +474,6 @@ public class Mob extends AbstractGameElement implements IMob{
 			}
 			Mob m = (Mob) o;
 
-			if (ObjectsUtil.notEqual(this.description, m.description)){
-				return false;
-			}
 			if (attack != m.attack){
 				return false;
 			}
@@ -530,7 +513,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		int start = super.hashCode();
 		start = start * ObjectsUtil.DEFAULT_PRIME + ObjectsUtil.getkeysHash(inventory);
 		return ObjectsUtil.getHashWithStart(start,
-				ObjectsUtil.DEFAULT_PRIME, description, attack, defense,
+				ObjectsUtil.DEFAULT_PRIME, attack, defense,
 				curHealth, maxHealth, money, hostile, armour,
 				weapon, statusList);
 	}

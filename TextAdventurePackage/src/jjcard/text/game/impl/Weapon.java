@@ -54,8 +54,8 @@ public class Weapon extends Item implements IWeapon{
 			this.durability = durability;
 			return this;
 		}
-		public Builder info(String info){
-			super.info(info);
+		public Builder viewDescription(String viewDescription){
+			super.viewDescription(viewDescription);
 			return this;
 		}
 		public Builder level(int level){

@@ -35,7 +35,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		private TextToken<T> verb;
 		private TextToken<T> withObject;
 		private List<TextParserError> errors = new LinkedList<TextParserError>();
-		private List<TextToken<T>> stream = new LinkedList<TextToken<T>>();
+		private final List<TextToken<T>> stream = new LinkedList<TextToken<T>>();
 		private boolean validateInput = true;
 
 		public Builder() {

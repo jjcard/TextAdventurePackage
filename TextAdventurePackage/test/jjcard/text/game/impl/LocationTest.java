@@ -36,7 +36,7 @@ public class LocationTest {
 	public void setUp() throws Exception {
 		mob = new Mob.Builder().name("Gelatinous Cube").build();
 		hallway = new Location("Hallway", "It's a hallway. What more do you want.");
-		item = new Item.Builder().name("vendor trash").info("doesn't do anything").build();
+		item = new Item.Builder().name("vendor trash").viewDescription("doesn't do anything").build();
 		room = new Location("A room", "no not THE room");
 		hallway.addExit(Exit.NORTH.getWithLocation(room));
 		room.addExit(Exit.SOUTH_BUILD.location(hallway).build());

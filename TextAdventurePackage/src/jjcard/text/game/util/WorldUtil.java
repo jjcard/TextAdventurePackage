@@ -1,5 +1,7 @@
 package jjcard.text.game.util;
 
+import static jjcard.text.game.util.ObjectsUtil.checkArg;
+
 import jjcard.text.game.IArmour;
 import jjcard.text.game.IGameElement;
 import jjcard.text.game.IItem;
@@ -47,12 +49,8 @@ public class WorldUtil<P extends IMob>{
 	 * @throws NullPointerException if the <code>current</code> argument or <code>player</code> argument is <code>null</code>
 	 */
 	public WorldUtil(ILocation current, P player) throws NullPointerException{
-		if (current == null){
-			throw new NullPointerException("current");
-		}
-		if (player == null){
-			throw new NullPointerException("player");
-		}
+		checkArg(current, "current");
+		checkArg(player, "player");
 		this.current = current;
 
 		this.player = player;
@@ -92,9 +90,7 @@ public class WorldUtil<P extends IMob>{
 	 * @throws NullPointerException if the <code>player</code> argument is <code>null</code>
 	 */
 	public void setPlayer(P player) throws NullPointerException{
-		if (player == null){
-			throw new NullPointerException("player");
-		}
+		checkArg(player, "player");
 		this.player = player;
 	}
 	/**
@@ -102,9 +98,7 @@ public class WorldUtil<P extends IMob>{
 	 * @throws NullPointerException if the <code>current</code> argument is <code>null</code>
 	 */
 	public void setCurrent(ILocation current) throws NullPointerException{
-		if (current == null){
-			throw new NullPointerException("current");
-		}
+		checkArg(current, "current");
 		this.current = current;
 	}
 	/**
@@ -307,9 +301,10 @@ public class WorldUtil<P extends IMob>{
 		}
 		return lookAt(object.getStandardToken());
 	}
-	/**
-	 * Gets the view description String depending on key.
+	/** 
 	 * Checks if room's item, room's mob, player's inventory or exits contain key, in that order. 
+	 * Returns the view description String if found, <code>null</code> otherwise.
+	 *
 	 * @param key
 	 * @return view description of matching object
 	 */

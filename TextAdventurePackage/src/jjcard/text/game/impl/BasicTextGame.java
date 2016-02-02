@@ -1,5 +1,7 @@
 package jjcard.text.game.impl;
 
+import static jjcard.text.game.util.ObjectsUtil.checkArg;
+
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -15,7 +17,6 @@ import jjcard.text.game.util.WorldUtil;
 import jjcard.text.game.util.WorldUtil.ReturnStatus;
 
 public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
-//	private ILocation current;
 	private WorldUtil<Player> worldUtil;
 	private PrintStream output = System.out;
 	private Scanner inputScanner;
@@ -27,13 +28,8 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 	 * @throws NullPointerException if the <code>current</code> argument or <code>player</code> argument is <code>null</code>
 	 */
 	public BasicTextGame(ILocation current, Player player) throws NullPointerException{
-		if (current == null){
-			throw new NullPointerException("current");
-		}
-		if (player == null){
-			throw new NullPointerException("player");
-		}
-//		this.current = current;
+		checkArg(current, "current");
+		checkArg(player, "player");
 		this.player = player;
 		worldUtil = new WorldUtil<Player>(current, player);
 		parser = new BasicTextParser<BasicTextTokenType>();

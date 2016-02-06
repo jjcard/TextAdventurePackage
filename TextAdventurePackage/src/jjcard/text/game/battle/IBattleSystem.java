@@ -6,13 +6,14 @@ import jjcard.text.game.util.Experimental;
  * System for attacked, defending against an attack
  */
 @Experimental
-public interface IBattleSystem {
+@FunctionalInterface
+public interface IBattleSystem<R> {
 	/**
 	 * @param attacker
 	 * @param defender
 	 * @return the damage done
 	 */
-	@Experimental
-	public int attackMob(IMob attacker, IMob defender);
+//	@Experimental
+	public R attackMob(IMob attacker, IMob defender);
 
 }

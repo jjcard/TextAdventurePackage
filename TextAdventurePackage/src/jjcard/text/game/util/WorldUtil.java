@@ -9,7 +9,6 @@ import jjcard.text.game.ILocation;
 import jjcard.text.game.IMob;
 import jjcard.text.game.IWeapon;
 import jjcard.text.game.battle.IBattleSystem;
-import jjcard.text.game.battle.impl.BasicBattleSystem;
 import jjcard.text.game.parser.TextToken;
 import jjcard.text.game.parser.impl.BasicTextTokenType;
 
@@ -22,7 +21,7 @@ import jjcard.text.game.parser.impl.BasicTextTokenType;
 public class WorldUtil<P extends IMob>{
 	private ILocation current;
 	private P player;
-	private IBattleSystem battleSystem = new BasicBattleSystem();
+//	private IBattleSystem battleSystem = new BasicBattleSystem();
 	/**
 	 * Generic enum response used in place of a boolean.
 	 * If just success/failure wanted, call {@link #isSuccess()} on the ReturnStatus.
@@ -55,24 +54,24 @@ public class WorldUtil<P extends IMob>{
 
 		this.player = player;
 	}
-	/**
-	 * Returns the battle System for {@link #attackMob(String, TextToken)}
-	 * @return battleSystem
-	 */
-	public IBattleSystem getBattleSystem(){
-		return battleSystem;
-	}
-	/**
-	 * Sets to the given battleSystem, or a BasicBattleSystem if null passed in
-	 * @param battleSystem
-	 */
-	public void setBattleSystem(IBattleSystem battleSystem){
-		if (battleSystem == null){
-			battleSystem = new BasicBattleSystem();
-		} else {
-			this.battleSystem = battleSystem;
-		}
-	}
+//	/**
+//	 * Returns the battle System for {@link #attackMob(String, TextToken)}
+//	 * @return battleSystem
+//	 */
+//	public IBattleSystem getBattleSystem(){
+//		return battleSystem;
+//	}
+//	/**
+//	 * Sets to the given battleSystem, or a BasicBattleSystem if null passed in
+//	 * @param battleSystem
+//	 */
+//	public void setBattleSystem(IBattleSystem battleSystem){
+//		if (battleSystem == null){
+//			battleSystem = new BasicBattleSystem();
+//		} else {
+//			this.battleSystem = battleSystem;
+//		}
+//	}
 	public P getPlayer() {
 		return player;
 	}
@@ -400,16 +399,12 @@ public class WorldUtil<P extends IMob>{
 		}
 		return ReturnStatus.NOT_FOUND;
 	}
-	/**
-	 * Returns number of damage done to mob, or -1 if mob not found
-	 * @param key
-	 * @return amount of damage done to mob, -1 if mob not found
-	 */
-	public int attackMob(String key) {
-		if (current.containsMob(key)) {
-			IMob mob = current.getMob(key);
-			return battleSystem.attackMob(player, mob);
+	
+	public <R> R attackMob(String key, IBattleSystem<R> battleSystem) throws NotFoundException{
+		if (current.containsMob(key)){
+			return battleSystem.attackMob(player, current.getMob(key));
+		} else {
+			throw new NotFoundException(key);
 		}
-		return -1;
 	}
 }

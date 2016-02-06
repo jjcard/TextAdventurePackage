@@ -7,12 +7,14 @@ import java.util.Scanner;
 
 import jjcard.text.game.IItem;
 import jjcard.text.game.ILocation;
-import jjcard.text.game.IMob;
+import jjcard.text.game.battle.IBattleSystem;
+import jjcard.text.game.battle.impl.BasicBattleSystem;
 import jjcard.text.game.parser.ITextParser;
 import jjcard.text.game.parser.ITextTokenStream;
 import jjcard.text.game.parser.TextToken;
 import jjcard.text.game.parser.impl.BasicTextParser;
 import jjcard.text.game.parser.impl.BasicTextTokenType;
+import jjcard.text.game.util.NotFoundException;
 import jjcard.text.game.util.WorldUtil;
 import jjcard.text.game.util.WorldUtil.ReturnStatus;
 
@@ -20,6 +22,11 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 	private WorldUtil<Player> worldUtil;
 	private PrintStream output = System.out;
 	private Scanner inputScanner;
+	//TODO how to handle when mob is dead, can't remove it, since still has items...
+	private IBattleSystem<Integer> battleSystem = new BasicBattleSystem(
+			(a, d, damage) -> {output.println(" you have attacked " + d.getName() + " for " + damage + " damage.\n");output.println("You have slain " + d.getName() + "!");}, 
+			(a, d, damage) -> {output.println(" you have attacked " + d.getName() + " for " + damage + " damage.\n");}
+	);
 	
 	/**
 	 * 
@@ -246,20 +253,11 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 	}
 
 	protected void attackMob(String token, TextToken<BasicTextTokenType> object) {
-		int damageDone = worldUtil.attackMob(token);
-		if (damageDone != -1){
-			
-			//TODO how to handle when mob is dead, can't remove it, since still has items...
-			output.println(" you have attacked " + token + " for "
-					+ damageDone + " damage.\n");
-			IMob mob = worldUtil.getCurrent().getMob(token);
-			if (mob.isDead()){
-				output.println("You have slain " + token + "!");
-			}
-		} else {
+		try {
+			worldUtil.attackMob(token, battleSystem);
+		} catch (NotFoundException e) {
 			output.println("cannot find " + token);
 		}
-		
 	}
 
 	public boolean isGameOver(){

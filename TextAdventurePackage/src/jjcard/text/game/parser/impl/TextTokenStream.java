@@ -2,8 +2,10 @@ package jjcard.text.game.parser.impl;
 
 import static jjcard.text.game.util.ObjectsUtil.notEqual;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import jjcard.text.game.parser.ITextTokenStream;
 import jjcard.text.game.parser.ITextTokenType;
@@ -25,7 +27,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 
 	private final TextToken<T> withObject;
 
-	private final List<TextParserError> errors;
+	private final Set<TextParserError> errors;
 	
 	private final List<TextToken<T>> stream;
 
@@ -34,7 +36,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		private List<TextToken<T>> objects = new LinkedList<TextToken<T>>();
 		private TextToken<T> verb;
 		private TextToken<T> withObject;
-		private List<TextParserError> errors = new LinkedList<TextParserError>();
+		private Set<TextParserError> errors = new HashSet<TextParserError>();
 		private final List<TextToken<T>> stream = new LinkedList<TextToken<T>>();
 		private boolean validateInput = true;
 
@@ -119,9 +121,9 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 			return this;
 		}
 
-		public Builder<T> errors(List<TextParserError> errors) {
+		public Builder<T> errors(Set<TextParserError> errors) {
 			if (errors == null) {
-				errors = new LinkedList<TextParserError>();
+				errors = new HashSet<TextParserError>();
 			}
 			this.errors = errors;
 			return this;
@@ -134,9 +136,8 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 * @return this
 		 */
 		public Builder<T> addError(TextParserError error) {
-			if (!this.errors.contains(error)) {
-				this.errors.add(error);
-			}
+			this.errors.add(error);
+			
 			return this;
 		}
 
@@ -164,7 +165,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	}
 
 	private TextTokenStream(TextToken<T> verb, List<TextToken<T>> objects,
-			TextToken<T> withObject, List<TextParserError> errors,
+			TextToken<T> withObject, Set<TextParserError> errors,
 			boolean validateInput, List<TextToken<T>> stream) {
 
 		this.objects = objects;
@@ -254,7 +255,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	 * 
 	 * @return errors
 	 */
-	public List<TextParserError> getErrors() {
+	public Set<TextParserError> getErrors() {
 		return errors;
 	}
 

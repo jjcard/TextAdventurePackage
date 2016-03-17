@@ -96,7 +96,6 @@ public final class DescriptionUtil {
 		return getConcealableStream(elements, excludeHidden).map(I::getRoomDescription).collect(Collectors.joining(COMMA_DELIMINATOR));
 	}
 	
-	
 	/**
 	 * Returns comma separated String of element view descriptions, filtering out hidden elements if <code>excludeHidden</code> is true
 	 * @param elements
@@ -141,7 +140,7 @@ public final class DescriptionUtil {
 	/**
 	 * Returns String containing the description of the <code>location</code> along with it's Inventory, Mob, and Exits Description if they are non-empty.
 	 * The <code>exitStart<code> is placed before the Description for the exits, if any.
-	 * @param l
+	 * @param location
 	 * @param exitStart
 	 * @return description of room and it's elements
 	 */
@@ -151,13 +150,13 @@ public final class DescriptionUtil {
 		}
 		StringBuilder re = new StringBuilder(location.getDescription());
 		String curDescrip;
-		if (!location.getInventory().isEmpty()&& !(curDescrip = location.getInventoryDescriptions()).isEmpty()){
+		if (!(curDescrip = location.getInventoryDescriptions()).isEmpty()){
 			re.append(SPACE).append(curDescrip);
 		}
-		if (!location.getMobs().isEmpty()&& !(curDescrip = location.getMobDescriptions()).isEmpty()){
+		if (!(curDescrip = location.getMobDescriptions()).isEmpty()){
 			re.append(SPACE).append(curDescrip);
 		}
-		if (!location.getExits().isEmpty() && !(curDescrip = location.getExitsDescriptions()).isEmpty()){
+		if (!(curDescrip = location.getExitsDescriptions()).isEmpty()){
 			re.append(SPACE).append(exitStart).append(curDescrip);
 		}
 		return re.toString();
@@ -165,11 +164,11 @@ public final class DescriptionUtil {
 	/**
 	 * Returns String containing the description of the <code>location</code> along with it's Inventory, Mob, and Exits Description if they are non-empty.
 	 * Calls {@link #showRoom(ILocation, String)} with {@link #DEFAULT_EXIT_START}
-	 * @param l
-	 * @return
+	 * @param location
+	 * @return description of room and it's elements
 	 * @see #showRoom(ILocation)
 	 */
-	public static String showRoom(final ILocation l){
-		return showRoom(l, DEFAULT_EXIT_START);
+	public static String showRoom(final ILocation location){
+		return showRoom(location, DEFAULT_EXIT_START);
 	}
 }

@@ -84,8 +84,11 @@ public final class MapUtil {
 
 	}
 	public static String getKeysAsString(Map<String, ?> map){
+		if (map == null){
+			return "";
+		}
 		String keys = map.keySet().toString();
-		return keys.toString().substring(1, keys.length() -1);
+		return keys.substring(1, keys.length() -1);
 	}
 	
 	public static String getKeysAsString(Map<String, ?> map, final String delimiter) {

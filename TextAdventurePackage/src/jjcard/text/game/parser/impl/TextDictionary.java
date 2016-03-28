@@ -21,9 +21,7 @@ import jjcard.text.game.parser.ITextTokenType;
 public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, ITextDefinition<T>>implements ITextDictionary<T>{
 
 	private static final boolean DEFAULT_AUTOMATIC_CASING = true;
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -108288250545705909L;
 	private final boolean automaticCasing;
 	private Locale locale = Locale.getDefault(); 
@@ -70,10 +68,8 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 				if (value.getType().defaultWords() != null){
 					putAll(value, value.getType().defaultWords());	
 				}
-				
 			}
 		}
-		
 	}	
 	@SafeVarargs
 	public TextDictionary(T...values){
@@ -92,7 +88,6 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 				
 			}
 		}
-		
 	}
 	/**
 	 * Sets the Locale that is used to change the case of the String keys.
@@ -131,7 +126,6 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 		for (String key: keys){
 			put(key, value);
 		}
-		
 	}
 	public void putAllElements(Collection<IGameElement> keys, ITextDefinition<T> value){
 		for (IGameElement g: keys){
@@ -157,35 +151,4 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 	public ITextDefinition<T> get(Object key){
 		return super.get(automaticCasing? key.toString().toUpperCase(locale): key);
 	}
-	
-	
-	
-//	private void loadPrintMap(String fileLocation) throws IOException{
-//		File file = new File(fileLocation);
-//		if (file.exists()){
-//			BufferedReader bfr = new BufferedReader(new FileReader(file));
-//			String line;
-//			
-//			while ((line = bfr.readLine()) != null){
-//				if (!line.startsWith(COMMENT_INDICATOR) && !line.isEmpty()){
-//					String[] pair = pairPattern.split(line);
-//					
-//					if (pair.length < 2){
-//						//Do something
-//					} else {
-//						String key = pair[0].trim();
-//						
-//						T value = T.valueOf( pair[1]);
-////						String value = pair[1];
-//						this.put(key, value);
-//					}
-//				}
-//			}
-//			bfr.close();
-//			
-//		} else {
-//			throw new IOException("String File cannot be found");
-//		}
-//	}
-
 }

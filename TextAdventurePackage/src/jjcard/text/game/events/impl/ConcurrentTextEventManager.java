@@ -7,18 +7,23 @@ import jjcard.text.game.events.ITextEvent;
 import jjcard.text.game.events.ITextEventListener;
 import jjcard.text.game.events.ITextEventManager;
 /**
- *A version of ITextEventManager that uses a enum to synchronize and has a CuncurrentHashMap as its underlying holder of ITextEventListeners.
+ *A version of ITextEventManager that uses  the holder pattern to synchronize and has a CuncurrentHashMap as its underlying holder of ITextEventListeners.
  *
  */
-public enum ConcurrentTextEventManager implements ITextEventManager {
-	INSTANCE;
+public final class ConcurrentTextEventManager implements ITextEventManager {
+	
 
 	private final Map<Class<? extends ITextEvent>, ITextEventListener> listenerMap;
 	
 	private ConcurrentTextEventManager(){
 		listenerMap = new ConcurrentHashMap<Class<? extends ITextEvent>, ITextEventListener>();
 	}
-	
+	private static class LazyHolder {
+		private static final ConcurrentTextEventManager _instance = new ConcurrentTextEventManager();
+	}
+	public static ConcurrentTextEventManager getInstance(){
+		return LazyHolder._instance;
+	}
 	@Override
 	public ITextEventListener registerEventListener(ITextEventListener listener,
 			Class<? extends ITextEvent> event) {

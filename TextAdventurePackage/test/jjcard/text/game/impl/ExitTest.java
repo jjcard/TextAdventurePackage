@@ -2,6 +2,8 @@ package jjcard.text.game.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
@@ -32,7 +34,7 @@ public class ExitTest {
 		
 		Exit Left2 = Exit.SOUTH;
 		
-		Assert.assertNull(Left2.getLocation());
+		assertNull(Left2.getLocation());
 		
 	}
 	@Test
@@ -58,13 +60,13 @@ public class ExitTest {
 		Exit north = Exit.NORTH_BUILD.build();
 		north = north.getWithLocation(l);
 		
-		Assert.assertNotNull(north.getLocation());
+		assertNotNull(north.getLocation());
 		Assert.assertEquals(l, north.getLocation());
 		
 		
 		Exit Left2 = Exit.NORTH_BUILD.build();
 		
-		Assert.assertNull(Left2.getLocation());
+		assertNull(Left2.getLocation());
 	}
 	@Test
 	public void jsonTest() throws JsonGenerationException, JsonMappingException, IOException{
@@ -82,6 +84,17 @@ public class ExitTest {
 		assertEquals(loc, in.getLocation());
 		assertEquals(name, in.getName());
 		assertTrue(in.isHidden());
+	}
+	
+	@Test
+	public void getWithLocationAsNameTest(){
+		String locName = "locSameNameTest";
+		Location loc = new Location(locName);
+		Exit exit = Exit.getWithLocationAsName(loc);
+		assertNotNull(exit);
+		assertNotNull(exit.getLocation());
+		assertEquals(loc, exit.getLocation());
+		assertEquals(locName, exit.getName());
 	}
 
 }

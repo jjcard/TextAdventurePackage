@@ -121,6 +121,14 @@ public class Exit extends AbstractGameElement implements IExit {
 	public Exit getWithLocation(ILocation location){
 		return new Builder(this).location(location).build();
 	}
+	/**
+	 * Returns a new Exit with given location, and name of Exit being same as the location
+	 * @param location 
+	 * @return new Exit
+	 */
+	public static Exit getWithLocationAsName(ILocation location){
+		return new Builder().location(location).name(location.getName()).build();
+	}
 	public boolean isHidden(){
 		return hidden;
 	}

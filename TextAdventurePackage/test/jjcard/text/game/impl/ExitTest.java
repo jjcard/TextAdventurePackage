@@ -96,5 +96,16 @@ public class ExitTest {
 		assertEquals(loc, exit.getLocation());
 		assertEquals(locName, exit.getName());
 	}
+	@Test
+	public void locationAndNameBuilderTest(){
+		String locName = "locSameNameTest2";
+		Location loc = new Location(locName);
+		
+		Exit exit = new Exit.Builder().locationAndName(loc).build();
+		assertNotNull(exit);
+		assertNotNull(exit.getLocation());
+		assertEquals(loc, exit.getLocation());
+		assertEquals(locName, exit.getName());
+	}
 
 }

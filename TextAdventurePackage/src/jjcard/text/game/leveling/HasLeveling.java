@@ -6,10 +6,7 @@ package jjcard.text.game.leveling;
  *
  */
 public interface HasLeveling {
-	
-	
-	
-	
+
 	public int getLevel();
 	
 	public void setLevel(int level);

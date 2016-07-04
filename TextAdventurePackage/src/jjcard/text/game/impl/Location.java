@@ -17,7 +17,7 @@ import jjcard.text.game.util.MapUtil;
 import jjcard.text.game.util.ObjectsUtil;
 
 /**
- * @author jjcard
+ * Basic class to implement {@link ILocation}
  *
  */
 

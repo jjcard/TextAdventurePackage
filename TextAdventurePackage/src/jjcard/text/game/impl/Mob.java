@@ -19,7 +19,6 @@ import jjcard.text.game.util.ObjectsUtil;
 
 /**
  * a class to represent creatures and people.
- * @author jjcard
  *
  */
 @JsonDeserialize(builder = Mob.Builder.class)

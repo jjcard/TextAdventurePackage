@@ -5,7 +5,6 @@ import jjcard.text.game.events.ITextEvent;
 import jjcard.text.game.events.ITextEventListener;
 /**
  * Abstract class that has basic pieces needed for a status that only performs its effect for an event
- * @author jjcard
  *
  */
 public abstract class AbstractStatusEventListener implements ITextEventListener, IStatus {

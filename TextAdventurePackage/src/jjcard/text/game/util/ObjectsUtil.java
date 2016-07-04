@@ -6,7 +6,6 @@ import java.util.Map;
 
 /**
  * Util class for all objects
- * @author User
  *
  */
 public final class ObjectsUtil {

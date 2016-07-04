@@ -2,7 +2,6 @@ package jjcard.text.game.leveling;
 
 /**
  * A strategy to level
- * @author jjcard
  *
  * @param <A>
  */

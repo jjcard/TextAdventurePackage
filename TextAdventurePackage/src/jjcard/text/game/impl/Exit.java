@@ -10,7 +10,6 @@ import jjcard.text.game.util.ObjectsUtil;
 
 /**
  * Class to hold an exit pertaining to a specific ILocation
- * @author jjcard
  *
  */
 @JsonDeserialize(builder = Exit.Builder.class)

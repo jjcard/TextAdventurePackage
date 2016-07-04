@@ -64,7 +64,6 @@ public class PatternList<S> {
 
 	/**
 	 * Class to hold the pattern and the value it returns
-	 * @author jjcard
 	 *
 	 */
 	private class PatternEntry {

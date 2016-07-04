@@ -1,7 +1,6 @@
 package jjcard.text.game.events;
 /**
  * Interface for a Event Manager
- * @author jjcard
  *
  */
 public interface ITextEventManager {

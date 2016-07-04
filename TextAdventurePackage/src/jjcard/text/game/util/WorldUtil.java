@@ -15,7 +15,6 @@ import jjcard.text.game.parser.impl.BasicTextTokenType;
 /**
  * basic world Util that contains locations and player and operations for commands
  * 
- * @author jjcard
  *  @param <P> the player class
  */
 public class WorldUtil<P extends IMob>{

@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
  * The name is used to to refer the the object in the game, usually as a key in a map. 
  * The name should not be able to changed after creation time, as that can have
  * unknown effects on classes that refer to the IGameElement by that name.
- * @author jjcard
  *
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = As.PROPERTY, property = "@class")

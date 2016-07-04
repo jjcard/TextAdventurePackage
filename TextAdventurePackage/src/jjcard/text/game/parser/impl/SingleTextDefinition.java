@@ -7,7 +7,6 @@ import jjcard.text.game.parser.ITextTokenType;
 import jjcard.text.game.util.ObjectsUtil;
 /**
  * Version of ITextDefinition that only has one standard name.
- * @author jjcard
  *
  * @param <T>
  */

@@ -8,7 +8,6 @@ import jjcard.text.game.util.ObjectsUtil;
 
 /**
  * a basic class implementing IGameElement
- * @author jjcard
  *
  */
 
@@ -30,7 +29,6 @@ public abstract class AbstractGameElement implements IGameElement{
 	 * This will also require them to reimplement all the methods here, so the return Builder
 	 * will be of the same type. Other solutions to extending Builders were considered, but the code 
 	 * ended up being too cumbersome and prone to errors. 
-	 * @author jjcard
 	 *
 	 */
 	public static class Builder{

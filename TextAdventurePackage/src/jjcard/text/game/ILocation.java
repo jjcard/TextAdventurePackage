@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 
+import jjcard.text.game.impl.Exit;
+import jjcard.text.game.util.DescriptionUtil;
+
 /**
  * An ILocation contains a collection of IItems, IMobs, and IExits and methods to use them.
  *
@@ -33,7 +36,10 @@ public interface ILocation extends Comparable<ILocation>{
 	public IMob removeMob(String key);
 	public boolean containsMob(String key);
 	public IExit addExit(IExit exit);
-	public IExit addExit(String dir, ILocation room);
+	default public IExit addExit(String dir, ILocation room){
+		Exit exit = new Exit.Builder().name(dir).location(room).build();
+		return addExit(exit);
+	}
 	/**
 	 * Removes the exit with the given direction and returns it.
 	 * @param dir
@@ -54,24 +60,32 @@ public interface ILocation extends Comparable<ILocation>{
 	 * 
 	 * @return room description, description of items and mobs in room, and exits. 
 	 */
-	public String showRoom();
+	default public String showRoom(){
+		return DescriptionUtil.showRoom(this);
+	}
 	/**
 	 * Gets the description for the exits. Must be non-null
 	 * @return
 	 */
 	@JsonIgnore
-	public String getExitsDescriptions();
+	default public String getExitsDescriptions(){
+		return DescriptionUtil.getConcealableNames(getExits(), true);
+	}
 	/**
 	 * Gets the description for each item in the inventory. Must be non-null
 	 * @return
 	 */
 	@JsonIgnore
-	public String getInventoryDescriptions();
+	default public String getInventoryDescriptions(){
+		return DescriptionUtil.getConceableRoomDescriptions(getInventory(), true);
+	}
 	/**
 	 * Gets the description for each mob. Must be non-null
 	 * @return
 	 */
 	@JsonIgnore
-	public String getMobDescriptions();
+	default public String getMobDescriptions(){
+		return DescriptionUtil.getConceableRoomDescriptions(getMobs(), true);
+	}
 	
 }

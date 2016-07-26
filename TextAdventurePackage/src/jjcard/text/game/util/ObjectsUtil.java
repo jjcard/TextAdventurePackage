@@ -87,7 +87,7 @@ public final class ObjectsUtil {
 		
 		return hash;
 	}
-	public static int getkeysHash(Map<String, ?> a){
+	public static int getKeysHash(Map<String, ?> a){
 		if (a == null){
 			return 0;
 		}

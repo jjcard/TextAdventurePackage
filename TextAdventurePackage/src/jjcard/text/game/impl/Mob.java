@@ -510,7 +510,7 @@ public class Mob extends AbstractGameElement implements IMob{
 	}
 	public int hashCode(){
 		int start = super.hashCode();
-		start = start * ObjectsUtil.DEFAULT_PRIME + ObjectsUtil.getkeysHash(inventory);
+		start = start * ObjectsUtil.DEFAULT_PRIME + ObjectsUtil.getKeysHash(inventory);
 		return ObjectsUtil.getHashWithStart(start,
 				ObjectsUtil.DEFAULT_PRIME, attack, defense,
 				curHealth, maxHealth, money, hostile, armour,

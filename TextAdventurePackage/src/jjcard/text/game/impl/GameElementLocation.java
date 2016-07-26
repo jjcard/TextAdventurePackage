@@ -134,20 +134,10 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		return MAP_UTIL.addItemToMap(inventory,add);
 	}
 	public void setInventory(Map<String,IItem> inventoryNew){
-		if (inventoryNew == null){
-			inventory = new HashMap<String,IItem>();
-		} else {
-			inventory = inventoryNew;
-		}
-		
+		inventory = MapUtil.getMapOrNew(inventoryNew);
 	}
 	public void setMobs(Map<String,IMob> roomMob){
-		if (roomMob == null){
-			this.roomMob = new HashMap<String,IMob>();
-		} else {
-			this.roomMob = roomMob;
-		}
-		
+		this.roomMob = MapUtil.getMapOrNew(roomMob);
 	}
 	public IItem removeItem(String key){
 		return MAP_UTIL.removeItemFromMap(inventory, key);
@@ -181,7 +171,6 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		return MAP_UTIL.addItemToMap(exits, exit);
 	}
 
-	
 	/**
 	 * removes Exit under that String
 	 * @param dir
@@ -236,13 +225,6 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		return DescriptionUtil.getConceableRoomDescriptions(roomMob, true);
 	}
 	/**
-	 * 
-	 * @return room description, description of items and mobs in room, and exits. 
-	 */
-	public String showRoom(){
-		return DescriptionUtil.showRoom(this);
-	}
-	/**
 	 * Checks that the name and description are equals. uses {@link ObjectsUtil#equalKeys(Map, Map)}
 	 * to check if the inventory, roomMobs, and exits are equal.
 	 */
@@ -271,21 +253,14 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 	}
 	public int hashCode(){
 		int start = super.hashCode();
-		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getkeysHash(exits);
-		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getkeysHash(inventory);
-		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getkeysHash(roomMob);
+		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getKeysHash(exits);
+		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getKeysHash(inventory);
+		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getKeysHash(roomMob);
 		return start;
 	}
 
-
 	@Override
 	public void setExits(Map<String, IExit> exits) {
-		if (exits == null){
-			this.exits = new HashMap<String, IExit>();
-		} else {
-			this.exits = exits;
-		}
-		
+		this.exits = MapUtil.getMapOrNew(exits);
 	}
-
 }

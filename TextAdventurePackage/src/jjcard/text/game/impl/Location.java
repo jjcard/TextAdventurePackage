@@ -37,18 +37,10 @@ public class Location implements ILocation {
 	private Map<String, IExit> exits;
 	
 	public Location(){
-		this.name = "";
-		description = "";
-		inventory = new HashMap<String, IItem>();
-		roomMob = new HashMap<String, IMob>();
-		exits = new HashMap<String, IExit>();
+		this("", "");
 	}
 	public Location(@JsonProperty("name") String name){
-		this.name = name;
-		description = "";
-		inventory = new HashMap<String, IItem>();
-		roomMob =  new HashMap<String, IMob>();
-		exits = new HashMap<String, IExit>();
+		this(name, "");
 	}
 	public Location(String name, String description){
 		this.name = name;
@@ -57,17 +49,17 @@ public class Location implements ILocation {
 		roomMob =  new HashMap<String, IMob>();
 		exits = new HashMap<String, IExit>();
 	}
-	public Location(String name, String description, Map<String, IItem> invenN){
+	public Location(String name, String description, Map<String, IItem> inventory){
 		this.name = name;
 		this.description = description;
-		setInventory(invenN);
+		setInventory(inventory);
 		roomMob =  new HashMap<String, IMob>();
 		exits = new HashMap<String, IExit>();
 	}
-	public Location(String name, String descripN, Map<String, IItem> invenN, Map<String, IMob>  mobs){
+	public Location(String name, String description, Map<String, IItem> inventory, Map<String, IMob>  mobs){
 		this.name = name;
-		description = descripN;
-		setInventory(invenN);
+		this.description = description;
+		setInventory(inventory);
 		setMobs(mobs);
 		exits = new HashMap<String, IExit>();
 	}
@@ -95,12 +87,12 @@ public class Location implements ILocation {
 		return MAP_UTIL.addItemToMap(inventory, add);
 	}
 	@JsonProperty("inventory")
-	public void setInventory(Map<String, IItem> inventoryNew){
-		inventory = MapUtil.getMapOrNew(inventoryNew);
+	public void setInventory(Map<String, IItem> inventory){
+		inventory = MapUtil.getMapOrNew(inventory);
 	}
 	@JsonProperty("mobs")
-	public void setMobs(Map<String, IMob> roomMobNew){
-		this.roomMob = MapUtil.getMapOrNew(roomMobNew);
+	public void setMobs(Map<String, IMob> mobs){
+		this.roomMob = MapUtil.getMapOrNew(mobs);
 	}
 	@JsonProperty("exits")
 	public void setExits(Map<String, IExit> exits){
@@ -114,14 +106,12 @@ public class Location implements ILocation {
 	}
 	public IMob addMob(IMob m){
 		return MAP_UTIL.addItemToMap(roomMob, m);
-		
 	}
 	public IMob removeMob(String key){
 		return MAP_UTIL.removeItemFromMap(roomMob, key);
 	}
 	public boolean containsMob(String m){
 		return MAP_UTIL.containsKey(roomMob, m);
-
 	}
 	/**
 	 * adds Exit with given String and location
@@ -153,11 +143,7 @@ public class Location implements ILocation {
 	@JsonIgnore
 	public ILocation getExitLocation(String dir){
 		IExit exit = getExit(dir);
-		if (exit != null){
-			return exit.getLocation();
-		} else {
-			return null;
-		}
+		return exit == null? null: exit.getLocation();
 	}
 	@JsonIgnore
 	public IExit getExit(String dir){
@@ -195,14 +181,6 @@ public class Location implements ILocation {
 		return DescriptionUtil.getConceableRoomDescriptions(roomMob, true);
 	}
 	/**
-	 * 
-	 * @return room description, description of items and mobs in room, and exits. 
-	 */
-	public String showRoom(){
-		
-		return DescriptionUtil.showRoom(this);
-	}
-	/**
 	 * Checks that the name and description are equals. uses {@link ObjectsUtil#equalKeys(Map, Map)}
 	 * when it checks if the inventory, mobs, and exits are equal.
 	 */
@@ -234,14 +212,14 @@ public class Location implements ILocation {
 		}
 	}
 	/**
-	 * Gets the hash code of values in Location, using {@link ObjectsUtil#getkeysHash(Map)}
+	 * Gets the hash code of values in Location, using {@link ObjectsUtil#getKeysHash(Map)}
 	 * for getting hash of exits, inventory, and mobs
 	 */
 	public int hashCode(){
 		int start = 1;
-		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getkeysHash(exits);
-		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getkeysHash(inventory);
-		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getkeysHash(roomMob);
+		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getKeysHash(exits);
+		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getKeysHash(inventory);
+		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getKeysHash(roomMob);
 		return ObjectsUtil.getHashWithStart(start, ObjectsUtil.DEFAULT_PRIME, name, description);
 	}
 }

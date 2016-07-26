@@ -88,7 +88,7 @@ public class Location implements ILocation {
 	}
 	@JsonProperty("inventory")
 	public void setInventory(Map<String, IItem> inventory){
-		inventory = MapUtil.getMapOrNew(inventory);
+		this.inventory = MapUtil.getMapOrNew(inventory);
 	}
 	@JsonProperty("mobs")
 	public void setMobs(Map<String, IMob> mobs){

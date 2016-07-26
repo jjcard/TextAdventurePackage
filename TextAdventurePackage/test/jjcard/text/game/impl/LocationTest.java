@@ -8,24 +8,17 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jjcard.text.game.IExit;
 import jjcard.text.game.IItem;
 import jjcard.text.game.IMob;
-import jjcard.text.game.impl.Exit;
-import jjcard.text.game.impl.Item;
-import jjcard.text.game.impl.Location;
-import jjcard.text.game.impl.Mob;
 
 public class LocationTest {
 	private Mob mob;
@@ -148,7 +141,7 @@ public class LocationTest {
 		assertNull(hallway.getItem("worthless trash"));
 	}
 	@Test
-	public void jsonTest() throws JsonParseException, JsonMappingException, IOException{
+	public void jsonTest() throws Exception{
 		String name = "fjksdafjlsd";
 		String descrip = "a white walled testing facility";
 		Map<String, IItem> inventory = new HashMap<>();
@@ -156,17 +149,19 @@ public class LocationTest {
 		Map<String, IMob> mobs = new HashMap<>();
 		mobs.put("turret", new Mob.Builder().hostile(true).name("FrakenTurret").build());
 		Location loc = new Location(name, descrip, inventory, mobs);
+		assertEquals(inventory, loc.getInventory());
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ObjectMapper m = new ObjectMapper();
 		m.writeValue(out, loc);
 		
 		Location in = m.readValue(new ByteArrayInputStream(out.toByteArray()), Location.class);
 		
-		assertEquals(loc, in);
+		
 		assertEquals(name, in.getName());
 		assertEquals(descrip, in.getDescription());
 		assertEquals(mobs, in.getMobs());
 		assertEquals(inventory, in.getInventory());
+		assertEquals(loc, in);
 	}
 	@Test
 	public void removeExitTest(){

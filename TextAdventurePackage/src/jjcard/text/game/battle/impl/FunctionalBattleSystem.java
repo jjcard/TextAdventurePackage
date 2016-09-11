@@ -6,6 +6,7 @@ import jjcard.text.game.IMob;
 import jjcard.text.game.battle.IBattleSystem;
 /**
  * Class for taking in lambdas for dealing with happens on attack, on death, and on living during a battle.
+ * First the <code> onAttack </code> function is called, then either the onDeath or onLive is called depending on the result of {@link IMob#isDead()}
  *
  * @param <R> the return type
  */
@@ -23,6 +24,11 @@ public class FunctionalBattleSystem<R> implements IBattleSystem<R> {
 		this.onDeath = onDeath;
 		this.onLive = onLive;
 	}
+	/**
+	 * Greats FunctionalBattleSystem with a {@link #getNoOpBattleConsumer()} <code> onLive</code> function.
+	 * @param onAttack
+	 * @param onDeath
+	 */
 	public FunctionalBattleSystem(BiFunction<IMob, IMob, R> onAttack, BattleConsumer<R> onDeath){
 		this.onAttack = onAttack;
 		this.onDeath = onDeath;

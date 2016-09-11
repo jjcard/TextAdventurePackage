@@ -15,7 +15,6 @@ public interface IBattleSystem<R> {
 	 * @param defender
 	 * @return the damage done
 	 */
-//	@Experimental
 	public R attackMob(IMob attacker, IMob defender);
 
 }

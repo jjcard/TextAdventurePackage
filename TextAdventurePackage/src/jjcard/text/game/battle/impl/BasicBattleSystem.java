@@ -15,7 +15,6 @@ public class BasicBattleSystem extends FunctionalBattleSystem<Integer> {
 	private static final BiFunction<IMob, IMob, Integer> ON_ATTACK = (attacker, defender) -> {
 		int damage = Math.max(0, attacker.getFullAttack() - defender.getFullDefense());
 		defender.setHealth(Math.max(defender.getHealth() - damage, 0));
-
 		return damage;
 	};
 	public BasicBattleSystem(BattleConsumer<Integer> onDeath) {

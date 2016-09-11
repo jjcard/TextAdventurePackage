@@ -35,5 +35,19 @@ public class BasicBattleSystemTest {
 		assertEquals(9990, damageOut);
 		assertEquals(0, defender.getHealth());
 	}
+	@Test
+	public void underKillTest(){
+		BasicBattleSystem fixture = new BasicBattleSystem(FunctionalBattleSystem.getNoOpBattleConsumer());
+		
+		Mob attacker = new Mob.Builder().health(10).attack(10).build();
+		
+		Mob defender = new Mob.Builder().health(10).defense(10000000).build();
+		
+		assertEquals(10, defender.getHealth());
+		
+		int damageOut = fixture.attackMob(attacker, defender);
+		assertEquals(0, damageOut);
+		assertEquals(10, defender.getHealth());
+	}
 
 }

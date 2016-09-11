@@ -4,7 +4,11 @@ import java.util.function.BiFunction;
 
 import jjcard.text.game.IMob;
 import jjcard.text.game.battle.IBattleSystem;
-
+/**
+ * Class for taking in lambdas for dealing with happens on attack, on death, and on living during a battle.
+ *
+ * @param <R> the return type
+ */
 public class FunctionalBattleSystem<R> implements IBattleSystem<R> {
 	@FunctionalInterface
 	public static interface BattleConsumer<T>{
@@ -22,7 +26,7 @@ public class FunctionalBattleSystem<R> implements IBattleSystem<R> {
 	public FunctionalBattleSystem(BiFunction<IMob, IMob, R> onAttack, BattleConsumer<R> onDeath){
 		this.onAttack = onAttack;
 		this.onDeath = onDeath;
-		this.onLive = (a, b, c)->{};
+		this.onLive = getNoOpBattleConsumer();
 	}
 	@Override
 	public R attackMob(IMob attacker, IMob defender) {
@@ -34,6 +38,13 @@ public class FunctionalBattleSystem<R> implements IBattleSystem<R> {
 		}
 		return result;
 
+	}
+	/**
+	 * Gets a BattleConsumer that performs no operations
+	 * @return BattleConsumer<R>
+	 */
+	public static <R> BattleConsumer<R> getNoOpBattleConsumer(){
+		return (a, b, c)->{};
 	}
 
 }

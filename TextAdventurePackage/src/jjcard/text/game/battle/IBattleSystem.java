@@ -3,7 +3,9 @@ package jjcard.text.game.battle;
 import jjcard.text.game.IMob;
 import jjcard.text.game.util.Experimental;
 /**
- * System for attacked, defending against an attack
+ * Interface for attacked, defending against an attack
+ *
+ * @param <R> return type
  */
 @Experimental
 @FunctionalInterface

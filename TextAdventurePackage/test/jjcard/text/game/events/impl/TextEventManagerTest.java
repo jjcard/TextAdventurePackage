@@ -26,7 +26,7 @@ public class TextEventManagerTest {
 		boolean succeded = evntMgr.generateEvent(new SimpleTextEvent("attack", "Nothing"));
 		assertFalse(succeded);
 	}
-	
+	@Test
 	public void hasEventListenerTest(){
 		ITextEventManager evntMgr = TextEventManager.getInstance();
 		ITextEventListener listener = new ITextEventListener() {
@@ -44,6 +44,21 @@ public class TextEventManagerTest {
 		evntMgr.registerEventListener(listener, SimpleTextEvent.class);
 		
 		boolean succeded = evntMgr.generateEvent(new SimpleTextEvent("get", "Win"));
+		assertTrue(succeded);
+	}
+	@Test
+	public void functionalInterfaceTest(){
+		ITextEventManager evntMgr = TextEventManager.getInstance();
+		ITextEventListener listener = (event) -> {
+			SimpleTextEvent e = (SimpleTextEvent) event;
+			assertEquals("len", e.getKey());
+			assertEquals("Vim", e.getCommandKey());
+			return true;
+		};
+		
+		evntMgr.registerEventListener(listener, SimpleTextEvent.class);
+		
+		boolean succeded = evntMgr.generateEvent(new SimpleTextEvent("len", "Vim"));
 		assertTrue(succeded);
 	}
 

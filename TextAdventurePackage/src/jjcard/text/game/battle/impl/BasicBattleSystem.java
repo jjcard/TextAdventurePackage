@@ -17,10 +17,12 @@ public class BasicBattleSystem extends FunctionalBattleSystem<Integer> {
 		defender.setHealth(Math.max(defender.getHealth() - damage, 0));
 		return damage;
 	};
+
 	public BasicBattleSystem(BattleConsumer<Integer> onDeath) {
-		super(ON_ATTACK , onDeath);
+		super(ON_ATTACK, onDeath);
 	}
+
 	public BasicBattleSystem(BattleConsumer<Integer> onDeath, BattleConsumer<Integer> onLive) {
-		super(ON_ATTACK , onDeath, onLive);
+		super(ON_ATTACK, onDeath, onLive);
 	}
 }

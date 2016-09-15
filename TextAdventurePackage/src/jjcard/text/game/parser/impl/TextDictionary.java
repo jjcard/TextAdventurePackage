@@ -101,16 +101,25 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 	 * For the given IGameElements, adds the standard name for the element to the map.
 	 * @param element
 	 * @param value
+	 * @return this
 	 */
-	public void putAll(ITextDefinition<T> value, IGameElement... elements){
+	public TextDictionary<T> putAll(ITextDefinition<T> value, IGameElement... elements){
 		for (IGameElement element: elements){
 			put(element, value);
 		}
+		return this;
 	}
-	public void putAll(T value, IGameElement... elements){
+	/**
+	 * 
+	 * @param value
+	 * @param elements
+	 * @return this
+	 */
+	public TextDictionary<T> putAll(T value, IGameElement... elements){
 		for (IGameElement element: elements){
 			put(element, new SimpleTextDefinition<T>(value));
 		}
+		return this;
 	}
 	/**
 	 * Adds the standard name for the element to the map.
@@ -127,23 +136,43 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 			put(key, value);
 		}
 	}
-	public void putAllElements(Collection<IGameElement> keys, ITextDefinition<T> value){
+	/**
+	 * 
+	 * @param keys
+	 * @param value
+	 * @return this
+	 */
+	public TextDictionary<T> putAllElements(Collection<IGameElement> keys, ITextDefinition<T> value){
 		for (IGameElement g: keys){
 			put(g, value);
 		}
+		return this;
 	}
 	public void put(ITextDefinition<T> value, IGameElement element, String...keys){
 		put(element, value);
 		putAll(value, keys);
 	}
-	public void putAll(ITextDefinition<T> value, String...keys){
+	/**
+	 * 
+	 * @param value
+	 * @param keys
+	 * @return this
+	 */
+	public TextDictionary<T> putAll(ITextDefinition<T> value, String...keys){
 		for (String key: keys){
 			put(key, value);
 		}
+		return this;
 	}
-	public void putAll(T value, String...keys){
+	/**
+	 * 
+	 * @param value
+	 * @param keys
+	 * @return this
+	 */
+	public TextDictionary<T> putAll(T value, String...keys){
 		ITextDefinition<T> def = new SimpleTextDefinition<T>(value);
-		putAll(def, keys);
+		return putAll(def, keys);
 	}
 	public ITextDefinition<T> put(String key, ITextDefinition<T> value){
 		return super.put(automaticCasing? key.toUpperCase(locale):key, value);

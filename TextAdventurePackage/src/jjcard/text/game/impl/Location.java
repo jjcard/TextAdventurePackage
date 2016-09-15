@@ -20,8 +20,6 @@ import jjcard.text.game.util.ObjectsUtil;
  * Basic class to implement {@link ILocation}
  *
  */
-
-
 public class Location implements ILocation {
 	@JsonIgnore
 	private static final MapUtil MAP_UTIL = MapUtil.getInstance();

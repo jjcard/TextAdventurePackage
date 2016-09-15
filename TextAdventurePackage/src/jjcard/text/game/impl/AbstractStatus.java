@@ -1,7 +1,8 @@
 package jjcard.text.game.impl;
 
 import jjcard.text.game.IStatus;
-
+import jjcard.text.game.util.Experimental;
+@Experimental
 public abstract class AbstractStatus<T> implements IStatus {
 	/**
 	 * true if the status should be done before the Mob acts, or after it in the turn. 

@@ -210,7 +210,7 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 			if (player.getInventory().isEmpty()) {
 				output.println("You have nothing in your inventory");
 			} else {
-				output.println(player.inventoryToString());
+				output.println(player.inventoryOverview());
 			}
 		case MONEY:
 			output.println(player.getMoney());

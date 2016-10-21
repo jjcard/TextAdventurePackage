@@ -309,7 +309,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		}
 
 	}
-	public void addIStatus(IStatus s){
+	public void addStatus(IStatus s){
 			statusList.add(s);
 
 	}
@@ -515,7 +515,7 @@ public class Mob extends AbstractGameElement implements IMob{
 				curHealth, maxHealth, money, hostile, armour,
 				weapon, statusList);
 	}
-	public String inventoryToString(){
+	public String inventoryOverview(){
 		return MapUtil.getKeysAsString(inventory);
 		
 	}

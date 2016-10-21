@@ -27,8 +27,8 @@ public class ShopItem<T extends IItem> implements IShopItem{
 		if (item == null){
 			throw new NullPointerException();
 		}
-		if (amount < 0){
-			throw new IllegalArgumentException("amount must be zero or greater");
+		if (amount < -1){
+			throw new IllegalArgumentException("amount must be -1 or greater");
 		}
 		if (price < 0){
 			throw new IllegalArgumentException("price must be zero or greater");
@@ -41,8 +41,8 @@ public class ShopItem<T extends IItem> implements IShopItem{
 		if (item == null){
 			throw new NullPointerException();
 		}
-		if (amount < 0){
-			throw new IllegalArgumentException("amount must be zero or greater");
+		if (amount < -1){
+			throw new IllegalArgumentException("amount must be -1 or greater");
 		}
 		if (price < 0){
 			throw new IllegalArgumentException("price must be zero or greater");

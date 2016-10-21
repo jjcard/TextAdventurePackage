@@ -55,6 +55,12 @@ public final class MapUtil {
 		checkArg(locale, "locale");
 		this.locale = locale;
 	}
+	/**
+	 * 
+	 * @param map
+	 * @param item
+	 * @return previous item associated with the key
+	 */
 	public <K extends IGameElement> K addItemToMap(Map<String, K> map, K item){
 		return map.put(getUppercase(item.getName()), item);
 	}
@@ -64,16 +70,26 @@ public final class MapUtil {
 	public <K extends IGameElement> K getItemFromMap(Map<String, K> map, String key){
 		return map.get(getUppercase(key));
 	}
+	/**
+	 * Removes and returns item with given key
+	 * @param map
+	 * @param key
+	 * @return item associated with key
+	 */
 	public <K extends IGameElement> K removeItemFromMap(Map<String, K> map, String key){
 		return map.remove(getUppercase(key));
 	}
-	
+	/**
+	 * Null-safe check for key being for given item
+	 * @param key
+	 * @param item
+	 * @return
+	 */
 	public static boolean isKeyForItem(String key, IGameElement item){
-
 		if (item == null){
 			return false;
 		}
-		if (key.equalsIgnoreCase(item.getName())){
+		if (key == item.getName() || key.equalsIgnoreCase(item.getName())) {
 			return true;
 		}
 		return false;

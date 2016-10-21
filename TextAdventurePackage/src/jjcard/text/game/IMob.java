@@ -35,7 +35,7 @@ public interface IMob extends ConcealableGameElement{
 	 */
 	public boolean removeStatus(IStatus status);
 	
-	public String inventoryToString();
+	public String inventoryOverview();
 	public boolean isKeyForWeapon(String key);
 	public boolean isKeyforArmour(String key);
 	
@@ -55,7 +55,11 @@ public interface IMob extends ConcealableGameElement{
 	 * @return armour
 	 */
 	public IArmour removeArmour();
-	
+	/**
+	 * Add Item to inventory
+	 * @param add
+	 * @return previous item associated with name
+	 */
 	public IItem addItem(IItem add);
 	public void addAllItems(Map<String, IItem> items);
 	/**
@@ -82,7 +86,7 @@ public interface IMob extends ConcealableGameElement{
 	 * @return previous armour
 	 */
 	public IArmour setArmour( IArmour armour);
-	public void addIStatus(IStatus status);
+	public void addStatus(IStatus status);
 	/**
 	 * Removes the Inventory from the mob and returns the result
 	 * @return inventory

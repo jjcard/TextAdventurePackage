@@ -27,13 +27,12 @@ public interface IStatus {
 	/**
 	 * Performs the status effect on mob and returns result. 
 	 * mobsTurn is true if it is the turn of the Mob this status is attached to.
-	 * @param mob the Mob
 	 * @param mobsTurn the boolean
 	 */
 	public void effect(boolean mobsTurn);
 	/**
 	 * Should return true when the status is done and can be removed from mob.
-	 * Should be called after each time by game after each check for turn or effect.
+	 * Should be called after by game after each check for turn or effect.
 	 * @return
 	 */
 	public boolean isDone();

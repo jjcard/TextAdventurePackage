@@ -1,4 +1,7 @@
 package jjcard.text.game.impl;
+
+import static jjcard.text.game.util.WorldUtil.isKeyForItem;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import jjcard.text.game.IArmour;
-import jjcard.text.game.IGameElement;
 import jjcard.text.game.IItem;
 import jjcard.text.game.IMob;
 import jjcard.text.game.IStatus;
@@ -393,7 +395,11 @@ public class Mob extends AbstractGameElement implements IMob{
 		this.hostile = hostile;
 	}
 	public void setStatusList(List<IStatus> s){
-		statusList = s;
+		if (s == null){
+			statusList = new LinkedList<>();
+		} else {
+			statusList = s;
+		}
 	}
 	public IItem addItem(IItem add){
 		return MAP_UTIL.addItemToMap(inventory, add);
@@ -439,6 +445,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		weapon = null;
 		return re;
 	}
+	@JsonIgnore
 	public String getArmourKey(){
 		return armour == null? null: armour.getName();
 	}
@@ -446,19 +453,11 @@ public class Mob extends AbstractGameElement implements IMob{
 	public boolean isKeyforArmour(String key){
 		return isKeyForItem(key, armour);
 	}
-	private boolean isKeyForItem(String key, IGameElement item){
-		if (item == null){
-			return false;
-		}
-		if (key.equalsIgnoreCase(item.getName())){
-			return true;
-		}
-		return false;
-	}
 	@JsonIgnore
 	public boolean isKeyForWeapon(String key){
 		return isKeyForItem(key, weapon);
 	}
+	@JsonIgnore
 	public String getWeaponKey(){
 		return weapon == null? null: weapon.getName();
 	}

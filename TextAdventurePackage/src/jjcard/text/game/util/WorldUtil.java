@@ -406,4 +406,19 @@ public class WorldUtil<P extends IMob>{
 			throw new NotFoundException(key);
 		}
 	}
+	/**
+	 * Returns true if items name matches given key
+	 * @param key
+	 * @param item
+	 * @return if matches
+	 */
+	public static boolean isKeyForItem(String key, IGameElement item){
+		if (item == null){
+			return false;
+		}
+		if (key.equalsIgnoreCase(item.getName())){
+			return true;
+		}
+		return false;
+	}
 }

@@ -84,7 +84,7 @@ public final class MapUtil {
 
 	}
 	public static String getKeysAsString(Map<String, ?> map){
-		if (map == null){
+		if (map == null || map.isEmpty()){
 			return "";
 		}
 		String keys = map.keySet().toString();

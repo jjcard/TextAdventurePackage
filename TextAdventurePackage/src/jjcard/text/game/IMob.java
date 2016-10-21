@@ -15,28 +15,29 @@ public interface IMob extends ConcealableGameElement{
 	public IArmour getArmour();
 	public IWeapon getWeapon();
 	/**
-	 * returns defense only. Does not add Armour bonus.
-	 * @return
+	 * returns defense only. Does not include any bonuses.
+	 * @return basic defense
 	 */
 	public int getBasicDefense();
 	
 	/**
-	 * returns attack only. Does not add weapon bonus.
-	 * @return
+	 * returns attack only. Does not include any bonuses.
+	 * @return basic attack
 	 */
 	public int getBasicAttack();
 	public boolean isHostile();
 	public List<IStatus> getStatusList();
 	public boolean containsStatus(IStatus status);
+	/**
+	 * 
+	 * @param status
+	 * @return true if status was found and removed
+	 */
 	public boolean removeStatus(IStatus status);
 	
 	public String inventoryToString();
-	@JsonIgnore
-	public String getWeaponKey();
 	public boolean isKeyForWeapon(String key);
 	public boolean isKeyforArmour(String key);
-	@JsonIgnore
-	public String getArmourKey();
 	
 	/**
 	 * Removes the weapon and returns the result
@@ -49,29 +50,42 @@ public interface IMob extends ConcealableGameElement{
 	public boolean containsItem(String key);
 	public void setHealth(int health);
 	public IItem removeItem(String key);
-	
+	/**
+	 * Remove armour and return it
+	 * @return armour
+	 */
 	public IArmour removeArmour();
 	
 	public IItem addItem(IItem add);
 	public void addAllItems(Map<String, IItem> items);
 	/**
-	 * gets attack plus any attack bonus
-	 * @return
+	 * gets attack plus any attack bonuses
+	 * @return full attack
 	 */
 	@JsonIgnore
 	public int getFullAttack();
 	/**
-	 *  gets defense plus any bonus
-	 * @return
+	 *  gets defense plus any bonuses
+	 * @return full defense
 	 */
 	@JsonIgnore
 	public int getFullDefense();
+	/**
+	 * sets weapon
+	 * @param weapon
+	 * @return previous weapon
+	 */
 	public IWeapon setWeapon(IWeapon weapon);
+	/**
+	 * sets armour
+	 * @param armour
+	 * @return previous armour
+	 */
 	public IArmour setArmour( IArmour armour);
 	public void addIStatus(IStatus status);
 	/**
 	 * Removes the Inventory from the mob and returns the result
-	 * @return
+	 * @return inventory
 	 */
 	public Map<String, IItem> removeInventory();
 }

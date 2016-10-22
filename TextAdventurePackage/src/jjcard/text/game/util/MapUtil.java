@@ -19,8 +19,8 @@ public final class MapUtil {
 	private static MapUtil instance;
 	private boolean setUppercase = true;
 	/**
-	 * get instance
-	 * @return get instance of MapUtil
+	 * get instance of map util. Lazy loaded
+	 * @return instance of MapUtil
 	 */
 	public static MapUtil getInstance(){
 		if (instance == null){

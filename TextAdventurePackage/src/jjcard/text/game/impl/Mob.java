@@ -430,10 +430,6 @@ public class Mob extends AbstractGameElement implements IMob{
 		return inventory.size();
 	}
 	@JsonIgnore
-	public boolean isDead(){
-		return  getHealth() <= 0;
-	}
-	@JsonIgnore
 	public boolean isAlive(){
 		return !isDead();
 	}

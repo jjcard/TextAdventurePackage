@@ -2,9 +2,10 @@ package jjcard.text.game.leveling.impl;
 
 import jjcard.text.game.leveling.HasLeveling;
 import jjcard.text.game.leveling.LevelingStrategy;
+import jjcard.text.game.util.Experimental;
 
 
-
+@Experimental
 public class BaseLevelingStrategy implements LevelingStrategy<HasLeveling> {
 	private static final int[] DEFAULT_LEVELING_CHART = new int[]{1000, 3000, 6000, 
 		10000, 15000, 21000, 28000, 36000, 45000, 55000, 66000, 78000, 

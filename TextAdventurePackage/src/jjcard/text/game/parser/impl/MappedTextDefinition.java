@@ -24,7 +24,7 @@ public class MappedTextDefinition<T extends ITextTokenType> extends AbstractText
 
 
 	public String putEntry(String key, String value){
-		return this.standerizedMap.put(key, value);
+		return standerizedMap.put(key, value);
 	}
 	@Override
 	public String getStandardToken(String token) {

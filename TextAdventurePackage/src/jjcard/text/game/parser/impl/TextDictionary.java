@@ -125,9 +125,10 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 	 * Adds the standard name for the element to the map.
 	 * @param element
 	 * @param value
+	 * @return  previous value associated with element's name
 	 */
-	public void put(IGameElement element, ITextDefinition<T> value){
-		put(element.getName(), value);
+	public ITextDefinition<T> put(IGameElement element, ITextDefinition<T> value){
+		return put(element.getName(), value);
 		
 	}
 	@Override
@@ -148,9 +149,17 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 		}
 		return this;
 	}
-	public void put(ITextDefinition<T> value, IGameElement element, String...keys){
+	/**
+	 * 
+	 * @param value
+	 * @param element
+	 * @param keys
+	 * @return this
+	 */
+	public TextDictionary<T> put(ITextDefinition<T> value, IGameElement element, String...keys){
 		put(element, value);
 		putAll(value, keys);
+		return this;
 	}
 	/**
 	 * 
@@ -174,6 +183,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 		ITextDefinition<T> def = new SimpleTextDefinition<T>(value);
 		return putAll(def, keys);
 	}
+	
 	public ITextDefinition<T> put(String key, ITextDefinition<T> value){
 		return super.put(automaticCasing? key.toUpperCase(locale):key, value);
 	}

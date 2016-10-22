@@ -1,5 +1,5 @@
 package jjcard.text.game.parser;
-
+import static jjcard.text.game.util.ObjectsUtil.checkArg;
 import jjcard.text.game.util.ObjectsUtil;
 
 /**
@@ -13,16 +13,17 @@ public class TextToken<T extends ITextTokenType> implements ITextTokenType{
 	
 	private final T type;
 
-	public TextToken(String token, String standardToken, T type){
-		if (token == null){
-			throw new NullPointerException("token");
-		}
-		if (type == null){
-			throw new NullPointerException("type");
-		}
-		if (standardToken == null){
-			throw new NullPointerException("standardToken");
-		}
+	/**
+	 * 
+	 * @param token
+	 * @param standardToken
+	 * @param type
+	 * @throws NullPointerException if token, standardToken, or type is null
+	 */
+	public TextToken(String token, String standardToken, T type) throws NullPointerException{
+		checkArg(token, "token");
+		checkArg(type, "type");
+		checkArg(standardToken, "standardToken");
 		this.token = token;
 		this.type = type;
 		this.standardToken = standardToken;

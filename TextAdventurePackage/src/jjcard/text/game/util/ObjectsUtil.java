@@ -98,8 +98,9 @@ public final class ObjectsUtil {
 	 * throws exception if the argument is null with the given string as detail 
 	 * @param arg
 	 * @param name
+	 * @throws NullPointerException
 	 */
-	public static void checkArg(Object arg, final String name){
+	public static void checkArg(Object arg, final String name) throws NullPointerException{
 		if (arg == null){
 			throw new NullPointerException(name);
 		}

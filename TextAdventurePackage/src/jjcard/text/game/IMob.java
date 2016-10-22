@@ -6,11 +6,23 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public interface IMob extends ConcealableGameElement{
-
+	/**
+	 * Returns max health of Mob
+	 * @return max health
+	 */
 	public int getMaxHealth();
+	/**
+	 * Returns current health of mob
+	 * @return current health
+	 */
 	public int getHealth();
 	public int getMoney();
 	public Map<String, IItem> getInventory();
+	/**
+	 * Returns item matching given key from inventory
+	 * @param key
+	 * @return
+	 */
 	public IItem getItem(String key);
 	public IArmour getArmour();
 	public IWeapon getWeapon();
@@ -45,7 +57,9 @@ public interface IMob extends ConcealableGameElement{
 	 */
 	public IWeapon removeWeapon();
 	@JsonIgnore
-	public boolean isDead();
+	public default boolean isDead(){
+		return  getHealth() <= 0;
+	}
 	
 	public boolean containsItem(String key);
 	public void setHealth(int health);

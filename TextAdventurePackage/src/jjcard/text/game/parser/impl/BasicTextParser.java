@@ -34,7 +34,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	 * Pattern to split characters using the default deliminators
 	 */
 	public static final Pattern DEFAULT_SPLIT_PATTERN = compileSplitPattern(DEFAULT_DELIMINATORS);
-	private final Pattern SPLIT_PATTERN;
+	private final Pattern splitPattern;
 	private static final int DEFAULT_OBJECT_LIMIT = 10;
 	private int objectLimit = DEFAULT_OBJECT_LIMIT;
 	
@@ -55,7 +55,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		this.textIndicatorPatterns = new PatternList<>();
 		this.textTokenPatterns = new PatternList<>();
 		this.dictionary = new TextDictionary<T>();
-		this.SPLIT_PATTERN = compileSplitPattern(deliminators);
+		this.splitPattern = compileSplitPattern(deliminators);
 	}
 	/**
 	 * Creates a BasicTextParser with the given deliminators. Deliminators are a String of characters, which each individual one should could as a deliminator.
@@ -72,18 +72,19 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		this.textIndicatorPatterns = new PatternList<>();
 		this.textTokenPatterns = new PatternList<>();
 		this.dictionary = new TextDictionary<T>();
-		this.SPLIT_PATTERN = DEFAULT_SPLIT_PATTERN;
+		this.splitPattern = DEFAULT_SPLIT_PATTERN;
 	}
 	public BasicTextParser(ITextDictionary<T> dictionary){
 		this();
 		this.dictionary = dictionary;
 	}
 	public static Pattern compileSplitPattern(String deliminators) throws PatternSyntaxException {
+		//split pattern based on StackOverflow post by Bart Kiers
 		return Pattern.compile("["+ deliminators +"]+(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 	}
 	@Override
 	protected String[] splitText(String text) {
-		return SPLIT_PATTERN.split(text);
+		return splitPattern.split(text);
 	}
 	/**
 	 * Called when the {@link TextIndicator.REPEAT_INDICATOR} is found. Returns the Previous TextTokenStream.

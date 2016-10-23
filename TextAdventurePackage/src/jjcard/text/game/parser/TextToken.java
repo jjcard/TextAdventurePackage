@@ -3,7 +3,8 @@ import static jjcard.text.game.util.ObjectsUtil.checkArg;
 import jjcard.text.game.util.ObjectsUtil;
 
 /**
- * A Class for containing the parsed Token.
+ * A Class for containing the parsed Token. Includes to original token, the
+ * standardized token, and the ITextTokenType type.
  *
  */
 public class TextToken<T extends ITextTokenType> implements ITextTokenType{

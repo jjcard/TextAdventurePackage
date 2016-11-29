@@ -11,7 +11,9 @@ public interface ITextTokenType {
 
 	public boolean isObject();
 	
-	public boolean isVerb();
+	public default boolean isVerb(){
+		return !isObject();
+	}
 	
 	/**
 	 * Optional operation that returns the basic set of words that this ITextTokenType relates to

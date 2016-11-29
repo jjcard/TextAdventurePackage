@@ -283,12 +283,14 @@ public class WorldUtil<P extends IMob>{
 		return current.containsExit(dir);
 	}
 	/**
+	 * 
 	 * Gets the view description String depending on key and TokenType.
 	 * First checks if TokenType is ROOM or PLAYER, then checks if
 	 * room's item, room's mob, player's inventory, or room's exits contain standard token, in that order. 
 	 * @param object
 	 * @return view description of matching object
 	 */
+	//TODO only one that still has to be BasicTextTokenType
 	public String lookAt(TextToken<BasicTextTokenType> object) {
 		
 		if (object.getType().equals(BasicTextTokenType.ROOM)) {

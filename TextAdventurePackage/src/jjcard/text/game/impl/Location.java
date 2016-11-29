@@ -133,16 +133,6 @@ public class Location implements ILocation {
 		return MAP_UTIL.removeItemFromMap(exits, dir);
 	}
 
-	/**
-	 * returns Location corresponding to dir to uppercase
-	 * @param dir
-	 * @return
-	 */
-	@JsonIgnore
-	public ILocation getExitLocation(String dir){
-		IExit exit = getExit(dir);
-		return exit == null? null: exit.getLocation();
-	}
 	@JsonIgnore
 	public IExit getExit(String dir){
 		return MAP_UTIL.getItemFromMap(exits, dir);

@@ -49,9 +49,12 @@ public interface ILocation extends Comparable<ILocation>{
 	/**
 	 * returns Location corresponding to directions
 	 * @param dir
-	 * @return
+	 * @return ILocation
 	 */
-	public ILocation getExitLocation(String dir);
+	public default ILocation getExitLocation(String dir){
+		IExit exit = getExit(dir);
+		return exit == null? null: exit.getLocation();
+	}
 	public IExit getExit(String dir);
 	public IMob getMob(String key);
 	public IItem getItem(String key);

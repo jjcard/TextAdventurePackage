@@ -95,6 +95,9 @@ public class Item extends AbstractGameElement implements IItem{
 		  setMovable(builder.movable);
 		  setUse(builder.use);
 	}
+	public Item(String name){
+		super(name);
+	}
 	public int getCost() {
 		return cost;
 	}

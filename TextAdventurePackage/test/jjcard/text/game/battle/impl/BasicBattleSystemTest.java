@@ -11,9 +11,9 @@ public class BasicBattleSystemTest {
 	public void equalAttackDefenseTest() {
 		BasicBattleSystem fixture = new BasicBattleSystem(FunctionalBattleSystem.getNoOpBattleConsumer());
 		
-		Mob attacker = new Mob.Builder().health(10).attack(3).build();
+		Mob attacker = new Mob.Builder().name("").health(10).attack(3).build();
 		
-		Mob defender = new Mob.Builder().health(10).defense(3).build();
+		Mob defender = new Mob.Builder().name("").health(10).defense(3).build();
 		
 		assertEquals(10, defender.getHealth());
 		
@@ -25,9 +25,9 @@ public class BasicBattleSystemTest {
 	public void overKillTest(){
 		BasicBattleSystem fixture = new BasicBattleSystem(FunctionalBattleSystem.getNoOpBattleConsumer());
 		
-		Mob attacker = new Mob.Builder().health(10).attack(10000).build();
+		Mob attacker = new Mob.Builder().name("").health(10).attack(10000).build();
 		
-		Mob defender = new Mob.Builder().health(10).defense(10).build();
+		Mob defender = new Mob.Builder().name("").health(10).defense(10).build();
 		
 		assertEquals(10, defender.getHealth());
 		
@@ -39,9 +39,9 @@ public class BasicBattleSystemTest {
 	public void underKillTest(){
 		BasicBattleSystem fixture = new BasicBattleSystem(FunctionalBattleSystem.getNoOpBattleConsumer());
 		
-		Mob attacker = new Mob.Builder().health(10).attack(10).build();
+		Mob attacker = new Mob.Builder().name("").health(10).attack(10).build();
 		
-		Mob defender = new Mob.Builder().health(10).defense(10000000).build();
+		Mob defender = new Mob.Builder().name("").health(10).defense(10000000).build();
 		
 		assertEquals(10, defender.getHealth());
 		

@@ -36,7 +36,7 @@ public class MobBuilderTest {
 		Item item = new Item.Builder().name("Token").cost(1).build();
 		builder.addItem(item);
 		
-		Mob mob = builder.build();
+		Mob mob = builder.name("Mob").build();
 		
 		assertTrue(mob.containsItem("Token"));
 		assertNotNull(mob.getItem("Token"));

@@ -32,7 +32,7 @@ public abstract class AbstractGameElement implements IGameElement{
 	 *
 	 */
 	public static class Builder{
-		private String name;
+		private String name = "";
 		private String roomDescription;
 		private String viewDescription;
 		private boolean validateFields = true;
@@ -76,9 +76,14 @@ public abstract class AbstractGameElement implements IGameElement{
 	
 	protected AbstractGameElement(Builder builder){
 		this.name = builder.name;
+		ObjectsUtil.checkArg(name, "name");
 		this.roomDescription = builder.roomDescription;
 		this.validateFields = builder.validateFields;
 		this.viewDescription = builder.viewDescription;
+	}
+	protected AbstractGameElement(String name){
+		ObjectsUtil.checkArg(name, "name");
+		this.name = name;
 	}
 	public final String getName(){
 		return name;

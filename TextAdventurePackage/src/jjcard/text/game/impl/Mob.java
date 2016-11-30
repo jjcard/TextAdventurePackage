@@ -220,6 +220,14 @@ public class Mob extends AbstractGameElement implements IMob{
 		  checkHealth = b.checkHealth;
 		  hidden = b.hidden;
 	}
+	/**
+	 * Constructor for only name. <code>checkHealth</code> is set to false.
+	 * @param name
+	 */
+	public Mob(String name){
+		super(name);
+		checkHealth = false;
+	}
 	public int getMaxHealth() {
 		return maxHealth;
 	}

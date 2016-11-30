@@ -48,6 +48,11 @@ public abstract class AbstractGameElement implements IGameElement{
 			this.roomDescription = element.roomDescription;
 		}
 		@JsonProperty("name")
+		/**
+		 * name of the Element. Default is ""
+		 * @param name
+		 * @return this
+		 */
 		public Builder name(String name){
 			this.name = name;
 			return  this;

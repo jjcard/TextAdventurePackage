@@ -8,9 +8,16 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = As.PROPERTY, property = "@class")
 public interface ITextTokenType {
-
+	/**
+	 *  Whether can be used as a object
+	 */
 	public boolean isObject();
-	
+	/**
+	 * Whether can be used as a verb
+	 * <br>
+	 * Default implementation returns opposite of {@link #isObject()}
+	 * @return is verb
+	 */
 	public default boolean isVerb(){
 		return !isObject();
 	}

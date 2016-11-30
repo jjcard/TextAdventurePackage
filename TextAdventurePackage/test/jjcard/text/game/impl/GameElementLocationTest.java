@@ -50,7 +50,7 @@ public class GameElementLocationTest {
 		
 		assertFalse(hallway.equals(room));
 		assertFalse(hallway.hashCode() == room.hashCode());
-		Location blank = new Location();
+		Location blank = new Location("");
 		Location room = new Location("A room", "no not THE room");
 		Location room2 = new Location("A room", "no not THE room");
 		

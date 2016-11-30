@@ -24,7 +24,7 @@ public class ExitTest {
 
 	@Test
 	public void getWithTest() {
-		Location l = new Location();
+		Location l = new Location("with Loc");
 		
 		Exit Left = Exit.SOUTH.getWithLocation(l);
 		
@@ -46,7 +46,7 @@ public class ExitTest {
 		assertEquals(first, snd);
 		
 		assertEquals(first.hashCode(), snd.hashCode());
-		Location l = new Location();
+		Location l = new Location("test Loc");
 		Exit thrd = new Exit.Builder(first).location(l).build();
 		
 		
@@ -55,7 +55,7 @@ public class ExitTest {
 	}
 	@Test
 	public void builderStaticTest(){
-		Location l = new Location();
+		Location l = new Location("North Loc");
 		
 		Exit north = Exit.NORTH_BUILD.build();
 		north = north.getWithLocation(l);

@@ -34,9 +34,6 @@ public class Location implements ILocation {
 	@JsonProperty("exits")
 	private Map<String, IExit> exits;
 	
-	public Location(){
-		this("", "");
-	}
 	public Location(@JsonProperty("name") String name){
 		this(name, "");
 	}

@@ -39,7 +39,7 @@ public class WorldUtilTest {
 	}
 	@Test(expected = NullPointerException.class)
 	public void nullPlayerTest() {
-		Location location = new Location();
+		Location location = new Location("");
 		 new WorldUtil<Player>(location, null);
 		
 	}

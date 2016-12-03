@@ -52,7 +52,7 @@ public final class MapUtil {
 	 * If the map is null, returns new constructor.get(), otherwise returns the map
 	 * @param map
 	 * @param constructor
-	 * @return
+	 * @return the given map or a new instance if map was null
 	 */
 	public static <J, K> Map<J, K> getMapOrNew(Map<J, K> map, Supplier<Map<J, K>> constructor){
 		return (map == null)? constructor.get() : map; 

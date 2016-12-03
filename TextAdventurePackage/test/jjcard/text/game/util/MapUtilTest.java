@@ -57,5 +57,26 @@ public class MapUtilTest {
 		assertNotNull(mapOut);
 		assertTrue(mapOut instanceof TreeMap);
 	}
-
+	@Test
+	public void isEmptyTest(){
+		assertTrue(MapUtil.isEmpty(null));
+		assertTrue(MapUtil.isEmpty(new HashMap<>()));
+		assertTrue(MapUtil.isEmpty(new TreeMap<>()));
+		
+		HashMap<String, Integer> map1 = new HashMap<>();
+		assertTrue(MapUtil.isEmpty(map1));
+		map1.put("Test", 1);
+		assertFalse(MapUtil.isEmpty(map1));
+	}
+	@Test
+	public void isNotEmptyTest(){
+		assertFalse(MapUtil.isNotEmpty(null));
+		assertFalse(MapUtil.isNotEmpty(new HashMap<>()));
+		assertFalse(MapUtil.isNotEmpty(new TreeMap<>()));
+		
+		HashMap<String, Integer> map1 = new HashMap<>();
+		assertFalse(MapUtil.isNotEmpty(map1));
+		map1.put("Test", 1);
+		assertTrue(MapUtil.isNotEmpty(map1));
+	}
 }

@@ -116,7 +116,6 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		return getRoomDescription();
 	}
 	@JsonIgnore
-	@Override
 	public void setDescription(String descrip) {
 		setRoomDescription(descrip);
 	}

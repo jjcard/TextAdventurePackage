@@ -18,36 +18,65 @@ public interface ILocation extends Comparable<ILocation>{
 
 	/**
 	 * Gets the name of the Location. Should only be set once.
-	 * @return
+	 * @return name
 	 */
 	public String getName();
 	public String getDescription();
-	public void setDescription(String description);
 	public Map<String, IItem> getInventory();
 	public Map<String, IMob> getMobs();
 	public Map<String, IExit> getExits();
-	public IItem addItem(IItem add);
+
+	
 	public void setInventory(Map<String, IItem> inventory);
 	public void setMobs(Map<String, IMob> mobs);
 	public void setExits(Map<String, IExit> exits);
+	/**
+	 * Adds <i>item</i> to Items map.
+	 * @param item
+	 * @return previous IItem associated with it's key
+	 */
+	public IItem addItem(IItem item);
 	public IItem removeItem(String key);
 	public boolean containsItem(String key);
+	public IItem getItem(String key);
+	/**
+	 * Adds <i>mob</i> to Mobs map.
+	 * @param mob
+	 * @return previous IMob associated with it's key
+	 */
 	public IMob addMob(IMob mob);
 	public IMob removeMob(String key);
 	public boolean containsMob(String key);
-	public IExit addExit(IExit exit);
+	public IMob getMob(String key);
+	/**
+	 * Adds exit to Exits map
+	 * @param exit
+	 * @return previous exit associated with dir key of exit
+	 */
+	public IExit addExit(IExit exit);	
+	/**
+	 * Removes the exit with the given direction and returns it.
+	 * @param dir
+	 * @return removed IExit
+	 */
+	public IExit removeExit(String dir);
+	public boolean containsExit(String dir);
+	public IExit getExit(String dir);
+	/**
+	 * Creates IExit for given room and direction and adds it to the Exits map.
+	 * <br> Default: Creates a {@link Exit}
+	 * @param dir
+	 * @param room
+	 * @return previous exit associated with dir
+	 */
 	default public IExit addExit(String dir, ILocation room){
 		Exit exit = new Exit.Builder().name(dir).location(room).build();
 		return addExit(exit);
 	}
-	/**
-	 * Removes the exit with the given direction and returns it.
-	 * @param dir
-	 * @return
-	 */
-	public IExit removeExit(String dir);
+
 	/**
 	 * returns Location corresponding to directions
+	 * <br> Default: Calls {@link #getExit(String)} and calls {@link Exit#getLocation()} on it
 	 * @param dir
 	 * @return ILocation
 	 */
@@ -55,19 +84,24 @@ public interface ILocation extends Comparable<ILocation>{
 		IExit exit = getExit(dir);
 		return exit == null? null: exit.getLocation();
 	}
-	public IExit getExit(String dir);
-	public IMob getMob(String key);
-	public IItem getItem(String key);
-	public boolean containsExit(String dir);
+	
 	/**
 	 * 
 	 * @return room description, description of items and mobs in room, and exits. 
+	 * <br> Default: Calls 
+	 * <blockquote>
+	 * {@link DescriptionUtil}.{@link DescriptionUtil#showRoom(ILocation) showRoom(<i>this</i>)}
+	 * </blockquote>
 	 */
 	default public String showRoom(){
 		return DescriptionUtil.showRoom(this);
 	}
 	/**
 	 * Gets the description for the exits. Must be non-null
+	 * <br> Default: Calls 
+	 * <blockquote>
+	 * {@link DescriptionUtil}.{@link DescriptionUtil#getConcealableNames(Map, boolean) getConcealableNames(getExits(), true)}
+	 * </blockquote>
 	 * @return
 	 */
 	@JsonIgnore
@@ -76,6 +110,10 @@ public interface ILocation extends Comparable<ILocation>{
 	}
 	/**
 	 * Gets the description for each item in the inventory. Must be non-null
+	 * <br> Default: Calls 
+	 * <blockquote>
+	 * {@link DescriptionUtil}.{@link DescriptionUtil#getConcealableNames(Map, boolean) getConcealableNames(getInventory(), true)}
+	 * </blockquote>
 	 * @return
 	 */
 	@JsonIgnore
@@ -84,6 +122,10 @@ public interface ILocation extends Comparable<ILocation>{
 	}
 	/**
 	 * Gets the description for each mob. Must be non-null
+	 * <br> Default: Calls 
+	 * <blockquote>
+	 * {@link DescriptionUtil}.{@link DescriptionUtil#getConcealableNames(Map, boolean) getConcealableNames(getMobs(), true)}
+	 * </blockquote>
 	 * @return
 	 */
 	@JsonIgnore

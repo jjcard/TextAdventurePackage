@@ -3,8 +3,10 @@ package jjcard.text.game.util;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -36,6 +38,24 @@ public class MapUtilTest {
 		assertNotNull(actual);
 		assertFalse(actual.isEmpty());
 		assertEquals(actual, "Key1.Key2");
+	}
+	@Test
+	public void getMapOrNewTest(){
+		HashMap<String, Integer> map1 = new HashMap<>();
+		
+		assertSame(map1, MapUtil.getMapOrNew(map1));
+		
+		assertNotNull(MapUtil.getMapOrNew(null));
+	}
+	@Test
+	public void getMapOrNewConstructorTest(){
+		TreeMap<String, Integer> map1 = new TreeMap<>();
+		
+		assertSame(map1, MapUtil.getMapOrNew(map1, TreeMap::new));
+		
+		Map<String, Integer> mapOut = MapUtil.getMapOrNew(null, TreeMap::new);
+		assertNotNull(mapOut);
+		assertTrue(mapOut instanceof TreeMap);
 	}
 
 }

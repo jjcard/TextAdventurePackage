@@ -5,6 +5,7 @@ package jjcard.text.game.util;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import jjcard.text.game.IGameElement;
@@ -46,6 +47,15 @@ public final class MapUtil {
 	 */
 	public static <J, K> Map<J, K> getMapOrNew(Map<J, K> map){
 		return (map == null)? new HashMap<J, K>() : map; 
+	}
+	/**
+	 * If the map is null, returns new constructor.get(), otherwise returns the map
+	 * @param map
+	 * @param constructor
+	 * @return
+	 */
+	public static <J, K> Map<J, K> getMapOrNew(Map<J, K> map, Supplier<Map<J, K>> constructor){
+		return (map == null)? constructor.get() : map; 
 	}
 	/**
 	 * Sets the Locale that is used to change the case of the String keys.
@@ -99,8 +109,14 @@ public final class MapUtil {
 		return setUppercase ? s.toUpperCase(locale) : s;
 
 	}
+	public static boolean isEmpty(Map<?, ?> map){
+		return map == null || map.isEmpty();
+	}
+	public static boolean isNotEmpty(Map<?, ?> map){
+		return !isEmpty(map);
+	}
 	public static String getKeysAsString(Map<String, ?> map){
-		if (map == null || map.isEmpty()){
+		if (isEmpty(map)){
 			return "";
 		}
 		String keys = map.keySet().toString();
@@ -108,7 +124,7 @@ public final class MapUtil {
 	}
 	
 	public static String getKeysAsString(Map<String, ?> map, final String delimiter) {
-		if (map != null && !map.isEmpty()) {
+		if (isNotEmpty(map)) {
 			return map.keySet().stream().collect(Collectors.joining(delimiter));
 		} else {
 			return "";

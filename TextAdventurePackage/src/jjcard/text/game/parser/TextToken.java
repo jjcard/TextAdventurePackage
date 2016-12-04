@@ -19,7 +19,7 @@ public class TextToken<T extends ITextTokenType> implements ITextTokenType{
 	 * @param token
 	 * @param standardToken
 	 * @param type
-	 * @throws NullPointerException if token, standardToken, or type is null
+	 * @throws IllegalArgumentException if token, standardToken, or type is null
 	 */
 	public TextToken(String token, String standardToken, T type) throws NullPointerException{
 		checkArg(token, "token");

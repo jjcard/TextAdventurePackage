@@ -123,8 +123,8 @@ public class Item extends AbstractGameElement implements IItem{
 	public void changeLevel(int change){
 		setLevel(level + change);
 	}
-	public void setLevel(int levelNew){
-		level = levelNew;
+	public void setLevel(int level){
+		this.level = level;
 		if (doValidateFields() && level < 0){
 			level = 0;
 		}
@@ -139,11 +139,11 @@ public class Item extends AbstractGameElement implements IItem{
 	public boolean canGet(){
 		return movable && !hidden;
 	}
-	public void setMovable(boolean change){
-		movable = change;
+	public void setMovable(boolean movable){
+		this.movable = movable;
 	}
-	public void setUse(ItemUse change){
-		use = change;
+	public void setUse(ItemUse use){
+		this.use = use;
 	}
 	public boolean equals(Object o){
 		if (o == this){

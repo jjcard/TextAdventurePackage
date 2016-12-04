@@ -32,12 +32,12 @@ public class WorldUtilTest {
 		 util = new WorldUtil<Player>(location, player);
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void nullLocationTest() {
 		Player player = new Player.Builder().build();
 		 new WorldUtil<Player>(null, player);
 	}
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void nullPlayerTest() {
 		Location location = new Location("");
 		 new WorldUtil<Player>(location, null);
@@ -58,11 +58,11 @@ public class WorldUtilTest {
 		
 		assertEquals(player, util.getPlayer());
 	}
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void setPlayerNullTest(){
 		util.setPlayer(null);
 	}
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void setCurrentNullTest(){
 		util.setCurrent(null);
 	}

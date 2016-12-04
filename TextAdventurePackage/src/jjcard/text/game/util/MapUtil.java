@@ -90,7 +90,7 @@ public final class MapUtil {
 		return map.remove(getUppercase(key));
 	}
 	/**
-	 * Null-safe check for key being for given item
+	 * Null-safe case ignoring check for key being for given item
 	 * @param key
 	 * @param item
 	 * @return
@@ -99,10 +99,7 @@ public final class MapUtil {
 		if (item == null){
 			return false;
 		}
-		if (key == item.getName() || key.equalsIgnoreCase(item.getName())) {
-			return true;
-		}
-		return false;
+		return key.equalsIgnoreCase(item.getName());
 	}
 
 	private String getUppercase(String s) {

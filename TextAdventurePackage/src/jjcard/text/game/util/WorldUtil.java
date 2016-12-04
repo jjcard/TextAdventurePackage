@@ -44,7 +44,7 @@ public class WorldUtil<P extends IMob>{
 	 * 
 	 * @param current the current location. Must be non-null
 	 * @param player. Must be non-null
-	 * @throws NullPointerException if the <code>current</code> argument or <code>player</code> argument is <code>null</code>
+	 * @throws IllegalArgumentException if the <code>current</code> argument or <code>player</code> argument is <code>null</code>
 	 */
 	public WorldUtil(ILocation current, P player) throws NullPointerException{
 		checkArg(current, "current");
@@ -85,7 +85,7 @@ public class WorldUtil<P extends IMob>{
 	/**
 	 * Sets the player.
 	 * @param player
-	 * @throws NullPointerException if the <code>player</code> argument is <code>null</code>
+	 * @throws IllegalArgumentException if the <code>player</code> argument is <code>null</code>
 	 */
 	public void setPlayer(P player) throws NullPointerException{
 		checkArg(player, "player");
@@ -93,7 +93,7 @@ public class WorldUtil<P extends IMob>{
 	}
 	/**
 	 * Sets the current location. Must be non-null.
-	 * @throws NullPointerException if the <code>current</code> argument is <code>null</code>
+	 * @throws IllegalArgumentException if the <code>current</code> argument is <code>null</code>
 	 */
 	public void setCurrent(ILocation current) throws NullPointerException{
 		checkArg(current, "current");

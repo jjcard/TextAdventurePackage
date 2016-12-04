@@ -151,8 +151,8 @@ public class Location implements ILocation {
 	}
 	public int compareTo(ILocation other) {
 		int compare = getName().compareTo(other.getName());
-		if (compare == 0 && description != null){
-			compare = description.compareTo(other.getDescription());
+		if (compare == 0){
+			compare = ObjectsUtil.compareTo(description,other.getDescription());
 		}
 		return compare;
 	}

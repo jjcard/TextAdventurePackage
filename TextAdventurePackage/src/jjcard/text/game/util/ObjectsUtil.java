@@ -103,12 +103,32 @@ public final class ObjectsUtil {
 	 * throws exception if the argument is null with the given string as detail 
 	 * @param arg
 	 * @param name
-	 * @throws NullPointerException
+	 * @throws IllegalArgumentException
 	 */
-	public static void checkArg(Object arg, final String name) throws NullPointerException{
+	public static void checkArg(Object arg, final String name) throws IllegalArgumentException{
 		if (arg == null){
-			throw new NullPointerException(name);
+			throw new IllegalArgumentException(name);
 		}
 	}
 	
+	/**
+	 * Null safe compare operation. Returns -1 if <i>a</i> is only null, 1 if
+	 * <i>b</i> is only null, otherwise compares them.
+	 * @param a
+	 * @param b
+	 * @return compared value
+	 * @see Comparable
+	 */
+	public static <A extends Comparable<A>> int compareTo(A a, A b){
+		if (a == b){
+			return 0;
+		}
+		if (a == null){
+			return -1;
+		}
+		if (b == null){
+			return 1;
+		}
+		return a.compareTo(b);
+	}
 }

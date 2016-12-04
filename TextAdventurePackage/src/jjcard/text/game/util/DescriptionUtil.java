@@ -166,7 +166,7 @@ public final class DescriptionUtil {
 	 * Calls {@link #showRoom(ILocation, String)} with {@link #DEFAULT_EXIT_START}
 	 * @param location
 	 * @return description of room and it's elements
-	 * @see #showRoom(ILocation)
+	 * @see #showRoom(ILocation, String)
 	 */
 	public static String showRoom(final ILocation location){
 		return showRoom(location, DEFAULT_EXIT_START);

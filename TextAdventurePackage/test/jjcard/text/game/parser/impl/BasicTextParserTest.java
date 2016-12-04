@@ -108,7 +108,7 @@ public class BasicTextParserTest {
 		assertEquals(BasicTextTokenType.ITEM, stream.getFirstObject().getType());
 		assertEquals(1, stream.getObjects().size());
 		assertEquals(2, stream.getOrderedStream().size());
-		System.out.println(stream.getOrderedStream());
+//		System.out.println(stream.getOrderedStream());
 		assertEquals("Go", stream.getOrderedStream().get(0).getToken());
 		assertEquals("brEaD", stream.getOrderedStream().get(1).getToken());
 	}

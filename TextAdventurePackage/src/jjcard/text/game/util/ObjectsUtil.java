@@ -19,7 +19,7 @@ public final class ObjectsUtil {
 		if (a == b){
 			return true;
 		}
-		if (a == null|| b == null){
+		if (a == null || b == null) {
 			return false;
 		}
 		
@@ -35,7 +35,7 @@ public final class ObjectsUtil {
 		if (a == b){
 			return true;
 		}
-		if (a == null|| b == null){
+		if (a == null || b == null) {
 			return false;
 		}
 		return a.size() == b.size();
@@ -66,7 +66,7 @@ public final class ObjectsUtil {
 		if (a == b){
 			return true;
 		}
-		if (a == null|| b == null){
+		if (a == null || b == null) {
 			return false;
 		}
 		return a.keySet().equals(b.keySet());
@@ -87,6 +87,11 @@ public final class ObjectsUtil {
 		
 		return hash;
 	}
+	/**
+	 * Returns hash of key set of the given map. Null safe.
+	 * @param a
+	 * @return
+	 */
 	public static int getKeysHash(Map<String, ?> a){
 		if (a == null){
 			return 0;

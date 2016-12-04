@@ -58,11 +58,7 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		}
 		@JsonProperty("exits")
 		public Builder exits(Map<String,IExit> exits){
-			if (exits == null){
-				this.exits = new HashMap<String,IExit>();
-			} else {
-				this.exits = exits;
-			}
+			this.exits = MapUtil.getMapOrNew(exits);
 			return this;
 		}
 		public Builder addExit(IExit exit){
@@ -71,11 +67,7 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		}
 		@JsonProperty("mobs")
 		public Builder mobs(Map<String,IMob> roomMobs){
-			if (roomMobs == null){
-				this.roomMob = new HashMap<String,IMob>();
-			} else {
-				this.roomMob = roomMobs;
-			}	
+			this.roomMob = MapUtil.getMapOrNew(roomMobs);
 			return this;
 		}
 		public Builder addMob(IMob mob){
@@ -84,11 +76,7 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		}
 		@JsonProperty("inventory")
 		public Builder inventory(Map<String,IItem> inventory){
-			if (inventory == null){
-				this.inventory = new HashMap<String,IItem>();
-			} else {
-				this.inventory = inventory;
-			}
+			this.inventory = MapUtil.getMapOrNew(inventory);
 			return this;
 		}
 		public Builder addItem(IItem item){
@@ -105,7 +93,6 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		this.exits = builder.exits;
 		this.inventory = builder.inventory;
 	}
-
 
 	/**
 	 * Gets the description aka the room description.
@@ -204,8 +191,6 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 	public boolean containsExit(String dir){
 		return MAP_UTIL.containsKey(exits,dir);
 	}
-
-
 
 	public int compareTo(ILocation other) {
 		int compare = getName().compareTo(other.getName());

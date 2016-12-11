@@ -46,7 +46,7 @@ public class WorldUtil<P extends IMob>{
 	 * @param player. Must be non-null
 	 * @throws IllegalArgumentException if the <code>current</code> argument or <code>player</code> argument is <code>null</code>
 	 */
-	public WorldUtil(ILocation current, P player) throws NullPointerException{
+	public WorldUtil(ILocation current, P player) throws IllegalArgumentException{
 		checkArg(current, "current");
 		checkArg(player, "player");
 		this.current = current;
@@ -87,7 +87,7 @@ public class WorldUtil<P extends IMob>{
 	 * @param player
 	 * @throws IllegalArgumentException if the <code>player</code> argument is <code>null</code>
 	 */
-	public void setPlayer(P player) throws NullPointerException{
+	public void setPlayer(P player) throws IllegalArgumentException{
 		checkArg(player, "player");
 		this.player = player;
 	}
@@ -95,7 +95,7 @@ public class WorldUtil<P extends IMob>{
 	 * Sets the current location. Must be non-null.
 	 * @throws IllegalArgumentException if the <code>current</code> argument is <code>null</code>
 	 */
-	public void setCurrent(ILocation current) throws NullPointerException{
+	public void setCurrent(ILocation current) throws IllegalArgumentException{
 		checkArg(current, "current");
 		this.current = current;
 	}
@@ -145,25 +145,6 @@ public class WorldUtil<P extends IMob>{
 		return current.showRoom();
 	}
 
-//	public ReturnCom equipItem(String i) {
-//		IItem toE = player.getItem(i);
-//
-//		if (toE == null) {
-//			return ReturnCom.EQUIPPED_NOT_FOUND;
-//		}
-//
-//		if (toE.getUse().equals(ItemUse.Armour)) {
-//			setPlayerArmour((IArmour) toE);
-//			player.removeItem(i);
-//			return ReturnCom.EQUIPPED_ARMOUR;
-//		}
-//		if (toE.getUse().equals(ItemUse.Weapon)) {
-//			setPlayerWeapon((IWeapon) toE);
-//			player.removeItem(i);
-//			return ReturnCom.EQUIPPED_WEAPON;
-//		}
-//		return ReturnCom.EQUIPPED_NOT_FOUND;
-//	}
 	/**
 	 * Equips armour for key to player, calling {@link #setPlayerArmour(IArmour)}
 	 * and removing the equipped armour from inventory
@@ -203,16 +184,7 @@ public class WorldUtil<P extends IMob>{
 		player.removeItem(key);
 		return ReturnStatus.SUCCESS;
 	}
-//	public ReturnCom unequipItem(String key) {
-//		if (key.equalsIgnoreCase("armour") || key.equalsIgnoreCase("armor")
-//				|| player.isKeyforArmour(key)) {
-//			return unequipArmour();
-//		}
-//		if (key.equalsIgnoreCase("weapon") || player.isKeyForWeapon(key)) {
-//			return unequipWeapon();
-//		}
-//		return ReturnCom.UNEQUIPPED_ITEM_NOT_FOUND;
-//	}
+
 	/**
 	 * Removes weapon from Player and adds it to his/her items.
 	 * @return true if weapon unequiped, false otherwise
@@ -224,7 +196,7 @@ public class WorldUtil<P extends IMob>{
 	 * Removes weapon from mob and adds it to his/her items.
 	 * @return true if weapon unequiped, false otherwise
 	 */
-	public boolean unequipWeapon(IMob mob){
+	public static boolean unequipWeapon(IMob mob){
 		IWeapon i = mob.removeWeapon();
 		if (i != null) {
 			mob.addItem(i);
@@ -244,7 +216,7 @@ public class WorldUtil<P extends IMob>{
 	 * Removes armour from mob and adds it to his/her items.
 	 * @return true if armour unequiped, false otherwise
 	 */
-	public boolean unequipArmour(IMob mob){
+	public static boolean unequipArmour(IMob mob){
 		IArmour it = mob.removeArmour();
 		if (it != null) {
 			// add it back to the inventory

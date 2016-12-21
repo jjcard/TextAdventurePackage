@@ -123,10 +123,13 @@ public class Player extends Mob implements HasLeveling{
 		}
 	}
 	
-	private Player(Builder b){
+	protected Player(Builder b){
 		super(b);
 		setXp(b.xp);
 		setLevel(b.level);
+	}
+	public Player(String name){
+		super(name);
 	}
 
 	/**

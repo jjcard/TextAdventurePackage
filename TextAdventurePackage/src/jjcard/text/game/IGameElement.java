@@ -24,7 +24,7 @@ public interface IGameElement {
 	public String getRoomDescription();
 	/**
 	 * Returns a description of the element when viewed individually. 
-	 * @return
+	 * @return vies description
 	 */
 	public String getViewDescription();
 	

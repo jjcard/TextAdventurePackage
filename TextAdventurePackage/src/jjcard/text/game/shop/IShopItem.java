@@ -16,10 +16,12 @@ public interface IShopItem extends IGameElement{
 	
 	/**
 	 * Returns true if has infinite amount of the item to sell
-	 * @return
+	 * @return true if infinite amount
+	 * <br> Default: returns <code>{@link #getAmount()} == -1</code>
 	 */
-	public boolean isInfinite();
-	
+	public default boolean isInfinite(){
+		return getAmount() == -1;
+	}
 
 	/**
 	 * Gets the room description of the underlying item
@@ -34,5 +36,13 @@ public interface IShopItem extends IGameElement{
 	 * @return
 	 */
 	public int getPrice();
+	/**
+	 * check for if item is in stock.
+	 * @return
+	 * <br> Default: returns true if {@link #isInfinite()} or amount is > 0
+	 */
+	public default boolean isAvailable(){
+		return isInfinite() || getAmount() > 0;
+	}
 
 }

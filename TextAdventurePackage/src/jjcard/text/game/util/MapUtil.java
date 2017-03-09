@@ -58,6 +58,13 @@ public final class MapUtil {
 		return (map == null)? constructor.get() : map; 
 	}
 	/**
+	 * Returns new HashMap
+	 * @return
+	 */
+	public static <J, K> Map<J, K> newHashMap(){
+		return new HashMap<J,K>();
+	}
+	/**
 	 * Sets the Locale that is used to change the case of the String keys.
 	 * @param locale
 	 */

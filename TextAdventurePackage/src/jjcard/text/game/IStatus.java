@@ -11,7 +11,7 @@ public interface IStatus {
 	
 	/**
 	 * Get the name that should be displayed for this status
-	 * @return
+	 * @return name
 	 */
 	public String getName();
 	/**

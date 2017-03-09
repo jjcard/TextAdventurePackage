@@ -19,7 +19,6 @@ public class Item extends AbstractGameElement implements IItem{
 	private ItemUse use = ItemUse.Item;
 	
 	
-	
 	public static class Builder extends AbstractGameElement.Builder{
 		private int cost;
 		private int level;

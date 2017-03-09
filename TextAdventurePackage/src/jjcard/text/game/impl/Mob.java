@@ -2,7 +2,6 @@ package jjcard.text.game.impl;
 
 import static jjcard.text.game.util.WorldUtil.isKeyForItem;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +55,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		private int maxHealth;
 		private int curHealth;
 		private int money = 0;
-		private Map<String, IItem> inventory = new HashMap<String, IItem>();
+		private Map<String, IItem> inventory = MapUtil.newHashMap();
 		private int defense = 0;
 		private int attack = 0;
 		private boolean hostile = true;
@@ -118,12 +117,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		}
 		@JsonProperty("inven")
 		public Builder inventory(Map<String, IItem> inventory){
-			if (inventory == null){
-				this.inventory = new HashMap<String, IItem>();
-			} else {
-				this.inventory = inventory;	
-			}
-			
+			this.inventory = MapUtil.getMapOrNew(inventory);
 			return this;
 		}
 		public Builder addItem(IItem item){
@@ -428,7 +422,7 @@ public class Mob extends AbstractGameElement implements IMob{
 	}
 	public Map<String, IItem> removeInventory(){
 		Map<String, IItem> returnIn = inventory;
-		inventory = new HashMap<>();
+		inventory = MapUtil.newHashMap();
 		return returnIn;
 	}
 	public boolean containsItem(String key){
@@ -521,7 +515,6 @@ public class Mob extends AbstractGameElement implements IMob{
 	}
 	public String inventoryOverview(){
 		return MapUtil.getKeysAsString(inventory);
-		
 	}
 	public boolean isHidden(){
 		return hidden;

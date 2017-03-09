@@ -1,8 +1,8 @@
 package jjcard.text.game.impl;
 
+import static jjcard.text.game.util.MapUtil.newHashMap;
 import static jjcard.text.game.util.ObjectsUtil.notEqual;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -40,23 +40,23 @@ public class Location implements ILocation {
 	public Location(String name, String description){
 		this.name = name;
 		this.description = description;
-		inventory = new HashMap<String, IItem>();
-		roomMob =  new HashMap<String, IMob>();
-		exits = new HashMap<String, IExit>();
+		inventory = newHashMap();
+		roomMob =  newHashMap();
+		exits = newHashMap();
 	}
 	public Location(String name, String description, Map<String, IItem> inventory){
 		this.name = name;
 		this.description = description;
 		setInventory(inventory);
-		roomMob =  new HashMap<String, IMob>();
-		exits = new HashMap<String, IExit>();
+		roomMob =  newHashMap();
+		exits = newHashMap();
 	}
 	public Location(String name, String description, Map<String, IItem> inventory, Map<String, IMob>  mobs){
 		this.name = name;
 		this.description = description;
 		setInventory(inventory);
 		setMobs(mobs);
-		exits = new HashMap<String, IExit>();
+		exits = newHashMap();
 	}
 	@JsonProperty("name")
 	public String getName(){

@@ -138,7 +138,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 		}
 	}
 	/**
-	 * 
+	 * Set multiple keys to the same value
 	 * @param keys
 	 * @param value
 	 * @return this

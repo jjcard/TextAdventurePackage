@@ -53,6 +53,12 @@ public final class ObjectsUtil {
 		}
 		return a.size() == b.size();
 	}
+	/**
+	 * null safe check for Maps not having equal key sets.
+	 * @param a
+	 * @param b
+	 * @return true if both maps don't have same key set
+	 */
 	public static <K> boolean notEqualKeys(Map<String, K> a, Map<String, K> b){
 		return !equalKeys(a, b);
 	}
@@ -71,9 +77,26 @@ public final class ObjectsUtil {
 		}
 		return a.keySet().equals(b.keySet());
 	}
+	
+	/**
+	 * Returns hash of given objects by , multiplying by <code>prime</code>.
+	 * Same as calling {@link #getHashWithStart(int, int, Object...)} with
+	 * <code>startingHash</code> of 1.
+	 * 
+	 * @param prime
+	 * @param objects
+	 * @return computed hash
+	 */
 	public static int getHash(final int prime, Object...objects){
 		return getHashWithStart(1, prime, objects);
 	}
+	/**
+	 * Returns hash of given objects. Hash starts with <code>startingHash</code>, multiplying by <code>prime</code>. Is Null safe.
+	 * @param startingHash
+	 * @param prime
+	 * @param objects
+	 * @return computed hash
+	 */
 	public static int getHashWithStart(int startingHash, final int prime, Object...objects){
 		int hash = startingHash;
 		
@@ -90,7 +113,7 @@ public final class ObjectsUtil {
 	/**
 	 * Returns hash of key set of the given map. Null safe.
 	 * @param a
-	 * @return
+	 * @return int, the Hash of key set
 	 */
 	public static int getKeysHash(Map<String, ?> a){
 		if (a == null){

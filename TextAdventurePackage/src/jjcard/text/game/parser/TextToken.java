@@ -21,7 +21,7 @@ public class TextToken<T extends ITextTokenType> implements ITextTokenType{
 	 * @param type
 	 * @throws IllegalArgumentException if token, standardToken, or type is null
 	 */
-	public TextToken(String token, String standardToken, T type) throws NullPointerException{
+	public TextToken(String token, String standardToken, T type) throws IllegalArgumentException{
 		checkArg(token, "token");
 		checkArg(type, "type");
 		checkArg(standardToken, "standardToken");

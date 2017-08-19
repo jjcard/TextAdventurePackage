@@ -54,7 +54,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	public BasicTextParser(String deliminators) throws PatternSyntaxException {
 		this.textIndicatorPatterns = new PatternList<>();
 		this.textTokenPatterns = new PatternList<>();
-		this.dictionary = new TextDictionary<T>();
+		this.dictionary = new TextDictionary<>();
 		this.splitPattern = compileSplitPattern(deliminators);
 	}
 	/**
@@ -71,7 +71,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	public BasicTextParser() {
 		this.textIndicatorPatterns = new PatternList<>();
 		this.textTokenPatterns = new PatternList<>();
-		this.dictionary = new TextDictionary<T>();
+		this.dictionary = new TextDictionary<>();
 		this.splitPattern = DEFAULT_SPLIT_PATTERN;
 	}
 	public BasicTextParser(ITextDictionary<T> dictionary){
@@ -105,7 +105,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	}
 	/**
 	 * Get a Deliminator String, with each argument escaped to be literal.
-	 * @param args
+	 * @param deliminators
 	 * @return the Deliminator String
 	 */
 	public static String getDeliminators (String... deliminators){
@@ -279,7 +279,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	protected void handleStartOfWordParsing(Builder<T> builder,
 			String[] words) {
 		checkingObjects = objectLimit > 0;
-		objects = new LinkedList<TextToken<T>>();
+		objects = new LinkedList<>();
 		verb = null;
 		withObject = null;
 		withObjectIndicator = false;

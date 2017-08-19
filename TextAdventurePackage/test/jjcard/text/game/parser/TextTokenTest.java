@@ -21,7 +21,7 @@ public class TextTokenTest {
 	public void test() {
 		String word = "glass-mail";
 		String standardWord = "glass mail";
-		TextToken<BasicTextTokenType> j = new TextToken<BasicTextTokenType>(word, standardWord, BasicTextTokenType.ARMOR);
+		TextToken<BasicTextTokenType> j = new TextToken<>(word, standardWord, BasicTextTokenType.ARMOR);
 		
 		BasicTextTokenType t = j.getType();
 		
@@ -35,7 +35,7 @@ public class TextTokenTest {
 	public void otherEnumTest(){
 		String word = "firefly";
 		String standardWord = "Serenity";
-		TextToken<SpaceTextTokenType> j = new TextToken<SpaceTextTokenType>(word, standardWord, SpaceTextTokenType.SHIP);
+		TextToken<SpaceTextTokenType> j = new TextToken<>(word, standardWord, SpaceTextTokenType.SHIP);
 		
 		SpaceTextTokenType t = j.getType();
 		

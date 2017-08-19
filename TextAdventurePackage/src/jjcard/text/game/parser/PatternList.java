@@ -18,14 +18,14 @@ public class PatternList<S> {
 
 	
 	public PatternList(){
-		patternList = new LinkedList<PatternEntry>();
+		patternList = new LinkedList<>();
 	}
 	/**
 	 * Constructs a PatternList with the same value as the given PatternList
 	 * @param list
 	 */
 	public PatternList(PatternList<S> list){
-		patternList = new LinkedList<PatternEntry>(list.patternList);
+		patternList = new LinkedList<>(list.patternList);
 	}
 	/**
 	 * Adds the given pattern and value

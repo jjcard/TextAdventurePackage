@@ -29,17 +29,13 @@ public class TextEventManagerTest {
 	@Test
 	public void hasEventListenerTest(){
 		ITextEventManager evntMgr = TextEventManager.getInstance();
-		ITextEventListener listener = new ITextEventListener() {
-			
-			@Override
-			public boolean handleEvent(ITextEvent event) {
-				SimpleTextEvent e = (SimpleTextEvent) event;
-				
-				assertEquals("get", e.getKey());
-				assertEquals("Win", e.getCommandKey());
-				return true;
-			}
-		};
+		ITextEventListener listener = event -> {
+            SimpleTextEvent e = (SimpleTextEvent) event;
+
+            assertEquals("get", e.getKey());
+            assertEquals("Win", e.getCommandKey());
+            return true;
+        };
 		
 		evntMgr.registerEventListener(listener, SimpleTextEvent.class);
 		

@@ -46,7 +46,7 @@ public final class MapUtil {
 	 * @return the given map or a new instance if map was null
 	 */
 	public static <J, K> Map<J, K> getMapOrNew(Map<J, K> map){
-		return (map == null)? new HashMap<J, K>() : map; 
+		return (map == null)? new HashMap<>() : map;
 	}
 	/**
 	 * If the map is null, returns new constructor.get(), otherwise returns the map
@@ -62,13 +62,14 @@ public final class MapUtil {
 	 * @return
 	 */
 	public static <J, K> Map<J, K> newHashMap(){
-		return new HashMap<J,K>();
+		return new HashMap<>();
 	}
 	/**
 	 * Sets the Locale that is used to change the case of the String keys.
 	 * @param locale
+	 * @throws IllegalArgumentException if locale is null
 	 */
-	public void setLocale(Locale locale){
+	public void setLocale(Locale locale) throws IllegalArgumentException {
 		checkArg(locale, "locale");
 		this.locale = locale;
 	}

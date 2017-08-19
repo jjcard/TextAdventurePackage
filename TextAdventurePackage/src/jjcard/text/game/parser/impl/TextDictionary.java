@@ -82,7 +82,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 		if (values != null){
 			for (T value: values){
 				if (value.defaultWords() != null){
-					ITextDefinition<T> definition = new SimpleTextDefinition<T>(value);
+					ITextDefinition<T> definition = new SimpleTextDefinition<>(value);
 					putAll(definition , value.defaultWords());	
 				}
 				
@@ -92,15 +92,16 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 	/**
 	 * Sets the Locale that is used to change the case of the String keys.
 	 * @param locale
+	 * @throws IllegalArgumentException if locale is null
 	 */
-	public void setLocale(Locale locale){
+	public void setLocale(Locale locale) throws IllegalArgumentException{
 		checkArg(locale, "locale");
 		this.locale = locale;
 	}
 	/**
 	 * For the given IGameElements, adds the standard name for the element to the map.
-	 * @param element
 	 * @param value
+	 * @param elements
 	 * @return this
 	 */
 	public TextDictionary<T> putAll(ITextDefinition<T> value, IGameElement... elements){
@@ -117,7 +118,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 	 */
 	public TextDictionary<T> putAll(T value, IGameElement... elements){
 		for (IGameElement element: elements){
-			put(element, new SimpleTextDefinition<T>(value));
+			put(element, new SimpleTextDefinition<>(value));
 		}
 		return this;
 	}
@@ -180,7 +181,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 	 * @return this
 	 */
 	public TextDictionary<T> putAll(T value, String...keys){
-		ITextDefinition<T> def = new SimpleTextDefinition<T>(value);
+		ITextDefinition<T> def = new SimpleTextDefinition<>(value);
 		return putAll(def, keys);
 	}
 	

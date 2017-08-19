@@ -20,7 +20,7 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	public TextTokenStream<T> parseText(String input) {
 		startParsing(input);
 
-		Builder<T> builder = new Builder<T>();
+		Builder<T> builder = new Builder<>();
 		String[] words = splitText(input);
 		/**
 		 * The current index in the list
@@ -70,7 +70,7 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	protected TextToken<T> createTextToken(String word, ITextDefinition<T> def){
 		T type = def.getType();
 		// has a type defined in the dictionary
-		return new TextToken<T>(word, def.getStandardToken(word), type);
+		return new TextToken<>(word, def.getStandardToken(word), type);
 	}
 	/**
 	 * Called if the parsing of all the words, if got to that point.

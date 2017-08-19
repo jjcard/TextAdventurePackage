@@ -26,7 +26,7 @@ public class SingleTextDefinition<T extends ITextTokenType> extends AbstractText
 	}
 	
 	public static <T extends ITextTokenType> SingleTextDefinition<T> getInstance(T type, String name){
-		return new SingleTextDefinition<T>(type, name);
+		return new SingleTextDefinition<>(type, name);
 	}
 	
 	public boolean equals(Object o){

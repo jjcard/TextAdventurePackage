@@ -16,7 +16,7 @@ public class TextTokenStreamTest {
 	}
 	@Test
 	public void setVerbTest(){
-		TextToken<BasicTextTokenType> verb = new TextToken<BasicTextTokenType>("verbTest", "vertTest2", BasicTextTokenType.MOVE);
+		TextToken<BasicTextTokenType> verb = new TextToken<>("verbTest", "vertTest2", BasicTextTokenType.MOVE);
 		TextTokenStream<BasicTextTokenType> stream = new TextTokenStream.Builder<BasicTextTokenType>().verb(verb).build();
 		
 		assertNotNull(stream.getVerb());

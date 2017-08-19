@@ -31,9 +31,9 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 	
 	public static class Builder extends AbstractGameElement.Builder{
 		
-		private Map<String,IItem> inventory = new HashMap<String,IItem>();
-		private Map<String,IMob> roomMob = new HashMap<String,IMob>();
-		private Map<String,IExit> exits = new HashMap<String,IExit>();
+		private Map<String,IItem> inventory = new HashMap<>();
+		private Map<String,IMob> roomMob = new HashMap<>();
+		private Map<String,IExit> exits = new HashMap<>();
 		
 		public Builder(){
 			super();

@@ -29,13 +29,13 @@ public class WorldUtilTest {
 	public void setUp(){
 		 location = new Location("Test location", "What? they can't all be zingers");
 		 player = new Player.Builder().name("The Player").build();
-		 util = new WorldUtil<Player>(location, player);
+		 util = new WorldUtil<>(location, player);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void nullLocationTest() {
 		Player player = new Player.Builder().build();
-		 new WorldUtil<Player>(null, player);
+        new WorldUtil<>(null, player);
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void nullPlayerTest() {
@@ -47,7 +47,7 @@ public class WorldUtilTest {
 	public void initTest(){
 		Location location = new Location("Test location", "What? they can't all be zingers");
 		Player player = new Player.Builder().name("The Player").build();
-		WorldUtil<Player> util = new WorldUtil<Player>(location, player);
+		WorldUtil<Player> util = new WorldUtil<>(location, player);
 		
 		assertNotNull(util);
 		

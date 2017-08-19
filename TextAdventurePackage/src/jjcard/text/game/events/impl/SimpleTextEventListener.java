@@ -26,20 +26,20 @@ public class SimpleTextEventListener implements ITextEventListener {
 	private PrintStream out = System.out;
 	
 	public SimpleTextEventListener() throws IOException{
-		printMap = new TreeMap<String, String>();
+		printMap = new TreeMap<>();
 		loadPrintMap(DEFAULT_TEXT_LOCATION);
 	}
 	public SimpleTextEventListener(PrintStream out) throws IOException{
-		printMap = new TreeMap<String, String>();
+		printMap = new TreeMap<>();
 		loadPrintMap(DEFAULT_TEXT_LOCATION);
 		this.out = out;
 	}
 	public SimpleTextEventListener(String fileLocation) throws IOException{
-		printMap = new TreeMap<String, String>();
+		printMap = new TreeMap<>();
 		loadPrintMap(fileLocation);
 	}
 	public SimpleTextEventListener(String fileLocation, PrintStream out) throws IOException{
-		printMap = new TreeMap<String, String>();
+		printMap = new TreeMap<>();
 		loadPrintMap(fileLocation);
 		this.out = out;
 	}
@@ -72,7 +72,7 @@ public class SimpleTextEventListener implements ITextEventListener {
 	private String formatString(String value, String keyReplace){
 		String formatedString = value;
 		if (keyReplace != null){
-			KEY_INPUT_PATTERN.matcher(value).replaceAll(keyReplace);	
+			formatedString = KEY_INPUT_PATTERN.matcher(value).replaceAll(keyReplace);
 		}
 		
 		return formatedString;

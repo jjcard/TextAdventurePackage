@@ -12,7 +12,7 @@ public final class TextEventManager implements ITextEventManager{
 	private static TextEventManager instance = null;
 	private final Map<Class<? extends ITextEvent>, ITextEventListener> listenerMap;
 	private TextEventManager(){
-		listenerMap = new HashMap<Class<? extends ITextEvent>, ITextEventListener>();
+		listenerMap = new HashMap<>();
 	}
 	
 	/**

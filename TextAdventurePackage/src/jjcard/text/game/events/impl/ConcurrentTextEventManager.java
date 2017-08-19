@@ -16,7 +16,7 @@ public final class ConcurrentTextEventManager implements ITextEventManager {
 	private final Map<Class<? extends ITextEvent>, ITextEventListener> listenerMap;
 	
 	private ConcurrentTextEventManager(){
-		listenerMap = new ConcurrentHashMap<Class<? extends ITextEvent>, ITextEventListener>();
+		listenerMap = new ConcurrentHashMap<>();
 	}
 	private static class LazyHolder {
 		private static final ConcurrentTextEventManager _instance = new ConcurrentTextEventManager();

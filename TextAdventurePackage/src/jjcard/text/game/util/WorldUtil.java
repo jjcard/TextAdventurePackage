@@ -43,7 +43,7 @@ public class WorldUtil<P extends IMob>{
 	/**
 	 * 
 	 * @param current the current location. Must be non-null
-	 * @param player. Must be non-null
+	 * @param player  Must be non-null
 	 * @throws IllegalArgumentException if the <code>current</code> argument or <code>player</code> argument is <code>null</code>
 	 */
 	public WorldUtil(ILocation current, P player) throws IllegalArgumentException{

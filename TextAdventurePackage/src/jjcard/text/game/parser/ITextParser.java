@@ -17,7 +17,7 @@ public interface ITextParser<T extends ITextTokenType> {
 	
 	/**
 	 * Sets the library the parser will use.
-	 * @param library
+	 * @param dictionary
 	 */
 	public void setTextDictionary(ITextDictionary<T> dictionary);
 	

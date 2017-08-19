@@ -22,7 +22,7 @@ public class SimpleTextDefinitionTest {
 	public void JsonTest() throws JsonParseException, JsonMappingException, IOException{
 		
 		BasicTextTokenType b = BasicTextTokenType.ARMOR;
-		SimpleTextDefinition<BasicTextTokenType> def = new SimpleTextDefinition<BasicTextTokenType>(b);
+		SimpleTextDefinition<BasicTextTokenType> def = new SimpleTextDefinition<>(b);
 
 		
 		

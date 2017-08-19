@@ -23,7 +23,7 @@ public interface IListMap<K, V> extends Map<K, List<V>> {
 	public default List<V> add(K key, V value){
 		List<V> list = get(key);
 		if (list == null){
-			list = new LinkedList<V>();
+			list = new LinkedList<>();
 			put(key, list);
 		}
 		list.add(value);
@@ -94,7 +94,7 @@ public interface IListMap<K, V> extends Map<K, List<V>> {
 	public default List<V> getOrNew(K key){
 		List<V> list = get(key);
 		if (list == null){
-			list = new LinkedList<V>();
+			list = new LinkedList<>();
 			put(key, list);
 		}
 		return list;

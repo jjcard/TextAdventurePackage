@@ -24,11 +24,11 @@ public class MappedTextDefinitionTest {
 	public void JsonTest() throws JsonParseException, JsonMappingException, IOException{
 		
 		BasicTextTokenType b = BasicTextTokenType.ARMOR;
-		Map<String, String> standardizeMap = new HashMap<String, String>();		
+		Map<String, String> standardizeMap = new HashMap<>();
 		String keyIn = "keyIn";
 		String keyOut = "keyOut";
 		standardizeMap.put(keyIn, keyOut);
-		MappedTextDefinition<BasicTextTokenType> def = new MappedTextDefinition<BasicTextTokenType>(b, standardizeMap);
+		MappedTextDefinition<BasicTextTokenType> def = new MappedTextDefinition<>(b, standardizeMap);
 
 		
 		

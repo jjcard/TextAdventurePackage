@@ -99,7 +99,7 @@ public class DescriptionUtilTest {
 		result = DescriptionUtil.getConcealableNames(elements, false);
 		assertTrue(result.isEmpty());
 		
-		elements = new LinkedList<ConcealableGameElement>();//empty
+		elements = new LinkedList<>();//empty
 		result = DescriptionUtil.getConcealableNames(elements, true);
 		assertTrue(result.isEmpty());
 		result = DescriptionUtil.getConcealableNames(elements, false);
@@ -138,7 +138,7 @@ public class DescriptionUtilTest {
 		result = DescriptionUtil.getConcealableNames(elements, false);
 		assertTrue(result.isEmpty());
 		
-		elements = new TreeMap<String, ConcealableGameElement>();//empty
+		elements = new TreeMap<>();//empty
 		result = DescriptionUtil.getConcealableNames(elements, true);
 		assertTrue(result.isEmpty());
 		result = DescriptionUtil.getConcealableNames(elements, false);
@@ -177,7 +177,7 @@ public class DescriptionUtilTest {
 		result = DescriptionUtil.getConcealableNamesList(elements, false);
 		assertTrue(result.isEmpty());
 		
-		elements = new LinkedList<ConcealableGameElement>();//empty
+		elements = new LinkedList<>();//empty
 		result = DescriptionUtil.getConcealableNamesList(elements, true);
 		assertTrue(result.isEmpty());
 		result = DescriptionUtil.getConcealableNamesList(elements, false);
@@ -222,7 +222,7 @@ public class DescriptionUtilTest {
 		result = DescriptionUtil.getConcealableNamesList(elements, false);
 		assertTrue(result.isEmpty());
 		
-		elements = new TreeMap<String, ConcealableGameElement>();//empty
+		elements = new TreeMap<>();//empty
 		result = DescriptionUtil.getConcealableNamesList(elements, true);
 		assertTrue(result.isEmpty());
 		result = DescriptionUtil.getConcealableNamesList(elements, false);
@@ -265,7 +265,7 @@ public class DescriptionUtilTest {
 		String result = DescriptionUtil.getGameElementRoomDescriptions(elements);
 		assertTrue(result.isEmpty());
 		
-		elements = new LinkedList<ConcealableGameElement>();//empty
+		elements = new LinkedList<>();//empty
 		result = DescriptionUtil.getGameElementRoomDescriptions(elements);
 		assertTrue(result.isEmpty());
 		
@@ -285,7 +285,7 @@ public class DescriptionUtilTest {
 		String result = DescriptionUtil.getGameElementRoomDescriptions(elements);
 		assertTrue(result.isEmpty());
 		
-		elements = new TreeMap<String, ConcealableGameElement>();//empty
+		elements = new TreeMap<>();//empty
 		result = DescriptionUtil.getGameElementRoomDescriptions(elements);
 		assertTrue(result.isEmpty());
 		
@@ -309,7 +309,7 @@ public class DescriptionUtilTest {
 		result = DescriptionUtil.getConceableRoomDescriptions(elements, false);
 		assertTrue(result.isEmpty());
 		
-		elements = new LinkedList<ConcealableGameElement>();//empty
+		elements = new LinkedList<>();//empty
 		result = DescriptionUtil.getConceableRoomDescriptions(elements, true);
 		assertTrue(result.isEmpty());
 		result = DescriptionUtil.getConceableRoomDescriptions(elements, false);
@@ -348,7 +348,7 @@ public class DescriptionUtilTest {
 		result = DescriptionUtil.getConceableRoomDescriptions(elements, false);
 		assertTrue(result.isEmpty());
 		
-		elements = new TreeMap<String, ConcealableGameElement>();//empty
+		elements = new TreeMap<>();//empty
 		result = DescriptionUtil.getConceableRoomDescriptions(elements, true);
 		assertTrue(result.isEmpty());
 		result = DescriptionUtil.getConceableRoomDescriptions(elements, false);

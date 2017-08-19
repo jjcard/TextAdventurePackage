@@ -8,7 +8,7 @@ public interface ITextEventManager {
 	/**
 	 * Registers the listener to handle and events of the given class.
 	 * @param listener
-	 * @param c
+	 * @param eventClass
 	 * @return
 	 */
 	public ITextEventListener registerEventListener(ITextEventListener listener, Class<? extends ITextEvent> eventClass);

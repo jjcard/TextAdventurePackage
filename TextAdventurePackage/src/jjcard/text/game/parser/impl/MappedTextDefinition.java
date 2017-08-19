@@ -57,10 +57,10 @@ public class MappedTextDefinition<T extends ITextTokenType> extends AbstractText
 		return ObjectsUtil.getHashWithStart(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, standerizedMap);
 	}
 	public static <T extends ITextTokenType> MappedTextDefinition<T> getInstance(T type){
-		return new MappedTextDefinition<T>(type);
+		return new MappedTextDefinition<>(type);
 	}
 	public static <T extends ITextTokenType> MappedTextDefinition<T> getInstance(T type, Map<String, String> map){
-		return new MappedTextDefinition<T>(type, map);
+		return new MappedTextDefinition<>(type, map);
 	}
 
 }

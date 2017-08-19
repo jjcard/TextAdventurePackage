@@ -21,7 +21,7 @@ public class MapUtilTest {
 		assertNotNull(actual);
 		assertTrue(actual.isEmpty());
 		
-		map = new TreeMap<String, Object>();
+		map = new TreeMap<>();
 		actual = MapUtil.getKeysAsString(map, ".");
 		assertNotNull(actual);
 		assertTrue(actual.isEmpty());

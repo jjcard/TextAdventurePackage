@@ -23,7 +23,7 @@ public class SimpleTextDefinition<T extends ITextTokenType> extends AbstractText
 	}
 
 	public static <T extends ITextTokenType> SimpleTextDefinition<T> getInstance(T type) {
-		return new SimpleTextDefinition<T>(type);
+		return new SimpleTextDefinition<>(type);
 	}
 
 }

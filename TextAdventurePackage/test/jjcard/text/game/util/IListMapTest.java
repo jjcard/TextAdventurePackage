@@ -28,7 +28,7 @@ public class IListMapTest {
 		assertNull(map.get("5252"));
 		
 		
-		List<String> inList = new ArrayList<String>();
+		List<String> inList = new ArrayList<>();
 		inList.add("testValue");
 		inList.add("testValue2");
 		List<String> out = map.addAll("5252", inList);
@@ -42,12 +42,12 @@ public class IListMapTest {
 		IListMap<String, String> map = IListMap.newListHashMap();
 		assertNull(map.get("5252"));
 		
-		List<String> alreadyList = new ArrayList<String>();
+		List<String> alreadyList = new ArrayList<>();
 		alreadyList.add("testValue3");
 		alreadyList.add("testValue4");
 		map.put("5252", alreadyList);
 		
-		List<String> inList = new ArrayList<String>();
+		List<String> inList = new ArrayList<>();
 		inList.add("testValue");
 		inList.add("testValue2");
 		List<String> out = map.addAll("5252", inList);

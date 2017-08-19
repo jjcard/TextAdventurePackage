@@ -115,7 +115,7 @@ public class BasicTextParserTest {
 	@Test
 	public void testPatternParsing(){
 		ITextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>();
-		ITextDefinition<BasicTextTokenType> def = new SimpleTextDefinition<BasicTextTokenType>(BasicTextTokenType.TALK);
+		ITextDefinition<BasicTextTokenType> def = new SimpleTextDefinition<>(BasicTextTokenType.TALK);
 		dictionary.put("say", def);
 		String text = "And then I say \"I really hope this works\"";
 		BasicTextParser<BasicTextTokenType> parser = new BasicTextParser<>(dictionary);
@@ -140,8 +140,8 @@ public class BasicTextParserTest {
 	@Test
 	public void testListPatternParsing(){
 		TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>();
-		ITextDefinition<BasicTextTokenType> def = new SimpleTextDefinition<BasicTextTokenType>(BasicTextTokenType.GET);
-		ITextDefinition<BasicTextTokenType> item = new SimpleTextDefinition<BasicTextTokenType>(BasicTextTokenType.ITEM);
+		ITextDefinition<BasicTextTokenType> def = new SimpleTextDefinition<>(BasicTextTokenType.GET);
+		ITextDefinition<BasicTextTokenType> item = new SimpleTextDefinition<>(BasicTextTokenType.ITEM);
 		dictionary.put("want", def);
 		dictionary.putAll(item, "cyberpunk", "parser", "monitor");
 		String text = "For christmas I want a parser, monitor, and cyberpunk.";
@@ -174,8 +174,8 @@ public class BasicTextParserTest {
 	@Test
 	public void testListPatternParsing_2(){
 		TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>();
-		ITextDefinition<BasicTextTokenType> def = new SimpleTextDefinition<BasicTextTokenType>(BasicTextTokenType.GET);
-		ITextDefinition<BasicTextTokenType> item = new SimpleTextDefinition<BasicTextTokenType>(BasicTextTokenType.ITEM);
+		ITextDefinition<BasicTextTokenType> def = new SimpleTextDefinition<>(BasicTextTokenType.GET);
+		ITextDefinition<BasicTextTokenType> item = new SimpleTextDefinition<>(BasicTextTokenType.ITEM);
 		dictionary.put("want", def);
 		dictionary.putAll(item, "cyberpunk", "parser,", "monitor,");
 		String text = "For christmas I want a parser, monitor, and cyberpunk.";

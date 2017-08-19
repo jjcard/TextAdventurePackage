@@ -33,11 +33,11 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 
 	public static class Builder<T extends ITextTokenType> {
 
-		private List<TextToken<T>> objects = new LinkedList<TextToken<T>>();
+		private List<TextToken<T>> objects = new LinkedList<>();
 		private TextToken<T> verb;
 		private TextToken<T> withObject;
-		private Set<TextParserError> errors = new HashSet<TextParserError>();
-		private final List<TextToken<T>> stream = new LinkedList<TextToken<T>>();
+		private Set<TextParserError> errors = new HashSet<>();
+		private final List<TextToken<T>> stream = new LinkedList<>();
 		private boolean validateInput = true;
 
 		public Builder() {
@@ -90,7 +90,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		 */
 		public Builder<T> objects(List<TextToken<T>> objects) {
 			if (objects == null) {
-				objects = new LinkedList<TextToken<T>>();
+				objects = new LinkedList<>();
 			}
 			this.objects = objects;
 			stream.addAll(objects);
@@ -123,7 +123,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 
 		public Builder<T> errors(Set<TextParserError> errors) {
 			if (errors == null) {
-				errors = new HashSet<TextParserError>();
+				errors = new HashSet<>();
 			}
 			this.errors = errors;
 			return this;

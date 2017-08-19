@@ -59,7 +59,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		private int defense = 0;
 		private int attack = 0;
 		private boolean hostile = true;
-		private List<IStatus> statusList = new LinkedList<IStatus>();
+		private List<IStatus> statusList = new LinkedList<>();
 		private IArmour armour;
 		private IWeapon weapon;
 		private boolean checkHealth = true;
@@ -152,7 +152,7 @@ public class Mob extends AbstractGameElement implements IMob{
 		@JsonProperty("statuses")
 		public Builder statusList(List<IStatus> statusList){
 			if (statusList == null){
-				this.statusList = new LinkedList<IStatus>();
+				this.statusList = new LinkedList<>();
 			} else {
 				this.statusList = statusList;	
 			}

@@ -80,8 +80,8 @@ public abstract class AbstractGameElement implements IGameElement{
 	}
 	
 	protected AbstractGameElement(Builder builder){
+		ObjectsUtil.checkArg(builder.name, "name");
 		this.name = builder.name;
-		ObjectsUtil.checkArg(name, "name");
 		this.roomDescription = builder.roomDescription;
 		this.validateFields = builder.validateFields;
 		this.viewDescription = builder.viewDescription;

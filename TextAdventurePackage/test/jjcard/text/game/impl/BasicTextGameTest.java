@@ -182,9 +182,9 @@ public class BasicTextGameTest {
 
 	private ITextParser<BasicTextTokenType> getParser(){
 		if (parser == null){
-			parser = new BasicTextParser<BasicTextTokenType>();
-			TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<BasicTextTokenType>(
-					BasicTextTokenType.values()).putAll(BasicTextTokenType.DIRECTION, Exit.DEFAULT_VALUES)
+			parser = new BasicTextParser<>();
+			TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>(
+                    BasicTextTokenType.values()).putAll(BasicTextTokenType.DIRECTION, Exit.DEFAULT_VALUES)
 					.putAll(BasicTextTokenType.ITEM, "coin", "item").putAll(BasicTextTokenType.WEAPON, "shank")
 					.putAll(BasicTextTokenType.ENEMY, "goblin").putAll(BasicTextTokenType.ARMOR, "wool");
 			parser.setTextDictionary(dictionary);

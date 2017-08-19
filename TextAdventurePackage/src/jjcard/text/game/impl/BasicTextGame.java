@@ -25,21 +25,21 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 	//TODO how to handle when mob is dead, can't remove it, since still has items...
 	private IBattleSystem<Integer> battleSystem = new BasicBattleSystem(
 			(a, d, damage) -> {output.println(" you have attacked " + d.getName() + " for " + damage + " damage.\n");output.println("You have slain " + d.getName() + "!");}, 
-			(a, d, damage) -> {output.println(" you have attacked " + d.getName() + " for " + damage + " damage.\n");}
+			(a, d, damage) -> output.println(" you have attacked " + d.getName() + " for " + damage + " damage.\n")
 	);
 	
 	/**
 	 * 
 	 * @param current the current location. Must be non-null
-	 * @param playerN
+	 * @param player
 	 * @throws IllegalArgumentException if the <code>current</code> argument or <code>player</code> argument is <code>null</code>
 	 */
-	public BasicTextGame(ILocation current, Player player) throws NullPointerException{
+	public BasicTextGame(ILocation current, Player player) throws IllegalArgumentException {
 		checkArg(current, "current");
 		checkArg(player, "player");
 		this.player = player;
-		worldUtil = new WorldUtil<Player>(current, player);
-		parser = new BasicTextParser<BasicTextTokenType>();
+		worldUtil = new WorldUtil<>(current, player);
+		parser = new BasicTextParser<>();
 		inputScanner = new Scanner(System.in);
 	}
 	

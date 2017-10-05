@@ -3,6 +3,7 @@ apply plugin: 'eclipse'
 apply plugin: 'pmd'
 apply plugin: 'findbugs'
 apply plugin: 'jacoco'
+apply plugin: 'idea'
 
 
 targetCompatibility = JavaVersion.VERSION_1_8 
@@ -56,7 +57,7 @@ configurations {
 }
 
 task wrapper(type: Wrapper){
-	gradleVersion = '4.1'
+	gradleVersion = '4.2.1'
 }
 pmd {
 	ruleSets = ["java-basic", "java-naming", "java-braces", "java-design", "java-unnecessary"]

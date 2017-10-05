@@ -1,6 +1,8 @@
 language: java
 
-before_install: cd TextAdventurePackage
+before_install: 
+ - chmod +x gradlew
+ - cd TextAdventurePackage
 
 before_cache:
   - rm -f  $HOME/TextAdventurePackage/.gradle/caches/modules-2/modules-2.lock

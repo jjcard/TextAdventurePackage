@@ -1,1 +1,9 @@
 language: java
+
+before_cache:
+  - rm -f  $HOME/TextAdventurePackage/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/TextAdventurePackage/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/TextAdventurePackage/.gradle/caches/
+    - $HOME/TextAdventurePackage/.gradle/wrapper/

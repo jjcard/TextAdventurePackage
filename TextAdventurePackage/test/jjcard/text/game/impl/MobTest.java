@@ -2,6 +2,8 @@ package jjcard.text.game.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
@@ -149,6 +151,34 @@ public class MobTest {
 		assertEquals(weapon, in.getWeapon());
 		assertEquals(hostile, in.isHostile());
 
+	}
+	@Test
+	public void initTest_String() {
+		Mob mob = new Mob("init_string mob");
+		assertNotNull(mob);
+		assertEquals("init_string mob", mob.getName());
+		assertNull("shouldn't have been constructed", mob.getRoomDescription());
+	}
+	@Test
+	public void getArmourKeyTest() {
+		Mob mob = new Mob("armour dummy");
+		
+		assertNull(mob.getArmour());
+		assertNull(mob.getArmourKey());
+		
+		Armour tutorialArmour = new Armour("kinda crappy armour");
+		mob.setArmour(tutorialArmour);
+		assertEquals(tutorialArmour, mob.getArmour());
+		assertEquals("kinda crappy armour", mob.getArmourKey());
+	}
+	@Test
+	public void setHiddenTest() {
+		Mob mob = new Mob("sometimes sneaky goblin");
+		
+		assertFalse(mob.isHidden());
+		
+		mob.setHidden(true);
+		assertTrue(mob.isHidden());
 	}
 
 }

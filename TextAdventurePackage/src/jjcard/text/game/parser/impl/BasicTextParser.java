@@ -78,6 +78,12 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		this();
 		this.dictionary = dictionary;
 	}
+	/**
+	 * Warning: Puts the given deliminators into a Regex Pattern, any characters that are used in the Java Regular Expression should be escaped properly. 
+	 * @param deliminators
+	 * @return Pattern the split Pattern
+	 * @throws PatternSyntaxException
+	 */
 	public static Pattern compileSplitPattern(String deliminators) throws PatternSyntaxException {
 		//split pattern based on StackOverflow post by Bart Kiers
 		return Pattern.compile("["+ deliminators +"]+(?=([^\"]*\"[^\"]*\")*[^\"]*$)");

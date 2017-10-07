@@ -45,5 +45,10 @@ public class TextTokenTest {
 		assertTrue(t.isObject());
 		assertFalse(t.isVerb());
 	}
+	@Test
+	public void toStringTest() {
+		TextToken<BasicTextTokenType> verb = new TextToken<>("verbTest", "vertTest2", BasicTextTokenType.MOVE);
+		assertEquals("TextToken=[type=MOVE, token=verbTest, standardToken=vertTest2]", verb.toString());
+	}
 
 }

@@ -78,8 +78,18 @@ tasks.withType(FindBugs) {
 		xml.enabled false
 		csv.enabled false
 		html.enabled true
-		html.destination "${buildDir}/reports/jacoco"
+		html.destination file("${buildDir}/reports/jacoco")
 	}
+ }
+ 
+ jacocoTestCoverageVerification {
+     violationRules {
+        rule {
+            limit {
+                minimum = 0.7
+            }
+        }
+     }
  }
 repositories {
 	mavenCentral()

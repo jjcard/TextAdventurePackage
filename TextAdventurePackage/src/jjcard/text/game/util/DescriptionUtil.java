@@ -16,7 +16,7 @@ import jjcard.text.game.ILocation;
  */
 public final class DescriptionUtil {
 	private static final String COMMA_DELIMINATOR = ", ";
-	public static final char SPACE = ' ';
+	private static final char SPACE = ' ';
 	private static final String EMPTY = "";
 	public static final String DEFAULT_EXIT_START = "The obvious exits are ";
 	private DescriptionUtil(){

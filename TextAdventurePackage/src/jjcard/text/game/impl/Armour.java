@@ -76,6 +76,9 @@ public class Armour extends Item implements IArmour {
 		super(builder);
 		setDefense(builder.defense);
 	}
+	public Armour(String name) {
+		super(name);
+	}
 	public int getDefense(){
 		return defense;
 	}

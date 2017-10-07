@@ -301,7 +301,7 @@ public class WorldUtil<P extends IMob>{
 			return player.getItem(key);
 		}
 		if (roomContainsExit(key)){
-			return  current.getExit(key);
+			return current.getExit(key);
 		}
 		return null;
 	}
@@ -390,9 +390,6 @@ public class WorldUtil<P extends IMob>{
 		if (item == null){
 			return false;
 		}
-		if (key.equalsIgnoreCase(item.getName())){
-			return true;
-		}
-		return false;
+		return key.equalsIgnoreCase(item.getName());
 	}
 }

@@ -28,7 +28,7 @@ public final class DescriptionUtil {
 	 * @param excludeHidden
 	 * @return Stream
 	 */
-	public static <I extends ConcealableGameElement> Stream<I> getConcealableStream(Collection<I> elements, boolean excludeHidden){
+	public static <I extends ConcealableGameElement> Stream<I> getConcealableStream(Collection<I> elements, final boolean excludeHidden){
 		if (elements == null || elements.isEmpty()){
 			return Stream.empty();
 		}
@@ -42,7 +42,7 @@ public final class DescriptionUtil {
 	 * @return the comma separated String
 	 * @see #getConcealableStream(Collection, boolean)
 	 */
-	public static <I extends ConcealableGameElement> String getConcealableNames(Map<?, I> elements, boolean excludeHidden){
+	public static <I extends ConcealableGameElement> String getConcealableNames(Map<?, I> elements, final boolean excludeHidden){
 		return getConcealableNames(elements == null? null: elements.values(), excludeHidden);
 	}
 	/**
@@ -52,7 +52,7 @@ public final class DescriptionUtil {
 	 * @return the comma separated String
 	 * @see #getConcealableStream(Collection, boolean)
 	 */
-	public static <I extends ConcealableGameElement> String getConcealableNames(Collection<I> elements, boolean excludeHidden){
+	public static <I extends ConcealableGameElement> String getConcealableNames(Collection<I> elements, final boolean excludeHidden){
 		return getConcealableStream(elements, excludeHidden).map(I::getName).collect(Collectors.joining(COMMA_DELIMINATOR));
 	}
 	/**
@@ -62,7 +62,7 @@ public final class DescriptionUtil {
 	 * @return the List
 	 * @see #getConcealableStream(Collection, boolean)
 	 */
-	public static <I extends ConcealableGameElement> List<String> getConcealableNamesList(Map<?, I> elements, boolean excludeHidden){
+	public static <I extends ConcealableGameElement> List<String> getConcealableNamesList(Map<?, I> elements, final boolean excludeHidden){
 		return getConcealableNamesList(elements == null? null: elements.values(), excludeHidden);
 	}
 	/**
@@ -72,7 +72,7 @@ public final class DescriptionUtil {
 	 * @return the List
 	 * @see #getConcealableStream(Collection, boolean)
 	 */
-	public static <I extends ConcealableGameElement> List<String> getConcealableNamesList(Collection<I> elements, boolean excludeHidden){
+	public static <I extends ConcealableGameElement> List<String> getConcealableNamesList(Collection<I> elements, final boolean excludeHidden){
 		return getConcealableStream(elements, excludeHidden).map(I::getName).collect(Collectors.toList());
 	}
 	/**
@@ -82,7 +82,7 @@ public final class DescriptionUtil {
 	 * @return the comma separated String
 	 * @see #getConcealableStream(Collection, boolean)
 	 */
-	public static <I extends ConcealableGameElement> String getConceableRoomDescriptions(Map<?,I> elements, boolean excludeHidden){
+	public static <I extends ConcealableGameElement> String getConceableRoomDescriptions(Map<?,I> elements, final boolean excludeHidden){
 		return getConceableRoomDescriptions(elements == null? null: elements.values(), excludeHidden);
 	}
 	/**
@@ -92,7 +92,7 @@ public final class DescriptionUtil {
 	 * @return the comma separated String
 	 * @see #getConcealableStream(Collection, boolean)
 	 */
-	public static <I extends ConcealableGameElement> String getConceableRoomDescriptions(Collection<I> elements, boolean excludeHidden){
+	public static <I extends ConcealableGameElement> String getConceableRoomDescriptions(Collection<I> elements, final boolean excludeHidden){
 		return getConcealableStream(elements, excludeHidden).map(I::getRoomDescription).collect(Collectors.joining(COMMA_DELIMINATOR));
 	}
 	
@@ -103,7 +103,7 @@ public final class DescriptionUtil {
 	 * @return the comma separated String
 	 * @see #getConcealableStream(Collection, boolean)
 	 */
-	public static <I extends ConcealableGameElement> String getConceableViewDescriptions(Map<?,I> elements, boolean excludeHidden){
+	public static <I extends ConcealableGameElement> String getConceableViewDescriptions(Map<?,I> elements, final boolean excludeHidden){
 		return getConceableViewDescriptions(elements == null? null: elements.values(), excludeHidden);
 	}
 	/**
@@ -113,10 +113,9 @@ public final class DescriptionUtil {
 	 * @return the comma separated String
 	 * @see #getConcealableStream(Collection, boolean)
 	 */
-	public static <I extends ConcealableGameElement> String getConceableViewDescriptions(Collection<I> elements, boolean excludeHidden){
+	public static <I extends ConcealableGameElement> String getConceableViewDescriptions(Collection<I> elements, final boolean excludeHidden){
 		return getConcealableStream(elements, excludeHidden).map(I::getViewDescription).collect(Collectors.joining(COMMA_DELIMINATOR));
 	}
-	
 	
 	/**
 	 * Return comma separated String of element room descriptions.
@@ -131,7 +130,7 @@ public final class DescriptionUtil {
 	 * @param elements
 	 * @return comma separated String
 	 */
-	public static <I extends IGameElement> String  getGameElementRoomDescriptions(Collection<I> elements){
+	public static <I extends IGameElement> String getGameElementRoomDescriptions(Collection<I> elements){
 		if (elements == null){
 			return EMPTY;
 		}
@@ -141,7 +140,7 @@ public final class DescriptionUtil {
 	 * Returns String containing the description of the <code>location</code> along with it's Inventory, Mob, and Exits Description if they are non-empty.
 	 * The <code>exitStart<code> is placed before the Description for the exits, if any.
 	 * @param location
-	 * @param exitStart
+	 * @param exitStart. null defaults to empty string
 	 * @return description of room and it's elements
 	 */
 	public static String showRoom(final ILocation location, final String exitStart){

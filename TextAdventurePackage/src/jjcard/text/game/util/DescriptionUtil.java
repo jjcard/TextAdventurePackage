@@ -148,7 +148,8 @@ public final class DescriptionUtil {
 		if (location == null){
 			return EMPTY;
 		}
-		StringBuilder re = new StringBuilder(location.getDescription());
+		final String _exitStart = exitStart == null? "": exitStart;
+		final StringBuilder re = new StringBuilder(location.getDescription());
 		String curDescrip;
 		if (!(curDescrip = location.getInventoryDescriptions()).isEmpty()){
 			re.append(SPACE).append(curDescrip);
@@ -157,7 +158,7 @@ public final class DescriptionUtil {
 			re.append(SPACE).append(curDescrip);
 		}
 		if (!(curDescrip = location.getExitsDescriptions()).isEmpty()){
-			re.append(SPACE).append(exitStart).append(curDescrip);
+			re.append(SPACE).append(_exitStart).append(curDescrip);
 		}
 		return re.toString();
 	}

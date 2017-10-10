@@ -50,6 +50,13 @@ public class DescriptionUtilTest {
 		assertTrue(roomDescrip, roomDescrip.contains("NORTHISH"));
 		assertTrue(roomDescrip, roomDescrip.contains("SOUTHERNLY"));
 		assertFalse(roomDescrip, roomDescrip.contains("DOWN"));
+		
+		
+		roomDescrip = DescriptionUtil.showRoom(hallway, null);
+		assertFalse(roomDescrip.contains(DescriptionUtil.DEFAULT_EXIT_START));
+		assertTrue(roomDescrip, roomDescrip.contains("NORTHISH"));
+		assertTrue(roomDescrip, roomDescrip.contains("SOUTHERNLY"));
+		assertFalse(roomDescrip, roomDescrip.contains("DOWN"));
 	}
 
 	@Test

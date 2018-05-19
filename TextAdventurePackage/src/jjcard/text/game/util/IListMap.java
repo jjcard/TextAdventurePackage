@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Supplier;
 /**
- * Interface for having map with multiple objects per key. with default methods for such.
+ * Interface for having map with multiple objects per key. Has default methods and implementation classes.
  *
  * @param <K>
  * @param <V>
@@ -115,9 +115,6 @@ public interface IListMap<K, V> extends Map<K, List<V>> {
 	}
 	public static class ListHashMap<K, V> extends HashMap<K, List<V>> implements IListMap<K, V>{
 
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = -1702963975522014415L;
 		
 		public ListHashMap() {
@@ -129,9 +126,6 @@ public interface IListMap<K, V> extends Map<K, List<V>> {
 	}
 	public static class ListTreeMap<K, V> extends TreeMap<K, List<V>>  implements IListMap<K, V>{
 
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = -8071210173902756898L;
 		
 		public ListTreeMap() {

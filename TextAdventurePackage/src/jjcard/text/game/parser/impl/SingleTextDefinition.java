@@ -1,5 +1,7 @@
 package jjcard.text.game.parser.impl;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,17 +17,17 @@ public class SingleTextDefinition<T extends ITextTokenType> extends AbstractText
 	@JsonProperty("standard")
 	private final String name;
 	@JsonCreator
-	public SingleTextDefinition(@JsonProperty("type")T type, @JsonProperty("standard")String name) {
+	public SingleTextDefinition(@JsonProperty("type")T type, @JsonProperty("standard")final String name) {
 		super(type);
 		this.name = name;
 	}
 
 	@Override
-	public String getStandardToken(String token) {
+	public String getStandardToken(final String token) {
 		return name;
 	}
 	
-	public static <T extends ITextTokenType> SingleTextDefinition<T> getInstance(T type, String name){
+	public static <T extends ITextTokenType> SingleTextDefinition<T> getInstance(T type, final String name){
 		return new SingleTextDefinition<>(type, name);
 	}
 	
@@ -38,7 +40,7 @@ public class SingleTextDefinition<T extends ITextTokenType> extends AbstractText
 		}
 		if (o instanceof SingleTextDefinition<?>){
 			SingleTextDefinition<?> other = (SingleTextDefinition<?>) o;
-			return ObjectsUtil.equals(name, other.name);
+			return Objects.equals(name, other.name);
 		}
 		return false;
 	}

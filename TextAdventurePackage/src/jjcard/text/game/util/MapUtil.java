@@ -45,7 +45,7 @@ public final class MapUtil {
      * 
      * @param setUppercase
      */
-    public void setSetUppercase(boolean setUppercase) {
+    public void setSetUppercase(final boolean setUppercase) {
         this.setUppercase = setUppercase;
     }
 

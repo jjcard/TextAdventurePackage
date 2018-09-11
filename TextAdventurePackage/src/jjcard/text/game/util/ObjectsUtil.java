@@ -3,6 +3,7 @@ package jjcard.text.game.util;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Util class for all objects
@@ -12,21 +13,10 @@ public final class ObjectsUtil {
 
 	public static final int DEFAULT_PRIME = 31;
 	private ObjectsUtil(){
-		super();
-	}
-	
-	public static boolean equals(Object a, Object b){
-		if (a == b){
-			return true;
-		}
-		if (a == null || b == null) {
-			return false;
-		}
-		
-		return a.equals(b);
+		super();//util class
 	}
 	public static boolean notEqual(Object a, Object b){
-		return !equals(a, b);
+		return !Objects.equals(a, b);
 	}
 	public static <K, V> boolean notEqualsSize(Map<K, V> a, Map<K, V> b){
 		return !equalsSize(a, b);
@@ -59,7 +49,7 @@ public final class ObjectsUtil {
 	 * @param b
 	 * @return true if both maps don't have same key set
 	 */
-	public static <K> boolean notEqualKeys(Map<String, K> a, Map<String, K> b){
+	public static boolean notEqualKeys(Map<String, ?> a, Map<String, ?> b){
 		return !equalKeys(a, b);
 	}
 	/**
@@ -68,7 +58,7 @@ public final class ObjectsUtil {
 	 * @param b
 	 * @return true if key sets of maps are the same
 	 */
-	public static <K> boolean equalKeys(Map<String, K> a, Map<String, K> b){
+	public static boolean equalKeys(Map<String, ?> a, Map<String, ?> b){
 		if (a == b){
 			return true;
 		}

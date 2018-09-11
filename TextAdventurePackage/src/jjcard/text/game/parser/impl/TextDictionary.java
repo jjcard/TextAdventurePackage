@@ -60,7 +60,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 	 * @param values
 	 */
 	@SafeVarargs
-	public TextDictionary( boolean automaticCasing, ITextDefinition<T>...values){
+	public TextDictionary(final boolean automaticCasing, ITextDefinition<T>...values){
 		super();
 		this.automaticCasing = automaticCasing;
 		if (values != null){
@@ -76,7 +76,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 		this(DEFAULT_AUTOMATIC_CASING, values);
 	}
 	@SafeVarargs
-	public TextDictionary(boolean automaticCasing, T...values){
+	public TextDictionary(final boolean automaticCasing, T...values){
 		super();
 		this.automaticCasing = automaticCasing;
 		if (values != null){

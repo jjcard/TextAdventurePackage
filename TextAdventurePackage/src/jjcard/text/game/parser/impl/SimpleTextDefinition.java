@@ -18,7 +18,7 @@ public class SimpleTextDefinition<T extends ITextTokenType> extends AbstractText
 	}
 
 	@Override
-	public String getStandardToken(String token) {
+	public String getStandardToken(final String token) {
 		return token;
 	}
 

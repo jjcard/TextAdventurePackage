@@ -69,8 +69,8 @@ public interface ILocation extends Comparable<ILocation>{
 	 * @param room
 	 * @return previous exit associated with dir
 	 */
-	default public IExit addExit(String dir, ILocation room){
-		Exit exit = new Exit.Builder().name(dir).location(room).build();
+	default public IExit addExit(final String dir, ILocation room){
+		final Exit exit = new Exit.Builder().name(dir).location(room).build();
 		return addExit(exit);
 	}
 
@@ -81,7 +81,7 @@ public interface ILocation extends Comparable<ILocation>{
 	 * @return ILocation
 	 */
 	public default ILocation getExitLocation(String dir){
-		IExit exit = getExit(dir);
+		final IExit exit = getExit(dir);
 		return exit == null? null: exit.getLocation();
 	}
 	

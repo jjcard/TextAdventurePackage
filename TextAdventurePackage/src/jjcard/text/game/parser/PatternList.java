@@ -42,7 +42,7 @@ public class PatternList<S> {
 	 * @param value
 	 * @throws PatternSyntaxException
 	 */
-	public void add(String s, S value) throws PatternSyntaxException {
+	public void add(final String s, S value) throws PatternSyntaxException {
 		add(Pattern.compile(s), value);
 	}
 
@@ -51,7 +51,7 @@ public class PatternList<S> {
 	 * @param text
 	 * @return
 	 */
-	public S get(String text) {
+	public S get(final String text) {
 		S value = null;
 		for (PatternEntry entry : patternList) {
 			if (entry.matches(text)) {

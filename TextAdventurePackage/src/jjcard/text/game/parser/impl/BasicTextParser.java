@@ -51,7 +51,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	 * @param deliminators
 	 * @throws PatternSyntaxException
 	 */
-	public BasicTextParser(String deliminators) throws PatternSyntaxException {
+	public BasicTextParser(final String deliminators) throws PatternSyntaxException {
 		this.textIndicatorPatterns = new PatternList<>();
 		this.textTokenPatterns = new PatternList<>();
 		this.dictionary = new TextDictionary<>();
@@ -64,7 +64,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	 * @param deliminators
 	 * @throws PatternSyntaxException
 	 */
-	public BasicTextParser(ITextDictionary<T> dictionary, String deliminators) throws PatternSyntaxException{
+	public BasicTextParser(ITextDictionary<T> dictionary, final String deliminators) throws PatternSyntaxException{
 		this(deliminators);
 		this.dictionary = dictionary;
 	}	
@@ -84,12 +84,12 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	 * @return Pattern the split Pattern
 	 * @throws PatternSyntaxException
 	 */
-	public static Pattern compileSplitPattern(String deliminators) throws PatternSyntaxException {
+	public static Pattern compileSplitPattern(final String deliminators) throws PatternSyntaxException {
 		//split pattern based on StackOverflow post by Bart Kiers
 		return Pattern.compile("["+ deliminators +"]+(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 	}
 	@Override
-	protected String[] splitText(String text) {
+	protected String[] splitText(final String text) {
 		return splitPattern.split(text);
 	}
 	/**
@@ -98,7 +98,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	 * @param input
 	 * @return builder
 	 */
-	protected Builder<T> handleRepeatIndicator(Builder<T> builder, String input) {
+	protected Builder<T> handleRepeatIndicator(Builder<T> builder, final String input) {
 		return new Builder<>(previousStream); 
 	}
 	/**
@@ -106,7 +106,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	 * @param builder
 	 * @param input
 	 */
-	protected void handleItIndicator(Builder<T> builder, String input) {
+	protected void handleItIndicator(Builder<T> builder, final String input) {
 		handleObject(builder, previousStream.getFirstObject());
 	}
 	/**
@@ -115,7 +115,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	 * @return the Deliminator String
 	 */
 	public static String getDeliminators (String... deliminators){
-		StringBuilder b = new StringBuilder();
+	    final StringBuilder b = new StringBuilder();
 		for (String delim: deliminators){
 			b.append(Pattern.quote(delim));
 		}
@@ -145,7 +145,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	 * @param regexPattern
 	 * @param type
 	 */
-	public void addTextIndicatorePattern(String regexPattern, TextIndicator type){
+	public void addTextIndicatorePattern(String regexPattern, final TextIndicator type){
 		addTextIndicatorePattern(Pattern.compile(regexPattern), type);
 	}
 	/**
@@ -154,7 +154,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	 * @param pattern
 	 * @param type
 	 */
-	public void addTextIndicatorePattern(Pattern pattern, TextIndicator type){
+	public void addTextIndicatorePattern(Pattern pattern, final TextIndicator type){
 		textIndicatorPatterns.add(pattern, type);
 	}
 	/**

@@ -57,7 +57,7 @@ configurations {
 }
 
 task wrapper(type: Wrapper){
-	gradleVersion = '4.2.1'
+	gradleVersion = '4.10'
 }
 pmd {
 	ruleSets = ["java-basic", "java-naming", "java-braces", "java-design", "java-unnecessary"]

@@ -1,7 +1,10 @@
+plugins {
+  id "com.github.spotbugs" version "4.4.3"
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'pmd'
-apply plugin: 'findbugs'
 apply plugin: 'jacoco'
 apply plugin: 'idea'
 
@@ -56,23 +59,19 @@ configurations {
 	}
 }
 
-task wrapper(type: Wrapper){
-	gradleVersion = '4.10'
+wrapper {
+    gradleVersion = '6.5'
 }
+
 pmd {
 	ruleSets = ["java-basic", "java-naming", "java-braces", "java-design", "java-unnecessary"]
 	ignoreFailures = true;
 //	ruleSets = ["java-basic", "java-unnecessary","java-naming", "java-braces", "java-design", "java-coupling", "java-optimization"]
 }
-findbugs {
+spotbugs {
 	ignoreFailures = true
 }
-tasks.withType(FindBugs) {
-	reports {
-		xml.enabled = false
-		html.enabled = true
-	}
- }
+
  jacocoTestReport {//run with gradlew test jacocoTestReport
 	reports {
 		xml.enabled false
@@ -95,9 +94,9 @@ repositories {
 	mavenCentral()
 }
 dependencies {
-	compile ([group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.9.0"],
+	implementation ([group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.9.0"],
 			 [group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.9.0"],
 			 [group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.9.0"])
 			 
-	testCompile 'junit:junit:4.12'
+	testImplementation 'junit:junit:4.12'
 }

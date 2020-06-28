@@ -19,7 +19,8 @@ public abstract class AbstractStatus<T> implements IStatus {
 		this(target);
 		setIsBefore(isBefore);
 	}	
-	public boolean isBeforeTurn(){
+	@Override
+    public boolean isBeforeTurn(){
 		return before;
 	}
 	public void setIsBefore(boolean isBfore){
@@ -28,7 +29,8 @@ public abstract class AbstractStatus<T> implements IStatus {
 	public T getTarget(){
 		return target;
 	}
-	public boolean isAfterTurn(){
+	@Override
+    public boolean isAfterTurn(){
 		return !before;
 	}
 	protected void setTarget(T mob){
@@ -37,7 +39,8 @@ public abstract class AbstractStatus<T> implements IStatus {
 	protected void setIsDone(boolean done){
 		this.isDone = done;
 	}
-	public boolean isDone(){
+	@Override
+    public boolean isDone(){
 		return isDone;
 	}
 	

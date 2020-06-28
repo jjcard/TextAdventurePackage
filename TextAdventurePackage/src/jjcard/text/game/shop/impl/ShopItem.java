@@ -63,7 +63,8 @@ public class ShopItem<T extends IItem> implements IShopItem{
 		}
 	}
 
-	public int getAmount(){
+	@Override
+    public int getAmount(){
 		return amount;
 	}
 	@Override
@@ -78,7 +79,8 @@ public class ShopItem<T extends IItem> implements IShopItem{
 	public String getRoomDescription() {
 		return item.getRoomDescription();
 	}
-	public String getViewDescription(){
+	@Override
+    public String getViewDescription(){
 		if (viewDescription != null){
 			return  viewDescription;
 		}

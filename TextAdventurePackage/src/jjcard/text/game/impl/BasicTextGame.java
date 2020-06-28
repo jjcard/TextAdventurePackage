@@ -260,7 +260,8 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 		}
 	}
 
-	public boolean isGameOver(){
+	@Override
+    public boolean isGameOver(){
 		return super.isGameOver() || player.isDead();
 	}
 	@Override

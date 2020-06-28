@@ -17,7 +17,8 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 	 */
 	protected boolean withObjectIndicator;
 
-	public TextTokenStream<T> parseText(String input) {
+	@Override
+    public TextTokenStream<T> parseText(String input) {
 		startParsing(input);
 
 		Builder<T> builder = new Builder<>();

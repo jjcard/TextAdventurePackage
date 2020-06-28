@@ -75,11 +75,13 @@ public class Exit extends AbstractGameElement implements IExit {
 		public Builder(AbstractGameElement element){
 			super(element);
 		}
-		public Builder name(String name){
+		@Override
+        public Builder name(String name){
 			super.name(name);
 			return this;
 		}
-		public Builder roomDescription(String roomDescrip){
+		@Override
+        public Builder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
 		}
@@ -119,7 +121,8 @@ public class Exit extends AbstractGameElement implements IExit {
 	/**
 	 * Gets the Location
 	 */
-	public ILocation getLocation() {
+	@Override
+    public ILocation getLocation() {
 		return location;
 	}
 
@@ -139,14 +142,17 @@ public class Exit extends AbstractGameElement implements IExit {
 	public static Exit getWithLocationAsName(ILocation location){
 		return new Builder().location(location).name(location.getName()).build();
 	}
-	public boolean isHidden(){
+	@Override
+    public boolean isHidden(){
 		return hidden;
 	}
-	public void setHidden(boolean hidden){
+	@Override
+    public void setHidden(boolean hidden){
 		this.hidden = hidden;
 	}
 	
-	public boolean equals(Object object){
+	@Override
+    public boolean equals(Object object){
 		if (object == this){
 			return true;
 		}
@@ -167,7 +173,8 @@ public class Exit extends AbstractGameElement implements IExit {
 			return false;
 		}
 	}
-	public int hashCode(){
+	@Override
+    public int hashCode(){
 		return ObjectsUtil.getHash(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, location, hidden);
 	}
 	/**

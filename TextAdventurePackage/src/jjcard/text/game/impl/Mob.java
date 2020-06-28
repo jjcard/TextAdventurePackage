@@ -173,19 +173,23 @@ public class Mob extends AbstractGameElement implements IMob{
 			statusList.add(status);
 			return this;
 		}
-		public Builder name(String name){
+		@Override
+        public Builder name(String name){
 			super.name(name);
 			return this;
 		}
-		public Builder roomDescription(String roomDescrip){
+		@Override
+        public Builder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
 		}
-		public Builder viewDescription(String viewDescription){
+		@Override
+        public Builder viewDescription(String viewDescription){
 			super.viewDescription(viewDescription);
 			return this;
 		}
-		public Builder validateFields(boolean validateFields){
+		@Override
+        public Builder validateFields(boolean validateFields){
 			super.validateFields(validateFields);
 			return this;
 		}
@@ -222,26 +226,33 @@ public class Mob extends AbstractGameElement implements IMob{
 		super(name);
 		checkHealth = false;
 	}
-	public int getMaxHealth() {
+	@Override
+    public int getMaxHealth() {
 		return maxHealth;
 	}
 
-	public int getHealth(){
+	@Override
+    public int getHealth(){
 		return curHealth;
 	}
-	public int getMoney(){
+	@Override
+    public int getMoney(){
 		return money;
 	}
-	public Map<String, IItem> getInventory() {
+	@Override
+    public Map<String, IItem> getInventory() {
 		return inventory;
 	}
-	public IItem getItem(String key){
+	@Override
+    public IItem getItem(String key){
 		return MAP_UTIL.getItemFromMap(inventory, key);
 	}
-	public IArmour getArmour(){
+	@Override
+    public IArmour getArmour(){
 		return armour;
 	}
-	public IWeapon getWeapon() {
+	@Override
+    public IWeapon getWeapon() {
 		return weapon;
 	}
 
@@ -249,7 +260,8 @@ public class Mob extends AbstractGameElement implements IMob{
 	 * returns defense only. Does not add armour bonus.
 	 * @return
 	 */
-	@JsonProperty("def")
+	@Override
+    @JsonProperty("def")
 	public int getBasicDefense() {
 		return defense;
 	}
@@ -257,20 +269,25 @@ public class Mob extends AbstractGameElement implements IMob{
 	 * returns attack only. Does not add weapon bonus.
 	 * @return
 	 */
-	@JsonProperty("att")
+	@Override
+    @JsonProperty("att")
 	public int getBasicAttack() {
 		return attack;
 	}
-	public boolean isHostile() {
+	@Override
+    public boolean isHostile() {
 		return hostile;
 	}
-	public List<IStatus> getStatusList() {
+	@Override
+    public List<IStatus> getStatusList() {
 		return statusList;
 	}
-	public boolean containsStatus(IStatus s){
+	@Override
+    public boolean containsStatus(IStatus s){
 		return statusList.contains(s);
 	}
-	public boolean removeStatus(IStatus s){
+	@Override
+    public boolean removeStatus(IStatus s){
 		return statusList.remove(s);
 	}
 
@@ -299,7 +316,8 @@ public class Mob extends AbstractGameElement implements IMob{
 		setHealth(this.curHealth + change);
  
 	}
-	public void setHealth(int health){
+	@Override
+    public void setHealth(int health){
 		curHealth = health;
 		if (doValidateFields()){
 			if (checkHealth && curHealth > maxHealth){
@@ -311,7 +329,8 @@ public class Mob extends AbstractGameElement implements IMob{
 		}
 
 	}
-	public void addStatus(IStatus s){
+	@Override
+    public void addStatus(IStatus s){
 			statusList.add(s);
 
 	}
@@ -341,7 +360,8 @@ public class Mob extends AbstractGameElement implements IMob{
 	 * @param a
 	 * @return previous Armour
 	 */
-	public IArmour setArmour( IArmour a){
+	@Override
+    public IArmour setArmour( IArmour a){
 		IArmour re = armour;
 		armour = a;
 		return re;
@@ -351,7 +371,8 @@ public class Mob extends AbstractGameElement implements IMob{
 	 * @param w
 	 * @return previous Weapon
 	 */
-	public IWeapon setWeapon( IWeapon w){
+	@Override
+    public IWeapon setWeapon( IWeapon w){
 		IWeapon re = weapon;
 		weapon = w;
 		return re;
@@ -367,7 +388,8 @@ public class Mob extends AbstractGameElement implements IMob{
 	 * @return
 	 */
 	
-	public int getFullAttack(){
+	@Override
+    public int getFullAttack(){
 		return attack + getWeaponBonus();
 	}
 	/**
@@ -390,7 +412,8 @@ public class Mob extends AbstractGameElement implements IMob{
 	 * gets defense plus any bonus
 	 * @return
 	 */
-	public int getFullDefense(){
+	@Override
+    public int getFullDefense(){
 		return defense + getArmourBonus();
 	}
 	public void setHostile(boolean hostile){
@@ -403,29 +426,35 @@ public class Mob extends AbstractGameElement implements IMob{
 			statusList = s;
 		}
 	}
-	public IItem addItem(IItem add){
+	@Override
+    public IItem addItem(IItem add){
 		return MAP_UTIL.addItemToMap(inventory, add);
 	}
-	public IArmour removeArmour() {
+	@Override
+    public IArmour removeArmour() {
 		IArmour re = armour;
 		armour = null;
 		return re;
 	}
-	public void addAllItems(Map<String, IItem> addMap) {
+	@Override
+    public void addAllItems(Map<String, IItem> addMap) {
 		inventory.putAll(addMap);
 	}
-	public IItem removeItem(String key){
+	@Override
+    public IItem removeItem(String key){
 		return MAP_UTIL.removeItemFromMap(inventory, key);
 	}
 	public void setInventory(Map<String, IItem> inventoryNew){
 		inventory = MapUtil.getMapOrNew(inventoryNew);
 	}
-	public Map<String, IItem> removeInventory(){
+	@Override
+    public Map<String, IItem> removeInventory(){
 		Map<String, IItem> returnIn = inventory;
 		inventory = MapUtil.newHashMap();
 		return returnIn;
 	}
-	public boolean containsItem(String key){
+	@Override
+    public boolean containsItem(String key){
 		return MAP_UTIL.containsKey(inventory, key);
 	}
 	public int inventorySize() {
@@ -435,10 +464,12 @@ public class Mob extends AbstractGameElement implements IMob{
 	public boolean isAlive(){
 		return !isDead();
 	}
-	public String toString() {
+	@Override
+    public String toString() {
 		return getName();
 	}
-	public IWeapon removeWeapon() {
+	@Override
+    public IWeapon removeWeapon() {
 		IWeapon re = weapon;
 		weapon = null;
 		return re;
@@ -447,11 +478,13 @@ public class Mob extends AbstractGameElement implements IMob{
 	public String getArmourKey(){
 		return armour == null? null: armour.getName();
 	}
-	@JsonIgnore
+	@Override
+    @JsonIgnore
 	public boolean isKeyforArmour(String key){
 		return isKeyForItem(key, armour);
 	}
-	@JsonIgnore
+	@Override
+    @JsonIgnore
 	public boolean isKeyForWeapon(String key){
 		return isKeyForItem(key, weapon);
 	}
@@ -459,7 +492,8 @@ public class Mob extends AbstractGameElement implements IMob{
 	public String getWeaponKey(){
 		return weapon == null? null: weapon.getName();
 	}
-	public boolean equals(Object o){
+	@Override
+    public boolean equals(Object o){
 		
 		if (this == o){
 			return true;
@@ -505,7 +539,8 @@ public class Mob extends AbstractGameElement implements IMob{
 			return false;
 		}
 	}
-	public int hashCode(){
+	@Override
+    public int hashCode(){
 		int start = super.hashCode();
 		start = start * ObjectsUtil.DEFAULT_PRIME + ObjectsUtil.getKeysHash(inventory);
 		return ObjectsUtil.getHashWithStart(start,
@@ -513,13 +548,16 @@ public class Mob extends AbstractGameElement implements IMob{
 				curHealth, maxHealth, money, hostile, armour,
 				weapon, statusList);
 	}
-	public String inventoryOverview(){
+	@Override
+    public String inventoryOverview(){
 		return MapUtil.getKeysAsString(inventory);
 	}
-	public boolean isHidden(){
+	@Override
+    public boolean isHidden(){
 		return hidden;
 	}
-	public void setHidden(boolean hidden){
+	@Override
+    public void setHidden(boolean hidden){
 		this.hidden = hidden;
 	}
 }

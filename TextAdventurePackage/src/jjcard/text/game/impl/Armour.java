@@ -27,7 +27,8 @@ public class Armour extends Item implements IArmour {
 			super(element);
 			use(ItemUse.Armour);
 		}
-		public Builder cost(int cost){
+		@Override
+        public Builder cost(int cost){
 			super.cost(cost);
 			return this;
 		}
@@ -36,39 +37,48 @@ public class Armour extends Item implements IArmour {
 			this.defense = defense;
 			return this;
 		}
-		public Builder viewDescription(String viewDescription){
+		@Override
+        public Builder viewDescription(String viewDescription){
 			super.viewDescription(viewDescription);
 			return this;
 		}
-		public Builder level(int level){
+		@Override
+        public Builder level(int level){
 			super.level(level);
 			return this;
 		}
-		public Builder hidden(boolean hidden){
+		@Override
+        public Builder hidden(boolean hidden){
 			super.hidden(hidden);
 			return this;
 		}
-		public Builder movable(boolean movable){
+		@Override
+        public Builder movable(boolean movable){
 			super.movable(movable);
 			return this;
 		}
-		public Builder use(ItemUse use){
+		@Override
+        public Builder use(ItemUse use){
 			super.use(use);
 			return this;
 		}
-		public Builder name(String name){
+		@Override
+        public Builder name(String name){
 			super.name(name);
 			return this;
 		}
-		public Builder roomDescription(String roomDescrip){
+		@Override
+        public Builder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
 		}
-		public Builder validateFields(boolean validateFields){
+		@Override
+        public Builder validateFields(boolean validateFields){
 			super.validateFields(validateFields);
 			return this;
 		}
-		public Armour build(){
+		@Override
+        public Armour build(){
 			return new Armour(this);
 		}
 	}
@@ -79,7 +89,8 @@ public class Armour extends Item implements IArmour {
 	public Armour(String name) {
 		super(name);
 	}
-	public int getDefense(){
+	@Override
+    public int getDefense(){
 		return defense;
 	}
 	public void setDefense(int defense){
@@ -91,7 +102,8 @@ public class Armour extends Item implements IArmour {
 	public void changeDefense(int change){
 		setDefense(defense + change);
 	}
-	public boolean equals(Object o){
+	@Override
+    public boolean equals(Object o){
 		if (o == this){
 			return true;
 		}
@@ -108,7 +120,8 @@ public class Armour extends Item implements IArmour {
 		}
 		return false;
 	}
-	public int hashCode(){
+	@Override
+    public int hashCode(){
 		return ObjectsUtil.getHashWithStart(super.hashCode(),
 				ObjectsUtil.DEFAULT_PRIME, defense);
 	}

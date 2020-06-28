@@ -28,10 +28,12 @@ public enum BasicTextTokenType implements ITextTokenType {
 		this(true);
 	}
 	
-	public boolean isObject(){
+	@Override
+    public boolean isObject(){
 		return isObject;
 	}
-	public boolean isVerb(){
+	@Override
+    public boolean isVerb(){
 		return !isObject;
 	}
 	@Override

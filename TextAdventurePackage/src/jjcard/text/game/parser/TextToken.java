@@ -51,20 +51,24 @@ public class TextToken<T extends ITextTokenType> implements ITextTokenType{
 		return standardToken;
 	}
 	
-	public boolean isObject(){
+	@Override
+    public boolean isObject(){
 		return type.isObject();
 	}
-	public boolean isVerb(){
+	@Override
+    public boolean isVerb(){
 		return type.isVerb();
 	}
 	@Override
 	public String[] defaultWords() {
 		return type.defaultWords();
 	}
-	public String toString(){
+	@Override
+    public String toString(){
 		return "TextToken=[type=" + type + ", token=" + token + ", standardToken=" + standardToken + "]";
 	}
-	@SuppressWarnings("rawtypes")
+	@Override
+    @SuppressWarnings("rawtypes")
 	public boolean equals(Object o){
 		if (this == o){
 			return true;
@@ -75,7 +79,8 @@ public class TextToken<T extends ITextTokenType> implements ITextTokenType{
 			return false;
 		}
 	}
-	public int hashCode(){
+	@Override
+    public int hashCode(){
 		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, token, standardToken, type);
 	}
 }

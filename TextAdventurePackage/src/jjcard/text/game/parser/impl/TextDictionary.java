@@ -185,10 +185,12 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 		return putAll(def, keys);
 	}
 	
-	public ITextDefinition<T> put(String key, ITextDefinition<T> value){
+	@Override
+    public ITextDefinition<T> put(String key, ITextDefinition<T> value){
 		return super.put(automaticCasing? key.toUpperCase(locale):key, value);
 	}
-	public ITextDefinition<T> get(Object key){
+	@Override
+    public ITextDefinition<T> get(Object key){
 		return super.get(automaticCasing? key.toString().toUpperCase(locale): key);
 	}
 }

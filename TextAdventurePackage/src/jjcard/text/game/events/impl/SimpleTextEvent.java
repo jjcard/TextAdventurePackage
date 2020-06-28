@@ -15,7 +15,8 @@ public class SimpleTextEvent implements ITextEvent{
 	public String getCommandKey() {
 		return commandKey;
 	}
-	public String getKey(){
+	@Override
+    public String getKey(){
 		return key;
 	}
 	

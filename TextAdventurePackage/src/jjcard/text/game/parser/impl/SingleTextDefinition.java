@@ -31,7 +31,8 @@ public class SingleTextDefinition<T extends ITextTokenType> extends AbstractText
 		return new SingleTextDefinition<>(type, name);
 	}
 	
-	public boolean equals(Object o){
+	@Override
+    public boolean equals(Object o){
 		if (o == this){
 			return true;
 		}
@@ -44,7 +45,8 @@ public class SingleTextDefinition<T extends ITextTokenType> extends AbstractText
 		}
 		return false;
 	}
-	public int hashCode(){
+	@Override
+    public int hashCode(){
 		return ObjectsUtil.getHashWithStart(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, name);
 	}
 

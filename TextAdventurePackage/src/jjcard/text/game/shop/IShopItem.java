@@ -26,11 +26,13 @@ public interface IShopItem extends IGameElement{
 	/**
 	 * Gets the room description of the underlying item
 	 */
-	public String getRoomDescription();
+	@Override
+    public String getRoomDescription();
 	/**
 	 * Gets the view description for the shop item or underlying item
 	 */
-	public String getViewDescription();
+	@Override
+    public String getViewDescription();
 	/**
 	 * Returns the price
 	 * @return

@@ -15,6 +15,7 @@ public abstract class AbstractTextDefinition<T extends ITextTokenType> implement
         this.type = type;
     }
 
+    @Override
     public T getType() {
         return type;
     }
@@ -25,12 +26,15 @@ public abstract class AbstractTextDefinition<T extends ITextTokenType> implement
      * @param token
      * @return the standardToken
      */
+    @Override
     public abstract String getStandardToken(String token);
 
+    @Override
     public String toString() {
         return getClass().getSimpleName() + "=" + type;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (o == this) {
             return true;
@@ -42,6 +46,7 @@ public abstract class AbstractTextDefinition<T extends ITextTokenType> implement
         return false;
     }
 
+    @Override
     public int hashCode() {
         return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, type);
     }

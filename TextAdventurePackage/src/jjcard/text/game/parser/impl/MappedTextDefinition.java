@@ -52,6 +52,7 @@ public class MappedTextDefinition<T extends ITextTokenType> extends AbstractText
         return standerizedMap.getOrDefault(token, token);
     }
 
+    @Override
     public boolean equals(Object o) {
         if (super.equals(o)) {
             if (o instanceof MappedTextDefinition<?>) {
@@ -62,6 +63,7 @@ public class MappedTextDefinition<T extends ITextTokenType> extends AbstractText
 
     }
 
+    @Override
     public int hashCode() {
         return ObjectsUtil.getHashWithStart(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, standerizedMap);
     }

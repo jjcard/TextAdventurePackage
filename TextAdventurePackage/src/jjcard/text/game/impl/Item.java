@@ -65,19 +65,23 @@ public class Item extends AbstractGameElement implements IItem{
 			this.use = use;
 			return this;
 		}
-		public Builder name(String name){
+		@Override
+        public Builder name(String name){
 			super.name(name);
 			return this;
 		}
-		public Builder roomDescription(String roomDescrip){
+		@Override
+        public Builder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
 		}
-		public Builder viewDescription(String viewDescription){
+		@Override
+        public Builder viewDescription(String viewDescription){
 			super.viewDescription(viewDescription);
 			return this;
 		}
-		public Builder validateFields(boolean validateFields){
+		@Override
+        public Builder validateFields(boolean validateFields){
 			super.validateFields(validateFields);
 			return this;
 		}
@@ -97,19 +101,24 @@ public class Item extends AbstractGameElement implements IItem{
 	public Item(String name){
 		super(name);
 	}
-	public int getCost() {
+	@Override
+    public int getCost() {
 		return cost;
 	}
-	public int getLevel(){
+	@Override
+    public int getLevel(){
 		return level;
 	}
-	public boolean isHidden(){
+	@Override
+    public boolean isHidden(){
 		return hidden;
 	}
-	public boolean isMovable(){
+	@Override
+    public boolean isMovable(){
 		return movable;
 	}
-	public ItemUse getUse() {
+	@Override
+    public ItemUse getUse() {
 		return use;
 	}
 
@@ -128,23 +137,28 @@ public class Item extends AbstractGameElement implements IItem{
 			level = 0;
 		}
 	}
-	public void setHidden(boolean hidden){
+	@Override
+    public void setHidden(boolean hidden){
 		this.hidden = hidden;
 	}
 	/**
 	 * returns true if item is movable and not hidden
 	 * @return
 	 */
-	public boolean canGet(){
+	@Override
+    public boolean canGet(){
 		return movable && !hidden;
 	}
-	public void setMovable(boolean movable){
+	@Override
+    public void setMovable(boolean movable){
 		this.movable = movable;
 	}
-	public void setUse(ItemUse use){
+	@Override
+    public void setUse(ItemUse use){
 		this.use = use;
 	}
-	public boolean equals(Object o){
+	@Override
+    public boolean equals(Object o){
 		if (o == this){
 			return true;
 		}
@@ -174,7 +188,8 @@ public class Item extends AbstractGameElement implements IItem{
 		}
 	}
 	
-	public int hashCode(){
+	@Override
+    public int hashCode(){
 		return ObjectsUtil.getHashWithStart(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, cost, level, hidden, movable, use);
 	}
 }

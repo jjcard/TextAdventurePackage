@@ -41,18 +41,21 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		public Builder(AbstractGameElement element){
 			super(element);
 		}
-		public Builder name(String name){
+		@Override
+        public Builder name(String name){
 			super.name(name);
 			return this;
 		}
 		/**
 		 * the room description and also the description
 		 */
-		public Builder roomDescription(String roomDescrip){
+		@Override
+        public Builder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
 		}
-		public Builder viewDescription(String viewDescription){
+		@Override
+        public Builder viewDescription(String viewDescription){
 			super.viewDescription(viewDescription);
 			return this;
 		}
@@ -107,38 +110,49 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		setRoomDescription(descrip);
 	}
 
-	public Map<String,IItem> getInventory(){
+	@Override
+    public Map<String,IItem> getInventory(){
 		return inventory;
 	}
-	public  Map<String,IMob> getMobs() {
+	@Override
+    public  Map<String,IMob> getMobs() {
 		return roomMob;
 	}
-	public Map<String,IExit> getExits() {
+	@Override
+    public Map<String,IExit> getExits() {
 		return exits;
 	}
-	public IItem addItem(IItem add){
+	@Override
+    public IItem addItem(IItem add){
 		return MAP_UTIL.addItemToMap(inventory,add);
 	}
-	public void setInventory(Map<String,IItem> inventoryNew){
+	@Override
+    public void setInventory(Map<String,IItem> inventoryNew){
 		inventory = MapUtil.getMapOrNew(inventoryNew);
 	}
-	public void setMobs(Map<String,IMob> roomMob){
+	@Override
+    public void setMobs(Map<String,IMob> roomMob){
 		this.roomMob = MapUtil.getMapOrNew(roomMob);
 	}
-	public IItem removeItem(String key){
+	@Override
+    public IItem removeItem(String key){
 		return MAP_UTIL.removeItemFromMap(inventory, key);
 	}
-	public boolean containsItem(String key){
+	@Override
+    public boolean containsItem(String key){
 		return MAP_UTIL.containsKey(inventory, key);
 	}
-	public IMob addMob(IMob mob){
+	@Override
+    public IMob addMob(IMob mob){
 		return MAP_UTIL.addItemToMap(roomMob,mob);
 		
 	}
-	public IMob removeMob(String key){
+	@Override
+    public IMob removeMob(String key){
 		return MAP_UTIL.removeItemFromMap(roomMob,key);
 	}
-	public boolean containsMob(String key){
+	@Override
+    public boolean containsMob(String key){
 		return MAP_UTIL.containsKey(roomMob,key);
 
 	}
@@ -148,12 +162,14 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 	 * @param room
 	 * @return 
 	 */
-	public IExit addExit(String dir, ILocation room){
+	@Override
+    public IExit addExit(String dir, ILocation room){
 		Exit exit = new Exit.Builder().name(dir).location(room).build();
 		return MAP_UTIL.addItemToMap(exits, exit);
 	}
 	
-	public IExit addExit(IExit exit){
+	@Override
+    public IExit addExit(IExit exit){
 		return MAP_UTIL.addItemToMap(exits, exit);
 	}
 
@@ -162,7 +178,8 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 	 * @param dir
 	 * @return 
 	 */
-	public IExit removeExit(String dir){
+	@Override
+    public IExit removeExit(String dir){
 		 return MAP_UTIL.removeItemFromMap(exits,dir); 
 	}
 
@@ -171,7 +188,8 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 	 * @param dir
 	 * @return
 	 */
-	public ILocation getExitLocation(String dir){
+	@Override
+    public ILocation getExitLocation(String dir){
 		IExit exit = getExit(dir);
 		if (exit != null){
 			return exit.getLocation();
@@ -179,40 +197,49 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 			return null;
 		}
 	}
-	public IExit getExit(String dir){
+	@Override
+    public IExit getExit(String dir){
 		return MAP_UTIL.getItemFromMap(exits, dir);
 	}
-	public IMob getMob(String key){
+	@Override
+    public IMob getMob(String key){
 		return MAP_UTIL.getItemFromMap(roomMob,key);
 	}
-	public IItem getItem(String key){
+	@Override
+    public IItem getItem(String key){
 		return MAP_UTIL.getItemFromMap(inventory,key);
 	}
-	public boolean containsExit(String dir){
+	@Override
+    public boolean containsExit(String dir){
 		return MAP_UTIL.containsKey(exits,dir);
 	}
 
-	public int compareTo(ILocation other) {
+	@Override
+    public int compareTo(ILocation other) {
 		int compare = getName().compareTo(other.getName());
 		if (compare == 0 && getRoomDescription() != null){
 			compare = getRoomDescription().compareTo(other.getDescription());
 		}
 		return compare;
 	}
-	public String getExitsDescriptions(){
+	@Override
+    public String getExitsDescriptions(){
 		return DescriptionUtil.getConcealableNames(exits, true);
 	}
-	public String getInventoryDescriptions(){
+	@Override
+    public String getInventoryDescriptions(){
 		return DescriptionUtil.getConceableRoomDescriptions(inventory, true);
 	}
-	public String getMobDescriptions(){
+	@Override
+    public String getMobDescriptions(){
 		return DescriptionUtil.getConceableRoomDescriptions(roomMob, true);
 	}
 	/**
 	 * Checks that the name and description are equals. uses {@link ObjectsUtil#equalKeys(Map, Map)}
 	 * to check if the inventory, roomMobs, and exits are equal.
 	 */
-	public boolean equals(Object o){
+	@Override
+    public boolean equals(Object o){
 		if (o == this){
 			return true;
 		}
@@ -235,7 +262,8 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 			return false;
 		}
 	}
-	public int hashCode(){
+	@Override
+    public int hashCode(){
 		int start = super.hashCode();
 		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getKeysHash(exits);
 		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getKeysHash(inventory);

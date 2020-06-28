@@ -25,7 +25,8 @@ public abstract class AbstractStatusEventListener implements ITextEventListener,
 		return isDone;
 	}
 
-	public abstract void effect(boolean mobTurn);
+	@Override
+    public abstract void effect(boolean mobTurn);
 	protected void setDone(boolean done){
 		this.isDone = done;
 	}

@@ -90,16 +90,19 @@ public abstract class AbstractGameElement implements IGameElement{
 		ObjectsUtil.checkArg(name, "name");
 		this.name = name;
 	}
-	public final String getName(){
+	@Override
+    public final String getName(){
 		return name;
 	}
-	public String getRoomDescription() {
+	@Override
+    public String getRoomDescription() {
 		return roomDescription;
 	}
 	public void setRoomDescription(String roomDescription) {
 		this.roomDescription = roomDescription;
 	}
-	public String getViewDescription(){
+	@Override
+    public String getViewDescription(){
 		return viewDescription;
 	}
 	public void setViewDescription(String viewDescription){
@@ -111,10 +114,12 @@ public abstract class AbstractGameElement implements IGameElement{
 	/**
 	 * Returns the name of the GameElement
 	 */
-	public String toString(){
+	@Override
+    public String toString(){
 		return getName();
 	}
-	public boolean equals(Object object){
+	@Override
+    public boolean equals(Object object){
 		if (object == this){
 			return true;
 		}
@@ -135,7 +140,8 @@ public abstract class AbstractGameElement implements IGameElement{
 			return false;
 		}
 	}
-	public int hashCode(){
+	@Override
+    public int hashCode(){
 		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, name, roomDescription, viewDescription);
 	}
 }

@@ -35,7 +35,8 @@ public class Player extends Mob implements HasLeveling{
 		public Builder(AbstractGameElement g){
 			super(g);
 		}
-		public Builder name(String name){
+		@Override
+        public Builder name(String name){
 			super.name(name);
 			return this;
 		}
@@ -49,76 +50,94 @@ public class Player extends Mob implements HasLeveling{
 			this.xp = xp;
 			return this;
 		}
-		public Builder checkHealth(boolean checkHealth){
+		@Override
+        public Builder checkHealth(boolean checkHealth){
 			super.checkHealth(checkHealth);
 			return this;
 		}
-		public Builder roomDescription(String roomDescrip){
+		@Override
+        public Builder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
 		}
-		public Builder maxHealth(int maxHealth){
+		@Override
+        public Builder maxHealth(int maxHealth){
 			super.maxHealth(maxHealth);
 			return this;
 		}
-		public Builder health(int curHealth){
+		@Override
+        public Builder health(int curHealth){
 			super.health(curHealth);
 			return this;
 		}
-		public Builder viewDescription(String description){
+		@Override
+        public Builder viewDescription(String description){
 			super.viewDescription(description);
 			return this;
 		}
-		public Builder money(int money){
+		@Override
+        public Builder money(int money){
 			super.money(money);
 			return this;
 		}
-		public Builder inventory(Map<String, IItem> inventory){
+		@Override
+        public Builder inventory(Map<String, IItem> inventory){
 			super.inventory(inventory);
 			return this;
 		}
-		public Builder addItem(IItem item){
+		@Override
+        public Builder addItem(IItem item){
 			super.addItem(item);
 			return this;
 		}
-		public Builder defense(int defense){
+		@Override
+        public Builder defense(int defense){
 			super.defense(defense);
 			return this;
 		}
-		public Builder attack(int attack){
+		@Override
+        public Builder attack(int attack){
 			super.attack(attack);
 			return this;
 		}
-		public Builder hostile(boolean hostile){
+		@Override
+        public Builder hostile(boolean hostile){
 			super.hostile(hostile);
 			return this;
 		}
-		public Builder statusList(List<IStatus> statusList){
+		@Override
+        public Builder statusList(List<IStatus> statusList){
 			super.statusList(statusList);
 			
 			return this;
 		}
-		public Builder armour(IArmour armour){
+		@Override
+        public Builder armour(IArmour armour){
 			super.armour(armour);
 			return this;
 		}
-		public Builder weapon(IWeapon weapon){
+		@Override
+        public Builder weapon(IWeapon weapon){
 			super.weapon(weapon);
 			return this;
 		}
-		public Builder addStatus(IStatus status){
+		@Override
+        public Builder addStatus(IStatus status){
 			super.addStatus(status);
 			return this;
 		}
-		public Builder validateFields(boolean validateFields){
+		@Override
+        public Builder validateFields(boolean validateFields){
 			super.validateFields(validateFields);
 			return this;
 		}
-		public Builder hidden(boolean hidden){
+		@Override
+        public Builder hidden(boolean hidden){
 			super.hidden(hidden);
 			return this;
 		}
-		public Player build(){
+		@Override
+        public Player build(){
 			return new Player(this);
 		}
 	}
@@ -135,20 +154,23 @@ public class Player extends Mob implements HasLeveling{
 	/**
 	 * Returns level
 	 */
-	public int getLevel(){
+	@Override
+    public int getLevel(){
 		return level;
 	}
 	/**
 	 * Returns xp
 	 */
-	public int getXp() {
+	@Override
+    public int getXp() {
 		return xp;
 	}
 
 	public void changelevel(int change){
 		setLevel(level + change);
 	}
-	public void setLevel(int levelN){
+	@Override
+    public void setLevel(int levelN){
 		level = levelN;
 		if (doValidateFields() && level < 0){
 			level = 0;
@@ -163,7 +185,8 @@ public class Player extends Mob implements HasLeveling{
 			xp = 0;
 		}
 	}
-	public boolean equals(Object o){
+	@Override
+    public boolean equals(Object o){
 		if (o == this){
 			return true;
 		}
@@ -184,7 +207,8 @@ public class Player extends Mob implements HasLeveling{
 		}
 
 	}
-	public int hashCode(){
+	@Override
+    public int hashCode(){
 		return ObjectsUtil.getHashWithStart(super.hashCode(),
 				ObjectsUtil.DEFAULT_PRIME, xp, level);
 	}

@@ -16,7 +16,8 @@ public interface IItem extends ConcealableGameElement{
 	 */
 	public boolean canGet();
 	
-	public void setHidden(boolean hidden);
+	@Override
+    public void setHidden(boolean hidden);
 	
 	public void setMovable(boolean movable);
 	

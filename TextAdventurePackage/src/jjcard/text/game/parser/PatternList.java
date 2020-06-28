@@ -89,7 +89,8 @@ public class PatternList<S> {
 		}
 	}
 	
-	@SuppressWarnings("rawtypes")
+	@Override
+    @SuppressWarnings("rawtypes")
 	public boolean equals(Object o){
 		if (this == o){
 			return true;
@@ -100,7 +101,8 @@ public class PatternList<S> {
 			return false;
 		}
 	}
-	public int hashCode(){
+	@Override
+    public int hashCode(){
 		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, patternList);
 	}
 }

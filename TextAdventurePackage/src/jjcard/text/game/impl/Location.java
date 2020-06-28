@@ -58,54 +58,68 @@ public class Location implements ILocation {
 		setMobs(mobs);
 		exits = newHashMap();
 	}
-	@JsonProperty("name")
+	@Override
+    @JsonProperty("name")
 	public String getName(){
 		return name;
 	}
-	@JsonProperty("descrip")
+	@Override
+    @JsonProperty("descrip")
 	public String getDescription(){
 		return description;
 	}
-	@JsonProperty("inventory")
+	@Override
+    @JsonProperty("inventory")
 	public Map<String, IItem> getInventory(){
 		return inventory;
 	}
-	@JsonProperty("mobs")
+	@Override
+    @JsonProperty("mobs")
 	public  Map<String, IMob> getMobs() {
 		return roomMob;
 	}
-	@JsonProperty("exits")
+	@Override
+    @JsonProperty("exits")
 	public Map<String, IExit> getExits() {
 		return exits;
 	}
-	public IItem addItem(IItem add){
+	@Override
+    public IItem addItem(IItem add){
 		return MAP_UTIL.addItemToMap(inventory, add);
 	}
-	@JsonProperty("inventory")
+	@Override
+    @JsonProperty("inventory")
 	public void setInventory(Map<String, IItem> inventory){
 		this.inventory = MapUtil.getMapOrNew(inventory);
 	}
-	@JsonProperty("mobs")
+	@Override
+    @JsonProperty("mobs")
 	public void setMobs(Map<String, IMob> mobs){
 		this.roomMob = MapUtil.getMapOrNew(mobs);
 	}
-	@JsonProperty("exits")
+	@Override
+    @JsonProperty("exits")
 	public void setExits(Map<String, IExit> exits){
 		this.exits = MapUtil.getMapOrNew(exits);
 	}
-	public IItem removeItem(String key){
+	@Override
+    public IItem removeItem(String key){
 		return MAP_UTIL.removeItemFromMap(inventory, key);
 	}
-	public boolean containsItem(String keyR){
+	@Override
+    public boolean containsItem(String keyR){
 		return MAP_UTIL.containsKey(inventory,keyR);
 	}
-	public IMob addMob(IMob m){
+	@Override
+    public IMob addMob(IMob m){
 		return MAP_UTIL.addItemToMap(roomMob, m);
 	}
-	public IMob removeMob(String key){
+	@Override
+    public IMob removeMob(String key){
 		return MAP_UTIL.removeItemFromMap(roomMob, key);
 	}
-	public boolean containsMob(String m){
+	@Override
+    public boolean containsMob(String m){
 		return MAP_UTIL.containsKey(roomMob, m);
 	}
 	/**
@@ -113,12 +127,14 @@ public class Location implements ILocation {
 	 * @param dir
 	 * @param room
 	 */
-	public IExit addExit(String dir, ILocation room){
+	@Override
+    public IExit addExit(String dir, ILocation room){
 		Exit exit = new Exit.Builder().name(dir).location(room).build();
 		return MAP_UTIL.addItemToMap(exits, exit);
 	}
 	
-	public IExit addExit(IExit exit){
+	@Override
+    public IExit addExit(IExit exit){
 		return MAP_UTIL.addItemToMap(exits, exit);
 	}
 	/**
@@ -126,50 +142,60 @@ public class Location implements ILocation {
 	 * @param dir
 	 * @return 
 	 */
-	public IExit removeExit(String dir){
+	@Override
+    public IExit removeExit(String dir){
 		return MAP_UTIL.removeItemFromMap(exits, dir);
 	}
 
-	@JsonIgnore
+	@Override
+    @JsonIgnore
 	public IExit getExit(String dir){
 		return MAP_UTIL.getItemFromMap(exits, dir);
 	}
-	@JsonIgnore
+	@Override
+    @JsonIgnore
 	public IMob getMob(String key){
 		return MAP_UTIL.getItemFromMap(roomMob,key);
 	}
-	@JsonIgnore
+	@Override
+    @JsonIgnore
 	public IItem getItem(String key){
 		return MAP_UTIL.getItemFromMap(inventory, key);
 	}
-	public boolean containsExit(String dir){
+	@Override
+    public boolean containsExit(String dir){
 		return MAP_UTIL.containsKey(exits, dir);
 	}
 	@JsonProperty("descrip")
 	public void setDescription(String descrip){
 		description = descrip;
 	}
-	public int compareTo(ILocation other) {
+	@Override
+    public int compareTo(ILocation other) {
 		int compare = getName().compareTo(other.getName());
 		if (compare == 0){
 			compare = ObjectsUtil.compareTo(description,other.getDescription());
 		}
 		return compare;
 	}
-	public String getExitsDescriptions(){
+	@Override
+    public String getExitsDescriptions(){
 		return DescriptionUtil.getConcealableNames(exits, true);
 	}
-	public String getInventoryDescriptions(){
+	@Override
+    public String getInventoryDescriptions(){
 		return DescriptionUtil.getConceableRoomDescriptions(inventory, true);
 	}
-	public String getMobDescriptions(){
+	@Override
+    public String getMobDescriptions(){
 		return DescriptionUtil.getConceableRoomDescriptions(roomMob, true);
 	}
 	/**
 	 * Checks that the name and description are equals. uses {@link ObjectsUtil#equalKeys(Map, Map)}
 	 * when it checks if the inventory, mobs, and exits are equal.
 	 */
-	public boolean equals(Object o){
+	@Override
+    public boolean equals(Object o){
 		if (o == this){
 			return true;
 		}
@@ -200,7 +226,8 @@ public class Location implements ILocation {
 	 * Gets the hash code of values in Location, using {@link ObjectsUtil#getKeysHash(Map)}
 	 * for getting hash of exits, inventory, and mobs
 	 */
-	public int hashCode(){
+	@Override
+    public int hashCode(){
 		int start = 1;
 		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getKeysHash(exits);
 		start = start * ObjectsUtil.DEFAULT_PRIME  + ObjectsUtil.getKeysHash(inventory);

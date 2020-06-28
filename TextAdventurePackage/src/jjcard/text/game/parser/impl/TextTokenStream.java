@@ -194,7 +194,8 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	 * 
 	 * @return true if has with object
 	 */
-	public boolean hasWithObject() {
+	@Override
+    public boolean hasWithObject() {
 		return withObject != null;
 	}
 
@@ -203,7 +204,8 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	 * 
 	 * @return objects
 	 */
-	public List<TextToken<T>> getObjects() {
+	@Override
+    public List<TextToken<T>> getObjects() {
 		return objects;
 	}
 	/**
@@ -218,7 +220,8 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	 * 
 	 * @return verb
 	 */
-	public TextToken<T> getVerb() {
+	@Override
+    public TextToken<T> getVerb() {
 		return verb;
 	}
 
@@ -227,7 +230,8 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	 * 
 	 * @return with object
 	 */
-	public TextToken<T> getWithObject() {
+	@Override
+    public TextToken<T> getWithObject() {
 		return withObject;
 	}
 
@@ -236,7 +240,8 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	 * 
 	 * @return true if has any object
 	 */
-	public boolean hasObject() {
+	@Override
+    public boolean hasObject() {
 		return !objects.isEmpty();
 	}
 
@@ -246,7 +251,8 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	 * 
 	 * @return first object
 	 */
-	public TextToken<T> getFirstObject() {
+	@Override
+    public TextToken<T> getFirstObject() {
 		return hasObject() ? objects.get(0) : null;
 	}
 
@@ -277,10 +283,12 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	public boolean hasErrors() {
 		return !errors.isEmpty();
 	}
-	public String toString(){
+	@Override
+    public String toString(){
 		return "verb=" + verb + ", objects=" + objects + ", errors=" + errors;
 	}
-	public boolean equals(Object o){
+	@Override
+    public boolean equals(Object o){
 		if (this == o){
 			return true;
 		}
@@ -310,7 +318,8 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 			return false;
 		}
 	}
-	public int hashCode(){
+	@Override
+    public int hashCode(){
 		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, verb, objects, withObject, errors);
 	}
 

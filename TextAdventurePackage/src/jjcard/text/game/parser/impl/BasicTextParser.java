@@ -173,7 +173,8 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	public ITextDictionary<T> getTextDictionary() {
 		return dictionary;
 	}
-	public void clear(){
+	@Override
+    public void clear(){
 		previousStream = null;
 	}
 	public void setIndicatorMap(Map<String, TextIndicator> indicatorMap){
@@ -234,7 +235,8 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		}
 		return builder;
 	}
-	protected TextToken<T> getTextToken(String word, String[] words, int index){
+	@Override
+    protected TextToken<T> getTextToken(String word, String[] words, int index){
 		ITextDefinition<T> def = getDefinition(word, words, index);
 		if (def != null){
 			return createTextToken(word, def);

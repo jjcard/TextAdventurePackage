@@ -35,7 +35,8 @@ public class Weapon extends Item implements IWeapon{
 			super(g);
 			use(ItemUse.Weapon);
 		}
-		public Builder cost(int cost){
+		@Override
+        public Builder cost(int cost){
 			super.cost(cost);
 			return this;
 		}
@@ -54,39 +55,48 @@ public class Weapon extends Item implements IWeapon{
 			this.durability = durability;
 			return this;
 		}
-		public Builder viewDescription(String viewDescription){
+		@Override
+        public Builder viewDescription(String viewDescription){
 			super.viewDescription(viewDescription);
 			return this;
 		}
-		public Builder level(int level){
+		@Override
+        public Builder level(int level){
 			super.level(level);
 			return this;
 		}
-		public Builder hidden(boolean hidden){
+		@Override
+        public Builder hidden(boolean hidden){
 			super.hidden(hidden);
 			return this;
 		}
-		public Builder movable(boolean movable){
+		@Override
+        public Builder movable(boolean movable){
 			super.movable(movable);
 			return this;
 		}
-		public Builder use(ItemUse use){
+		@Override
+        public Builder use(ItemUse use){
 			super.use(use);
 			return this;
 		}
-		public Builder name(String name){
+		@Override
+        public Builder name(String name){
 			super.name(name);
 			return this;
 		}
-		public Builder roomDescription(String roomDescrip){
+		@Override
+        public Builder roomDescription(String roomDescrip){
 			super.roomDescription(roomDescrip);
 			return this;
 		}
-		public Builder validateFields(boolean validateFields){
+		@Override
+        public Builder validateFields(boolean validateFields){
 			super.validateFields(validateFields);
 			return this;
 		}
-		public Weapon build(){
+		@Override
+        public Weapon build(){
 			return new Weapon(this);
 		}
 	}
@@ -96,13 +106,16 @@ public class Weapon extends Item implements IWeapon{
 		setCritChance(b.critChance);
 		setDurability(b.durability);
 	}
-	public int getAttack() {
+	@Override
+    public int getAttack() {
 		return attack;
 	}
-	public int getCritChance() {
+	@Override
+    public int getCritChance() {
 		return critChance;
 	}
-	public int getDurability(){
+	@Override
+    public int getDurability(){
 		return durability;
 	}
 	public void setDurability(int durN){
@@ -134,7 +147,8 @@ public class Weapon extends Item implements IWeapon{
 		}
 
 	}
-	public boolean equals(Object o){
+	@Override
+    public boolean equals(Object o){
 		if (o == this){
 			return true;
 		}
@@ -157,7 +171,8 @@ public class Weapon extends Item implements IWeapon{
 		}
 		return false;
 	}
-	public int hashCode(){
+	@Override
+    public int hashCode(){
 		return ObjectsUtil.getHashWithStart(super.hashCode(),
 				ObjectsUtil.DEFAULT_PRIME, attack, critChance, durability);
 	}

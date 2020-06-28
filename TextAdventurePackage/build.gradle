@@ -64,9 +64,8 @@ wrapper {
 }
 
 pmd {
-	ruleSets = ["java-basic", "java-naming", "java-braces", "java-design", "java-unnecessary"]
+    ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml", "category/java/performance.xml", "category/java/security.xml"]
 	ignoreFailures = true;
-//	ruleSets = ["java-basic", "java-unnecessary","java-naming", "java-braces", "java-design", "java-coupling", "java-optimization"]
 }
 spotbugs {
 	ignoreFailures = true

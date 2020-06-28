@@ -47,23 +47,23 @@ public class SimpleTextEventListener implements ITextEventListener {
 	private void loadPrintMap(String fileLocation) throws IOException{
 		File file = new File(fileLocation);
 		if (file.exists()){
-			BufferedReader bfr = new BufferedReader(new FileReader(file));
-			String line;
-			
-			while ((line = bfr.readLine()) != null){
-				if (!line.startsWith(COMMENT_INDICATOR) && !line.isEmpty()){
-					String[] pair = PAIR_PATTERN.split(line);
-					
-					if (pair.length < 2){
-						//Do something
-					} else {
-						String key = pair[0].trim();
-						String value = pair[1];
-						printMap.put(key, value);
-					}
-				}
-			}
-			bfr.close();
+            try (BufferedReader bfr = new BufferedReader(new FileReader(file))) {
+                String line;
+
+                while ((line = bfr.readLine()) != null) {
+                    if (!line.startsWith(COMMENT_INDICATOR) && !line.isEmpty()) {
+                        String[] pair = PAIR_PATTERN.split(line);
+
+                        if (pair.length < 2) {
+                            // TODO Do something
+                        } else {
+                            String key = pair[0].trim();
+                            String value = pair[1];
+                            printMap.put(key, value);
+                        }
+                    }
+                }
+            }
 			
 		} else {
 			throw new IOException("String File not found");

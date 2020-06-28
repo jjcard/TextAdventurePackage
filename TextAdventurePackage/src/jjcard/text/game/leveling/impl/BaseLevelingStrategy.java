@@ -1,5 +1,7 @@
 package jjcard.text.game.leveling.impl;
 
+import java.util.Arrays;
+
 import jjcard.text.game.leveling.HasLeveling;
 import jjcard.text.game.leveling.LevelingStrategy;
 import jjcard.text.game.util.Experimental;
@@ -22,7 +24,7 @@ public class BaseLevelingStrategy implements LevelingStrategy<HasLeveling> {
 	}
 	public BaseLevelingStrategy(HasLeveling player, int[] levelingChart) {
 		client = player;
-		this.levelingChart = levelingChart;
+		this.levelingChart = Arrays.copyOf(levelingChart, levelingChart.length);
 	}
 	protected int updateLevel() {
 		

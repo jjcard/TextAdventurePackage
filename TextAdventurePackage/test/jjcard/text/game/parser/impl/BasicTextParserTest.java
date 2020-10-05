@@ -204,38 +204,56 @@ public class BasicTextParserTest {
 		assertEquals("cyberpunk", stream.getObjects().get(2).getStandardToken());
 		assertEquals(BasicTextTokenType.ITEM, stream.getObjects().get(2).getType());
 	}
-	@Ignore("haven't figured out multi-word support yet")
+
 	@Test
 	public void multiWordTest(){
 		TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>();
 		ITextDefinition<BasicTextTokenType> def = new SimpleTextDefinition<>(BasicTextTokenType.GET);
 		ITextDefinition<BasicTextTokenType> item = new SimpleTextDefinition<>(BasicTextTokenType.ITEM);
 		dictionary.put("want", def);
-		dictionary.putAll(item, "cyberpunk", "parser", "monitor", "multiword support");
+		dictionary.putAll(item, "cyberpunk", "parser", "monitor", "multiword support", "even three words");
 		BasicTextParser<BasicTextTokenType> parser = new BasicTextParser<>(dictionary);
-		
-		
-		String text = "For christmas I want a parser, cyberpunk, and multiword support.";
+
+		String text = "For christmas I want a parser, cyberpunk, multiword support, even three words and much more.";
 		
 		TextTokenStream<BasicTextTokenType> stream = parser.parseText(text);
 		
 		assertFalse(stream.hasErrors());
 		assertNotNull(stream.getFirstObject());
-		assertEquals(stream.getObjects().toString(), 3, stream.getObjects().size());
+		assertEquals(stream.getObjects().toString(), 4, stream.getObjects().size());
 		
 		assertEquals("parser", stream.getObjects().get(0).getToken());
 		assertEquals("parser", stream.getObjects().get(0).getStandardToken());
 		assertEquals(BasicTextTokenType.ITEM, stream.getObjects().get(0).getType());
-		
-		
+
 		assertEquals("cyberpunk", stream.getObjects().get(1).getToken());
 		assertEquals("cyberpunk", stream.getObjects().get(1).getStandardToken());
 		assertEquals(BasicTextTokenType.ITEM, stream.getObjects().get(1).getType());
-		
+
 		assertEquals("multiword support", stream.getObjects().get(2).getToken());
 		assertEquals("multiword support", stream.getObjects().get(2).getStandardToken());
 		assertEquals(BasicTextTokenType.ITEM, stream.getObjects().get(2).getType());
 
+		assertEquals("even three words", stream.getObjects().get(3).getToken());
+		assertEquals("even three words", stream.getObjects().get(3).getStandardToken());
+		assertEquals(BasicTextTokenType.ITEM, stream.getObjects().get(3).getType());
+	}
 
+	@Test
+	public void testMultiWordSplit() {
+		TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>();
+		ITextDefinition<BasicTextTokenType> def = new SimpleTextDefinition<>(BasicTextTokenType.GET);
+		ITextDefinition<BasicTextTokenType> item = new SimpleTextDefinition<>(BasicTextTokenType.ITEM);
+		dictionary.put("want", def);
+		dictionary.putAll(item, "cyberpunk", "parser", "monitor", "multiword support", "even three words");
+		BasicTextParser<BasicTextTokenType> parser = new BasicTextParser<>(dictionary);
+
+		String text = "For christmas I want a parser, cyberpunk, multiword support, even three words and much more.";
+
+		String[] expectedToken = {"For", "christmas", "I", "want", "a", "parser", "cyberpunk",
+				"multiword support", "even three words", "and", "much", "more"};
+		String[] token = parser.splitText(text);
+
+		assertEquals(expectedToken, token);
 	}
 }

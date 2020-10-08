@@ -193,4 +193,8 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
     public ITextDefinition<T> get(Object key){
 		return super.get(automaticCasing? key.toString().toUpperCase(locale): key);
 	}
+
+	public boolean containsKey(Object key) {
+		return super.containsKey(automaticCasing? key.toString().toUpperCase(locale): key);
+	}
 }

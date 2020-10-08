@@ -1,5 +1,6 @@
 package jjcard.text.game.parser.impl;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -90,7 +91,32 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	}
 	@Override
 	protected String[] splitText(final String text) {
-		return splitPattern.split(text);
+		List<String> result = new ArrayList<>();
+		String[] token = splitPattern.split(text);
+
+		for (int tokenIndex = 0; tokenIndex < token.length; tokenIndex++) {
+
+			String currentToken = token[tokenIndex];
+
+			if(dictionary.containsKey(currentToken)) {
+				result.add(currentToken);
+			}
+
+			String concatKey = currentToken;
+			for (int offset = 1; tokenIndex + offset < token.length; offset++) {
+				concatKey = concatKey + " " + token[tokenIndex + offset];
+				if (dictionary.containsKey(concatKey)) {
+					result.add(concatKey);
+					tokenIndex += offset;
+					break;
+				}
+			}
+
+			if (result.size() == 0 || !result.get(result.size() - 1).startsWith(currentToken)) {
+				result.add(currentToken);
+			}
+		}
+		return result.toArray(new String[0]);
 	}
 	/**
 	 * Called when the {@link TextIndicator.REPEAT_INDICATOR} is found. Returns the Previous TextTokenStream.

@@ -191,10 +191,15 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 	}
 	@Override
     public ITextDefinition<T> get(Object key){
-		return super.get(automaticCasing? key.toString().toUpperCase(locale): key);
+		return super.get(withCasing(key));
 	}
 
+	@Override
 	public boolean containsKey(Object key) {
-		return super.containsKey(automaticCasing? key.toString().toUpperCase(locale): key);
+		return super.containsKey(withCasing(key));
 	}
+	
+    private Object withCasing(Object key) {
+        return automaticCasing? key.toString().toUpperCase(locale): key;
+    }
 }

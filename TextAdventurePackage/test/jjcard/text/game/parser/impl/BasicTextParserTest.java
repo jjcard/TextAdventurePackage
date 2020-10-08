@@ -1,5 +1,6 @@
 package jjcard.text.game.parser.impl;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -8,16 +9,10 @@ import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import jjcard.text.game.parser.ITextDefinition;
 import jjcard.text.game.parser.ITextDictionary;
-import jjcard.text.game.parser.impl.BasicTextParser;
-import jjcard.text.game.parser.impl.BasicTextTokenType;
-import jjcard.text.game.parser.impl.SimpleTextDefinition;
-import jjcard.text.game.parser.impl.TextDictionary;
-import jjcard.text.game.parser.impl.TextTokenStream;
 
 public class BasicTextParserTest {
 
@@ -241,19 +236,40 @@ public class BasicTextParserTest {
 
 	@Test
 	public void testMultiWordSplit() {
-		TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>();
-		ITextDefinition<BasicTextTokenType> def = new SimpleTextDefinition<>(BasicTextTokenType.GET);
-		ITextDefinition<BasicTextTokenType> item = new SimpleTextDefinition<>(BasicTextTokenType.ITEM);
-		dictionary.put("want", def);
-		dictionary.putAll(item, "cyberpunk", "parser", "monitor", "multiword support", "even three words");
-		BasicTextParser<BasicTextTokenType> parser = new BasicTextParser<>(dictionary);
+        TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>();
+        ITextDefinition<BasicTextTokenType> def = new SimpleTextDefinition<>(BasicTextTokenType.GET);
+        ITextDefinition<BasicTextTokenType> item = new SimpleTextDefinition<>(BasicTextTokenType.ITEM);
+        dictionary.put("want", def);
+        dictionary.putAll(item, "cyberpunk", "parser", "monitor", "multiword support", "even three words");
+        BasicTextParser<BasicTextTokenType> parser = new BasicTextParser<>(dictionary);
 
-		String text = "For christmas I want a parser, cyberpunk, multiword support, even three words and much more.";
+        String text = "For christmas I want a parser, cyberpunk, multiword support, even three words and much more.";
 
-		String[] expectedToken = {"For", "christmas", "I", "want", "a", "parser", "cyberpunk",
-				"multiword support", "even three words", "and", "much", "more"};
-		String[] token = parser.splitText(text);
+        String[] expectedToken = { "For", "christmas", "I", "want", "a", "parser", "cyberpunk", "multiword support",
+                "even three words", "and", "much", "more" };
+        String[] token = parser.splitText(text);
 
-		assertEquals(expectedToken, token);
+        assertArrayEquals(expectedToken, token);
+	}
+	
+	@Test
+	public void testMultiWordSplitSSameToken() {
+	    //should only add one token per text, never double-up
+        TextDictionary<BasicTextTokenType> dictionary = new TextDictionary<>();
+        ITextDefinition<BasicTextTokenType> def = new SimpleTextDefinition<>(BasicTextTokenType.GET);
+        ITextDefinition<BasicTextTokenType> item = new SimpleTextDefinition<>(BasicTextTokenType.ITEM);
+        dictionary.put("want", def);
+        //TODO figure out how to keep the dictionary from having values that are super-strings of others
+        dictionary.putAll(item, "cyberpunk", "parser", "monitor", "even three", "multiword", "multiword support",
+                "even three words");
+        BasicTextParser<BasicTextTokenType> parser = new BasicTextParser<>(dictionary);
+
+        String text = "For christmas I want a parser, cyberpunk, multiword support, even three words and much more.";
+
+        String[] expectedToken = { "For", "christmas", "I", "want", "a", "parser", "cyberpunk", "multiword", "support",
+                "even three", "words", "and", "much", "more" };
+        String[] token = parser.splitText(text);
+
+        assertArrayEquals(expectedToken, token);
 	}
 }

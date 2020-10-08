@@ -91,30 +91,34 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	}
 	@Override
 	protected String[] splitText(final String text) {
-		List<String> result = new ArrayList<>();
-		String[] token = splitPattern.split(text);
+		final List<String> result = new ArrayList<>();
+		final String[] tokens = splitPattern.split(text);
 
-		for (int tokenIndex = 0; tokenIndex < token.length; tokenIndex++) {
+		for (int tokenIndex = 0; tokenIndex < tokens.length; tokenIndex++) {
 
-			String currentToken = token[tokenIndex];
+			String currentToken = tokens[tokenIndex];
 
 			if(dictionary.containsKey(currentToken)) {
 				result.add(currentToken);
+				continue;
 			}
 
 			String concatKey = currentToken;
-			for (int offset = 1; tokenIndex + offset < token.length; offset++) {
-				concatKey = concatKey + " " + token[tokenIndex + offset];
+			boolean found = false;
+			for (int offset = 1; tokenIndex + offset < tokens.length; offset++) {
+				concatKey = concatKey + " " + tokens[tokenIndex + offset];
 				if (dictionary.containsKey(concatKey)) {
-					result.add(concatKey);
 					tokenIndex += offset;
+					found = true;
 					break;
 				}
 			}
-
-			if (result.size() == 0 || !result.get(result.size() - 1).startsWith(currentToken)) {
-				result.add(currentToken);
+			if (found) {
+                result.add(concatKey);
+                continue;
 			}
+			//couldn't find in dictionary, just add as itself
+			result.add(currentToken);			
 		}
 		return result.toArray(new String[0]);
 	}

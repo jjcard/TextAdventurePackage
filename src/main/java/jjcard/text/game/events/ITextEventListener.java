@@ -7,5 +7,5 @@ public interface ITextEventListener {
 	 * @param event
 	 * @return
 	 */
-	public boolean handleEvent(ITextEvent event);
+    boolean handleEvent(ITextEvent event);
 }

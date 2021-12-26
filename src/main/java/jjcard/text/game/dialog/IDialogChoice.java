@@ -10,6 +10,6 @@ import jjcard.text.game.util.Experimental;
 public interface IDialogChoice {
 	
 	@Experimental
-	public String getDescription();
+    String getDescription();
 
 }

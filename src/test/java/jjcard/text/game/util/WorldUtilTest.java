@@ -53,15 +53,11 @@ public class WorldUtilTest {
 	}
 	@Test
 	public void setPlayerNullTest(){
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			util.setPlayer(null);
-		});
+		Assertions.assertThrows(IllegalArgumentException.class, () -> util.setPlayer(null));
 	}
 	@Test
 	public void setCurrentNullTest(){
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			util.setCurrent(null);
-		});
+		Assertions.assertThrows(IllegalArgumentException.class, () -> util.setCurrent(null));
 	}
 	@Test
 	public void equipArmourTest(){

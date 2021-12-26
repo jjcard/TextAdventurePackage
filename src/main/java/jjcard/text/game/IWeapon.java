@@ -2,9 +2,9 @@ package jjcard.text.game;
 
 public interface IWeapon extends IItem {
 
-	public int getAttack();
+	int getAttack();
 	
-	public int getCritChance();
+	int getCritChance();
 	
-	public int getDurability();
+	int getDurability();
 }

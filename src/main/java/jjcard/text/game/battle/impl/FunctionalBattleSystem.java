@@ -12,8 +12,8 @@ import jjcard.text.game.battle.IBattleSystem;
  */
 public class FunctionalBattleSystem<R> implements IBattleSystem<R> {
 	@FunctionalInterface
-	public static interface BattleConsumer<T>{
-		public void accept(IMob attacker, IMob defender, T battleResult);
+	public interface BattleConsumer<T>{
+		void accept(IMob attacker, IMob defender, T battleResult);
 	}
 	BiFunction<IMob, IMob, R> onAttack;
 	BattleConsumer<R> onDeath;

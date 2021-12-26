@@ -17,7 +17,7 @@ public enum TextParserError {
 	private final int code;
 	private final String description;
 
-	private TextParserError(int code, String description) {
+	TextParserError(int code, String description) {
 		this.code = code;
 		this.description = description;
 	}

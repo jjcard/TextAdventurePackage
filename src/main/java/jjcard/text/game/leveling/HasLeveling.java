@@ -6,10 +6,10 @@ package jjcard.text.game.leveling;
  */
 public interface HasLeveling {
 
-	public int getLevel();
+	int getLevel();
 	
-	public void setLevel(int level);
+	void setLevel(int level);
 	
-	public int getXp();
+	int getXp();
 
 }

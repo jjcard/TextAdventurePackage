@@ -123,7 +123,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		return result.toArray(new String[0]);
 	}
 	/**
-	 * Called when the {@link TextIndicator.REPEAT_INDICATOR} is found. Returns the Previous TextTokenStream.
+	 * Called when the {@link TextIndicator#REPEAT_INDICATOR} is found. Returns the Previous TextTokenStream.
 	 * @param builder
 	 * @param input
 	 * @return builder
@@ -132,7 +132,7 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 		return new Builder<>(previousStream); 
 	}
 	/**
-	 * Called when the {@link TextIndicator.IT_INDICATOR} is found. calls {@link #handleObject(Builder, TextToken)} with the first object token from the previous Stream.
+	 * Called when the {@link TextIndicator#IT_INDICATOR} is found. calls {@link #handleObject(Builder, TextToken)} with the first object token from the previous Stream.
 	 * @param builder
 	 * @param input
 	 */

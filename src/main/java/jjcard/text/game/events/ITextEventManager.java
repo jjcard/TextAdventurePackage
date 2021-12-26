@@ -11,7 +11,7 @@ public interface ITextEventManager {
 	 * @param eventClass
 	 * @return
 	 */
-	public ITextEventListener registerEventListener(ITextEventListener listener, Class<? extends ITextEvent> eventClass);
+    ITextEventListener registerEventListener(ITextEventListener listener, Class<? extends ITextEvent> eventClass);
 	
 	/**
 	 * Generates a event and calls the listener associated with the event class.
@@ -19,6 +19,6 @@ public interface ITextEventManager {
 	 * @param event
 	 * @return
 	 */
-	public boolean generateEvent(ITextEvent event);
+    boolean generateEvent(ITextEvent event);
 
 }

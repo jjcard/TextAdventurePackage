@@ -9,9 +9,9 @@ import jjcard.text.game.util.Experimental;
 @Experimental
 public interface Buyer {
 
-	public void buy(IMob seller, IItem item);
+	void buy(IMob seller, IItem item);
 	
-	public void buy(IMob seller, IItem item, int amount);
+	void buy(IMob seller, IItem item, int amount);
 	
 	
 }

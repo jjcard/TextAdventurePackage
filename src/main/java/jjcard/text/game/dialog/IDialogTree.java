@@ -10,7 +10,7 @@ import jjcard.text.game.util.Experimental;
 @Experimental
 public interface IDialogTree {
 	@Experimental
-	public List<IDialogChoice> getDialogChoices();
+    List<IDialogChoice> getDialogChoices();
 	
 
 }

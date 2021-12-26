@@ -18,21 +18,21 @@ public interface ITextTokenStream<T extends ITextTokenType> {
 	 * 
 	 * @return
 	 */
-	public TextToken<T> getFirstObject();
+    TextToken<T> getFirstObject();
 	
 	/**
 	 * returns true if there is an object token in the objects list.
 	 * 
 	 * @return
 	 */
-	public boolean hasObject();
+    boolean hasObject();
 	
 	/**
 	 * Returns the withObject TextToken
 	 * 
 	 * @return
 	 */
-	public TextToken<T> getWithObject();
+    TextToken<T> getWithObject();
 	
 	
 	/**
@@ -40,7 +40,7 @@ public interface ITextTokenStream<T extends ITextTokenType> {
 	 * 
 	 * @return
 	 */
-	public TextToken<T> getVerb();
+    TextToken<T> getVerb();
 	
 	
 	/**
@@ -48,7 +48,7 @@ public interface ITextTokenStream<T extends ITextTokenType> {
 	 * 
 	 * @return
 	 */
-	public List<TextToken<T>> getObjects();
+    List<TextToken<T>> getObjects();
 	
 	
 	/**
@@ -57,6 +57,6 @@ public interface ITextTokenStream<T extends ITextTokenType> {
 	 * 
 	 * @return
 	 */
-	public boolean hasWithObject();
+    boolean hasWithObject();
 
 }

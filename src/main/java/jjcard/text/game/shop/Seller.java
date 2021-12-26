@@ -13,9 +13,9 @@ import jjcard.text.game.util.Experimental;
 public interface Seller {
 
 	
-	public IItem sell(IMob buyer, IShopItem item);
+	IItem sell(IMob buyer, IShopItem item);
 	
-	public IItem sell(IMob buyer, IShopItem item, int amount);
+	IItem sell(IMob buyer, IShopItem item, int amount);
 	
-	public List<IShopItem> getInventory();
+	List<IShopItem> getInventory();
 }

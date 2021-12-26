@@ -12,14 +12,14 @@ public interface IShopItem extends IGameElement{
 	 * Returns the amount of the item the shop has to sell
 	 * @return
 	 */
-	public int getAmount();
+    int getAmount();
 	
 	/**
 	 * Returns true if has infinite amount of the item to sell
 	 * @return true if infinite amount
 	 * <br> Default: returns <code>{@link #getAmount()} == -1</code>
 	 */
-	public default boolean isInfinite(){
+	default boolean isInfinite(){
 		return getAmount() == -1;
 	}
 
@@ -27,23 +27,23 @@ public interface IShopItem extends IGameElement{
 	 * Gets the room description of the underlying item
 	 */
 	@Override
-    public String getRoomDescription();
+    String getRoomDescription();
 	/**
 	 * Gets the view description for the shop item or underlying item
 	 */
 	@Override
-    public String getViewDescription();
+    String getViewDescription();
 	/**
 	 * Returns the price
 	 * @return
 	 */
-	public int getPrice();
+    int getPrice();
 	/**
 	 * check for if item is in stock.
 	 * @return
 	 * <br> Default: returns true if {@link #isInfinite()} or amount is > 0
 	 */
-	public default boolean isAvailable(){
+	default boolean isAvailable(){
 		return isInfinite() || getAmount() > 0;
 	}
 

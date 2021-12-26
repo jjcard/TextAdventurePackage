@@ -1,14 +1,13 @@
 package jjcard.text.game.util;
 
-import static jjcard.text.game.util.ObjectsUtil.checkArg;
+import jjcard.text.game.IGameElement;
 
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
-import jjcard.text.game.IGameElement;
+import static jjcard.text.game.util.ObjectsUtil.checkArg;
 
 /**
  * Singleton to help work with Maps that deal with String keys and
@@ -163,7 +162,7 @@ public final class MapUtil {
 
     public static String getKeysAsString(Map<String, ?> map, final String delimiter) {
         if (isNotEmpty(map)) {
-            return map.keySet().stream().collect(Collectors.joining(delimiter));
+            return String.join(delimiter, map.keySet());
         } else {
             return "";
         }

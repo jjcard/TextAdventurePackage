@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 public interface ITextDictionary<T extends ITextTokenType> extends Map<String, ITextDefinition<T>>{
 
 	
-	public void putAll(Collection<String> keys, ITextDefinition<T> value);
+	void putAll(Collection<String> keys, ITextDefinition<T> value);
 	
 //	/**
 //	 * If this is true, Dictionary should automatically set casing on words to lowercase when using

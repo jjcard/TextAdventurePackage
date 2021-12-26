@@ -10,5 +10,5 @@ import jjcard.text.game.util.Experimental;
 @Experimental
 public interface Talking<T extends ITextTokenType> {
 	@Experimental
-	public void talkTo(ITextTokenStream<T> words);
+    void talkTo(ITextTokenStream<T> words);
 }

@@ -20,7 +20,7 @@ public interface IListMap<K, V> extends Map<K, List<V>> {
 	 * @param value
 	 * @return List for key
 	 */
-	public default List<V> add(K key, V value){
+	default List<V> add(K key, V value){
 		List<V> list = get(key);
 		if (list == null){
 			list = new LinkedList<>();
@@ -36,7 +36,7 @@ public interface IListMap<K, V> extends Map<K, List<V>> {
 	 * @param listSupplier
 	 * @return List for key
 	 */
-	public default List<V> add(K key, V value, Supplier<List<V>> listSupplier){
+	default List<V> add(K key, V value, Supplier<List<V>> listSupplier){
 		List<V> list = get(key);
 		if (list == null){
 			list = listSupplier.get();
@@ -51,7 +51,7 @@ public interface IListMap<K, V> extends Map<K, List<V>> {
 	 * @param values
 	 * @return List for key
 	 */
-	public default List<V> addAll(K key, List<V> values) {
+	default List<V> addAll(K key, List<V> values) {
 		List<V> list = get(key);
 		if (list == null) {
 			list = new LinkedList<>();
@@ -67,7 +67,7 @@ public interface IListMap<K, V> extends Map<K, List<V>> {
 	 * @param values
 	 * @return List for key
 	 */
-	public default List<V> addAll(K key, List<V> values, Supplier<List<V>> listSupplier) {
+	default List<V> addAll(K key, List<V> values, Supplier<List<V>> listSupplier) {
 		List<V> list = get(key);
 		if (list == null) {
 			list = listSupplier.get();
@@ -82,7 +82,7 @@ public interface IListMap<K, V> extends Map<K, List<V>> {
 	 * @param key
 	 * @return
 	 */
-	public default int getListSize(K key){
+	default int getListSize(K key){
 		List<V> list = get(key);
 		return list == null? 0: list.size();
 	}
@@ -91,7 +91,7 @@ public interface IListMap<K, V> extends Map<K, List<V>> {
 	 * @param key
 	 * @return List from map, existing or new.
 	 */
-	public default List<V> getOrNew(K key){
+	default List<V> getOrNew(K key){
 		List<V> list = get(key);
 		if (list == null){
 			list = new LinkedList<>();
@@ -105,7 +105,7 @@ public interface IListMap<K, V> extends Map<K, List<V>> {
 	 * @param listSupplier
 	 * @return
 	 */
-	public default List<V> getOrNew(K key, Supplier<List<V>> listSupplier){
+	default List<V> getOrNew(K key, Supplier<List<V>> listSupplier){
 		List<V> list = get(key);
 		if (list == null){
 			list = listSupplier.get();
@@ -113,7 +113,7 @@ public interface IListMap<K, V> extends Map<K, List<V>> {
 		}
 		return list;
 	}
-	public static class ListHashMap<K, V> extends HashMap<K, List<V>> implements IListMap<K, V>{
+	class ListHashMap<K, V> extends HashMap<K, List<V>> implements IListMap<K, V>{
 
 		private static final long serialVersionUID = -1702963975522014415L;
 		
@@ -124,7 +124,7 @@ public interface IListMap<K, V> extends Map<K, List<V>> {
 			super(m);
 		}
 	}
-	public static class ListTreeMap<K, V> extends TreeMap<K, List<V>>  implements IListMap<K, V>{
+	class ListTreeMap<K, V> extends TreeMap<K, List<V>>  implements IListMap<K, V>{
 
 		private static final long serialVersionUID = -8071210173902756898L;
 		
@@ -139,10 +139,10 @@ public interface IListMap<K, V> extends Map<K, List<V>> {
 		}
 		
 	}
-	public static <K, V> ListHashMap<K, V> newListHashMap(){
+	static <K, V> ListHashMap<K, V> newListHashMap(){
 		return new ListHashMap<>();
 	}
-	public static <K, V> ListTreeMap<K, V> newListTreeMap(){
+	static <K, V> ListTreeMap<K, V> newListTreeMap(){
 		return new ListTreeMap<>();
 	}
 }

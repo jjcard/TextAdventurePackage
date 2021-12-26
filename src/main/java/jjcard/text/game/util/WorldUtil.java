@@ -26,10 +26,10 @@ public class WorldUtil<P extends IMob>{
 	 * If just success/failure wanted, call {@link #isSuccess()} on the ReturnStatus.
 	 *
 	 */
-	public static enum ReturnStatus{
+	public enum ReturnStatus{
 		SUCCESS(true), FAILURE(false), NOT_FOUND(false);
 		private final boolean success;
-		private ReturnStatus(boolean success){
+		ReturnStatus(boolean success){
 			this.success = success;
 		}
 		/**

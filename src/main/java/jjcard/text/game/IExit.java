@@ -6,8 +6,8 @@ package jjcard.text.game;
  */
 public interface IExit extends ConcealableGameElement {
 
-	public ILocation getLocation();
+	ILocation getLocation();
 	
 	@Override
-    public void setHidden(boolean hidden);
+    void setHidden(boolean hidden);
 }

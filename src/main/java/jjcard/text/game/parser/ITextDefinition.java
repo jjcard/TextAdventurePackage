@@ -13,11 +13,11 @@ public interface ITextDefinition<T extends ITextTokenType> {
 	 * Return the ITextTokenType of this definition
 	 * @return T
 	 */
-	public T getType();
+    T getType();
 	/**
 	 * Returns the standardized form of given token. 
 	 * @param token
 	 * @return
 	 */
-	public String getStandardToken(String token);
+    String getStandardToken(String token);
 }

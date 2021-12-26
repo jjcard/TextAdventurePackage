@@ -140,7 +140,7 @@ public final class DescriptionUtil {
 	 * Returns String containing the description of the <code>location</code> along with it's Inventory, Mob, and Exits Description if they are non-empty.
 	 * The <code>exitStart<code> is placed before the Description for the exits, if any.
 	 * @param location
-	 * @param exitStart. null defaults to empty string
+	 * @param exitStart null defaults to empty string
 	 * @return description of room and it's elements
 	 */
 	public static String showRoom(final ILocation location, final String exitStart){

@@ -4,10 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import jjcard.text.game.events.ITextEvent;
 import jjcard.text.game.events.ITextEventListener;
 import jjcard.text.game.events.ITextEventManager;
 import jjcard.text.game.events.impl.SimpleTextEvent;

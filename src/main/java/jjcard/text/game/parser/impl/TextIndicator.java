@@ -22,7 +22,7 @@ public enum TextIndicator implements ITextIndicator{
 	private final boolean isWholeSentence;
 	private final boolean isWord;
 	
-	private TextIndicator(final boolean isWholeSentence, final boolean isWord){
+	TextIndicator(final boolean isWholeSentence, final boolean isWord){
 		this.isWholeSentence = isWholeSentence;
 		this.isWord = isWord;
 	}

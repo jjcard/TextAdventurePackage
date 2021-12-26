@@ -10,100 +10,100 @@ public interface IMob extends ConcealableGameElement {
 	 * Returns max health of Mob
 	 * @return max health
 	 */
-	public int getMaxHealth();
+	int getMaxHealth();
 	/**
 	 * Returns current health of mob
 	 * @return current health
 	 */
-	public int getHealth();
-	public int getMoney();
-	public Map<String, IItem> getInventory();
+	int getHealth();
+	int getMoney();
+	Map<String, IItem> getInventory();
 	/**
 	 * Returns item matching given key from inventory
 	 * @param key
 	 * @return Item
 	 */
-	public IItem getItem(String key);
-	public IArmour getArmour();
-	public IWeapon getWeapon();
+	IItem getItem(String key);
+	IArmour getArmour();
+	IWeapon getWeapon();
 	/**
 	 * returns defense only. Does not include any bonuses.
 	 * @return basic defense
 	 */
-	public int getBasicDefense();
+	int getBasicDefense();
 	
 	/**
 	 * returns attack only. Does not include any bonuses.
 	 * @return basic attack
 	 */
-	public int getBasicAttack();
-	public boolean isHostile();
-	public List<IStatus> getStatusList();
-	public boolean containsStatus(IStatus status);
+	int getBasicAttack();
+	boolean isHostile();
+	List<IStatus> getStatusList();
+	boolean containsStatus(IStatus status);
 	/**
 	 * 
 	 * @param status
 	 * @return true if status was found and removed
 	 */
-	public boolean removeStatus(IStatus status);
+	boolean removeStatus(IStatus status);
 	
-	public String inventoryOverview();
-	public boolean isKeyForWeapon(String key);
-	public boolean isKeyforArmour(String key);
+	String inventoryOverview();
+	boolean isKeyForWeapon(String key);
+	boolean isKeyforArmour(String key);
 	
 	/**
 	 * Removes the weapon and returns the result
 	 * @return
 	 */
-	public IWeapon removeWeapon();
+	IWeapon removeWeapon();
 	@JsonIgnore
-	public default boolean isDead(){
+	default boolean isDead(){
 		return  getHealth() <= 0;
 	}
 	
-	public boolean containsItem(String key);
-	public void setHealth(int health);
-	public IItem removeItem(String key);
+	boolean containsItem(String key);
+	void setHealth(int health);
+	IItem removeItem(String key);
 	/**
 	 * Remove armour and return it
 	 * @return armour
 	 */
-	public IArmour removeArmour();
+	IArmour removeArmour();
 	/**
 	 * Add Item to inventory
 	 * @param add
 	 * @return previous item associated with name
 	 */
-	public IItem addItem(IItem add);
-	public void addAllItems(Map<String, IItem> items);
+	IItem addItem(IItem add);
+	void addAllItems(Map<String, IItem> items);
 	/**
 	 * gets attack plus any attack bonuses
 	 * @return full attack
 	 */
 	@JsonIgnore
-	public int getFullAttack();
+	int getFullAttack();
 	/**
 	 *  gets defense plus any bonuses
 	 * @return full defense
 	 */
 	@JsonIgnore
-	public int getFullDefense();
+	int getFullDefense();
 	/**
 	 * sets weapon
 	 * @param weapon
 	 * @return previous weapon
 	 */
-	public IWeapon setWeapon(IWeapon weapon);
+	IWeapon setWeapon(IWeapon weapon);
 	/**
 	 * sets armour
 	 * @param armour
 	 * @return previous armour
 	 */
-	public IArmour setArmour( IArmour armour);
-	public void addStatus(IStatus status);
+	IArmour setArmour(IArmour armour);
+	void addStatus(IStatus status);
 	/**
 	 * Removes the Inventory from the mob and returns the result
 	 * @return inventory
 	 */
-	public Map<String, IItem> removeInventory();
+	Map<String, IItem> removeInventory();
 }

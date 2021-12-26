@@ -23,7 +23,7 @@ import jjcard.text.game.parser.impl.MappedTextDefinition;
 public class MappedTextDefinitionTest {
 
 	@Test
-	public void JsonTest() throws JsonParseException, JsonMappingException, IOException{
+	public void JsonTest() throws IOException{
 		
 		BasicTextTokenType b = BasicTextTokenType.ARMOR;
 		Map<String, String> standardizeMap = new HashMap<>();

@@ -1,23 +1,14 @@
 package jjcard.text.game.impl;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import jjcard.text.game.impl.Armour;
-import jjcard.text.game.impl.BasicTextGame;
-import jjcard.text.game.impl.Exit;
-import jjcard.text.game.impl.Item;
-import jjcard.text.game.impl.Location;
-import jjcard.text.game.impl.Mob;
-import jjcard.text.game.impl.Player;
-import jjcard.text.game.impl.Weapon;
 import jjcard.text.game.parser.ITextParser;
 import jjcard.text.game.parser.ITextTokenStream;
 import jjcard.text.game.parser.impl.BasicTextParser;
 import jjcard.text.game.parser.impl.BasicTextTokenType;
 import jjcard.text.game.parser.impl.TextDictionary;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BasicTextGameTest {
 

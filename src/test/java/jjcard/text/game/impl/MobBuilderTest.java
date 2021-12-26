@@ -1,11 +1,8 @@
 package jjcard.text.game.impl;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
-import jjcard.text.game.impl.Item;
-import jjcard.text.game.impl.Mob;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MobBuilderTest {
 

@@ -2,7 +2,7 @@ TextAdventurePackage
 ====================
 
 A java library to help make text adventure games.
-Includes interfaces and basic implimentation classes for:
+Includes interfaces and basic implementation classes for:
 
   - Location
   - Mob

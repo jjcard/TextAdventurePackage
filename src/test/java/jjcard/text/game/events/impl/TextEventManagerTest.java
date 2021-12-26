@@ -15,10 +15,6 @@ import jjcard.text.game.events.impl.TextEventManager;
 
 public class TextEventManagerTest {
 
-	@BeforeEach
-	public void setUp() {
-	}
-
 	@Test
 	public void noEventListenerTest() {
 		ITextEventManager evntMgr = TextEventManager.getInstance();

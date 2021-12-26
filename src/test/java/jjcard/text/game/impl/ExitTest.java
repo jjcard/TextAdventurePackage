@@ -1,24 +1,15 @@
 package jjcard.text.game.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
-
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import jjcard.text.game.impl.Exit;
-import jjcard.text.game.impl.Location;
 
 public class ExitTest {
 
@@ -69,7 +60,7 @@ public class ExitTest {
 		assertNull(Left2.getLocation());
 	}
 	@Test
-	public void jsonTest() throws JsonGenerationException, JsonMappingException, IOException{
+	public void jsonTest() throws IOException{
 		String name = "fsafsd";
 		String locName = "loc1";
 		Location loc = new Location(locName);

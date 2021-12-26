@@ -1,25 +1,14 @@
 package jjcard.text.game.util;
 
-import static jjcard.text.game.util.WorldUtil.ReturnStatus.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import jjcard.text.game.IItem;
+import jjcard.text.game.impl.*;
+import jjcard.text.game.util.WorldUtil.ReturnStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import jjcard.text.game.IItem;
-import jjcard.text.game.impl.Armour;
-import jjcard.text.game.impl.Item;
-import jjcard.text.game.impl.Location;
-import jjcard.text.game.impl.Mob;
-import jjcard.text.game.impl.Player;
-import jjcard.text.game.impl.Weapon;
-import jjcard.text.game.util.WorldUtil;
-import jjcard.text.game.util.WorldUtil.ReturnStatus;
+import static jjcard.text.game.util.WorldUtil.ReturnStatus.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class WorldUtilTest {
 	Location location;

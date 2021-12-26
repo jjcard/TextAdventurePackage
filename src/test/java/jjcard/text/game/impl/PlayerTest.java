@@ -1,23 +1,18 @@
 package jjcard.text.game.impl;
 
-import static org.junit.jupiter.api.Assertions.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import org.junit.jupiter.api.Test;
-
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import jjcard.text.game.impl.Player;
-import jjcard.text.game.impl.Weapon;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PlayerTest {
 
 	@Test
-	public void jsontest() throws IOException {
+	public void jsonTest() throws IOException {
 		String name = "sword";
 
 		boolean hostile = true;

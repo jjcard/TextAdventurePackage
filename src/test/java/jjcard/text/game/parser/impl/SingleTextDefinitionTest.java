@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class SingleTextDefinitionTest {
 
 	@Test
-	public void JsonTest() throws JsonParseException, JsonMappingException, IOException{
+	public void JsonTest() throws IOException{
 		
 		BasicTextTokenType b = BasicTextTokenType.ARMOR;
 		SingleTextDefinition<BasicTextTokenType> def = new SingleTextDefinition<>(b, "armor");

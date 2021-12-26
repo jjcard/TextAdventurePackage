@@ -1,6 +1,11 @@
 package jjcard.text.game.impl;
 
-import static org.junit.jupiter.api.Assertions.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jjcard.text.game.IExit;
+import jjcard.text.game.IItem;
+import jjcard.text.game.IMob;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -8,21 +13,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import jjcard.text.game.IExit;
-import jjcard.text.game.IItem;
-import jjcard.text.game.IMob;
-import jjcard.text.game.impl.Exit;
-import jjcard.text.game.impl.GameElementLocation;
-import jjcard.text.game.impl.Item;
-import jjcard.text.game.impl.Location;
-import jjcard.text.game.impl.Mob;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameElementLocationTest {
 

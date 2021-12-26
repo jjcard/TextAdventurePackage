@@ -21,7 +21,7 @@ import jjcard.text.game.parser.impl.SimpleTextDefinition;
 public class SimpleTextDefinitionTest {
 
 	@Test
-	public void JsonTest() throws JsonParseException, JsonMappingException, IOException{
+	public void JsonTest() throws IOException{
 		
 		BasicTextTokenType b = BasicTextTokenType.ARMOR;
 		SimpleTextDefinition<BasicTextTokenType> def = new SimpleTextDefinition<>(b);

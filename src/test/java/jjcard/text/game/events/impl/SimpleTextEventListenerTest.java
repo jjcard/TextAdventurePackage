@@ -1,18 +1,15 @@
 package jjcard.text.game.events.impl;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
-
-import org.junit.jupiter.api.*;
-
-import jjcard.text.game.events.impl.SimpleTextEventListener;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 @Disabled
 public class SimpleTextEventListenerTest {
-	PrintStream stream;
+	private PrintStream stream;
 	@BeforeEach
 	public void setUp(){
 		 stream = new PrintStream(new ByteArrayOutputStream());

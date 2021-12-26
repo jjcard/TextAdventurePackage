@@ -1,22 +1,14 @@
 package jjcard.text.game.parser.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import org.junit.jupiter.api.Test;
-
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import jjcard.text.game.parser.impl.BasicTextTokenType;
-import jjcard.text.game.parser.impl.MappedTextDefinition;
-import jjcard.text.game.parser.impl.SimpleTextDefinition;
-import jjcard.text.game.parser.impl.TextDictionary;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TextDictionaryTest {
 

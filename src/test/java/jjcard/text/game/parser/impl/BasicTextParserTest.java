@@ -1,17 +1,12 @@
 package jjcard.text.game.parser.impl;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import jjcard.text.game.parser.ITextDefinition;
+import jjcard.text.game.parser.ITextDictionary;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import jjcard.text.game.parser.ITextDefinition;
-import jjcard.text.game.parser.ITextDictionary;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BasicTextParserTest {
 

@@ -1,27 +1,18 @@
 package jjcard.text.game.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
-import org.junit.jupiter.api.Test;
-
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import jjcard.text.game.impl.Armour;
-import jjcard.text.game.impl.Item;
-import jjcard.text.game.impl.ItemUse;
-import jjcard.text.game.impl.Weapon;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ItemTest {
 
 	@Test
-	public void Itemtest() {
+	public void ItemTest() {
 		Item item = new Item.Builder().name("basic item").viewDescription("it shows off the true potential of an item...which isn't much").build();
 		assertEquals("basic item", item.getName());
 		assertEquals("it shows off the true potential of an item...which isn't much", item.getViewDescription());

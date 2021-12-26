@@ -41,18 +41,19 @@ public abstract class AbstractGameElement implements IGameElement{
 		 * Creates a new builder for a AbstractGameElement
 		 */
 		public Builder(){
-			//default empty constructer
+			//default empty constructor
 		}
 		public Builder(AbstractGameElement element){
 			this.name = element.name;
 			this.roomDescription = element.roomDescription;
 		}
-		@JsonProperty("name")
+
 		/**
 		 * name of the Element. Default is ""
 		 * @param name
 		 * @return this
 		 */
+		@JsonProperty("name")
 		public Builder name(String name){
 			this.name = name;
 			return  this;
@@ -65,7 +66,7 @@ public abstract class AbstractGameElement implements IGameElement{
 		/**
 		 * a flag. If true, then the fields are validated before set.
 		 * @param validateFields
-		 * @return
+		 * @return this
 		 */
 		@JsonProperty("valFields")
 		public Builder validateFields(boolean validateFields){

@@ -23,7 +23,7 @@ public abstract class AbstractTextIndicatorParser<T extends ITextTokenType, K ex
 
 		Builder<T> builder = new Builder<>();
 		String[] words = splitText(input);
-		/**
+		/*
 		 * The current index in the list
 		 */
 		int index = -1;

@@ -175,8 +175,8 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	 * @param regexPattern
 	 * @param type
 	 */
-	public void addTextIndicatorePattern(String regexPattern, final TextIndicator type){
-		addTextIndicatorePattern(Pattern.compile(regexPattern), type);
+	public void addTextIndicatorPattern(String regexPattern, final TextIndicator type){
+		addTextIndicatorPattern(Pattern.compile(regexPattern), type);
 	}
 	/**
 	 * Adds the given pattern to the list matching to the given TextIndicator.
@@ -184,12 +184,12 @@ public class BasicTextParser<T extends ITextTokenType> extends AbstractTextIndic
 	 * @param pattern
 	 * @param type
 	 */
-	public void addTextIndicatorePattern(Pattern pattern, final TextIndicator type){
+	public void addTextIndicatorPattern(Pattern pattern, final TextIndicator type){
 		textIndicatorPatterns.add(pattern, type);
 	}
 	/**
 	 * Sets the limit on the number of objects allowed before adding an error to the stream.
-	 * A number less then 1 indicates no checking. The default is 10.
+	 * A number less than 1 indicates no checking. The default is 10.
 	 * @param objectLimit
 	 */
 	public void setObjectLimit(int objectLimit){

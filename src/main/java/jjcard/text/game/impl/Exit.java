@@ -95,12 +95,13 @@ public class Exit extends AbstractGameElement implements IExit {
 			this.hidden = hidden;
 			return this;
 		}
-		@JsonIgnore
+
 		/**
 		 * Sets the location to given location and name to location's name
 		 * @param location
 		 * @return this
 		 */
+		@JsonIgnore
 		public Builder locationAndName(ILocation location){
 			this.location = location;
 			this.name(location.getName());

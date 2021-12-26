@@ -1,20 +1,14 @@
 package jjcard.text.game.parser.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import org.junit.jupiter.api.Test;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import jjcard.text.game.parser.impl.BasicTextTokenType;
-import jjcard.text.game.parser.impl.SimpleTextDefinition;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SimpleTextDefinitionTest {
 
@@ -32,7 +26,8 @@ public class SimpleTextDefinitionTest {
 		
 		SimpleTextDefinition<BasicTextTokenType> in = m.readValue(
 				new ByteArrayInputStream(out.toByteArray()),
-				new TypeReference<SimpleTextDefinition<BasicTextTokenType>>() {});
+				new TypeReference<>() {
+				});
 		
 		assertEquals(def, in);
 		assertEquals(b, in.getType());

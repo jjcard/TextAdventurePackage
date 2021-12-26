@@ -17,7 +17,7 @@ public interface ITextDefinition<T extends ITextTokenType> {
 	/**
 	 * Returns the standardized form of given token. 
 	 * @param token
-	 * @return
+	 * @return standard token
 	 */
     String getStandardToken(String token);
 }

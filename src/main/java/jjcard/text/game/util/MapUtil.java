@@ -83,7 +83,7 @@ public final class MapUtil {
      * 
      * @param map
      * @param key
-     * @return item associated with key
+     * @return item associated with key that was removed
      */
     public <K extends IGameElement> K removeItemFromMap(Map<String, K> map, String key) {
         return map.remove(getUppercase(key));

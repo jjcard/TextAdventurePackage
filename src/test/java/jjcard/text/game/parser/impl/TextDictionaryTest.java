@@ -27,7 +27,8 @@ public class TextDictionaryTest {
 		ObjectMapper m = new ObjectMapper();
 		m.writeValue(out, dict);
 		
-		TextDictionary<BasicTextTokenType> in = m.readValue(new ByteArrayInputStream(out.toByteArray()), new TypeReference<TextDictionary<BasicTextTokenType>>() {});
+		TextDictionary<BasicTextTokenType> in = m.readValue(new ByteArrayInputStream(out.toByteArray()), new TypeReference<>() {
+		});
 		assertEquals(dict, in);
 		assertEquals(dict.get("Blarg"), in.get("Blarg"));
 

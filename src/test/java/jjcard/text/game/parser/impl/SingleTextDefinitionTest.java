@@ -28,7 +28,8 @@ public class SingleTextDefinitionTest {
 		
 		SingleTextDefinition<BasicTextTokenType> in = m.readValue(
 				new ByteArrayInputStream(out.toByteArray()),
-				new TypeReference<SingleTextDefinition<BasicTextTokenType>>() {});
+				new TypeReference<>() {
+				});
 		
 		assertEquals(def, in);
 		assertEquals(b, in.getType());

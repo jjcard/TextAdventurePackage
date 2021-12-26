@@ -37,7 +37,7 @@ public class MappedTextDefinition<T extends ITextTokenType> extends AbstractText
 
     /**
      * Adds standardizing entry into internal map. Returns previous value
-     * assosicated with that key
+     * associated with that key
      * 
      * @param key
      * @param value

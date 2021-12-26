@@ -176,7 +176,7 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 	/**
 	 * removes Exit under that String
 	 * @param dir
-	 * @return 
+	 * @return removed IExit
 	 */
 	@Override
     public IExit removeExit(String dir){

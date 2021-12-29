@@ -86,10 +86,8 @@ public class GameElementLocationTest {
 	@Test
 	public void getDirectionTest() {
 		assertEquals(hallway.getExitLocation("North"), room);
-//		assertEquals(hallway.getExitLocation("N"), room);
-		
+
 		assertEquals(room.getExitLocation("South"), hallway);
-//		assertEquals(room.getExitLocation("S"), hallway);
 		assertNull(room.getExitLocation("go North") );
 	}
 	

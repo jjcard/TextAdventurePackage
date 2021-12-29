@@ -166,7 +166,7 @@ public class Player extends Mob implements HasLeveling{
 		return xp;
 	}
 
-	public void changelevel(int change){
+	public void changeLevel(int change){
 		setLevel(level + change);
 	}
 	@Override

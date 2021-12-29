@@ -102,7 +102,6 @@ public interface ILocation extends Comparable<ILocation>{
 	 * <blockquote>
 	 * {@link DescriptionUtil}.{@link DescriptionUtil#getConcealableNames(Map, boolean) getConcealableNames(getExits(), true)}
 	 * </blockquote>
-	 * @return
 	 */
 	@JsonIgnore
 	default String getExitsDescriptions(){
@@ -114,11 +113,10 @@ public interface ILocation extends Comparable<ILocation>{
 	 * <blockquote>
 	 * {@link DescriptionUtil}.{@link DescriptionUtil#getConcealableNames(Map, boolean) getConcealableNames(getInventory(), true)}
 	 * </blockquote>
-	 * @return
 	 */
 	@JsonIgnore
 	default String getInventoryDescriptions(){
-		return DescriptionUtil.getConceableRoomDescriptions(getInventory(), true);
+		return DescriptionUtil.getConcealableRoomDescriptions(getInventory(), true);
 	}
 	/**
 	 * Gets the description for each mob. Must be non-null
@@ -126,11 +124,10 @@ public interface ILocation extends Comparable<ILocation>{
 	 * <blockquote>
 	 * {@link DescriptionUtil}.{@link DescriptionUtil#getConcealableNames(Map, boolean) getConcealableNames(getMobs(), true)}
 	 * </blockquote>
-	 * @return
 	 */
 	@JsonIgnore
 	default String getMobDescriptions(){
-		return DescriptionUtil.getConceableRoomDescriptions(getMobs(), true);
+		return DescriptionUtil.getConcealableRoomDescriptions(getMobs(), true);
 	}
 	
 }

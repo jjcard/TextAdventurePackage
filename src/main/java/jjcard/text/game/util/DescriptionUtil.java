@@ -82,8 +82,8 @@ public final class DescriptionUtil {
 	 * @return the comma separated String
 	 * @see #getConcealableStream(Collection, boolean)
 	 */
-	public static <I extends ConcealableGameElement> String getConceableRoomDescriptions(Map<?,I> elements, final boolean excludeHidden){
-		return getConceableRoomDescriptions(elements == null? null: elements.values(), excludeHidden);
+	public static <I extends ConcealableGameElement> String getConcealableRoomDescriptions(Map<?,I> elements, final boolean excludeHidden){
+		return getConcealableRoomDescriptions(elements == null? null: elements.values(), excludeHidden);
 	}
 	/**
 	 * Returns comma separated String of element room descriptions, filtering out hidden elements if <code>excludeHidden</code> is true
@@ -92,7 +92,7 @@ public final class DescriptionUtil {
 	 * @return the comma separated String
 	 * @see #getConcealableStream(Collection, boolean)
 	 */
-	public static <I extends ConcealableGameElement> String getConceableRoomDescriptions(Collection<I> elements, final boolean excludeHidden){
+	public static <I extends ConcealableGameElement> String getConcealableRoomDescriptions(Collection<I> elements, final boolean excludeHidden){
 		return getConcealableStream(elements, excludeHidden).map(I::getRoomDescription).collect(Collectors.joining(COMMA_DELIMINATOR));
 	}
 	
@@ -103,8 +103,8 @@ public final class DescriptionUtil {
 	 * @return the comma separated String
 	 * @see #getConcealableStream(Collection, boolean)
 	 */
-	public static <I extends ConcealableGameElement> String getConceableViewDescriptions(Map<?,I> elements, final boolean excludeHidden){
-		return getConceableViewDescriptions(elements == null? null: elements.values(), excludeHidden);
+	public static <I extends ConcealableGameElement> String getConcealableViewDescriptions(Map<?,I> elements, final boolean excludeHidden){
+		return getConcealableViewDescriptions(elements == null? null: elements.values(), excludeHidden);
 	}
 	/**
 	 * Returns comma separated String of element view descriptions, filtering out hidden elements if <code>excludeHidden</code> is true
@@ -113,7 +113,7 @@ public final class DescriptionUtil {
 	 * @return the comma separated String
 	 * @see #getConcealableStream(Collection, boolean)
 	 */
-	public static <I extends ConcealableGameElement> String getConceableViewDescriptions(Collection<I> elements, final boolean excludeHidden){
+	public static <I extends ConcealableGameElement> String getConcealableViewDescriptions(Collection<I> elements, final boolean excludeHidden){
 		return getConcealableStream(elements, excludeHidden).map(I::getViewDescription).collect(Collectors.joining(COMMA_DELIMINATOR));
 	}
 	

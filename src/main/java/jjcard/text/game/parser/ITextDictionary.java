@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 
 /**
  * Interface to hold the Dictionary for use during parsing.
- * Should have all the verbs and objects used in the jjcard.text.game, or else parsing may not work correctly.
+ * Should have all the verbs and objects used in the game, or else parsing may not work correctly.
  *
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = As.PROPERTY, property = "@class")

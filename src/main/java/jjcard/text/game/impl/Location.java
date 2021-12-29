@@ -184,11 +184,11 @@ public class Location implements ILocation {
 	}
 	@Override
     public String getInventoryDescriptions(){
-		return DescriptionUtil.getConceableRoomDescriptions(inventory, true);
+		return DescriptionUtil.getConcealableRoomDescriptions(inventory, true);
 	}
 	@Override
     public String getMobDescriptions(){
-		return DescriptionUtil.getConceableRoomDescriptions(roomMob, true);
+		return DescriptionUtil.getConcealableRoomDescriptions(roomMob, true);
 	}
 	/**
 	 * Checks that the name and description are equals. uses {@link ObjectsUtil#equalKeys(Map, Map)}

@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 
 /**
- * An interface with some basic operations needed for most elements in the jjcard.text.game.
- * The name is used to refer the object in the jjcard.text.game, usually as a key in a map.
+ * An interface with some basic operations needed for most elements in the game.
+ * The name is used to refer the object in the game, usually as a key in a map.
  * The name should not be able to changed after creation time, as that can have
  * unknown effects on classes that refer to the IGameElement by that name.
  *

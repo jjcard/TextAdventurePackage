@@ -7,7 +7,7 @@ import jjcard.text.game.events.ITextEvent;
 import jjcard.text.game.events.ITextEventListener;
 import jjcard.text.game.events.ITextEventManager;
 /**
- *A version of ITextEventManager that uses  the holder pattern to synchronize and has a CuncurrentHashMap as its underlying holder of ITextEventListeners.
+ *A version of ITextEventManager that uses  the holder pattern to synchronize and has a ConcurrentHashMap as its underlying holder of ITextEventListeners.
  *
  */
 public final class ConcurrentTextEventManager implements ITextEventManager {

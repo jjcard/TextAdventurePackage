@@ -18,7 +18,7 @@ import jjcard.text.game.util.ObjectsUtil;
  */
 public class MappedTextDefinition<T extends ITextTokenType> extends AbstractTextDefinition<T> {
     @JsonProperty("map")
-    private final Map<String, String> standerizedMap;
+    private final Map<String, String> standardizedMap;
 
     public MappedTextDefinition(T type) {
         this(type, null);
@@ -28,9 +28,9 @@ public class MappedTextDefinition<T extends ITextTokenType> extends AbstractText
     public MappedTextDefinition(@JsonProperty("type") T type, @JsonProperty("map") Map<String, String> standarizedMap) {
         super(type);
         if (standarizedMap == null) {
-            this.standerizedMap = new TreeMap<>();
+            this.standardizedMap = new TreeMap<>();
         } else {
-            this.standerizedMap = standarizedMap;
+            this.standardizedMap = standarizedMap;
         }
 
     }
@@ -44,19 +44,19 @@ public class MappedTextDefinition<T extends ITextTokenType> extends AbstractText
      * @return previous value
      */
     public String putEntry(String key, String value) {
-        return standerizedMap.put(key, value);
+        return standardizedMap.put(key, value);
     }
 
     @Override
     public String getStandardToken(String token) {
-        return standerizedMap.getOrDefault(token, token);
+        return standardizedMap.getOrDefault(token, token);
     }
 
     @Override
     public boolean equals(Object o) {
         if (super.equals(o)) {
             if (o instanceof MappedTextDefinition<?>) {
-                return this.standerizedMap.equals(((MappedTextDefinition<?>) o).standerizedMap);
+                return this.standardizedMap.equals(((MappedTextDefinition<?>) o).standardizedMap);
             }
         }
         return false;
@@ -65,7 +65,7 @@ public class MappedTextDefinition<T extends ITextTokenType> extends AbstractText
 
     @Override
     public int hashCode() {
-        return ObjectsUtil.getHashWithStart(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, standerizedMap);
+        return ObjectsUtil.getHashWithStart(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, standardizedMap);
     }
 
     public static <T extends ITextTokenType> MappedTextDefinition<T> getInstance(T type) {

@@ -6,7 +6,7 @@ public enum SpaceTextTokenType implements ITextTokenType {
 	
 	ENEMY(true), TALK(false), LOOK(false), GET(false), DROP(false), WEAPON(true), 
 	ARMOR(true), MOVE(false), SHIP(true), MOVE_SHIP(false), ITEM(true), PLAYER(true), 
-	WORDS(true), UNKOWN;
+	WORDS(true), UNKNOWN;
 
 	private final boolean isObject;
 	

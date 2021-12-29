@@ -82,7 +82,6 @@ public class PatternList<S> {
 		/**
 		 * Returns true of text matches Pattern
 		 * @param text
-		 * @return
 		 */
 		public boolean matches(String text) {
 			return pattern.matcher(text).matches();

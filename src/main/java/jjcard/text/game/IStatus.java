@@ -8,7 +8,6 @@ import jjcard.text.game.util.Experimental;
 @Experimental
 public interface IStatus {
 	
-	
 	/**
 	 * Get the name that should be displayed for this status
 	 * @return name
@@ -16,12 +15,10 @@ public interface IStatus {
     String getName();
 	/**
 	 * Returns true if status takes effect before Mob's turn
-	 * @return
 	 */
     boolean isBeforeTurn();
 	/**
 	 * Returns true if status takes effect after Mob's turn
-	 * @return
 	 */
     boolean isAfterTurn();
 	/**
@@ -32,8 +29,7 @@ public interface IStatus {
     void effect(boolean mobsTurn);
 	/**
 	 * Should return true when the status is done and can be removed from mob.
-	 * Should be called after by jjcard.text.game after each check for turn or effect.
-	 * @return
+	 * Should be called after by game after each check for turn or effect.
 	 */
     boolean isDone();
 	

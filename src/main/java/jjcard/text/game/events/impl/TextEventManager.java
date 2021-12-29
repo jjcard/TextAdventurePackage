@@ -16,7 +16,7 @@ public final class TextEventManager implements ITextEventManager{
 	}
 	
 	/**
-	 * Returns the instance of the TextEventmanager
+	 * Returns the instance of the TextEventManager
 	 * @return
 	 */
 	public static TextEventManager getInstance(){

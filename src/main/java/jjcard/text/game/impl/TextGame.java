@@ -5,7 +5,7 @@ import jjcard.text.game.parser.ITextParser;
 import jjcard.text.game.parser.ITextTokenStream;
 import jjcard.text.game.parser.ITextTokenType;
 /**
- * Abstract class that includes basic jjcard.text.game loop
+ * Abstract class that includes basic game loop
  *
  * @param <T> extends ITextTokenType.
  * @param <P> extends IMob. The Player class.
@@ -30,11 +30,11 @@ public abstract class TextGame<T extends ITextTokenType, P extends IMob> {
 		endCleanUp();
 	}
 	/**
-	 * Set up the jjcard.text.game before the main jjcard.text.game loop
+	 * Set up the game before the main game loop
 	 */
 	public abstract void setUp();
 	/**
-	 * clean up after jjcard.text.game loop is exited
+	 * clean up after game loop is exited
 	 */
 	protected abstract void endCleanUp();
 	/**
@@ -43,8 +43,8 @@ public abstract class TextGame<T extends ITextTokenType, P extends IMob> {
 	protected abstract String getInput();
 	/**
 	 * Parses the input to be sent to the {@link #executeCommands(ITextTokenStream)} method.
-	 * By default simply calls the {@code parser} 
-	 * @param input
+	 * By default, simply calls the {@code parser}
+	 * @param input to parse
 	 * @return ITextTokenStream
 	 */
 	protected ITextTokenStream<T> parseInput(String input){
@@ -56,15 +56,15 @@ public abstract class TextGame<T extends ITextTokenType, P extends IMob> {
 	 */
 	protected abstract void executeCommands(ITextTokenStream<T> stream);
 	/**
-	 * Returns true if there is a condition where the jjcard.text.game loop should exit.
-	 * By default returns true if gameOver flag set.
-	 * @return true if jjcard.text.game over
+	 * Returns true if there is a condition where the game loop should exit.
+	 * By default, returns true if gameOver flag set.
+	 * @return true if game over
 	 */
 	public boolean isGameOver(){
 		return gameOver;
 	}
 	/**
-	 * Called after {@link #executeCommands(ITextTokenStream)} in jjcard.text.game loop.
+	 * Called after {@link #executeCommands(ITextTokenStream)} in game loop.
 	 */
 	protected abstract void gameUpdate();
 }

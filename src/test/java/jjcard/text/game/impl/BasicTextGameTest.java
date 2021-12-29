@@ -12,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BasicTextGameTest {
 
-	BasicTextGame game;
-	Player player;
-	Location local;
-	Location hallway;
-	Mob mob;
-	ITextParser<BasicTextTokenType> parser;
+	private BasicTextGame game;
+	private Player player;
+	private Location local;
+	private Location hallway;
+	private Mob mob;
+	private ITextParser<BasicTextTokenType> parser;
 
 	@BeforeEach
 	public void setUp(){

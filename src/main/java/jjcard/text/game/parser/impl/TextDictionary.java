@@ -15,7 +15,7 @@ import jjcard.text.game.parser.ITextTokenType;
 
 /**
  * Class implementation to hold the Library for use during parsing.
- * Should have all the verbs and objects used in the jjcard.text.game, or else parsing may not work correctly.
+ * Should have all the verbs and objects used in the game, or else parsing may not work correctly.
  *
  */
 public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, ITextDefinition<T>>implements ITextDictionary<T>{

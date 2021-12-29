@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ItemTest {
 
 	@Test
-	public void ItemTest() {
+	public void basicItemTest() {
 		Item item = new Item.Builder().name("basic item").viewDescription("it shows off the true potential of an item...which isn't much").build();
 		assertEquals("basic item", item.getName());
 		assertEquals("it shows off the true potential of an item...which isn't much", item.getViewDescription());

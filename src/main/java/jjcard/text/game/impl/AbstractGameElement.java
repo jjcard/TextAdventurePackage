@@ -12,7 +12,7 @@ import jjcard.text.game.util.ObjectsUtil;
  */
 
 @JsonDeserialize(builder = AbstractGameElement.Builder.class)
-public abstract class AbstractGameElement implements IGameElement{
+public abstract class AbstractGameElement implements IGameElement {
 	@JsonProperty("roomDescrip")
 	private String roomDescription;
 	@JsonProperty("name")

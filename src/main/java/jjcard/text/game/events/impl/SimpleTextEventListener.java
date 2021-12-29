@@ -70,12 +70,12 @@ public class SimpleTextEventListener implements ITextEventListener {
 		}
 	}
 	private String formatString(String value, String keyReplace){
-		String formatedString = value;
+		String formattedString = value;
 		if (keyReplace != null){
-			formatedString = KEY_INPUT_PATTERN.matcher(value).replaceAll(keyReplace);
+			formattedString = KEY_INPUT_PATTERN.matcher(value).replaceAll(keyReplace);
 		}
 		
-		return formatedString;
+		return formattedString;
 		
 		
 	}

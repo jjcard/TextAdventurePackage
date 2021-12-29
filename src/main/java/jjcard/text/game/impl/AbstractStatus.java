@@ -23,8 +23,8 @@ public abstract class AbstractStatus<T> implements IStatus {
     public boolean isBeforeTurn(){
 		return before;
 	}
-	public void setIsBefore(boolean isBfore){
-		before = isBfore;
+	public void setIsBefore(boolean isBefore){
+		this.before = isBefore;
 	}
 	public T getTarget(){
 		return target;

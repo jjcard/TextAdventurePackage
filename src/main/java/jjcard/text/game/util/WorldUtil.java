@@ -187,14 +187,14 @@ public class WorldUtil<P extends IMob>{
 
 	/**
 	 * Removes weapon from Player and adds it to his/her items.
-	 * @return true if weapon unequiped, false otherwise
+	 * @return true if weapon unequipped, false otherwise
 	 */
 	public boolean unequipWeapon(){
 		return unequipWeapon(player);
 	}
 	/**
 	 * Removes weapon from mob and adds it to his/her items.
-	 * @return true if weapon unequiped, false otherwise
+	 * @return true if weapon unequipped, false otherwise
 	 */
 	public static boolean unequipWeapon(IMob mob){
 		IWeapon i = mob.removeWeapon();
@@ -207,14 +207,14 @@ public class WorldUtil<P extends IMob>{
 	}
 	/**
 	 * Removes armour from Player and adds it to his/her items.
-	 * @return true if armour unequiped, false otherwise
+	 * @return true if armour unequipped, false otherwise
 	 */
 	public boolean unequipArmour(){
 		return unequipArmour(player);
 	}
 	/**
 	 * Removes armour from mob and adds it to his/her items.
-	 * @return true if armour unequiped, false otherwise
+	 * @return true if armour unequipped, false otherwise
 	 */
 	public static boolean unequipArmour(IMob mob){
 		IArmour it = mob.removeArmour();

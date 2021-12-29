@@ -15,7 +15,7 @@ import jjcard.text.game.util.ObjectsUtil;
 
 /**
  * 
- * A class to hold to result from the parser in a way easy for the jjcard.text.game to use.
+ * A class to hold to result from the parser in a way easy for the game to use.
  * 
  * @param <T>
  */

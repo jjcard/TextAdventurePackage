@@ -23,7 +23,7 @@ import jjcard.text.game.util.ObjectsUtil;
  *
  */
 @JsonDeserialize(builder = Mob.Builder.class)
-public class Mob extends AbstractGameElement implements IMob{
+public class Mob extends AbstractGameElement implements IMob {
 	@JsonProperty("maxHealth")
 	private int maxHealth;
 	@JsonProperty("health")

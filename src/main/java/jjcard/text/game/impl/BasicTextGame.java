@@ -55,7 +55,7 @@ public class BasicTextGame extends TextGame<BasicTextTokenType, Player>{
 	public ITextParser<BasicTextTokenType> getTextParser() {
 		return parser;
 	}
-	public PrintStream getOuput() {
+	public PrintStream getOutput() {
 		return output;
 	}
 

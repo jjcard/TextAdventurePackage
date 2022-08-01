@@ -123,6 +123,6 @@ public class Armour extends Item implements IArmour {
 	@Override
     public int hashCode(){
 		return ObjectsUtil.getHashWithStart(super.hashCode(),
-				ObjectsUtil.DEFAULT_PRIME, defense);
+				defense);
 	}
 }

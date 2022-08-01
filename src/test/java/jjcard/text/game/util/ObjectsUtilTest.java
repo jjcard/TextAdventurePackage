@@ -1,13 +1,11 @@
 package jjcard.text.game.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import org.junit.jupiter.api.Test;
-
-import jjcard.text.game.util.ObjectsUtil;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class ObjectsUtilTest {
 
@@ -20,7 +18,7 @@ public class ObjectsUtilTest {
 		String[] words = {"fdsaf", "fdsafsdafsdfafsdafasdf", "bioeoiwo"};
 		
 		
-		int hashCode = ObjectsUtil.getHash(prime, s1, s2, words);
+		int hashCode = ObjectsUtil.getHashWithStart(1, s1, s2, words);
 		
 		assertFalse(hashCode == 0);
 		

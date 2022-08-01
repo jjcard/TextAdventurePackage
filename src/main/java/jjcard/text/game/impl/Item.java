@@ -190,6 +190,6 @@ public class Item extends AbstractGameElement implements IItem{
 	
 	@Override
     public int hashCode(){
-		return ObjectsUtil.getHashWithStart(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, cost, level, hidden, movable, use);
+		return ObjectsUtil.getHashWithStart(super.hashCode(), cost, level, hidden, movable, use);
 	}
 }

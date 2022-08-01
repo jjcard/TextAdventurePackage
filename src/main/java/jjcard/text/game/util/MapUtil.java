@@ -132,7 +132,7 @@ public final class MapUtil {
     /**
      * Returns new HashMap
      * 
-     * @return
+     * @return new map
      */
     public static <J, K> Map<J, K> newHashMap() {
         return new HashMap<>();

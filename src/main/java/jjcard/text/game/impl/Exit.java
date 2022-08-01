@@ -176,7 +176,7 @@ public class Exit extends AbstractGameElement implements IExit {
 	}
 	@Override
     public int hashCode(){
-		return ObjectsUtil.getHash(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, location, hidden);
+		return ObjectsUtil.getHashWithStart(super.hashCode(), location, hidden);
 	}
 	/**
 	 * Returns the Room Description if set, or else the name of the Exit

@@ -210,6 +210,6 @@ public class Player extends Mob implements HasLeveling{
 	@Override
     public int hashCode(){
 		return ObjectsUtil.getHashWithStart(super.hashCode(),
-				ObjectsUtil.DEFAULT_PRIME, xp, level);
+                xp, level);
 	}
 }

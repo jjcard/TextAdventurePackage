@@ -174,6 +174,6 @@ public class Weapon extends Item implements IWeapon{
 	@Override
     public int hashCode(){
 		return ObjectsUtil.getHashWithStart(super.hashCode(),
-				ObjectsUtil.DEFAULT_PRIME, attack, critChance, durability);
+                attack, critChance, durability);
 	}
 }

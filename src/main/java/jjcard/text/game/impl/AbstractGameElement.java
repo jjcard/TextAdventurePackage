@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jjcard.text.game.IGameElement;
 import jjcard.text.game.util.ObjectsUtil;
 
+import java.util.Objects;
+
 /**
  * a basic class implementing IGameElement
  *
@@ -143,6 +145,6 @@ public abstract class AbstractGameElement implements IGameElement {
 	}
 	@Override
     public int hashCode(){
-		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, name, roomDescription, viewDescription);
+		return Objects.hash(name, roomDescription, viewDescription);
 	}
 }

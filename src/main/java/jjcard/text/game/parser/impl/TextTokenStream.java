@@ -2,10 +2,7 @@ package jjcard.text.game.parser.impl;
 
 import static jjcard.text.game.util.ObjectsUtil.notEqual;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import jjcard.text.game.parser.ITextTokenStream;
 import jjcard.text.game.parser.ITextTokenType;
@@ -320,7 +317,7 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	}
 	@Override
     public int hashCode(){
-		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, verb, objects, withObject, errors);
+		return Objects.hash(verb, objects, withObject, errors);
 	}
 
 }

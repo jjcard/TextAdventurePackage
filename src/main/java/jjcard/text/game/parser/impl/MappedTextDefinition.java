@@ -65,7 +65,7 @@ public class MappedTextDefinition<T extends ITextTokenType> extends AbstractText
 
     @Override
     public int hashCode() {
-        return ObjectsUtil.getHashWithStart(super.hashCode(), ObjectsUtil.DEFAULT_PRIME, standardizedMap);
+        return ObjectsUtil.getHashWithStart(super.hashCode(), standardizedMap);
     }
 
     public static <T extends ITextTokenType> MappedTextDefinition<T> getInstance(T type) {

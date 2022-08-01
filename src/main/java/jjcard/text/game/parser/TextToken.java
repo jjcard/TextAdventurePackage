@@ -1,6 +1,8 @@
 package jjcard.text.game.parser;
+
+import java.util.Objects;
+
 import static jjcard.text.game.util.ObjectsUtil.checkArg;
-import jjcard.text.game.util.ObjectsUtil;
 
 /**
  * A Class for containing the parsed Token. Includes to original token, the
@@ -81,6 +83,6 @@ public class TextToken<T extends ITextTokenType> implements ITextTokenType{
 	}
 	@Override
     public int hashCode(){
-		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, token, standardToken, type);
+		return Objects.hash(token, standardToken, type);
 	}
 }

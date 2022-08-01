@@ -11,6 +11,7 @@ import java.util.Objects;
  */
 public final class ObjectsUtil {
 
+	/** To match Arrays.hashCode**/
 	public static final int DEFAULT_PRIME = 31;
 	private ObjectsUtil(){
 		super();//util class
@@ -30,10 +31,7 @@ public final class ObjectsUtil {
 		}
 		return a.size() == b.size();
 	}
-	
-	public static <K> boolean notEqualsSize(Collection<K> a, Collection<K> b){
-		return !equalsSize(a, b);
-	}
+
 	public static <K> boolean equalsSize(Collection<K> a, Collection<K> b){
 		if (a == b){
 			return true;
@@ -67,34 +65,21 @@ public final class ObjectsUtil {
 		}
 		return a.keySet().equals(b.keySet());
 	}
-	
-	/**
-	 * Returns hash of given objects by , multiplying by <code>prime</code>.
-	 * Same as calling {@link #getHashWithStart(int, int, Object...)} with
-	 * <code>startingHash</code> of 1.
-	 * 
-	 * @param prime
-	 * @param objects
-	 * @return computed hash
-	 */
-	public static int getHash(final int prime, Object...objects){
-		return getHashWithStart(1, prime, objects);
-	}
+
 	/**
 	 * Returns hash of given objects. Hash starts with <code>startingHash</code>, multiplying by <code>prime</code>. Is Null safe.
 	 * @param startingHash
-	 * @param prime
 	 * @param objects
 	 * @return computed hash
 	 */
-	public static int getHashWithStart(int startingHash, final int prime, Object...objects){
+	public static int getHashWithStart(int startingHash, Object...objects){
 		int hash = startingHash;
 		
 		for (Object o : objects) {
 			if (o instanceof Object[]) {
-				hash = hash * prime + Arrays.hashCode((Object[]) o);
+				hash = hash * DEFAULT_PRIME + Arrays.hashCode((Object[]) o);
 			} else {
-				hash = hash * prime + (o == null ? 0 : o.hashCode());
+				hash = hash * DEFAULT_PRIME + (o == null ? 0 : o.hashCode());
 			}
 		}
 		
@@ -102,21 +87,21 @@ public final class ObjectsUtil {
 	}
 	/**
 	 * Returns hash of key set of the given map. Null safe.
-	 * @param a
+	 * @param keyMap map to pull key set from
 	 * @return int, the Hash of key set
 	 */
-	public static int getKeysHash(Map<String, ?> a){
-		if (a == null){
+	public static int getKeysHash(Map<String, ?> keyMap){
+		if (keyMap == null){
 			return 0;
 		}
-		return a.keySet().hashCode();
+		return keyMap.keySet().hashCode();
 		
 	}
 	/**
 	 * throws exception if the argument is null with the given string as detail 
 	 * @param arg
-	 * @param name
-	 * @throws IllegalArgumentException
+	 * @param name name to put in detail message
+	 * @throws IllegalArgumentException if arg is null
 	 */
 	public static void checkArg(Object arg, final String name) throws IllegalArgumentException{
 		if (arg == null){

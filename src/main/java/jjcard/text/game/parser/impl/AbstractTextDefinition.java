@@ -6,6 +6,8 @@ import jjcard.text.game.parser.ITextDefinition;
 import jjcard.text.game.parser.ITextTokenType;
 import jjcard.text.game.util.ObjectsUtil;
 
+import java.util.Objects;
+
 public abstract class AbstractTextDefinition<T extends ITextTokenType> implements ITextDefinition<T> {
     @JsonProperty("type")
     private final T type;
@@ -48,7 +50,7 @@ public abstract class AbstractTextDefinition<T extends ITextTokenType> implement
 
     @Override
     public int hashCode() {
-        return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, type);
+        return Objects.hash(type);
     }
 
 }

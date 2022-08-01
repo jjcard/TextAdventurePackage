@@ -2,10 +2,9 @@ package jjcard.text.game.parser;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-
-import jjcard.text.game.util.ObjectsUtil;
 
 /**
  * Class to hold a list of Patterns and Values and, for a given String, returns
@@ -40,7 +39,7 @@ public class PatternList<S> {
 	 * Compiles the given string into a pattern and adds it.
 	 * @param s
 	 * @param value
-	 * @throws PatternSyntaxException
+	 * @throws PatternSyntaxException If the expression's syntax is invalid
 	 */
 	public void add(final String s, S value) throws PatternSyntaxException {
 		add(Pattern.compile(s), value);
@@ -102,6 +101,6 @@ public class PatternList<S> {
 	}
 	@Override
     public int hashCode(){
-		return ObjectsUtil.getHash(ObjectsUtil.DEFAULT_PRIME, patternList);
+		return Objects.hash(patternList);
 	}
 }

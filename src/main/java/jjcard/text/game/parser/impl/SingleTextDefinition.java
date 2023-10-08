@@ -39,8 +39,7 @@ public class SingleTextDefinition<T extends ITextTokenType> extends AbstractText
 		if (!super.equals(o)){
 			return false;
 		}
-		if (o instanceof SingleTextDefinition<?>){
-			SingleTextDefinition<?> other = (SingleTextDefinition<?>) o;
+		if (o instanceof SingleTextDefinition<?> other){
 			return Objects.equals(name, other.name);
 		}
 		return false;

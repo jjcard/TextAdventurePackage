@@ -5,6 +5,7 @@ import static jjcard.text.game.util.WorldUtil.isKeyForItem;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -151,12 +152,7 @@ public class Mob extends AbstractGameElement implements IMob {
 		}
 		@JsonProperty("statuses")
 		public Builder statusList(List<IStatus> statusList){
-			if (statusList == null){
-				this.statusList = new LinkedList<>();
-			} else {
-				this.statusList = statusList;	
-			}
-			
+            this.statusList = Objects.requireNonNullElseGet(statusList, LinkedList::new);
 			return this;
 		}
 		@JsonProperty("armr")
@@ -490,11 +486,10 @@ public class Mob extends AbstractGameElement implements IMob {
 		if (this == o){
 			return true;
 		}
-		if (o instanceof Mob){
+		if (o instanceof Mob m){
 			if (!super.equals(o)){
 				return false;
 			}
-			Mob m = (Mob) o;
 
 			if (attack != m.attack){
 				return false;

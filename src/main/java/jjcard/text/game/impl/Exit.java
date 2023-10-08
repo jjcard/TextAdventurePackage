@@ -158,11 +158,10 @@ public class Exit extends AbstractGameElement implements IExit {
 			return true;
 		}
 		
-		if (object instanceof Exit){
+		if (object instanceof Exit e){
 			if (!super.equals(object)){
 				return false;
 			}
-			Exit e = (Exit) object;
 			if (ObjectsUtil.notEqual(location, e.location)){
 				return false;
 			}

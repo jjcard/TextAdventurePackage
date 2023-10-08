@@ -127,8 +127,7 @@ public abstract class AbstractGameElement implements IGameElement {
 			return true;
 		}
 		
-		if (object instanceof AbstractGameElement){
-			final AbstractGameElement element = (AbstractGameElement) object;
+		if (object instanceof AbstractGameElement element){
 			if (ObjectsUtil.notEqual(name, element.name)){
 				return false;
 			}

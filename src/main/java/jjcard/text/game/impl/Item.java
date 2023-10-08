@@ -134,7 +134,7 @@ public class Item extends AbstractGameElement implements IItem{
 	public void setLevel(int level){
 		this.level = level;
 		if (doValidateFields() && level < 0){
-			level = 0;
+			this.level = 0;
 		}
 	}
 	@Override
@@ -165,8 +165,7 @@ public class Item extends AbstractGameElement implements IItem{
 		if (o == null){
 			return false;
 		}
-		if (o instanceof Item){
-			Item m = (Item) o;
+		if (o instanceof Item m){
 			if (!super.equals(o)){
 				return false;
 			}

@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import jjcard.text.game.events.ITextEventListener;
 import jjcard.text.game.events.ITextEventManager;
-import jjcard.text.game.events.impl.SimpleTextEvent;
-import jjcard.text.game.events.impl.TextEventManager;
 
 public class TextEventManagerTest {
 
@@ -26,8 +24,8 @@ public class TextEventManagerTest {
 		ITextEventListener listener = event -> {
             SimpleTextEvent e = (SimpleTextEvent) event;
 
-            assertEquals("get", e.getKey());
-            assertEquals("Win", e.getCommandKey());
+            assertEquals("get", e.key());
+            assertEquals("Win", e.commandKey());
             return true;
         };
 		
@@ -41,8 +39,8 @@ public class TextEventManagerTest {
 		ITextEventManager evntMgr = TextEventManager.getInstance();
 		ITextEventListener listener = (event) -> {
 			SimpleTextEvent e = (SimpleTextEvent) event;
-			assertEquals("len", e.getKey());
-			assertEquals("Vim", e.getCommandKey());
+			assertEquals("len", e.key());
+			assertEquals("Vim", e.commandKey());
 			return true;
 		};
 		

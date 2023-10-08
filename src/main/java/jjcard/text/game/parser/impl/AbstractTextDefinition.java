@@ -41,8 +41,7 @@ public abstract class AbstractTextDefinition<T extends ITextTokenType> implement
         if (o == this) {
             return true;
         }
-        if (o instanceof AbstractTextDefinition<?>) {
-            AbstractTextDefinition<?> other = (AbstractTextDefinition<?>) o;
+        if (o instanceof AbstractTextDefinition<?> other) {
             return type.equals(other.type);
         }
         return false;

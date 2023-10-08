@@ -185,10 +185,8 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	}
 
 	/**
-	 * Returns true if the TextTokenStream has a object token in the withObject
+	 * @return true if the TextTokenStream has a object token in the withObject
 	 * field.
-	 * 
-	 * @return true if has with object
 	 */
 	@Override
     public boolean hasWithObject() {
@@ -196,17 +194,14 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 	}
 
 	/**
-	 * Returns the list of Object TextTokens
-	 * 
-	 * @return objects
+	 * @return list of Object TextTokens
 	 */
 	@Override
     public List<TextToken<T>> getObjects() {
 		return objects;
 	}
 	/**
-	 * Get a List of the TextTokens in order they were parsed
-	 * @return
+	 * @return List of the TextTokens in order they were parsed
 	 */
 	public List<TextToken<T>> getOrderedStream(){
 		return stream;
@@ -288,10 +283,8 @@ public class TextTokenStream<T extends ITextTokenType> implements ITextTokenStre
 		if (this == o){
 			return true;
 		}
-		if (o instanceof TextTokenStream){
-			@SuppressWarnings("rawtypes")
-			TextTokenStream s = (TextTokenStream) o;
-			
+		if (o instanceof @SuppressWarnings("rawtypes")TextTokenStream s){
+
 			if (notEqual(verb, s.verb)){
 				return false;
 			}

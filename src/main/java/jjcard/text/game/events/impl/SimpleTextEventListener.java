@@ -25,11 +25,11 @@ public class SimpleTextEventListener implements ITextEventListener {
 	private final Map<String, String> printMap;
 	private PrintStream out = System.out;
 	
-	public SimpleTextEventListener() throws IOException{
+	public SimpleTextEventListener() throws IOException {
 		printMap = new TreeMap<>();
 		loadPrintMap(DEFAULT_TEXT_LOCATION);
 	}
-	public SimpleTextEventListener(PrintStream out) throws IOException{
+	public SimpleTextEventListener(PrintStream out) throws IOException {
 		printMap = new TreeMap<>();
 		loadPrintMap(DEFAULT_TEXT_LOCATION);
 		this.out = out;
@@ -82,12 +82,12 @@ public class SimpleTextEventListener implements ITextEventListener {
 	@Override
 	public boolean handleEvent(ITextEvent event) {
 		SimpleTextEvent e  = (SimpleTextEvent) event;
-		String key = event.getKey();
+		String key = event.key();
 		
 		String toPrint = printMap.get(key);
 		
 		if (toPrint != null){
-			toPrint  = formatString(toPrint, e.getCommandKey());
+			toPrint  = formatString(toPrint, e.commandKey());
 			out.println(toPrint);
 			return true;
 		}

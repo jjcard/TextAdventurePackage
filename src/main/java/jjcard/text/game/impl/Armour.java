@@ -110,8 +110,7 @@ public class Armour extends Item implements IArmour {
 		if (!super.equals(o)){
 			return false;
 		}
-		if (o instanceof Armour){
-			Armour other = (Armour) o;
+		if (o instanceof Armour other){
 			if (defense != other.defense){
 				return false;
 			}

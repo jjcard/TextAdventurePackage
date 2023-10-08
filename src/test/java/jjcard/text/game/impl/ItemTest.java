@@ -36,6 +36,18 @@ public class ItemTest {
 		assertEquals(item.getUse(), ItemUse.Item);
 		
 	}
+
+	@Test
+	public void setLevelTest_validate() {
+		Item item = new Item.Builder().name("basic item").viewDescription("it shows off the true potential of an item...which isn't much").build();
+		assertEquals(0, item.getLevel());
+
+		item.setLevel(55);
+		assertEquals(55, item.getLevel());
+
+		item.setLevel(-5);
+		assertEquals(0, item.getLevel());
+	}
 	@Test
 	public void WeaponTest(){
 		Weapon weapon = new Weapon.Builder().name("sword").viewDescription("pointy end").attack(2).build();

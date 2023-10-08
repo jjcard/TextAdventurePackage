@@ -155,8 +155,7 @@ public class Weapon extends Item implements IWeapon{
 		if (!super.equals(o)){
 			return false;
 		}
-		if (o instanceof Weapon){
-			Weapon other = (Weapon) o;
+		if (o instanceof Weapon other){
 			if (attack != other.attack){
 				return false;
 			}

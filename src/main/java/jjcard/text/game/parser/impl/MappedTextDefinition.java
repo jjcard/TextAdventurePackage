@@ -1,6 +1,7 @@
 package jjcard.text.game.parser.impl;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -27,20 +28,14 @@ public class MappedTextDefinition<T extends ITextTokenType> extends AbstractText
     @JsonCreator
     public MappedTextDefinition(@JsonProperty("type") T type, @JsonProperty("map") Map<String, String> standarizedMap) {
         super(type);
-        if (standarizedMap == null) {
-            this.standardizedMap = new TreeMap<>();
-        } else {
-            this.standardizedMap = standarizedMap;
-        }
+        this.standardizedMap = Objects.requireNonNullElseGet(standarizedMap, TreeMap::new);
 
     }
 
     /**
      * Adds standardizing entry into internal map. Returns previous value
      * associated with that key
-     * 
-     * @param key
-     * @param value
+     *
      * @return previous value
      */
     public String putEntry(String key, String value) {

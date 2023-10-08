@@ -246,8 +246,7 @@ public class GameElementLocation extends AbstractGameElement implements ILocatio
 		if (!super.equals(o)){
 			return false;
 		}
-		if (o instanceof GameElementLocation){
-			GameElementLocation l = (GameElementLocation) o;
+		if (o instanceof GameElementLocation l){
 			if (ObjectsUtil.notEqualKeys(inventory, l.inventory)){
 				return false;
 			}

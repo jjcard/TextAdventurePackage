@@ -200,8 +200,7 @@ public class Location implements ILocation {
 			return true;
 		}
 		
-		if (o instanceof Location){
-			Location l = (Location) o;
+		if (o instanceof Location l){
 			if (notEqual(name, l.name)){
 				return false;
 			}

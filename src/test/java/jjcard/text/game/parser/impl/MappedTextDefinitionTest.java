@@ -52,7 +52,7 @@ public class MappedTextDefinitionTest {
 		assertFalse(def.equals(null));
 		assertFalse(def.equals("Mecha-Goblin"));
 		assertTrue(def.equals(def));
-		assertTrue(def.hashCode() == def.hashCode());
+        assertEquals(def.hashCode(), def.hashCode());
 		
 		
 		BasicTextTokenType b2 = BasicTextTokenType.ARMOR;
@@ -63,7 +63,7 @@ public class MappedTextDefinitionTest {
 		MappedTextDefinition<BasicTextTokenType> def2 = new MappedTextDefinition<>(b2, standardizeMap2);
 		
 		assertTrue(def.equals(def2));
-		assertTrue(def.hashCode() == def2.hashCode());
+        assertEquals(def.hashCode(), def2.hashCode());
 		
 		
 		SpaceTextTokenType b3 = SpaceTextTokenType.ARMOR;
@@ -74,7 +74,7 @@ public class MappedTextDefinitionTest {
 		MappedTextDefinition<SpaceTextTokenType> def3 = new MappedTextDefinition<>(b3, standardizeMap3);
 		
 		assertFalse(def.equals(def3));
-		assertFalse(def.hashCode() == def3.hashCode());
+        assertNotEquals(def.hashCode(), def3.hashCode());
 	}
 
 }

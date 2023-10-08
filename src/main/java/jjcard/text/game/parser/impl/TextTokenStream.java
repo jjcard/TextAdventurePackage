@@ -1,14 +1,13 @@
 package jjcard.text.game.parser.impl;
 
-import static jjcard.text.game.util.ObjectsUtil.notEqual;
-
-import java.util.*;
-
 import jjcard.text.game.parser.ITextTokenStream;
 import jjcard.text.game.parser.ITextTokenType;
 import jjcard.text.game.parser.TextParserError;
 import jjcard.text.game.parser.TextToken;
-import jjcard.text.game.util.ObjectsUtil;
+
+import java.util.*;
+
+import static jjcard.text.game.util.ObjectsUtil.notEqual;
 
 /**
  * 

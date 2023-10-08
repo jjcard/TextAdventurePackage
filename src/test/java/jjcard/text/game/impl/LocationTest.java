@@ -1,11 +1,5 @@
 package jjcard.text.game.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
@@ -19,6 +13,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jjcard.text.game.IExit;
 import jjcard.text.game.IItem;
 import jjcard.text.game.IMob;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LocationTest {
 	private Mob mob;
@@ -45,7 +41,7 @@ public class LocationTest {
 		assertEquals(hallway.hashCode(), hallway.hashCode());
 		
 		assertFalse(hallway.equals(room));
-		assertFalse(hallway.hashCode() == room.hashCode());
+        assertNotEquals(hallway.hashCode(), room.hashCode());
 		Location blank = new Location("");
 		Location room = new Location("A room", "no not THE room");
 		Location room2 = new Location("A room", "no not THE room");
@@ -54,12 +50,12 @@ public class LocationTest {
 		assertEquals(room.hashCode(), room2.hashCode());
 		assertTrue(room2.equals(room));
 		assertFalse(room2.equals(blank));
-		assertFalse(room.hashCode() == blank.hashCode());
+        assertNotEquals(room.hashCode(), blank.hashCode());
 		
 		room.addItem(item);
 		assertFalse(room.equals(room2));
 		assertFalse(room2.equals(room));
-		assertFalse(room.hashCode() == room2.hashCode());
+        assertNotEquals(room.hashCode(), room2.hashCode());
 		
 		room2.addItem(item);
 		assertTrue(room.equals(room2));
@@ -69,7 +65,7 @@ public class LocationTest {
 		room.addMob(mob);
 		assertFalse(room.equals(room2));
 		assertFalse(room2.equals(room));
-		assertFalse(room.hashCode() == room2.hashCode());
+        assertNotEquals(room.hashCode(), room2.hashCode());
 		
 		room2.addMob(mob);
 		assertTrue(room.equals(room2));
@@ -80,7 +76,7 @@ public class LocationTest {
 		room.addExit(Exit.NORTH.getWithLocation(hallway));
 		assertFalse(room.equals(room2));
 		assertFalse(room2.equals(room));
-		assertFalse(room.hashCode() == room2.hashCode());
+        assertNotEquals(room.hashCode(), room2.hashCode());
 		
 		room2.addExit(Exit.NORTH.getWithLocation(hallway));
 		assertTrue(room.equals(room2));

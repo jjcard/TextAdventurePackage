@@ -37,10 +37,10 @@ public class ExitTest {
 		assertEquals(first.hashCode(), snd.hashCode());
 		Location l = new Location("test Loc");
 		Exit thrd = new Exit.Builder(first).location(l).build();
-		
-		
-		assertFalse(first.equals(thrd));
-		assertFalse(first.hashCode() == thrd.hashCode());
+
+
+        assertNotEquals(first, thrd);
+        assertNotEquals(first.hashCode(), thrd.hashCode());
 	}
 	@Test
 	public void builderStaticTest(){

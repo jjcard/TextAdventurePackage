@@ -65,7 +65,7 @@ public class GameElementLocationTest {
 		room.addMob(mob);
 		assertFalse(room.equals(room2));
 		assertFalse(room2.equals(room));
-		assertFalse(room.hashCode() == room2.hashCode());
+        assertNotEquals(room.hashCode(), room2.hashCode());
 		
 		room2.addMob(mob);
 		assertTrue(room.equals(room2));
@@ -76,7 +76,7 @@ public class GameElementLocationTest {
 		room.addExit(Exit.NORTH.getWithLocation(hallway));
 		assertFalse(room.equals(room2));
 		assertFalse(room2.equals(room));
-		assertFalse(room.hashCode() == room2.hashCode());
+        assertNotEquals(room.hashCode(), room2.hashCode());
 		
 		room2.addExit(Exit.NORTH.getWithLocation(hallway));
 		assertTrue(room.equals(room2));

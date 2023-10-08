@@ -1,5 +1,6 @@
 package jjcard.text.game.util;
 
+import java.io.Serial;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -115,6 +116,7 @@ public interface IListMap<K, V> extends Map<K, List<V>> {
 	}
 	class ListHashMap<K, V> extends HashMap<K, List<V>> implements IListMap<K, V>{
 
+		@Serial
 		private static final long serialVersionUID = -1702963975522014415L;
 		
 		public ListHashMap() {
@@ -126,6 +128,7 @@ public interface IListMap<K, V> extends Map<K, List<V>> {
 	}
 	class ListTreeMap<K, V> extends TreeMap<K, List<V>>  implements IListMap<K, V>{
 
+		@Serial
 		private static final long serialVersionUID = -8071210173902756898L;
 		
 		public ListTreeMap() {

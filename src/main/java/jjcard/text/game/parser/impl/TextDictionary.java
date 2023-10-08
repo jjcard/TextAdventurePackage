@@ -2,6 +2,7 @@ package jjcard.text.game.parser.impl;
 
 import static jjcard.text.game.util.ObjectsUtil.checkArg;
 
+import java.io.Serial;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
@@ -22,6 +23,7 @@ public class TextDictionary<T extends ITextTokenType> extends TreeMap<String, IT
 
 	private static final boolean DEFAULT_AUTOMATIC_CASING = true;
 
+	@Serial
 	private static final long serialVersionUID = -108288250545705909L;
 	private final boolean automaticCasing;
 	private Locale locale = Locale.getDefault(); 

@@ -384,33 +384,28 @@ public class Mob extends AbstractGameElement implements IMob {
 		}
 	}
 	/**
-	 * gets attack plus any bonuses
-	 * @return
+	 * @return attack plus any bonuses
 	 */
-	
 	@Override
     public int getFullAttack(){
 		return attack + getWeaponBonus();
 	}
 	/**
-	 * returns the weapon bonus or 0 if no weapon equipped
-	 * @return
+	 * @return weapon bonus or 0 if no weapon equipped
 	 */
 	@JsonIgnore
 	public int getWeaponBonus(){
 		return weapon == null? 0: weapon.getAttack();
 	}
 	/**
-	 * Returns the armour bonus or 0 if no armour equipped
-	 * @return
+	 * @return armour bonus or 0 if no armour equipped
 	 */
 	@JsonIgnore
 	public int getArmourBonus(){
 		return armour == null? 0: armour.getDefense();
 	}
 	/**
-	 * gets defense plus any bonus
-	 * @return
+	 * @return defense plus any bonus
 	 */
 	@Override
     public int getFullDefense(){
@@ -464,10 +459,7 @@ public class Mob extends AbstractGameElement implements IMob {
 	public boolean isAlive(){
 		return !isDead();
 	}
-	@Override
-    public String toString() {
-		return getName();
-	}
+
 	@Override
     public IWeapon removeWeapon() {
 		IWeapon re = weapon;

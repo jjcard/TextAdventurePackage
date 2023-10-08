@@ -1,13 +1,10 @@
 package jjcard.text.game.parser.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
 
 import jjcard.text.game.parser.TextToken;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TextTokenStreamTest {
 
@@ -37,14 +34,14 @@ public class TextTokenStreamTest {
 	@Test
 	public void basicEqualsTest() {
 		TextTokenStream<BasicTextTokenType> stream = new TextTokenStream.Builder<BasicTextTokenType>().build();
-		
-		assertFalse(stream.equals(null));
-		assertFalse(stream.equals("none stream type"));
-		assertTrue(stream.equals(stream));
+
+        assertNotEquals(null, stream);
+        assertNotEquals("none stream type", stream);
+        assertEquals(stream, stream);
 		
 		TextTokenStream<BasicTextTokenType> stream2 = new TextTokenStream.Builder<BasicTextTokenType>().build();
-		assertTrue(stream.equals(stream2));
-		assertTrue(stream2.equals(stream));
+        assertEquals(stream, stream2);
+        assertEquals(stream2, stream);
 	}
 
 }

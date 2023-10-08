@@ -43,8 +43,6 @@ public final class ObjectsUtil {
 	}
 	/**
 	 * null safe check for Maps not having equal key sets.
-	 * @param a
-	 * @param b
 	 * @return true if both maps don't have same key set
 	 */
 	public static boolean notEqualKeys(Map<String, ?> a, Map<String, ?> b){
@@ -52,8 +50,6 @@ public final class ObjectsUtil {
 	}
 	/**
 	 * If both maps are non-null, checks if the key set on each is the same
-	 * @param a
-	 * @param b
 	 * @return true if key sets of maps are the same
 	 */
 	public static boolean equalKeys(Map<String, ?> a, Map<String, ?> b){
@@ -112,8 +108,6 @@ public final class ObjectsUtil {
 	/**
 	 * Null safe compare operation. Returns -1 if <i>a</i> is only null, 1 if
 	 * <i>b</i> is only null, otherwise compares them.
-	 * @param a
-	 * @param b
 	 * @return compared value
 	 * @see Comparable
 	 */

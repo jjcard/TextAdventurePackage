@@ -4,14 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ObjectsUtilTest {
 
 	@Test
 	public void hashCodeTest() {
-		final int prime = 23;
+		final int prime = 31;
 		String s1 = "wfksdlajkf";
 		String s2 = "fjajslfjs";
 		
@@ -19,8 +18,8 @@ public class ObjectsUtilTest {
 		
 		
 		int hashCode = ObjectsUtil.getHashWithStart(1, s1, s2, words);
-		
-		assertFalse(hashCode == 0);
+
+        assertNotEquals(0, hashCode);
 		
 		
 		int hashCode2 = 1;
